@@ -46,8 +46,7 @@
 		<log4j.version>2.6.2</log4j.version>
 		<junit.version>4.12</junit.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- allowed values: R7, 1.0, 1.5, 2.0 or none -->
-		<wtp.version>none</wtp.version>
+		<wtp.version>none</wtp.version> <!-- allowed values: R7, 1.0, 1.5, 2.0 or none -->
 	</properties>
 	<dependencies>
 		<!--  WICKET DEPENDENCIES -->
@@ -160,6 +159,14 @@
 				<configuration>
 					<downloadSources>true</downloadSources>
 					<wtpversion>${wtp.version}</wtpversion>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<configLocation>checkstyle.xml</configLocation>
 				</configuration>
 			</plugin>
 		</plugins>

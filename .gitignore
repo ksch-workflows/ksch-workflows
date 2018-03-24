@@ -12,6 +12,12 @@ target/
 .project
 .settings/
 
+# Coala
+*.orig
+
 # Miscellaneous
+notes.org
+\#*
+.#*
 *~
 *~*

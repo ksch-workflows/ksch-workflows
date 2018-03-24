@@ -6,9 +6,9 @@
     </Console>
   </Appenders>
   <Loggers>
-  	<logger name="org.apache.wicket" level="INFO" additivity="false">
-  		<AppenderRef ref="CONSOLE"/>
-  	</logger>
+    <logger name="org.apache.wicket" level="INFO" additivity="false">
+        <AppenderRef ref="CONSOLE"/>
+    </logger>
     <Root level="WARN">
       <AppenderRef ref="CONSOLE"/>
     </Root>
