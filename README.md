@@ -2,6 +2,10 @@
 
 Implementation of the K.S.C.H. Workflows application with Apache Wicket
 
+## Documentation
+
+- https://github.com/ksch-workflows/wicket-prototype/wiki
+
 
 ## Code style
 
