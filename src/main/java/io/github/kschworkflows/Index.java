@@ -1,14 +1,15 @@
 package io.github.kschworkflows;
 
+import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-public class HomePage extends WebPage
+@WicketHomePage
+public class Index extends WebPage
 {
     private static final long serialVersionUID = 1L;
 
-    public HomePage(final PageParameters parameters)
+    public Index(final PageParameters parameters)
     {
-        getSession().invalidate();
     }
 }

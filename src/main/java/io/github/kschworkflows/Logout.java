@@ -8,6 +8,6 @@ public class Logout extends WebPage
     public Logout(final PageParameters parameters)
     {
         getSession().invalidate();
-        getRequestCycle().setResponsePage(HomePage.class);
+        getRequestCycle().setResponsePage(Index.class);
     }
 }
