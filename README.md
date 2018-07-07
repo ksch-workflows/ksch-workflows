@@ -2,22 +2,34 @@
 
 Implementation of the K.S.C.H. Workflows application with Apache Wicket
 
-## Documentation
+## Development
 
-- https://github.com/ksch-workflows/wicket-prototype/wiki
+### Compiling the project
 
-
-## Code style
-
-### Coala
+By running the following Gradle task the project can be packaged into a JAR file:
 
 ```
-coala --bears=SpaceConsistencyBear --files=src/\*\* --apply-patches
-coala --bears=CheckstyleBear --files=src/\*\* --apply-patches
+./gradlew bootJar
 ```
 
-### Checkstyle
+### Starting the application
+
+After the compilation the KSCH Workflows application can be started like this:
 
 ```
-mvn checkstyle:check
+java -jar build/libs/ksch-workflows-0.1.0-SNAPSHOT.jar
 ```
+
+Then it can be accessed in the browser under the URL http://localhost:8080 .
+
+Alternatively the application can also be started without explicit complication with the following Gradle task:
+
+```
+./gradlew bootRun
+```
+
+## Credits
+
+- https://github.com/apache/wicket/
+- https://github.com/MarcGiffing/wicket-spring-boot
+- https://github.com/MarcGiffing/wicket-spring-boot-examples

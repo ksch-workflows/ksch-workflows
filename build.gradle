@@ -1,0 +1,36 @@
+
+plugins {
+    id 'org.springframework.boot' version '2.0.2.RELEASE'
+}
+
+apply plugin: 'checkstyle'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java-library'
+
+repositories {
+    maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+group = 'io.github.kschworkflows'
+version = '0.1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.1'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.wicketstuff:wicketstuff-annotation:8.0.0'
+
+    compileOnly 'org.projectlombok:lombok:1.16.16'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile files('src/main/webapp')
+}
+
+
