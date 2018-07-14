@@ -10,7 +10,7 @@
             <property name="caseIndent" value="0" />
         </module>
         <module name="LineLength">
-            <property name="max" value="120" />
+            <property name="max" value="100" />
         </module>
         <module name="EmptyBlock">
             <property name="option" value="text" />
@@ -18,11 +18,38 @@
 
         <!-- http://checkstyle.sourceforge.net/config_blocks.html#LeftCurly -->
         <module name="LeftCurly">
-            <property name="option" value="nl"/>
+            <property name="option" value="eol"/>
             <property name="tokens" value="CLASS_DEF,INTERFACE_DEF,CTOR_DEF,METHOD_DEF"/>
         </module>
 
         <module name="UnusedImports" />
+
+        <!-- http://checkstyle.sourceforge.net/apidocs/com/puppycrawl/tools/checkstyle/checks/blocks/NeedBracesCheck.html -->
+        <module name="NeedBraces"/>
+
+        <!-- http://checkstyle.sourceforge.net/apidocs/com/puppycrawl/tools/checkstyle/checks/whitespace/WhitespaceAroundCheck.html -->
+        <module name="WhitespaceAround"/>
+
+        <!-- http://checkstyle.sourceforge.net/apidocs/com/puppycrawl/tools/checkstyle/checks/coding/MissingSwitchDefaultCheck.html -->
+        <module name="MissingSwitchDefault"/>
+
+        <!-- http://checkstyle.sourceforge.net/apidocs/com/puppycrawl/tools/checkstyle/checks/coding/FallThroughCheck.html -->
+        <module name="FallThrough"/>
+
+        <!-- http://checkstyle.sourceforge.net/apidocs/com/puppycrawl/tools/checkstyle/checks/modifier/ModifierOrderCheck.html -->
+        <module name="ModifierOrder"/>
+
+        <!-- http://checkstyle.sourceforge.net/apidocs/com/puppycrawl/tools/checkstyle/checks/whitespace/EmptyLineSeparatorCheck.html -->
+        <module name="EmptyLineSeparator"/>
+
+        <!-- http://checkstyle.sourceforge.net/apidocs/com/puppycrawl/tools/checkstyle/checks/whitespace/GenericWhitespaceCheck.html -->
+        <module name="GenericWhitespace"/>
+
+        <!-- http://checkstyle.sourceforge.net/apidocs/com/puppycrawl/tools/checkstyle/checks/blocks/EmptyCatchBlockCheck.html -->
+        <module name="EmptyCatchBlock">
+            <property name="exceptionVariableName" value="ignore|expected"/>
+        </module>
+
     </module>
 
     <module name="NewlineAtEndOfFile" />

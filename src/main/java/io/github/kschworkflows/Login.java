@@ -20,24 +20,21 @@ import org.wicketstuff.annotation.mount.MountPath;
 
 @WicketSignInPage
 @MountPath("/login")
-public class Login extends WebPage
-{
-    public Login(PageParameters parameters)
-    {
-        super(parameters);
+public class Login extends WebPage {
 
+    public Login(PageParameters parameters) {
+        super(parameters);
         add(new LoginForm("loginForm"));
     }
 }
 
-class LoginForm extends Form<LoginForm>
-{
+class LoginForm extends Form<LoginForm> {
+
     private String username;
 
     private String password;
 
-    public LoginForm(String id)
-    {
+    public LoginForm(String id) {
         super(id);
         setModel(new CompoundPropertyModel<>(this));
         add(new FeedbackPanel("feedback"));
@@ -46,8 +43,7 @@ class LoginForm extends Form<LoginForm>
     }
 
     @Override
-    protected void onSubmit()
-    {
+    protected void onSubmit() {
         AuthenticatedWebSession session = AuthenticatedWebSession.get();
         if (session.signIn(username, password)) {
             continueToOriginalDestination();

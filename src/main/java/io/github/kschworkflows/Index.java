@@ -5,11 +5,10 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 @WicketHomePage
-public class Index extends WebPage
-{
+public class Index extends WebPage {
+
     private static final long serialVersionUID = 1L;
 
-    public Index(final PageParameters parameters)
-    {
+    public Index(final PageParameters parameters) {
     }
 }
