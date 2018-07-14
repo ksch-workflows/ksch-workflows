@@ -1,4 +1,4 @@
-package io.github.kschworkflows;
+package ksch;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

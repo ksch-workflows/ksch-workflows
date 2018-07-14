@@ -21,7 +21,7 @@
         <filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
         <init-param>
             <param-name>applicationClassName</param-name>
-            <param-value>io.github.kschworkflows.WicketApplication</param-value>
+            <param-value>ksch.WicketApplication</param-value>
         </init-param>
     </filter>
 

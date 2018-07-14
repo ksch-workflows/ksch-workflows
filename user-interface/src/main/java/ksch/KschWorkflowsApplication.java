@@ -1,4 +1,4 @@
-package io.github.kschworkflows;
+package ksch;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
