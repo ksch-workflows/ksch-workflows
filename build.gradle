@@ -1,36 +1,31 @@
 
-plugins {
-    id 'org.springframework.boot' version '2.0.2.RELEASE'
+apply plugin: 'idea'
+
+
+allprojects  {
+    group = 'io.github.kschworkflows'
+    version = '0.1.0-SNAPSHOT'
 }
 
-apply plugin: 'checkstyle'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'java-library'
+subprojects {
+    repositories {
+        mavenCentral()
+        maven { url "http://repo.maven.apache.org/maven2" }
+    }
 
-repositories {
-    maven { url "http://repo.maven.apache.org/maven2" }
+    apply plugin: 'checkstyle'
+    apply plugin: 'java-library'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok:1.16.22'
+
+        testCompile 'org.mockito:mockito-core:2.18.3'
+    }
 }
-
-group = 'io.github.kschworkflows'
-version = '0.1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
-
-dependencies {
-    compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.1'
-    compile 'org.springframework.boot:spring-boot-starter-security'
-    compile 'org.wicketstuff:wicketstuff-annotation:8.0.0'
-
-    compileOnly 'org.projectlombok:lombok:1.18.0'
-
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testCompile files('src/main/webapp')
-}
-
-
