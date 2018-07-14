@@ -5,7 +5,7 @@
  * https://github.com/MarcGiffing/wicket-spring-boot-examples
  */
 
-package io.github.kschworkflows;
+package ksch;
 
 import com.giffing.wicket.spring.boot.context.scan.WicketSignInPage;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;

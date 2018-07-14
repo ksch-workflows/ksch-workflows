@@ -3,7 +3,7 @@ apply plugin: 'idea'
 
 
 allprojects  {
-    group = 'io.github.kschworkflows'
+    group = 'io.github.ksch'
     version = '0.1.0-SNAPSHOT'
 }
 

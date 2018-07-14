@@ -1,6 +1,7 @@
 package io.github.kschworkflows.registration;
 
 import io.github.kschworkflows.WebPageTest;
+import ksch.registration.RegistrationHome;
 import org.junit.Test;
 
 public class RegistrationHomeTest extends WebPageTest {

@@ -1,6 +1,8 @@
 package io.github.kschworkflows;
 
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
+import ksch.KschWorkflowsApplication;
+import ksch.Login;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;

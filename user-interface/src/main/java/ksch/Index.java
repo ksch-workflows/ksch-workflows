@@ -1,4 +1,4 @@
-package io.github.kschworkflows;
+package ksch;
 
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 import org.apache.wicket.markup.html.WebPage;

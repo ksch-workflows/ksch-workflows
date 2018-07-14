@@ -1,4 +1,4 @@
-package io.github.kschworkflows.registration;
+package ksch.registration;
 
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebPage;
