@@ -18,8 +18,8 @@ import org.springframework.test.util.ReflectionTestUtils;
 @SpringBootTest(classes = KschWorkflowsApplication.class)
 @ActiveProfiles("test")
 @EnableWebSecurity
-public abstract class WebPageTest
-{
+public abstract class WebPageTest {
+
     protected WicketTester tester;
 
     @Autowired
@@ -29,14 +29,12 @@ public abstract class WebPageTest
     private ApplicationContext applicationContextMock;
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
         ReflectionTestUtils.setField(wicketApplication, "applicationContext", applicationContextMock);
         tester = new WicketTester(wicketApplication);
     }
 
-    protected void login(String username, String password)
-    {
+    protected void login(String username, String password) {
         SecureWebSession session = (SecureWebSession) tester.getSession();
         session.signOut();
         tester.startPage(Login.class);

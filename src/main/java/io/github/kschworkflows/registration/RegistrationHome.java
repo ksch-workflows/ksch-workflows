@@ -9,10 +9,9 @@ import org.wicketstuff.annotation.mount.MountPath;
 
 @AuthorizeInstantiation({"NURSE", "CLERK"})
 @MountPath("/registration")
-public class RegistrationHome extends WebPage
-{
-    public RegistrationHome(final PageParameters parameters)
-    {
+public class RegistrationHome extends WebPage {
+
+    public RegistrationHome(final PageParameters parameters) {
         add(new Label("message", new Model<>("Registration")));
     }
 }
