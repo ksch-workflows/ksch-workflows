@@ -1,4 +1,4 @@
-# K.S.C.H. Workflows
+# K.S.C.H. Workflows [![Build Status](https://travis-ci.com/ksch-workflows/ksch-workflows.svg?branch=master)](https://travis-ci.com/ksch-workflows/ksch-workflows)
 
 Implementation of the K.S.C.H. Workflows application with Apache Wicket
 

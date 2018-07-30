@@ -1,0 +1,9 @@
+sudo: required
+os: linux
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install --assume-yes --quiet openjdk-8-jdk
+
+script:
+- ./gradlew build
