@@ -1,32 +1,22 @@
 # K.S.C.H. Workflows [![Build Status](https://travis-ci.com/ksch-workflows/ksch-workflows.svg?branch=master)](https://travis-ci.com/ksch-workflows/ksch-workflows)
 
-Implementation of the K.S.C.H. Workflows application with Apache Wicket
+![Project logo](https://cdn.pixabay.com/photo/2014/03/25/15/26/bike-296852_960_720.png)
+
+This project is a prototype for a custom hospital information system for the [Kirpal Sagar Chariable Hospital](http://kirpal-sagar.org/en/medicale-care/gemeinn%C3%BCtziges-krankenhaus.html).
+
+The motivation behind it is to support the growth vision for the hospital over the next decades.
 
 ## Development
 
-### Compiling the project
-
-By running the following Gradle task the project can be packaged into a JAR file:
-
-```
-./gradlew bootJar
-```
-
 ### Starting the application
 
-After the compilation the KSCH Workflows application can be started like this:
-
-```
-java -jar build/libs/ksch-workflows-0.1.0-SNAPSHOT.jar
-```
-
-Then it can be accessed in the browser under the URL http://localhost:8080 .
-
-Alternatively the application can also be started without explicit complication with the following Gradle task:
+The application can be started for development tests with the following Gradle task:
 
 ```
 ./gradlew bootRun
 ```
+
+Then it is accessible in the browser under the URL http://localhost:8080.
 
 ## Credits
 
