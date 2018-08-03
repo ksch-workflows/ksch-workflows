@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+</head>
+<body>
+    <wicket:extend>
+
+        <div class="row">
+            <div class="col-xl-1 d-flex justify-content-center">
+                <a href="/registration/register-patient" class="fa fa-arrow-circle-left" style="font-size: 3em;"></a>
+            </div>
+            <div class="col-xl-11">
+                <h2>Patient details</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-1 d-flex">
+                <!-- Placeholder -->
+            </div>
+
+            <div class="col-xl-9">
+                <a href="#" class="btn btn-outline-secondary">Start visit</a>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xl-1 d-flex">
+                <!-- Placeholder -->
+            </div>
+
+            <div class="col-xl-9">
+                <div class="card">
+                    <div class="card-header">
+                        General information
+                    </div>
+                    <div class="card-body">
+                        <form wicket:id="updatePatientForm">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="inputName">Name</label>
+                                    <input required wicket:id="inputName" type="text" class="form-control" id="inputName"
+                                           placeholder="Enter the patient name here">
+                                    <div class="invalid-feedback">
+                                        Please enter the patient name.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputNameFather">Father's name (optional)</label>
+                                    <input wicket:id="inputNameFather" type="text" class="form-control" id="inputNameFather"
+                                           placeholder="Enter the patient father's name here if necessary">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputDateOfBirth">Date of birth</label>
+                                    <input required wicket:id="inputDateOfBirth" type="text" class="form-control" id="inputDateOfBirth"
+                                           placeholder="Enter the patient's date of birth here in format dd-mm-yyyy">
+                                    <div class="invalid-feedback">
+                                        Please enter the patient date of birth.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputGender">Gender</label>
+                                    <select required wicket:id="inputGender" class="form-control" id="inputGender">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                        <option>Other</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select the patient gender.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputAddress">Address</label>
+                                    <textarea wicket:id="inputAddress" id="inputAddress" class="form-control" rows="4"
+                                              placeholder="Enter the patient address here"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </wicket:extend>
+</body>
+
+</html>
