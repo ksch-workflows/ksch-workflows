@@ -1,0 +1,38 @@
+
+.card-login {
+    max-width: 25rem;
+}
+
+body div.container {
+    margin-top: 100px;
+}
+
+.card-body i {
+    font-size: 50px;
+}
+
+.card-body p {
+    font-size: 25px;
+}
+
+a.fa, a.fas {
+    font-size: 50px;
+}
+
+div.row {
+    margin-bottom: 25px;
+}
+
+input.patientSearchTerm {
+    min-width: 250px;
+}
+
+input[type="submit"] {
+    margin-right: 12px;
+    margin-left: 12px;
+}
+
+
+#addPatientDialog .modal-content {
+    width:1000px;
+}

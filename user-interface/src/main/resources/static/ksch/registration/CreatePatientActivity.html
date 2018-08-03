@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+<body>
+    <wicket:extend>
+
+        <div class="row">
+            <div class="col-xl-1 d-flex justify-content-center">
+                <a href="#" class="fas fa-arrow-circle-left" style="font-size: 3em;"></a>
+            </div>
+            <div class="col-xl-9">
+                <h2>Create new patient</h2>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xl-1 d-flex">
+                <!-- Placeholder -->
+            </div>
+
+            <div class="col-xl-9">
+                <form>
+                    <div class="form-group">
+                        <label for="inputName">Name</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDateOfBirth">Date of birth</label>
+                        <input type="text" class="form-control" id="inputDateOfBirth" placeholder="dd/mm/yyyy">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputGender">Gender</label>
+                        <select class="form-control" id="inputGender">
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress">Address</label>
+                        <input type="email" class="form-control" id="inputAddress" placeholder="Name">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+        </div>
+
+    </wicket:extend>
+</body>
+
+</html>
