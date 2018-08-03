@@ -1,16 +1,33 @@
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.3.0' // https://github.com/szpak/gradle-pitest-plugin/releases
+    }
+}
+
+plugins {
+    id "io.spring.dependency-management" version "1.0.6.RELEASE" // https://github.com/spring-gradle-plugins/dependency-management-plugin/releases
+}
+
 apply plugin: 'idea'
 
+ext {
+    springBootVersion = '2.0.4.RELEASE' // https://spring.io/projects/spring-boot
+}
 
 allprojects  {
-    group = 'io.github.ksch'
+    group = 'org.ks-plus'
     version = '0.1.0-SNAPSHOT'
 }
 
 subprojects {
+
     repositories {
         mavenCentral()
-        maven { url "http://repo.maven.apache.org/maven2" }
+        maven { url 'http://repo.maven.apache.org/maven2' }
     }
 
     apply plugin: 'checkstyle'
@@ -24,8 +41,38 @@ subprojects {
     }
 
     dependencies {
-        compileOnly 'org.projectlombok:lombok:1.16.22'
+        compileOnly 'org.projectlombok:lombok:1.18.2' // https://projectlombok.org/download
+    }
+}
 
-        testCompile 'org.mockito:mockito-core:2.18.3'
+configure(subprojects.findAll { !it.name.endsWith('-api')} ) {
+
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'info.solidsoft.pitest'
+
+    dependencies {
+        compile 'org.springframework.boot:spring-boot-starter'
+        compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+        compile 'javax.xml.bind:jaxb-api:2.3.0' // http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22javax.xml.bind%22%20AND%20a%3A%22jaxb-api%22
+        compile 'com.google.guava:guava:26.0-jre' // https://github.com/google/guava/releases
+
+        testCompile 'org.springframework.boot:spring-boot-starter-test'
+        testCompile 'org.mockito:mockito-core'
+    }
+
+    dependencyManagement {
+        imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
+    }
+
+    configurations {
+        testImplementation.extendsFrom compileOnly
+    }
+
+    pitest {
+        targetClasses = ['ksch.*', 'org.leanhis.*']
+
+        threads = 4
+
+        failWhenNoMutations = false
     }
 }

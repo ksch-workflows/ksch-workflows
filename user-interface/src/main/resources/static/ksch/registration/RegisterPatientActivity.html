@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <script src="../../js/jquery.min.js" ></script>
+    <script src="../../js/bootstrap.min.js" ></script>
+
+    <wicket:head>
+        <link href="../../css/bootstrap-datepicker.min.css" rel="stylesheet">
+        <script src="../../js/bootstrap-datepicker.min.js" ></script>
+    </wicket:head>
+</head>
+
+<body>
+
+    <wicket:extend>
+
+        <div class="row">
+            <div class="col-xl-1 d-flex justify-content-center">
+                <a href="/registration" class="fa fa-arrow-circle-left" style="font-size: 3em;"></a>
+            </div>
+            <div class="col-xl-9">
+                <h2>Register patient</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-1 d-flex">
+                <!-- Placeholder -->
+            </div>
+            <div class="col-xl-5">
+                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#addPatientDialog">
+                    Add new patient
+                </button>
+            </div>
+            <div class="col-xl-6">
+                <form wicket:id="patientSearchForm" class="form-inline float-right">
+                    <input wicket:id="patientSearchTerm" type="text" class="patientSearchTerm form-control" style="min-width: 350px;" placeholder="Patient number or name">
+                    <input class="btn btn-outline-secondary" type="submit" value="Search patient"/>
+                </form>
+            </div>
+        </div>
+
+        <div wicket:id="patientList" class="row">
+            <div class="col-xl-1 d-flex">
+                <!-- Placeholder -->
+            </div>
+            <div class="col-xl-11">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Age</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    <tr wicket:id="patients">
+                        <th wicket:id="patientNumber" scope="row">[patient number]</th>
+                        <td wicket:id="name">[name]</td>
+                        <td wicket:id="gender">[gender]</td>
+                        <td wicket:id="age">[age]</td>
+                        <td class="float-right">
+                            <a wicket:id="openPatientDetails" href="/registration/edit-patient" class="btn btn-outline-secondary">Open details</a>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div wicket:id="noSearchResultsMessage" class="row">
+            <div class="col-xl-1 d-flex">
+                <!-- Placeholder -->
+            </div>
+            <div class="col-xl-11">
+                Cannot find patient with given number or name.
+            </div>
+        </div>
+
+        <div id="addPatientDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addPatientDialogLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addPatientDialogLabel">Add new patient</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form wicket:id="addPatientForm" class="needs-validation" novalidate>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="inputName">Name</label>
+                                <input required wicket:id="inputName" type="text" class="form-control" id="inputName"
+                                       placeholder="Enter the patient name here">
+                                <div class="invalid-feedback">
+                                    Please enter the patient name.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputNameFather">Father's name (optional)</label>
+                                <input wicket:id="inputNameFather" type="text" class="form-control" id="inputNameFather"
+                                       placeholder="Enter the patient father's name here if necessary">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputDateOfBirth">Date of birth</label>
+                                <input required wicket:id="inputDateOfBirth" type="text" class="form-control" id="inputDateOfBirth"
+                                       placeholder="Enter the patient's date of birth here in format dd-mm-yyyy">
+                                <div class="invalid-feedback">
+                                    Please enter the patient date of birth.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputGender">Gender</label>
+                                <select required wicket:id="inputGender" class="form-control" id="inputGender">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Other</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please select the patient gender.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputAddress">Address</label>
+                                <textarea wicket:id="inputAddress" id="inputAddress" class="form-control" rows="4"
+                                          placeholder="Enter the patient address here"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <script>
+            var now = new Date()
+
+            $('#inputDateOfBirth').datepicker({
+                format: 'dd-mm-yyyy',
+                startView: 'century',
+                weekStart: 1,
+                autoclose: true,
+                endDate: `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()}`,
+                defaultViewDate: `01-01-${now.getFullYear() - 30}`
+            });
+
+            // https://getbootstrap.com/docs/4.0/components/forms/#validation
+            (function() {
+              'use strict';
+              window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                  form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                  }, false);
+                });
+              }, false);
+            })();
+            </script>
+
+        </div>
+
+    </wicket:extend>
+
+</body>
+
+</html>
