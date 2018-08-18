@@ -16,6 +16,10 @@ public class Time {
      * @param date date in format "dd-mm-yyyy"
      */
     public static LocalDate parseDate(String date) {
+        if (date == null) {
+            throw new IllegalArgumentException("Date must not be null.");
+        }
+
         if (date.split("-").length != 3) {
             throw new IllegalArgumentException("Date " + date + " is not in expected format (dd-mm-yyyy).");
         }

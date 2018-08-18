@@ -1,8 +1,4 @@
 
-/**
- * General
- */
-
 body div.container {
     margin-top: 100px;
 }
@@ -21,24 +17,4 @@ a.fa, a.fas {
 
 div.row {
     margin-bottom: 25px;
-}
-
-/**
- * Login
- */
-
-.card-login {
-    max-width: 25rem;
-}
-
-/**
- * RegisterPatientActivity
- */
-
-input.patientSearchTerm {
-    min-width: 250px;
-}
-
-#addPatientDialog .modal-content {
-    width:1000px;
 }

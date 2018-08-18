@@ -36,7 +36,7 @@ public class PatientServiceTest {
     public void should_retrieve_patient_by_patient_number() {
         String patientNumber = "1234";
 
-        patientService.findBy(patientNumber);
+        patientService.findByNameOrNumber(patientNumber);
 
         verify(patientRepository).findByIdOrName(patientNumber);
     }

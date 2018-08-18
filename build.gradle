@@ -12,8 +12,6 @@ plugins {
     id "io.spring.dependency-management" version "1.0.6.RELEASE" // https://github.com/spring-gradle-plugins/dependency-management-plugin/releases
 }
 
-apply plugin: 'idea'
-
 ext {
     springBootVersion = '2.0.4.RELEASE' // https://spring.io/projects/spring-boot
 }
@@ -53,7 +51,7 @@ configure(subprojects.findAll { !it.name.endsWith('-api')} ) {
     dependencies {
         compile 'org.springframework.boot:spring-boot-starter'
         compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-        compile 'javax.xml.bind:jaxb-api:2.3.0' // http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22javax.xml.bind%22%20AND%20a%3A%22jaxb-api%22
+        compile 'javax.xml.bind:jaxb-api:2.3.0' // http://search.maven.org/javax.xml.bind/jaxb-api
         compile 'com.google.guava:guava:26.0-jre' // https://github.com/google/guava/releases
 
         testCompile 'org.springframework.boot:spring-boot-starter-test'

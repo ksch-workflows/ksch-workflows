@@ -1,6 +1,6 @@
 package ksch.registration;
 
-import ksch.ApplicationFrame;
+import ksch.Activity;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -9,17 +9,14 @@ import org.leanhis.patientmanagement.Gender;
 import org.leanhis.patientmanagement.Patient;
 import org.leanhis.patientmanagement.PatientService;
 import org.wicketstuff.annotation.mount.MountPath;
-import util.wicket.FormBuilder;
 
 import java.util.UUID;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static util.Time.INDIAN_DATE_FORMAT;
 import static util.Time.parseDate;
 
 @MountPath("/registration/edit-patient/${id}")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
-public class EditPatientDetailsActivity extends ApplicationFrame {
+public class EditPatientDetailsActivity extends Activity {
 
     @SpringBean
     private PatientService patientService;
@@ -28,26 +25,47 @@ public class EditPatientDetailsActivity extends ApplicationFrame {
         super(pageParameters);
 
         UUID patientID = UUID.fromString(pageParameters.get("id").toString());
+        Patient patient = patientService.getById(patientID);
 
-        add(buildUpdatePatientForm(patientService.getById(patientID)));
+        add(new UpdatePatientForm(patient));
     }
 
-    private Form buildUpdatePatientForm(Patient patient) {
-        return new FormBuilder("updatePatientForm")
-                .textField("inputName", patient.getName())
-                .textField("inputNameFather", patient.getNameFather())
-                .textArea("inputAddress", patient.getAddress())
-                .textField("inputDateOfBirth", patient.getDateOfBirth().format(INDIAN_DATE_FORMAT))
-                .dropDownChoice("inputGender", newArrayList("MALE", "FEMALE", "OTHER"), patient.getGender().toString())
-                .onSubmit(f -> {
-                    patient.setName(f.getValue("inputName"));
-                    patient.setNameFather(f.getValue("inputNameFather"));
-                    patient.setAddress(f.getValue("inputAddress"));
-                    patient.setGender(Gender.valueOf(f.getValue("inputGender")));
-                    patient.setDateOfBirth(parseDate(f.getValue("inputDateOfBirth")));
+    @Override
+    public String getActivityTitle() {
+        return "Patient details";
+    }
 
-                    patientService.update(patient);
-                })
-                .build();
+    @Override
+    public String getPreviousPagePath() {
+        return "/registration/register-patient";
+    }
+
+    class UpdatePatientForm extends Form<Void> {
+
+        private final Patient patient;
+
+        private final PatientFormFields patientFormFields;
+
+        public UpdatePatientForm(Patient patient) {
+            super("updatePatientForm");
+
+            this.patient = patient;
+            this.patientFormFields = new PatientFormFields(patient);
+
+            add(patientFormFields);
+        }
+
+        @Override
+        protected void onSubmit() {
+            patient.setName(patientFormFields.getValue("inputName"));
+            patient.setNameFather(patientFormFields.getValue("inputNameFather"));
+            patient.setAddress(patientFormFields.getValue("inputAddress"));
+            patient.setGender(Gender.valueOf(patientFormFields.getValue("inputGender")));
+            patient.setDateOfBirth(parseDate(patientFormFields.getValue("inputDateOfBirth")));
+
+            patientService.update(patient);
+        }
     }
 }
+
+

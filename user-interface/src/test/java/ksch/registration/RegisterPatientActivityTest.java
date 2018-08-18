@@ -75,7 +75,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
         formTester.submit();
 
         assertTrue("Notification about missing search results wasn't rendered.",
-                tester.getLastResponseAsString().contains("Cannot find patient with given number or name"));
+                tester.getLastResponseAsString().contains("Cannot find a patient"));
         assertFalse("Table with patients was rendered even though there are no patients in the search results",
                 tester.getLastResponseAsString().contains("<th scope=\"col\">No.</th>"));
     }
@@ -86,16 +86,16 @@ public class RegisterPatientActivityTest extends WebPageTest {
         tester.startPage(RegisterPatientActivity.class);
 
         FormTester formTester = tester.newFormTester("addPatientForm", false);
-        formTester.setValue("inputName", "Fritz");
-        formTester.setValue("inputNameFather", "Carl");
-        formTester.select("inputGender", 0);
-        formTester.setValue("inputDateOfBirth", "27-07-2000");
-        formTester.setValue("inputAddress", "Kirpal Sagar");
+        formTester.setValue("patientFormFields:inputName", "Fritz");
+        formTester.setValue("patientFormFields:inputNameFather", "Carl");
+        formTester.select("patientFormFields:inputGender", 0);
+        formTester.setValue("patientFormFields:inputDateOfBirth", "27-07-2000");
+        formTester.setValue("patientFormFields:inputAddress", "Kirpal Sagar");
         formTester.submit();
 
         tester.assertRenderedPage(EditPatientDetailsActivity.class);
 
-        List<Patient> searchResults = patientService.findBy("Fritz");
+        List<Patient> searchResults = patientService.findByNameOrNumber("Fritz");
 
         assertEquals("Could not create new patient",
                 1, searchResults.size());

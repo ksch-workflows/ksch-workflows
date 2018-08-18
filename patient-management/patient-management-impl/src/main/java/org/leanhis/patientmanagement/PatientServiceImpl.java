@@ -21,8 +21,8 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<Patient> findBy(String nameOrMedicalRecordNumber) {
-        return patientRepository.findByIdOrName(nameOrMedicalRecordNumber);
+    public List<Patient> findByNameOrNumber(String nameOrNumber) {
+        return patientRepository.findByIdOrName(nameOrNumber);
     }
 
     @Override

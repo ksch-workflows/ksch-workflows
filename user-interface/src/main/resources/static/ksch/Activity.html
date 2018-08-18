@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<wicket:extend>
+    <div class="row">
+        <div class="col-md-1 d-flex justify-content-center">
+            <a wicket:id="goToPreviousPage" href="/registration/register-patient" class="fa fa-arrow-circle-left" style="font-size: 3em;"></a>
+        </div>
+        <div class="col-md-11">
+            <h2 wicket:id="activityTitle">[Activity title]</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1">
+            <!-- Placeholder -->
+        </div>
+        <div class="col-md-11">
+            <!-- Activity content -->
+            <wicket:child/>
+        </div>
+    </div>
+
+</wicket:extend>
+
+</body>
+
+</html>
