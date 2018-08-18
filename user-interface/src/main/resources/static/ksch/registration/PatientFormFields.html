@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <script src="../../js/jquery.min.js" ></script>
+    <script src="../../js/bootstrap.min.js" ></script>
+
+    <wicket:head>
+        <link href="../../css/bootstrap-datepicker.min.css" rel="stylesheet">
+    </wicket:head>
+</head>
+
+<body>
+    <div class="container">
+        <wicket:panel>
+            <script src="../../../js/bootstrap-datepicker.min.js"></script>
+
+            <div class="form-group">
+                <label for="inputName">Name</label>
+                <input required wicket:id="inputName" type="text" class="form-control" id="inputName"
+                       placeholder="Patient name">
+                <div class="invalid-feedback">
+                    Please enter the patient name here.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputNameFather">Father's name (optional)</label>
+                <input wicket:id="inputNameFather" type="text" class="form-control" id="inputNameFather"
+                       placeholder="Patient father's name">
+            </div>
+            <div class="form-group">
+                <label for="inputDateOfBirth">Date of birth</label>
+                <input required wicket:id="inputDateOfBirth" type="text" class="form-control" id="inputDateOfBirth"
+                       placeholder="Patient date of birth (dd-mm-yyyy)">
+                <div class="invalid-feedback">
+                    Please enter the patient date of birth here.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputGender">Gender</label>
+                <select required wicket:id="inputGender" class="form-control" id="inputGender">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please select the patient gender.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Address</label>
+                <textarea wicket:id="inputAddress" id="inputAddress" class="form-control" rows="4"
+                          placeholder="Patient address"></textarea>
+            </div>
+
+            <script>
+                var now = new Date()
+
+                $('#inputDateOfBirth').datepicker({
+                    format: 'dd-mm-yyyy',
+                    startView: 'century',
+                    weekStart: 1,
+                    autoclose: true,
+                    endDate: `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()}`,
+                    defaultViewDate: `01-01-${now.getFullYear() - 30}`
+                });
+
+                // https://getbootstrap.com/docs/4.0/components/forms/#validation
+                (function() {
+                  'use strict';
+                  window.addEventListener('load', function() {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                      form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                          event.preventDefault();
+                          event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                      }, false);
+                    });
+                  }, false);
+                })();
+            </script>
+        </wicket:panel>
+    </div>
+</body>
+
+</html>

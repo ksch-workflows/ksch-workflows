@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html xmlns:wicket="http://wicket.apache.org">
+
+<head>
+    <meta charset="utf-8" />
+
+    <title>Login Page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+
+    <wicket:head>
+        <style type="text/css">
+            .card-login {
+                max-width: 25rem;
+            }
+        </style>
+    </wicket:head>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Login</div>
+        <div class="card-body">
+            <form wicket:id="loginForm" class="form-box">
+                <div wicket:id="feedback"></div>
+                <div class="form-group">
+                    <label for="inputUsername">Username</label>
+                    <input type="text" wicket:id="username" id="inputUsername" placeholder="Username" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" wicket:id="password" id="inputPassword" placeholder="Password" class="form-control"/>
+                </div>
+                <input class="btn btn-primary btn-block" type="submit" value="Login" />
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

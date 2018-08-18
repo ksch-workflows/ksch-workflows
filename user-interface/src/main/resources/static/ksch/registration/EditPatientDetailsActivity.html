@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <wicket:extend>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="#" class="btn btn-outline-secondary">Start visit</a>
+            </div>
+        </div>
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    General information
+                </div>
+                <div class="card-body">
+                    <form wicket:id="updatePatientForm" class="needs-validation" novalidate>
+                        <div wicket:id="patientFormFields" class="modal-body">
+                            [patient form fields]
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </wicket:extend>
+
+</body>
+
+</html>

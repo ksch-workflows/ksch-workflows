@@ -1,0 +1,5 @@
+
+dependencies {
+    api project(':patient-management:patient-management-api')
+    implementation project(':patient-management:patient-management-impl')
+}

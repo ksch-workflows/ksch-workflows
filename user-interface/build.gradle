@@ -1,17 +1,28 @@
-plugins {
-    id 'org.springframework.boot' version '2.0.2.RELEASE'
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
 }
 
-apply plugin: 'io.spring.dependency-management'
+apply plugin: "org.springframework.boot"
 
-sourceSets.test.resources {
-    srcDir "${project(':user-interface').projectDir}/src/main/webapp"
+
+sourceSets.main.resources {
+    srcDir "${project(':user-interface').projectDir}/src/main/resources/static"
 }
 
 dependencies {
-    compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.1'
-    compile 'org.wicketstuff:wicketstuff-annotation:8.0.0'
-    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile project(':patient-management')
 
-    testCompile 'org.springframework.boot:spring-boot-starter-test:2.0.2.RELEASE'
+    compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.1'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.wicketstuff:wicketstuff-annotation:8.0.0'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
