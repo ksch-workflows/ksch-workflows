@@ -14,7 +14,7 @@ apply plugin: "org.springframework.boot"
 
 
 sourceSets.main.resources {
-    srcDir "${project(':user-interface').projectDir}/src/main/resources/static"
+    srcDir "src/main/resources/static"
 }
 
 dependencies {

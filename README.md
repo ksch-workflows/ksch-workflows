@@ -69,6 +69,27 @@ Afterwards HTML reports are generated for each respective subproject and can be 
 find . -name "index.html" | grep "pitest"
 ```
 
+## Deployment
+
+The executable JAR file can be compiled with the following Gradle task:
+
+```
+./gradlew clean bootJar
+```
+
+Afterwards you can find the JAR file in the following directory:
+
+```
+$ ls user-interface/build/libs
+ksch-workflows-0.1.0-SNAPSHOT.jar
+```
+
+The JAR file can then be copied onto the server and started like this:
+
+```
+java -jar ksch-workflows-0.1.0-SNAPSHOT.jar
+```
+
 ## Contact information
 
 If you have any question or idea you can discuss it in this chat. Also drop please drop a message if you get stuck with one of the steps above.
