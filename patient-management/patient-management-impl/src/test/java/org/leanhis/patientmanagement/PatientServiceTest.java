@@ -12,6 +12,7 @@ import java.util.UUID;
 import static java.time.temporal.ChronoUnit.YEARS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -25,11 +26,11 @@ public class PatientServiceTest {
 
     @Test
     public void should_create_patient() {
-        Patient p = Patient.builder().id(UUID.randomUUID()).build();
+        PatientEntity p = PatientEntity.builder().id(UUID.randomUUID()).build();
 
         patientService.create(p);
 
-        verify(patientRepository).save(p);
+        verify(patientRepository).save(any(PatientEntity.class));
     }
 
     @Test
@@ -43,7 +44,7 @@ public class PatientServiceTest {
 
     @Test
     public void should_get_patient_by_id() {
-        Patient p = Patient.builder().id(UUID.randomUUID()).build();
+        Patient p = PatientEntity.builder().id(UUID.randomUUID()).build();
 
         patientService.getById(p.getId());
 
@@ -69,7 +70,7 @@ public class PatientServiceTest {
     }
 
     private Patient buildTestPatient(LocalDate dateOfBirth) {
-        return Patient.builder()
+        return PatientEntity.builder()
                 .id(UUID.randomUUID())
                 .patientNumber("KSA-18-1005")
                 .name("John Doe")

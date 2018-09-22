@@ -21,7 +21,7 @@ public class PatientRepositoryTest {
 
     @Test
     public void should_create_patient() {
-        Patient patient = Patient.builder()
+        PatientEntity patient = PatientEntity.builder()
                 .dateOfBirth(LocalDate.now())
                 .gender(Gender.MALE)
                 .name("John Doe")
@@ -36,7 +36,7 @@ public class PatientRepositoryTest {
     public void should_find_patient_by_name() {
         createTestPatient("KSA-18-1001", "Jane Doe");
 
-        List<Patient> retrievedPatients = patientRepository.findByIdOrName("jane");
+        List<PatientEntity> retrievedPatients = patientRepository.findByIdOrName("jane");
 
         assertEquals("Could not find patient in database by searching her name",
                 1, retrievedPatients.size());
@@ -46,14 +46,14 @@ public class PatientRepositoryTest {
     public void should_find_patient_by_id() {
         createTestPatient("KSA-19-1002", "Jane Doe");
 
-        List<Patient> retrievedPatients = patientRepository.findByIdOrName("-19-");
+        List<PatientEntity> retrievedPatients = patientRepository.findByIdOrName("-19-");
 
         assertEquals("Could not find patient in database by searching her medical record number",
                 1, retrievedPatients.size());
     }
 
     private Patient createTestPatient(String patientNumber, String name) {
-        return patientRepository.save(Patient.builder()
+        return patientRepository.save(PatientEntity.builder()
                 .dateOfBirth(LocalDate.now())
                 .gender(Gender.FEMALE)
                 .name(name)

@@ -1,6 +1,8 @@
 include 'user-interface'
 project(":user-interface").name = "ksch-workflows"
 
+include 'shared-test'
+
 include 'patient-management'
 include 'patient-management:patient-management-api'
 findProject(':patient-management:patient-management-api')?.name = 'patient-management-api'

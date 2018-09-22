@@ -25,4 +25,5 @@ dependencies {
     compile 'org.wicketstuff:wicketstuff-annotation:8.0.0'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile project(':shared-test')
 }

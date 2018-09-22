@@ -1,6 +1,7 @@
 package ksch.registration;
 
 import ksch.WebPageTest;
+import model.PatientResource;
 import org.apache.wicket.util.tester.FormTester;
 import org.junit.Test;
 import org.leanhis.patientmanagement.Gender;
@@ -112,7 +113,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
 
     private void createDummyPatients() {
 
-        Patient patient1 = Patient.builder()
+        Patient patient1 = PatientResource.builder()
                 .id(UUID.randomUUID())
                 .patientNumber("KSA-18-1001")
                 .name("John Doe")
@@ -121,7 +122,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
                 .address("Kirpal Sagar")
                 .build();
 
-        Patient patient2 = Patient.builder()
+        Patient patient2 = PatientResource.builder()
                 .id(UUID.randomUUID())
                 .patientNumber("KSA-18-1002")
                 .name("Jane Doe")
