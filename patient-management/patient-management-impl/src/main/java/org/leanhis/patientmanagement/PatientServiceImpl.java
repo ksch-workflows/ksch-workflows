@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static java.time.LocalDate.now;
 import static java.time.temporal.ChronoUnit.YEARS;
+import static org.leanhis.patientmanagement.PatientEntity.toPatientEntity;
 
 @Service
 @RequiredArgsConstructor
@@ -17,12 +19,14 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient create(Patient patient) {
-        return patientRepository.save(patient);
+        return patientRepository.save(toPatientEntity(patient));
     }
 
     @Override
     public List<Patient> findByNameOrNumber(String nameOrNumber) {
-        return patientRepository.findByIdOrName(nameOrNumber);
+        return patientRepository.findByIdOrName(nameOrNumber).stream()
+                .map(p -> (Patient) p)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -41,6 +45,6 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void update(Patient patient) {
-        patientRepository.save(patient);
+        patientRepository.save(toPatientEntity(patient));
     }
 }

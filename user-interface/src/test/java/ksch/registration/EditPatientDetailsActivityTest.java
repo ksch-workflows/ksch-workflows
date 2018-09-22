@@ -1,6 +1,7 @@
 package ksch.registration;
 
 import ksch.WebPageTest;
+import model.PatientResource;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.tester.FormTester;
 import org.junit.Test;
@@ -49,7 +50,7 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
     }
 
     private Patient createDummyPatient() {
-        Patient patient = Patient.builder()
+        PatientResource patient = PatientResource.builder()
                 .id(UUID.randomUUID())
                 .patientNumber("KSA-18-1001")
                 .name("John Doe")

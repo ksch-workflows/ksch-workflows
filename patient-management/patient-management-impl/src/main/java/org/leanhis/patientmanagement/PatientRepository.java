@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public interface PatientRepository extends CrudRepository<Patient, UUID> {
+public interface PatientRepository extends CrudRepository<PatientEntity, UUID> {
 
-    @Query("Select p from Patient p where " +
+    @Query("Select p from PatientEntity p where " +
             "lower(p.name) like lower(concat('%',:patientNumberOrName,'%')) or " +
             "lower(p.patientNumber) like lower(concat('%',:patientNumberOrName,'%'))" )
-    List<Patient> findByIdOrName(@Param("patientNumberOrName") String patientNumberOrName);
+    List<PatientEntity> findByIdOrName(@Param("patientNumberOrName") String patientNumberOrName);
 
-    Patient getById(UUID patientId);
+    PatientEntity getById(UUID patientId);
 }

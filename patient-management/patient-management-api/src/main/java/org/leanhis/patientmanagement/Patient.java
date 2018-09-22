@@ -1,33 +1,21 @@
 package org.leanhis.patientmanagement;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Builder
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class Patient implements Serializable {
+public interface Patient {
 
-    private UUID id;
+    UUID getId();
 
-    private String patientNumber;
+    String getPatientNumber();
 
-    private String name;
+    String getName();
 
-    private String nameFather;
+    String getNameFather();
 
-    private LocalDate dateOfBirth;
+    LocalDate getDateOfBirth();
 
-    private Gender gender;
+    Gender getGender();
 
-    private String address;
+    String getAddress();
 }

@@ -1,6 +1,7 @@
 package ksch.registration;
 
 import ksch.Activity;
+import model.PatientResource;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -12,6 +13,7 @@ import org.wicketstuff.annotation.mount.MountPath;
 
 import java.util.UUID;
 
+import static model.PatientResource.toPatientResource;
 import static util.Time.parseDate;
 
 @MountPath("/registration/edit-patient/${id}")
@@ -25,7 +27,7 @@ public class EditPatientDetailsActivity extends Activity {
         super(pageParameters);
 
         UUID patientID = UUID.fromString(pageParameters.get("id").toString());
-        Patient patient = patientService.getById(patientID);
+        PatientResource patient = toPatientResource(patientService.getById(patientID));
 
         add(new UpdatePatientForm(patient));
     }
@@ -42,11 +44,11 @@ public class EditPatientDetailsActivity extends Activity {
 
     class UpdatePatientForm extends Form<Void> {
 
-        private final Patient patient;
+        private final PatientResource patient;
 
         private final PatientFormFields patientFormFields;
 
-        public UpdatePatientForm(Patient patient) {
+        public UpdatePatientForm(PatientResource patient) {
             super("updatePatientForm");
 
             this.patient = patient;

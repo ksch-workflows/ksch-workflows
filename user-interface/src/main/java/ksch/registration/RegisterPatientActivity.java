@@ -2,6 +2,7 @@ package ksch.registration;
 
 import ksch.Activity;
 import lombok.extern.java.Log;
+import model.PatientResource;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
@@ -21,6 +22,7 @@ import org.wicketstuff.annotation.mount.MountPath;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static util.Time.parseDate;
 
@@ -73,10 +75,10 @@ public class RegisterPatientActivity extends Activity {
         noSearchResultsMessageContainer.setVisible(true);
     }
 
-    private void renderPatientList(List<Patient> matchingPatients) {
-        ListView lv = new ListView<Patient>("patients", matchingPatients) {
+    private void renderPatientList(List<PatientResource> matchingPatients) {
+        ListView lv = new ListView<PatientResource>("patients", matchingPatients) {
             @Override
-            protected void populateItem(ListItem<Patient> item) {
+            protected void populateItem(ListItem<PatientResource> item) {
                 Patient patient = item.getModelObject();
 
                 item.add(new Label("patientNumber", patient.getPatientNumber()));
@@ -108,7 +110,7 @@ public class RegisterPatientActivity extends Activity {
 
         @Override
         protected void onSubmit() {
-            Patient patient = Patient.builder()
+            PatientResource patient = PatientResource.builder()
                     .name(patientFormFields.getAndResetValue("inputName"))
                     .nameFather(patientFormFields.getAndResetValue("inputNameFather"))
                     .address(patientFormFields.getAndResetValue("inputAddress"))
@@ -136,7 +138,10 @@ public class RegisterPatientActivity extends Activity {
 
         @Override
         protected void onSubmit() {
-            List<Patient> matchingPatients = patientService.findByNameOrNumber(patientSearchTerm);
+            List<PatientResource> matchingPatients = patientService.findByNameOrNumber(patientSearchTerm)
+                    .stream()
+                    .map(PatientResource::toPatientResource)
+                    .collect(Collectors.toList());
             if (matchingPatients.size() > 0) {
                 renderPatientList(matchingPatients);
             } else {
