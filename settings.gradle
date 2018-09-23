@@ -3,8 +3,13 @@ project(":user-interface").name = "ksch-workflows"
 
 include 'shared-test'
 
-include 'patient-management'
-include 'patient-management:patient-management-api'
-findProject(':patient-management:patient-management-api')?.name = 'patient-management-api'
-include 'patient-management:patient-management-impl'
-findProject(':patient-management:patient-management-impl')?.name = 'patient-management-impl'
+def includeModule(moduleName) {
+    include "$moduleName"
+    include "$moduleName:$moduleName-api"
+    findProject(":$moduleName:$moduleName-api")?.name = "$moduleName-api"
+    include "$moduleName:$moduleName-impl"
+    findProject(":$moduleName:$moduleName-impl")?.name = "$moduleName-impl"
+}
+
+includeModule("patient-management")
+
