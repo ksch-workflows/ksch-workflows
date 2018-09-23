@@ -36,9 +36,14 @@ public class EventListenerTest {
         whenPatientCreated();
         whenPatientCreated();
 
+        /*
         List<EventEntity> currentEvents = eventRepository.findEvents(
                 LocalDateTime.now().minusDays(1),
                 LocalDateTime.now().plusDays(1));
+        */
+
+        List<EventEntity> currentEvents = eventRepository.findEvents(PatientCreatedEvent.class.getName());
+
         assertEquals(2, currentEvents.size());
     }
 

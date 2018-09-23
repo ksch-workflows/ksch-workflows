@@ -16,4 +16,7 @@ public interface EventRepository extends CrudRepository<EventEntity, Integer> {
             @Param("from") LocalDateTime from,
             @Param("to") LocalDateTime to
     );
+
+    @Query("Select e from EventEntity e where eventType = :eventType")
+    List<EventEntity> findEvents(@Param("eventType") String eventType);
 }

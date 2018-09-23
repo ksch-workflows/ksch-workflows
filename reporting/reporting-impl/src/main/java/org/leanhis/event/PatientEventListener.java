@@ -16,7 +16,7 @@ public class PatientEventListener {
     @EventListener
     public void handlePatientCreatedEvent(PatientCreatedEvent patientCreatedEvent) {
         EventEntity event = EventEntity.builder()
-                .eventType(patientCreatedEvent.getClass())
+                .eventType(patientCreatedEvent.getClass().getName())
                 .pointInTime(LocalDateTime.now())
                 .build();
         eventRepository.save(event);
