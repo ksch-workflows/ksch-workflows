@@ -32,6 +32,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("user").password("{noop}pwd").authorities("NURSE", "CLERCK");
+                .withUser("user").password("{noop}pwd").authorities("NURSE", "CLERCK", "ADMINISTRATOR");
     }
 }

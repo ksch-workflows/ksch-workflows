@@ -1,8 +1,8 @@
 package org.leanhis;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public interface PatientReport {
 
-    int getNumberOfNewPatients(LocalDate from, LocalDate to);
+    int getNumberOfNewPatients(LocalDateTime from, LocalDateTime to);
 }

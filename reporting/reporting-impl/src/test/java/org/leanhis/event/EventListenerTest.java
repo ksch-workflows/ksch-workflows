@@ -12,12 +12,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.temporal.TemporalAmount;
 import java.util.List;
 import java.util.UUID;
 
-import static java.time.temporal.ChronoUnit.DAYS;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
