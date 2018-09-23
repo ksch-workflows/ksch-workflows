@@ -11,12 +11,14 @@ import java.util.List;
 @Component
 public interface EventRepository extends CrudRepository<EventEntity, Integer> {
 
-    @Query("Select e from EventEntity e where pointInTime between :from and :to")
+    default List<EventEntity> findEvents(Class eventType, LocalDateTime from, LocalDateTime to) {
+        return findEvents(eventType.getName(), from, to);
+    }
+
+    @Query("Select e from EventEntity e where pointInTime between :from and :to and eventType = :eventType")
     List<EventEntity> findEvents(
+            @Param("eventType") String eventType,
             @Param("from") LocalDateTime from,
             @Param("to") LocalDateTime to
     );
-
-    @Query("Select e from EventEntity e where eventType = :eventType")
-    List<EventEntity> findEvents(@Param("eventType") String eventType);
 }
