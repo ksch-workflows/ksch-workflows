@@ -1,7 +1,7 @@
 include 'user-interface'
 project(":user-interface").name = "ksch-workflows"
 
-include 'shared-test'
+include 'infrastructure:shared-test'
 
 def includeModule(moduleName) {
     include "$moduleName"
