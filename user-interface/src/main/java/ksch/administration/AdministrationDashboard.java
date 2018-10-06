@@ -7,7 +7,7 @@ import org.wicketstuff.annotation.mount.MountPath;
 
 @MountPath("/administration")
 @AuthorizeInstantiation({"ADMINISTRATOR"})
-public class AdministrationDashboard extends ApplicationFrame {
+public class AdministrationDashboard extends ApplicationFrame implements AdministrationHeaderMixin {
 
     public AdministrationDashboard(PageParameters pageParameters) {
         super(pageParameters);

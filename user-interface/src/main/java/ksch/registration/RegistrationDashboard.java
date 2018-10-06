@@ -7,7 +7,7 @@ import org.wicketstuff.annotation.mount.MountPath;
 
 @MountPath("/registration")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
-public class RegistrationDashboard extends ApplicationFrame {
+public class RegistrationDashboard extends ApplicationFrame implements RegistrationHeaderMixing {
 
     public RegistrationDashboard(PageParameters pageParameters) {
         super(pageParameters);

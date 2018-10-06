@@ -12,7 +12,7 @@ import static java.time.LocalDateTime.now;
 
 @MountPath("/administration/patient-report")
 @AuthorizeInstantiation({"ADMINISTRATOR"})
-public class PatientReportActivity extends Activity {
+public class PatientReportActivity extends Activity implements AdministrationHeaderMixin {
 
     @SpringBean
     private PatientReport patientReport;

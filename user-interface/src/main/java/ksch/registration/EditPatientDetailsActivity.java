@@ -18,7 +18,7 @@ import static util.Time.parseDate;
 
 @MountPath("/registration/edit-patient/${id}")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
-public class EditPatientDetailsActivity extends Activity {
+public class EditPatientDetailsActivity extends RegistrationActivity {
 
     @SpringBean
     private PatientService patientService;
