@@ -1,6 +1,6 @@
 
 dependencies {
-    compile project(':reporting:reporting-api')
+    compile project(':reporting')
     compile project(':patient-management')
 
     compile 'com.h2database:h2'
