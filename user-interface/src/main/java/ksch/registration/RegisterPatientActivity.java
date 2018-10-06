@@ -1,6 +1,5 @@
 package ksch.registration;
 
-import ksch.Activity;
 import lombok.extern.java.Log;
 import model.PatientResource;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
@@ -29,7 +28,7 @@ import static util.Time.parseDate;
 @MountPath("/registration/register-patient")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
 @Log
-public class RegisterPatientActivity extends Activity {
+public class RegisterPatientActivity extends RegistrationActivity {
 
     private WebMarkupContainer patientListContainer;
 

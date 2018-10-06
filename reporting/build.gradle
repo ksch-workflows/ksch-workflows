@@ -1,0 +1,5 @@
+
+dependencies {
+    api project(':reporting:reporting-api')
+    implementation project(':reporting:reporting-impl')
+}

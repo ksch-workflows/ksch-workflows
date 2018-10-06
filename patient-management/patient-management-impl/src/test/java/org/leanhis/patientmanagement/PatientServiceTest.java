@@ -2,17 +2,25 @@ package org.leanhis.patientmanagement;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
+import static java.time.LocalDate.now;
 import static java.time.temporal.ChronoUnit.YEARS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -24,6 +32,9 @@ public class PatientServiceTest {
     @Mock
     private PatientRepository patientRepository;
 
+    @Mock
+    private ApplicationEventPublisher eventPublisher;
+
     @Test
     public void should_create_patient() {
         PatientEntity p = PatientEntity.builder().id(UUID.randomUUID()).build();
@@ -31,14 +42,17 @@ public class PatientServiceTest {
         patientService.create(p);
 
         verify(patientRepository).save(any(PatientEntity.class));
+        verify(eventPublisher).publishEvent(any(PatientCreatedEvent.class));
     }
 
     @Test
     public void should_retrieve_patient_by_patient_number() {
         String patientNumber = "1234";
+        given(patientRepository.findByIdOrName(patientNumber)).willReturn(listOf(buildTestPatient(patientNumber)));
 
-        patientService.findByNameOrNumber(patientNumber);
+        List<Patient> patients = patientService.findByNameOrNumber(patientNumber);
 
+        assertTrue("Could not find patient by patient number.", patients.size() > 0);
         verify(patientRepository).findByIdOrName(patientNumber);
     }
 
@@ -53,7 +67,7 @@ public class PatientServiceTest {
 
     @Test
     public void should_calculate_patient_age() {
-        Patient patient = buildTestPatient(LocalDate.now().minus(15, YEARS));
+        Patient patient = buildTestPatient(now().minus(15, YEARS));
 
         int patientAgeInYears = patientService.getAgeInYears(patient);
 
@@ -62,14 +76,26 @@ public class PatientServiceTest {
 
     @Test
     public void should_skip_patient_age_calculation_if_no_age_specified() {
-        Patient patient = buildTestPatient(null);
+
+        Patient patient = buildTestPatientWithoutDateOfBirth();
 
         Integer patientAgeInYears = patientService.getAgeInYears(patient);
 
         assertNull("Patient age is expected to be null if not date of birth is specified", patientAgeInYears);
     }
 
-    private Patient buildTestPatient(LocalDate dateOfBirth) {
+    private PatientEntity buildTestPatient(String patientNumber) {
+        return PatientEntity.builder()
+                .id(UUID.randomUUID())
+                .patientNumber(patientNumber)
+                .name("John Doe")
+                .dateOfBirth(now())
+                .gender(Gender.MALE)
+                .address("Kirpal Sagar")
+                .build();
+    }
+
+    private PatientEntity buildTestPatient(LocalDate dateOfBirth) {
         return PatientEntity.builder()
                 .id(UUID.randomUUID())
                 .patientNumber("KSA-18-1005")
@@ -78,5 +104,20 @@ public class PatientServiceTest {
                 .gender(Gender.MALE)
                 .address("Kirpal Sagar")
                 .build();
+    }
+
+    private PatientEntity buildTestPatientWithoutDateOfBirth() {
+        return PatientEntity.builder()
+                .id(UUID.randomUUID())
+                .patientNumber("KSA-18-1005")
+                .name("John Doe")
+                .dateOfBirth(null)
+                .gender(Gender.MALE)
+                .address("Kirpal Sagar")
+                .build();
+    }
+
+    private List<PatientEntity> listOf(PatientEntity... patient) {
+        return Arrays.asList(patient);
     }
 }

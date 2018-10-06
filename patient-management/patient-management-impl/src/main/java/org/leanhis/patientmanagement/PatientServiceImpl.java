@@ -1,6 +1,7 @@
 package org.leanhis.patientmanagement;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +18,13 @@ public class PatientServiceImpl implements PatientService {
 
     private final PatientRepository patientRepository;
 
+    private final ApplicationEventPublisher eventPublisher;
+
     @Override
     public Patient create(Patient patient) {
-        return patientRepository.save(toPatientEntity(patient));
+        PatientEntity p = patientRepository.save(toPatientEntity(patient));
+        eventPublisher.publishEvent(new PatientCreatedEvent(p));
+        return p;
     }
 
     @Override

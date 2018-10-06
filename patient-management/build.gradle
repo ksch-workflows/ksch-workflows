@@ -1,3 +1,4 @@
+// TODO Remove wrapper projects
 
 dependencies {
     api project(':patient-management:patient-management-api')

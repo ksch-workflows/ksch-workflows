@@ -16,7 +16,7 @@ public abstract class Activity extends ApplicationFrame {
     public abstract String getActivityTitle();
 
     /**
-     * @return URL path with which the link to the previous page for the back button can be build, e.g. "/dashboard"
+     * @return URL path with which the link to the previous page for the back button can be build, e.g. "/registration/dashboard"
      */
     public abstract String getPreviousPagePath();
 }
