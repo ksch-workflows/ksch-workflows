@@ -34,6 +34,16 @@ public class CustomAssertionsTest {
         CustomAssertions.assertAllPropertiesEqual(ExampleInterface.class, objA, objB);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void should_reject_objects_which_dont_belong_to_the_model_class() {
+
+        Class modelClass = ExampleInterface.class;
+        ExampleInterface objA = getExampleObject();
+        AnotherExampleInterface objB = getAnotherExampleObject();
+
+        CustomAssertions.assertAllPropertiesEqual(modelClass, objA, objB);
+    }
+
     private ExampleInterface getExampleObject() {
         return new ExampleInterface() {
             @Override
@@ -70,5 +80,9 @@ public class CustomAssertionsTest {
                 return false;
             }
         };
+    }
+
+    private AnotherExampleInterface getAnotherExampleObject() {
+        return () -> "anything";
     }
 }
