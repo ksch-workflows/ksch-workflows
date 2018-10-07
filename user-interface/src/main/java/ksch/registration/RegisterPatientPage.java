@@ -1,21 +1,20 @@
-package ksch.administration;
+package ksch.registration;
 
-import ksch.Dashboard;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
 
-@MountPath("/administration")
-@AuthorizeInstantiation({"ADMINISTRATOR"})
-public class AdministrationDashboard extends AdministrationPage {
+@MountPath("/registration/register-patient")
+@AuthorizeInstantiation({"NURSE", "CLERK"})
+public class RegisterPatientPage extends RegistrationPage {
 
-    public AdministrationDashboard(PageParameters pageParameters) {
+    public RegisterPatientPage(PageParameters pageParameters) {
         super(pageParameters);
     }
 
     @Override
-    protected Panel getContent() {
-        return new Dashboard();
+    public Panel getContent() {
+        return new RegisterPatientActivity();
     }
 }

@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class RegisterPatientActivityTest extends WebPageTest {
+public class RegisterPatientPageTest extends WebPageTest {
 
     @Autowired
     private PatientService patientService;
@@ -26,7 +26,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
     public void should_render_patient_search_result_list() {
         createDummyPatients();
         login("user", "pwd");
-        tester.startPage(RegisterPatientActivity.class);
+        tester.startPage(RegisterPatientPage.class);
 
         FormTester formTester = tester.newFormTester("patientSearchForm", false);
         formTester.setValue("patientSearchTerm", "doe");
@@ -40,7 +40,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
     public void should_open_patient_details() {
         createDummyPatients();
         login("user", "pwd");
-        tester.startPage(RegisterPatientActivity.class);
+        tester.startPage(RegisterPatientPage.class);
 
         FormTester formTester = tester.newFormTester("patientSearchForm", false);
         formTester.setValue("patientSearchTerm", "doe");
@@ -54,7 +54,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
     public void should_resubmit_patient_search() {
         createDummyPatients();
         login("user", "pwd");
-        tester.startPage(RegisterPatientActivity.class);
+        tester.startPage(RegisterPatientPage.class);
         FormTester formTester = tester.newFormTester("patientSearchForm", false);
         formTester.setValue("patientSearchTerm", "doe");
         formTester.submit();
@@ -70,7 +70,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
     @Test
     public void should_render_message_about_no_search_results() {
         login("user", "pwd");
-        tester.startPage(RegisterPatientActivity.class);
+        tester.startPage(RegisterPatientPage.class);
 
         FormTester formTester = tester.newFormTester("patientSearchForm", false);
         formTester.submit();
@@ -84,7 +84,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
     @Test
     public void should_add_new_patient() {
         login("user", "pwd");
-        tester.startPage(RegisterPatientActivity.class);
+        tester.startPage(RegisterPatientPage.class);
 
         FormTester formTester = tester.newFormTester("addPatientForm", false);
         formTester.setValue("patientFormFields:inputName", "Fritz");
@@ -94,7 +94,7 @@ public class RegisterPatientActivityTest extends WebPageTest {
         formTester.setValue("patientFormFields:inputAddress", "Kirpal Sagar");
         formTester.submit();
 
-        tester.assertRenderedPage(EditPatientDetailsActivity.class);
+        tester.assertRenderedPage(EditPatientDetailsPage.class);
 
         List<Patient> searchResults = patientService.findByNameOrNumber("Fritz");
 
