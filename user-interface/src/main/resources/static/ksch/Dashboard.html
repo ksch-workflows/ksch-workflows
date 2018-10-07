@@ -12,19 +12,21 @@
 
 <wicket:panel>
 
-    <h1>Registration dashboard</h1>
+    <h1 wicket:id="dashboardTitle">[dashboard title]</h1>
 
     <div class="row">
-        <div class="col-xl-3 col-sm-4 mb-3">
-            <a href="/registration/register-patient" class="card btn btn-default o-hidden h-100">
+
+        <div wicket:id="activities" class="col-sm-6 col-md-4 col-lg-3 mb-3">
+            <a wicket:id="activityLink" href="#" class="card btn btn-default o-hidden h-100">
                 <div class="card-body">
-                    <i class="fa fa-book"></i>
-                    <p>
-                        Register patient
+                    <i wicket:id="activityLinkIcon" class="fa fa-book"></i>
+                    <p wicket:id="activityLinkText">
+                        [activity name]
                     </p>
                 </div>
             </a>
         </div>
+
     </div>
 
 </wicket:panel>
