@@ -41,7 +41,7 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         parameters.add("id", patient.getId());
         tester.startPage(EditPatientDetailsPage.class, parameters);
 
-        FormTester formTester = tester.newFormTester("updatePatientForm", false);
+        FormTester formTester = tester.newFormTester("content:updatePatientForm", false);
         formTester.setValue("patientFormFields:inputAddress", "St. Gilgen");
         formTester.submit();
 

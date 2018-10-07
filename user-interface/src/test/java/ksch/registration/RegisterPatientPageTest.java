@@ -8,6 +8,7 @@ import org.leanhis.patientmanagement.Gender;
 import org.leanhis.patientmanagement.Patient;
 import org.leanhis.patientmanagement.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import util.Debug;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,7 +29,7 @@ public class RegisterPatientPageTest extends WebPageTest {
         login("user", "pwd");
         tester.startPage(RegisterPatientPage.class);
 
-        FormTester formTester = tester.newFormTester("patientSearchForm", false);
+        FormTester formTester = tester.newFormTester("content:patientSearchForm", false);
         formTester.setValue("patientSearchTerm", "doe");
         formTester.submit();
 
@@ -42,7 +43,7 @@ public class RegisterPatientPageTest extends WebPageTest {
         login("user", "pwd");
         tester.startPage(RegisterPatientPage.class);
 
-        FormTester formTester = tester.newFormTester("patientSearchForm", false);
+        FormTester formTester = tester.newFormTester("content:patientSearchForm", false);
         formTester.setValue("patientSearchTerm", "doe");
         formTester.submit();
 
@@ -55,11 +56,11 @@ public class RegisterPatientPageTest extends WebPageTest {
         createDummyPatients();
         login("user", "pwd");
         tester.startPage(RegisterPatientPage.class);
-        FormTester formTester = tester.newFormTester("patientSearchForm", false);
+        FormTester formTester = tester.newFormTester("content:patientSearchForm", false);
         formTester.setValue("patientSearchTerm", "doe");
         formTester.submit();
 
-        formTester = tester.newFormTester("patientSearchForm", false);
+        formTester = tester.newFormTester("content:patientSearchForm", false);
         formTester.setValue("patientSearchTerm", "doe");
         formTester.submit();
 
@@ -72,7 +73,7 @@ public class RegisterPatientPageTest extends WebPageTest {
         login("user", "pwd");
         tester.startPage(RegisterPatientPage.class);
 
-        FormTester formTester = tester.newFormTester("patientSearchForm", false);
+        FormTester formTester = tester.newFormTester("content:patientSearchForm", false);
         formTester.submit();
 
         assertTrue("Notification about missing search results wasn't rendered.",
@@ -86,7 +87,7 @@ public class RegisterPatientPageTest extends WebPageTest {
         login("user", "pwd");
         tester.startPage(RegisterPatientPage.class);
 
-        FormTester formTester = tester.newFormTester("addPatientForm", false);
+        FormTester formTester = tester.newFormTester("content:addPatientForm", false);
         formTester.setValue("patientFormFields:inputName", "Fritz");
         formTester.setValue("patientFormFields:inputNameFather", "Carl");
         formTester.select("patientFormFields:inputGender", 0);
