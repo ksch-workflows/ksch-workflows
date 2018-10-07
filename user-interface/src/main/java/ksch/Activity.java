@@ -18,7 +18,8 @@ public abstract class Activity extends Panel {
     public abstract String getActivityTitle();
 
     /**
-     * @return URL path with which the link to the previous page for the back button can be build, e.g. "/registration/dashboard"
+     * @return URL path with which the link to the previous page for the back button can be build,
+     * e.g. "/registration/dashboard"
      */
     public abstract String getPreviousPagePath();
 }

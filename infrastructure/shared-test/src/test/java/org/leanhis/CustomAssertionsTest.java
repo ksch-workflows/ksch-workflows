@@ -5,6 +5,7 @@ import org.junit.Test;
 public class CustomAssertionsTest {
 
     private ExampleInterface objA;
+
     private ExampleInterface objB;
 
     @Test

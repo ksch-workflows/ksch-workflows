@@ -8,7 +8,6 @@ import org.leanhis.patientmanagement.Gender;
 import org.leanhis.patientmanagement.Patient;
 import org.leanhis.patientmanagement.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import util.Debug;
 
 import java.time.LocalDate;
 import java.util.List;

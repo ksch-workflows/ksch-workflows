@@ -16,6 +16,7 @@ import static ksch.ApplicationFrame.MAIN_CONTENT_ID;
 public class Dashboard extends Panel {
 
     private final String title;
+
     private final ActivityLink[] activityLinks;
 
     public Dashboard(String title, ActivityLink... activityLinks) {
