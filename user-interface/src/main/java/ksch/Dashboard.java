@@ -15,24 +15,15 @@ import static ksch.ApplicationFrame.MAIN_CONTENT_ID;
 
 public class Dashboard extends Panel {
 
-    private final String title;
-
-    private final ActivityLink[] activityLinks;
-
     public Dashboard(String title, ActivityLink... activityLinks) {
         super(MAIN_CONTENT_ID);
 
-        this.title = title;
-        this.activityLinks = activityLinks;
+        add(new Label("dashboardTitle", title));
+        add(createActivityLinkList(activityLinks));
     }
 
-    @Override
-    public void onInitialize() {
-        super.onInitialize();
-
-        add(new Label("dashboardTitle", title));
-
-        ListView lv = new ListView<ActivityLink>("activities", Arrays.asList(activityLinks)) {
+    private ListView createActivityLinkList(ActivityLink[] activityLinks) {
+        return new ListView<ActivityLink>("activities", Arrays.asList(activityLinks)) {
             @Override
             protected void populateItem(ListItem<ActivityLink> activityLink) {
                 ActivityLink link = activityLink.getModelObject();
@@ -44,8 +35,6 @@ public class Dashboard extends Panel {
                 a.add(i);
             }
         };
-
-        add(lv);
     }
 
     @AllArgsConstructor
