@@ -2,12 +2,14 @@ package ksch;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.ExternalLink;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.markup.html.panel.Panel;
 
-public abstract class Activity extends ApplicationFrame {
+import static ksch.ApplicationFrame.MAIN_CONTENT_ID;
 
-    public Activity(PageParameters pageParameters) {
-        super(pageParameters);
+public abstract class Activity extends Panel {
+
+    public Activity() {
+        super(MAIN_CONTENT_ID);
 
         add(new ExternalLink("goToPreviousPage", getPreviousPagePath()));
         add(new Label("activityTitle", getActivityTitle()));
@@ -16,7 +18,8 @@ public abstract class Activity extends ApplicationFrame {
     public abstract String getActivityTitle();
 
     /**
-     * @return URL path with which the link to the previous page for the back button can be build, e.g. "/registration/dashboard"
+     * @return URL path with which the link to the previous page for the back button can be build,
+     * e.g. "/registration/dashboard"
      */
     public abstract String getPreviousPagePath();
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<wicket:panel>
+
+    <h1 wicket:id="dashboardTitle">[dashboard title]</h1>
+
+    <div class="row">
+
+        <div wicket:id="activities" class="col-sm-6 col-md-4 col-lg-3 mb-3">
+            <a wicket:id="activityLink" href="#" class="card btn btn-default o-hidden h-100">
+                <div class="card-body">
+                    <i wicket:id="activityLinkIcon" class="fa fa-book"></i>
+                    <p wicket:id="activityLinkText">
+                        [activity name]
+                    </p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+</wicket:panel>
+
+</body>
+
+</html>

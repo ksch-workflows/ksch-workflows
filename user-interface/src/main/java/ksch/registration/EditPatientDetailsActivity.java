@@ -2,33 +2,23 @@ package ksch.registration;
 
 import ksch.Activity;
 import model.PatientResource;
-import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.leanhis.patientmanagement.Gender;
-import org.leanhis.patientmanagement.Patient;
 import org.leanhis.patientmanagement.PatientService;
-import org.wicketstuff.annotation.mount.MountPath;
 
 import java.util.UUID;
 
 import static model.PatientResource.toPatientResource;
 import static util.Time.parseDate;
 
-@MountPath("/registration/edit-patient/${id}")
-@AuthorizeInstantiation({"NURSE", "CLERK"})
-public class EditPatientDetailsActivity extends RegistrationActivity {
+public class EditPatientDetailsActivity extends Activity {
 
     @SpringBean
     private PatientService patientService;
 
-    public EditPatientDetailsActivity(PageParameters pageParameters) {
-        super(pageParameters);
-
-        UUID patientID = UUID.fromString(pageParameters.get("id").toString());
-        PatientResource patient = toPatientResource(patientService.getById(patientID));
-
+    public EditPatientDetailsActivity(UUID patientId) {
+        PatientResource patient = toPatientResource(patientService.getById(patientId));
         add(new UpdatePatientForm(patient));
     }
 

@@ -18,9 +18,9 @@ public class PatientReportActivityTest extends WebPageTest {
         login("user", "pwd");
         given(patientReport.getNumberOfNewPatients(any(), any())).willReturn(42);
 
-        tester.startPage(PatientReportActivity.class);
+        tester.startPage(PatientReportPage.class);
 
         tester.assertContains("42");
-        tester.assertRenderedPage(PatientReportActivity.class);
+        tester.assertRenderedPage(PatientReportPage.class);
     }
 }

@@ -3,10 +3,10 @@ package ksch.registration;
 import ksch.WebPageTest;
 import org.junit.Test;
 
-public class RegistrationHomeTest extends WebPageTest {
+public class RegistrationDashboardTest extends WebPageTest {
 
     @Test
-    public void should_render_registration_landing_page() {
+    public void should_render_registration_dashboard() {
         login("user", "pwd");
 
         tester.startPage(RegistrationDashboard.class);
@@ -14,3 +14,4 @@ public class RegistrationHomeTest extends WebPageTest {
         tester.assertRenderedPage(RegistrationDashboard.class);
     }
 }
+

@@ -1,25 +1,18 @@
 package ksch.administration;
 
 import ksch.Activity;
-import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.leanhis.PatientReport;
-import org.wicketstuff.annotation.mount.MountPath;
 
 import static java.time.LocalDateTime.now;
 
-@MountPath("/administration/patient-report")
-@AuthorizeInstantiation({"ADMINISTRATOR"})
-public class PatientReportActivity extends Activity implements AdministrationHeaderMixin {
+public class PatientReportActivity extends Activity {
 
     @SpringBean
     private PatientReport patientReport;
 
-    public PatientReportActivity(PageParameters pageParameters) {
-        super(pageParameters);
-
+    public PatientReportActivity() {
         add(new Label("numberOfNewPatient", patientReport.getNumberOfNewPatients(now().minusDays(7), now())));
     }
 

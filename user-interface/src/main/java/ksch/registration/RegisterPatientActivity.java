@@ -1,8 +1,7 @@
 package ksch.registration;
 
-import lombok.extern.java.Log;
+import ksch.Activity;
 import model.PatientResource;
-import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
@@ -12,12 +11,10 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.flow.RedirectToUrlException;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.leanhis.patientmanagement.Gender;
 import org.leanhis.patientmanagement.Patient;
 import org.leanhis.patientmanagement.PatientService;
-import org.wicketstuff.annotation.mount.MountPath;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,10 +22,7 @@ import java.util.stream.Collectors;
 
 import static util.Time.parseDate;
 
-@MountPath("/registration/register-patient")
-@AuthorizeInstantiation({"NURSE", "CLERK"})
-@Log
-public class RegisterPatientActivity extends RegistrationActivity {
+public class RegisterPatientActivity extends Activity {
 
     private WebMarkupContainer patientListContainer;
 
@@ -37,9 +31,7 @@ public class RegisterPatientActivity extends RegistrationActivity {
     @SpringBean
     private PatientService patientService;
 
-    public RegisterPatientActivity(PageParameters pageParameters) {
-        super(pageParameters);
-
+    public RegisterPatientActivity() {
         createPatientList();
         createNoSearchResultsMessage();
 

@@ -27,9 +27,9 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         PageParameters parameters = new PageParameters();
         parameters.add("id", patient.getId());
 
-        tester.startPage(EditPatientDetailsActivity.class, parameters);
+        tester.startPage(EditPatientDetailsPage.class, parameters);
 
-        tester.assertRenderedPage(EditPatientDetailsActivity.class);
+        tester.assertRenderedPage(EditPatientDetailsPage.class);
         tester.assertContains(patient.getName());
     }
 
@@ -39,9 +39,9 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         Patient patient = createDummyPatient();
         PageParameters parameters = new PageParameters();
         parameters.add("id", patient.getId());
-        tester.startPage(EditPatientDetailsActivity.class, parameters);
+        tester.startPage(EditPatientDetailsPage.class, parameters);
 
-        FormTester formTester = tester.newFormTester("updatePatientForm", false);
+        FormTester formTester = tester.newFormTester("content:updatePatientForm", false);
         formTester.setValue("patientFormFields:inputAddress", "St. Gilgen");
         formTester.submit();
 
