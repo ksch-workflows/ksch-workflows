@@ -45,7 +45,7 @@ Please refer to the following wiki pages for explanations for configuring those 
 The application can be started for development tests with the following Gradle task:
 
 ```
-./gradlew bootRun
+./gradlew clean bootRun
 ```
 
 Then it is accessible in the browser under the URL http://localhost:8080 (login: user/pwd).
