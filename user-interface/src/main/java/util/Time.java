@@ -19,8 +19,9 @@ public class Time {
         if (date == null) {
             throw new IllegalArgumentException("Date must not be null.");
         }
-
-        if (date.split("-").length != 3) {
+        
+        String datePattern = "\\d{2}-\\d{2}-\\d{4}";
+        if (!date.matches(datePattern)) {
             throw new IllegalArgumentException("Date " + date + " is not in expected format (dd-mm-yyyy).");
         }
 
