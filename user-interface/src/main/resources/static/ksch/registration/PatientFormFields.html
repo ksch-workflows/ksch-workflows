@@ -9,16 +9,11 @@
 
     <script src="../../js/jquery.min.js" ></script>
     <script src="../../js/bootstrap.min.js" ></script>
-
-    <wicket:head>
-        <link href="../../css/bootstrap-datepicker.min.css" rel="stylesheet">
-    </wicket:head>
 </head>
 
 <body>
     <div class="container">
         <wicket:panel>
-            <script src="../../../js/bootstrap-datepicker.min.js"></script>
 
             <div class="form-group">
                 <label for="inputName">Name</label>
@@ -59,16 +54,6 @@
             </div>
 
             <script>
-                var now = new Date()
-
-                $('#inputDateOfBirth').datepicker({
-                    format: 'dd-mm-yyyy',
-                    startView: 'century',
-                    weekStart: 1,
-                    autoclose: true,
-                    endDate: `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()}`,
-                    defaultViewDate: `01-01-${now.getFullYear() - 30}`
-                });
 
                 // https://getbootstrap.com/docs/4.0/components/forms/#validation
                 (function() {
