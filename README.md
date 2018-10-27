@@ -92,7 +92,7 @@ java -jar ksch-workflows-0.1.0-SNAPSHOT.jar
 
 ## Contact information
 
-If you have any question or idea you can discuss it in this chat:
+If you have any question or idea, please join this chat room and post it there:
 
 https://gitter.im/ksch-workflows/Lobby
 
