@@ -92,11 +92,9 @@ java -jar ksch-workflows-0.1.0-SNAPSHOT.jar
 
 ## Contact information
 
-If you have any question or idea you can discuss it in this chat. Also drop please drop a message if you get stuck with one of the steps above.
+If you have any question or idea you can discuss it in this chat:
 
-https://ksch-workflows.zulipchat.com/#narrow/stream/138447-Townhall
-
-Login can be done with an email, Google, or GitHub account.
+https://gitter.im/ksch-workflows/Lobby
 
 ## License
 
