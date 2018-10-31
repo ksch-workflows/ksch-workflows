@@ -1,40 +1,53 @@
-package model;
+package ksch.patientmanagement;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
 
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Builder
+@Entity
+@Table
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatientResource implements Patient, Serializable {
+public class PatientEntity implements Patient {
 
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @Column
     private UUID id;
 
+    @Column
     private String patientNumber;
 
+    @Column
     private String name;
 
+    @Column
     private String nameFather;
 
+    @Column
     private LocalDate dateOfBirth;
 
+    @Column
     private Gender gender;
 
+    @Column
     private String address;
 
-    public static PatientResource toPatientResource(Patient patient) {
-        return PatientResource.builder()
+    public static PatientEntity toPatientEntity(Patient patient) {
+        return PatientEntity.builder()
                 .id(patient.getId())
                 .patientNumber(patient.getPatientNumber())
                 .name(patient.getName())
