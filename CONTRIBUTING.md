@@ -9,6 +9,12 @@ So the guidelines below are supposed to help to keep the code in this project in
 If you think that they should be improved in some way or the other,
 please create a ticket with your suggestion [as a GitHub issue](https://github.com/ksch-workflows/ksch-workflows/issues/new).
 
+## Pull requests
+
+Please do all pull requests against the `master` branch of the `ksch-workflows` organization.
+
+The basic workflow for doing so is explained in the Wiki: [Creating a pull request](https://www.google.com). If you are having any difficulties on the way, please post a question in the [Gitter chat](https://gitter.im/ksch-workflows/Lobby).
+
 ## Test coverage
 
 All features of the system should be covered by automated tests.
