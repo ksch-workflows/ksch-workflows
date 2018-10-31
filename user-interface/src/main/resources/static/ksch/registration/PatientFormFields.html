@@ -13,68 +13,73 @@
 
 <body>
     <div class="container">
-        <wicket:panel>
+        <form class="form-box">
 
-            <div class="form-group">
-                <label for="inputName">Name</label>
-                <input required wicket:id="inputName" type="text" class="form-control" id="inputName"
-                       placeholder="Patient name">
-                <div class="invalid-feedback">
-                    Please enter the patient name here.
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputNameFather">Father's name (optional)</label>
-                <input wicket:id="inputNameFather" type="text" class="form-control" id="inputNameFather"
-                       placeholder="Patient father's name">
-            </div>
-            <div class="form-group">
-                <label for="inputDateOfBirth">Date of birth</label>
-                <input required wicket:id="inputDateOfBirth" type="text" class="form-control" id="inputDateOfBirth"
-                       placeholder="Patient date of birth (dd-mm-yyyy)" pattern="[0-3][0-9]-[0-1][0-9]-[0-2][0-9][0-9][0-9]">
-                <div class="invalid-feedback">
-                    Please enter the patient date of birth here.
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputGender">Gender</label>
-                <select required wicket:id="inputGender" class="form-control" id="inputGender">
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
-                </select>
-                <div class="invalid-feedback">
-                    Please select the patient gender.
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputAddress">Address</label>
-                <textarea wicket:id="inputAddress" id="inputAddress" class="form-control" rows="4"
-                          placeholder="Patient address"></textarea>
-            </div>
+            <wicket:panel>
 
-            <script>
+                <div class="form-group">
+                    <label for="inputName">Name</label>
+                    <input required wicket:id="inputName" type="text" class="form-control" id="inputName"
+                           placeholder="Patient name">
+                    <div class="invalid-feedback">
+                        Please enter the patient name here.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputNameFather">Father's name (optional)</label>
+                    <input wicket:id="inputNameFather" type="text" class="form-control" id="inputNameFather"
+                           placeholder="Patient father's name">
+                </div>
+                <div class="form-group">
+                    <label for="inputDateOfBirth">Date of birth</label>
+                    <input required wicket:id="inputDateOfBirth" type="text" class="form-control" id="inputDateOfBirth"
+                           placeholder="Patient date of birth (dd-mm-yyyy)" pattern="[0-3]?[0-9]-[0-1]?[0-9]-[1-2][0-9][0-9][0-9]">
+                    <div class="invalid-feedback">
+                        Please enter the patient date of birth here.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputGender">Gender</label>
+                    <select required wicket:id="inputGender" class="form-control" id="inputGender">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select the patient gender.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress">Address</label>
+                    <textarea wicket:id="inputAddress" id="inputAddress" class="form-control" rows="4"
+                              placeholder="Patient address"></textarea>
+                </div>
 
-                // https://getbootstrap.com/docs/4.0/components/forms/#validation
-                (function() {
-                  'use strict';
-                  window.addEventListener('load', function() {
-                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    var forms = document.getElementsByClassName('needs-validation');
-                    // Loop over them and prevent submission
-                    var validation = Array.prototype.filter.call(forms, function(form) {
-                      form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                          event.preventDefault();
-                          event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
+                <script>
+
+                    // https://getbootstrap.com/docs/4.0/components/forms/#validation
+                    (function() {
+                      'use strict';
+                      window.addEventListener('load', function() {
+                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                        var forms = document.getElementsByClassName('needs-validation');
+                        // Loop over them and prevent submission
+                        var validation = Array.prototype.filter.call(forms, function(form) {
+                          form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                              event.preventDefault();
+                              event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                          }, false);
+                        });
                       }, false);
-                    });
-                  }, false);
-                })();
-            </script>
-        </wicket:panel>
+                    })();
+                </script>
+            </wicket:panel>
+
+            <input class="btn btn-primary btn-block" type="submit" value="Submit form" />
+        </form>
     </div>
 </body>
 
