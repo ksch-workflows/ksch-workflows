@@ -13,7 +13,7 @@ please create a ticket with your suggestion [as a GitHub issue](https://github.c
 
 Please do all pull requests against the `master` branch of the `ksch-workflows` organization.
 
-The basic workflow for doing so is explained in the Wiki: [Creating a pull request](https://www.google.com). If you are having any difficulties on the way, please post a question in the [Gitter chat](https://gitter.im/ksch-workflows/Lobby).
+The basic workflow for doing so is explained in the Wiki: [Creating a pull request](https://github.com/ksch-workflows/ksch-workflows/wiki/Creating-a-pull-request). If you are having any difficulties on the way, please post a question in the [Gitter chat](https://gitter.im/ksch-workflows/Lobby).
 
 ## Test coverage
 
