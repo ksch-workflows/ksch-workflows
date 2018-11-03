@@ -1,25 +1,23 @@
-package model;
+package ksch.patientmanagement;
 
 import org.junit.Test;
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 import static ksch.util.CustomAssertions.assertAllPropertiesEqual;
 
-public class PatientResourceTest {
+public class PatientEnitityTest {
 
     private Patient patient;
 
     @Test
-    public void should_build_patient_resource() {
+    public void should_build_patient_entity() {
         givenPatient();
 
-        PatientResource r = PatientResource.toPatientResource(patient);
+        PatientEntity e = PatientEntity.toPatientEntity(patient);
 
-        assertAllPropertiesEqual(Patient.class, patient, r);
+        assertAllPropertiesEqual(Patient.class, patient, e);
     }
 
     private void givenPatient() {

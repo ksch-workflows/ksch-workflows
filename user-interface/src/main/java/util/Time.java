@@ -20,7 +20,7 @@ public class Time {
             throw new IllegalArgumentException("Date must not be null.");
         }
         
-        String datePattern = "\\d{2}-\\d{2}-\\d{4}";
+        String datePattern = "[0-3]?[0-9]-[0-1]?[0-9]-[1-2][0-9]{3}";
         if (!date.matches(datePattern)) {
             throw new IllegalArgumentException("Date " + date + " is not in expected format (dd-mm-yyyy).");
         }

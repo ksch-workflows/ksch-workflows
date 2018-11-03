@@ -2,7 +2,7 @@ package ksch.administration;
 
 import ksch.WebPageTest;
 import org.junit.Test;
-import org.leanhis.PatientReport;
+import ksch.PatientReport;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.mockito.ArgumentMatchers.any;

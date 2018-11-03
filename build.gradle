@@ -69,7 +69,7 @@ configure(subprojects.findAll { !it.name.endsWith('-api')} ) {
     }
 
     pitest {
-        targetClasses = ['ksch.*', 'org.leanhis.*']
+        targetClasses = ['ksch.*']
 
         threads = 4
 
