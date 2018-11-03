@@ -1,4 +1,4 @@
-package ksch.patientmanagement;
+package ksch.patientmanagement.patient;
 
 import java.time.LocalDate;
 import java.util.UUID;

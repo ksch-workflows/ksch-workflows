@@ -1,8 +1,8 @@
 package model;
 
 import org.junit.Test;
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
+import ksch.patientmanagement.patient.Gender;
+import ksch.patientmanagement.patient.Patient;
 
 import java.time.LocalDate;
 import java.util.UUID;

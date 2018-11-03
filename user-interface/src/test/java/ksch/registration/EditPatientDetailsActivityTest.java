@@ -6,9 +6,9 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.tester.FormTester;
 import org.junit.Before;
 import org.junit.Test;
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
-import ksch.patientmanagement.PatientService;
+import ksch.patientmanagement.patient.Gender;
+import ksch.patientmanagement.patient.Patient;
+import ksch.patientmanagement.patient.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
@@ -57,7 +57,7 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
 
         tester.newFormTester("content:startVisitForm").submit();
 
-        
+
 
 
 

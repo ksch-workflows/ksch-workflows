@@ -4,8 +4,8 @@ import ksch.Activity;
 import model.PatientResource;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.PatientService;
+import ksch.patientmanagement.patient.Gender;
+import ksch.patientmanagement.patient.PatientService;
 
 import java.util.UUID;
 

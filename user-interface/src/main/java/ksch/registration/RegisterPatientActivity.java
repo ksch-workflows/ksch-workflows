@@ -12,9 +12,9 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.flow.RedirectToUrlException;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
-import ksch.patientmanagement.PatientService;
+import ksch.patientmanagement.patient.Gender;
+import ksch.patientmanagement.patient.Patient;
+import ksch.patientmanagement.patient.PatientService;
 
 import java.util.List;
 import java.util.UUID;

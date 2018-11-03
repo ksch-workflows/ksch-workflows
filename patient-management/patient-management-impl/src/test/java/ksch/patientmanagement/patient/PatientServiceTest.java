@@ -1,5 +1,11 @@
-package ksch.patientmanagement;
+package ksch.patientmanagement.patient;
 
+import ksch.patientmanagement.patient.Gender;
+import ksch.patientmanagement.patient.Patient;
+import ksch.patientmanagement.patient.PatientCreatedEvent;
+import ksch.patientmanagement.patient.PatientEntity;
+import ksch.patientmanagement.patient.PatientRepository;
+import ksch.patientmanagement.patient.PatientServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

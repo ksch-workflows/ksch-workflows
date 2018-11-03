@@ -1,7 +1,7 @@
 package ksch.event;
 
 import lombok.RequiredArgsConstructor;
-import ksch.patientmanagement.PatientCreatedEvent;
+import ksch.patientmanagement.patient.PatientCreatedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 

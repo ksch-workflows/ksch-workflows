@@ -4,9 +4,9 @@ import ksch.WebPageTest;
 import model.PatientResource;
 import org.apache.wicket.util.tester.FormTester;
 import org.junit.Test;
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
-import ksch.patientmanagement.PatientService;
+import ksch.patientmanagement.patient.Gender;
+import ksch.patientmanagement.patient.Patient;
+import ksch.patientmanagement.patient.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;

@@ -1,5 +1,8 @@
-package ksch.patientmanagement;
+package ksch.patientmanagement.patient;
 
+import ksch.patientmanagement.patient.Gender;
+import ksch.patientmanagement.patient.Patient;
+import ksch.patientmanagement.patient.PatientEntity;
 import org.junit.Test;
 
 import java.time.LocalDate;
