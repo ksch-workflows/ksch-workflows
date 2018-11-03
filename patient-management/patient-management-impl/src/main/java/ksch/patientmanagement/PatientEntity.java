@@ -23,11 +23,13 @@ import java.util.UUID;
 @AllArgsConstructor
 public class PatientEntity implements Patient {
 
+    // TODO Add unique constaint for patient id
     @Id
     @GeneratedValue(generator = "UUID")
     @Column
     private UUID id;
 
+    // TODO Add unique constaint for patient number
     @Column
     private String patientNumber;
 

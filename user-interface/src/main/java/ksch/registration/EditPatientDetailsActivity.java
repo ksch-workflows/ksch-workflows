@@ -20,6 +20,7 @@ public class EditPatientDetailsActivity extends Activity {
     public EditPatientDetailsActivity(UUID patientId) {
         PatientResource patient = toPatientResource(patientService.getById(patientId));
         add(new UpdatePatientForm(patient));
+        add(new StartVisitForm());
     }
 
     @Override
@@ -56,6 +57,13 @@ public class EditPatientDetailsActivity extends Activity {
             patient.setDateOfBirth(parseDate(patientFormFields.getValue("inputDateOfBirth")));
 
             patientService.update(patient);
+        }
+    }
+
+    class StartVisitForm extends Form<Void> {
+
+        public StartVisitForm() {
+            super("startVisitForm");
         }
     }
 }
