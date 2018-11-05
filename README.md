@@ -1,8 +1,6 @@
 # K.S.C.H. Workflows [![Build Status](https://travis-ci.com/ksch-workflows/ksch-workflows.svg?branch=master)](https://travis-ci.com/ksch-workflows/ksch-workflows)
 
-This project is a prototype for a [workflow management](https://www.youtube.com/watch?v=3KJjKY8k9Lk) system for the [Kirpal Sagar Chariable Hospital](http://kirpal-sagar.org/en/medicale-care/gemeinn%C3%BCtziges-krankenhaus.html).
-
-The motivation behind it is to support the growth vision for the hospital over the next decades.
+The [Kirpal Sagar Charitable Hospital](http://kirpal-sagar.org/en/medicale-care/gemeinn%C3%BCtziges-krankenhaus.html) is a small hospital in Punjab, India where all people receive treatment and then pay what they can afford. It is envisioned to grow up to 500 beds and become part of a Medical College. The purpose of this project is to support that vision.
 
 ## Software architecture
 
