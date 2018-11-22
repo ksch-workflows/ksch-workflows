@@ -1,25 +1,35 @@
 package ksch.registration;
 
 import ksch.WebPageTest;
-import model.PatientResource;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.util.tester.FormTester;
-import org.junit.Before;
-import org.junit.Test;
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientService;
+import ksch.patientmanagement.visit.VisitService;
+import ksch.patientmanagement.visit.VisitType;
+import model.PatientResource;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.junit.Before;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
+import static ksch.util.HtmlAssertions.assertContains;
+import static ksch.util.HtmlAssertions.assertNotContains;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 
+@ContextConfiguration(classes = MockVisitService.class)
 public class EditPatientDetailsActivityTest extends WebPageTest {
 
     @Autowired
     private PatientService patientService;
+
+    @Autowired
+    private VisitService visitService;
 
     @Before
     public void setup() {
@@ -42,9 +52,9 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         Patient patient = createTestPatient();
         openPatientDetails(patient);
 
-        FormTester formTester = tester.newFormTester("content:updatePatientForm", false);
-        formTester.setValue("patientFormFields:inputAddress", "St. Gilgen");
-        formTester.submit();
+        tester.newFormTester("content:updatePatientForm", false)
+                .setValue("patientFormFields:inputAddress", "St. Gilgen")
+                .submit();
 
         Patient updatedPatient = patientService.getById(patient.getId());
         assertEquals("St. Gilgen", updatedPatient.getAddress());
@@ -54,15 +64,16 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
     public void should_start_visit() {
         Patient patient = createTestPatient();
         openPatientDetails(patient);
+        assertNotContains(currentPage(), "button[name='content:dischargeButton']");
 
-        tester.newFormTester("content:startVisitForm").submit();
+        tester.newFormTester("content:startVisitForm")
+                .select("visitTypeSelection", 1)
+                .submit();
+        openPatientDetails(patient); // TODO Figure out a solution for partial or full page reload after form submission
 
-
-
-
-
-        // TODO assert that discharge button is rendered
-
+        verify(visitService).startVisit(any(Patient.class), any(VisitType.class));
+        assertContains(currentPage(), "button[name='content:dischargeButton']");
+        assertNotContains(currentPage(), "button[name='content:startVisitButton']");
     }
 
     @Test
@@ -93,4 +104,10 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         PageParameters parameters = buildPageParameters(patient);
         tester.startPage(EditPatientDetailsPage.class, parameters);
     }
+
+    private String currentPage() {
+        return tester.getLastResponseAsString();
+    }
+
+
 }

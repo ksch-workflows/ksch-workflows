@@ -1,4 +1,5 @@
 
 dependencies {
     compile 'junit:junit'
+    compile 'org.jsoup:jsoup:1.11.3'
 }

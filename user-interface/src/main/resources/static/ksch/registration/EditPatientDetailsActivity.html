@@ -16,8 +16,12 @@
     <wicket:extend>
         <div class="row">
             <div class="col-md-6">
-                <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#startVisitDialog">
+                <button wicket:id="startVisitButton" type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#startVisitDialog">
                     Start visit
+                </button>
+
+                <button wicket:id="dischargeButton" type="button" class="btn btn-outline-secondary">
+                    Discharge
                 </button>
             </div>
         </div>
@@ -48,31 +52,8 @@
                     </div>
                     <form wicket:id="startVisitForm" class="modal-body">
                         <p>Please select the visit type:</p>
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="visitTypeSelection" id="visitTypeOPD" value="option1" checked>
-                                <label class="form-check-label" for="visitTypeOPD">
-                                    OPD
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="visitTypeSelection" id="visitTypeIPD" value="option2">
-                                <label class="form-check-label" for="visitTypeIPD">
-                                    IPD
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="visitTypeSelection" id="visitTypePhysioTherapy" value="option3">
-                                <label class="form-check-label" for="visitTypePhysioTherapy">
-                                    Physio therapy
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="visitTypeSelection" id="visitTypeEmergency" value="option4">
-                                <label class="form-check-label" for="visitTypeEmergency">
-                                    Emergency
-                                </label>
-                            </div>
+                        <div class="form-group" wicket:id="visitTypeSelection">
+                            <input type="radio"/>
                         </div>
 
                         <div class="modal-footer">

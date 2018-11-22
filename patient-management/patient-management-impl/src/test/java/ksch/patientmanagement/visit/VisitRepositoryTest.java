@@ -1,7 +1,6 @@
 package ksch.patientmanagement.visit;
 
 import ksch.patientmanagement.patient.Gender;
-import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientEntity;
 import ksch.patientmanagement.patient.PatientRepository;
 import org.junit.Test;
