@@ -1,4 +1,4 @@
-# K.S.C.H. Workflows [![Build Status](https://travis-ci.com/ksch-workflows/ksch-workflows.svg?branch=master)](https://travis-ci.com/ksch-workflows/ksch-workflows)
+# K.S.C.H. Workflows [![Build Status](https://travis-ci.com/ksch-workflows/ksch-workflows.svg?branch=master)](https://travis-ci.com/ksch-workflows/ksch-workflows) [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/2328/badge)](https://bestpractices.coreinfrastructure.org/projects/2328)
 
 The [Kirpal Sagar Charitable Hospital](http://kirpal-sagar.org/en/medicale-care/gemeinn%C3%BCtziges-krankenhaus.html) is a small hospital in Punjab, India where all people receive treatment and then pay what they can afford. It is envisioned to grow up to 500 beds and become part of a Medical College. The purpose of this project is to support that vision.
 
