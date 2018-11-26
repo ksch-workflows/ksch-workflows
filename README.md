@@ -48,7 +48,9 @@ The application can be started for development tests with the following Gradle t
 ./gradlew clean bootRun
 ```
 
-Then it is accessible in the browser under the URL http://localhost:8080 (login: user/pwd).
+Then it is accessible in the browser under the URL http://localhost:8080 (login: user / pwd).
+
+The database can be inspected under this URL: http://localhost:8080/h2-console (login: sa / <empty password>).
 
 ### Run mutation tests
 
