@@ -9,10 +9,12 @@ import ksch.patientmanagement.visit.VisitType;
 import lombok.Getter;
 import model.PatientResource;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RadioChoice;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
@@ -36,14 +38,31 @@ public class EditPatientDetailsActivity extends Activity {
 
     private final Button startVisitButton;
 
-    private final Button dischargeButton;
+    private final AjaxLink dischargeButton;
 
     public EditPatientDetailsActivity(UUID patientId) {
         PatientResource patientResource = toPatientResource(patientService.getById(patientId));
         this.patient = patientResource;
 
         this.startVisitButton = new Button("startVisitButton");
-        this.dischargeButton = new Button("dischargeButton");
+        startVisitButton.setOutputMarkupId(true);
+        startVisitButton.setOutputMarkupPlaceholderTag(true);
+
+        this.dischargeButton = new AjaxLink<Void>("dischargeButton"){
+            @Override
+            public void onClick(AjaxRequestTarget target) {
+                visitService.discharge(patient);
+
+                startVisitButton.setVisible(true);
+                dischargeButton.setVisible(false);
+
+                target.add(startVisitButton);
+                target.add(dischargeButton);
+            }
+        };
+
+        dischargeButton.setOutputMarkupId(true);
+        dischargeButton.setOutputMarkupPlaceholderTag(true);
 
         add(new UpdatePatientForm(patientResource));
         add(new StartVisitForm());
@@ -118,12 +137,6 @@ public class EditPatientDetailsActivity extends Activity {
             startVisitButton.setVisible(false);
             dischargeButton.setVisible(true);
         }
-    }
-
-    // TODO Figure out a solution for partial or full page reload
-    private void reloadPage() {
-        getApplication().getMarkupSettings().getMarkupFactory().getMarkupCache().clear();
-        getRequestCycle().setResponsePage(getPage());
     }
 }
 

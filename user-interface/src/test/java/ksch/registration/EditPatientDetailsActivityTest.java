@@ -7,6 +7,7 @@ import ksch.patientmanagement.patient.PatientService;
 import ksch.patientmanagement.visit.VisitService;
 import ksch.patientmanagement.visit.VisitType;
 import model.PatientResource;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +26,7 @@ import static org.mockito.Mockito.verify;
 @ContextConfiguration(classes = MockVisitService.class)
 public class EditPatientDetailsActivityTest extends WebPageTest {
 
+    public static final String CSS_SELECTOR_DISCHARGE_BUTTON = "a[name='dischargeButton']";
     @Autowired
     private PatientService patientService;
 
@@ -64,20 +66,33 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
     public void should_start_visit() {
         Patient patient = createTestPatient();
         openPatientDetails(patient);
-        assertNotContains(currentPage(), "button[name='content:dischargeButton']");
+        assertNotContains(currentPage(), CSS_SELECTOR_DISCHARGE_BUTTON);
 
         tester.newFormTester("content:startVisitForm")
                 .select("visitTypeSelection", 1)
                 .submit();
 
         verify(visitService).startVisit(any(Patient.class), any(VisitType.class));
-        assertContains(currentPage(), "button[name='content:dischargeButton']");
+        assertContains(currentPage(), CSS_SELECTOR_DISCHARGE_BUTTON);
         assertNotContains(currentPage(), "button[name='content:startVisitButton']");
     }
 
     @Test
     public void should_discharge_patient() {
-        // TODO Implement should_discharge_patient
+        Patient patient = createTestPatient();
+        openPatientDetails(patient);
+        tester.newFormTester("content:startVisitForm")
+                .select("visitTypeSelection", 1)
+                .submit();
+        tester.assertComponent("content:dischargeButton", AjaxLink.class);
+        assertNotContains(currentPage(), "button[name='content:startVisitButton']");
+
+        tester.clickLink("content:dischargeButton");
+
+        tester.assertContains("ajax-response.*startVisitButton");
+        openPatientDetails(patient);
+        assertContains(currentPage(), "button[name='content:startVisitButton']");
+        assertNotContains(currentPage(), CSS_SELECTOR_DISCHARGE_BUTTON);
     }
 
     private Patient createTestPatient() {
@@ -107,6 +122,4 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
     private String currentPage() {
         return tester.getLastResponseAsString();
     }
-
-
 }
