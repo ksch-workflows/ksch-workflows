@@ -46,7 +46,7 @@ public class EditPatientDetailsActivity extends Activity {
         startVisitButton.setOutputMarkupId(true);
         startVisitButton.setOutputMarkupPlaceholderTag(true);
 
-        this.dischargeButton = new AjaxLink<Void>("dischargeButton"){
+        this.dischargeButton = new AjaxLink<Void>("dischargeButton") {
             @Override
             public void onClick(AjaxRequestTarget target) {
                 visitService.discharge(patient);
@@ -116,8 +116,8 @@ public class EditPatientDetailsActivity extends Activity {
     @Getter
     class StartVisitForm extends Form<Void> {
 
-        private final List<String> visitTypes = Arrays.asList(VisitType.values()).stream()
-                .map(t -> t.toString())
+        private final List<String> visitTypes = Arrays.stream(VisitType.values())
+                .map(Enum::toString)
                 .collect(Collectors.toList());
 
         private String visitType;

@@ -1,7 +1,6 @@
 package ksch.patientmanagement.visit;
 
 import ksch.patientmanagement.patient.Gender;
-import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientEntity;
 import ksch.patientmanagement.patient.PatientRepository;
 import org.junit.Test;
@@ -15,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
@@ -33,7 +33,7 @@ public class VisitRepositoryTest {
 
         VisitEntity visit = createNewVisit(patient);
 
-        assertTrue("Could not generate primary key in database", visit.getId() != null);
+        assertNotNull("Could not generate primary key in database", visit.getId());
         assertTrue("Could not find any visit in database.", visitRepository.findAll().iterator().hasNext());
     }
 

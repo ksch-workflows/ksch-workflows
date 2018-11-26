@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class FormFieldsPanel extends Panel {
 
-    private Map<String, FormComponent> formComponents = new HashMap<>();
+    private final Map<String, FormComponent<String>> formComponents = new HashMap<>();
 
     protected FormFieldsPanel(String wicketId) {
         super(wicketId);
@@ -51,14 +51,14 @@ public class FormFieldsPanel extends Panel {
     }
 
     public String getAndResetValue(String wicketId) {
-        IModel model = formComponents.get(wicketId).getModel();
+        IModel<String> model = formComponents.get(wicketId).getModel();
         Object object = model.getObject();
         model.setObject(null);
         return object != null ? object.toString() : null;
     }
 
     public String getValue(String wicketId) {
-        IModel model = formComponents.get(wicketId).getModel();
+        IModel<String> model = formComponents.get(wicketId).getModel();
         Object object = model.getObject();
         return object != null ? object.toString() : null;
     }

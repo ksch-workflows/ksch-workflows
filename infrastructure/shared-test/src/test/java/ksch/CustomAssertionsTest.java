@@ -5,10 +5,6 @@ import org.junit.Test;
 
 public class CustomAssertionsTest {
 
-    private ExampleInterface objA;
-
-    private ExampleInterface objB;
-
     @Test
     public void should_compare_objects() {
 
