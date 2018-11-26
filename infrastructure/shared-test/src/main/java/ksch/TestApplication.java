@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan("ksch")
 @EntityScan("ksch")
 @EnableJpaRepositories("ksch")
-public class ApplicationTest {
+public class TestApplication {
 }

@@ -1,8 +1,5 @@
 package ksch.patientmanagement.patient;
 
-import ksch.patientmanagement.patient.Gender;
-import ksch.patientmanagement.patient.Patient;
-import ksch.patientmanagement.patient.PatientEntity;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -10,7 +7,7 @@ import java.util.UUID;
 
 import static ksch.util.CustomAssertions.assertAllPropertiesEqual;
 
-public class PatientEnitityTest {
+public class PatientEntityTest {
 
     private Patient patient;
 

@@ -1,9 +1,5 @@
 package ksch.patientmanagement.patient;
 
-import ksch.patientmanagement.patient.Gender;
-import ksch.patientmanagement.patient.Patient;
-import ksch.patientmanagement.patient.PatientEntity;
-import ksch.patientmanagement.patient.PatientRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
