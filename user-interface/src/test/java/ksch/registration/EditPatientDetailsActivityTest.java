@@ -27,6 +27,7 @@ import static org.mockito.Mockito.verify;
 public class EditPatientDetailsActivityTest extends WebPageTest {
 
     public static final String CSS_SELECTOR_DISCHARGE_BUTTON = "a[name='dischargeButton']";
+
     @Autowired
     private PatientService patientService;
 

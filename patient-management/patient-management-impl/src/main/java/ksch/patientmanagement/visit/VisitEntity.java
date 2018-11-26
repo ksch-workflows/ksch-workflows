@@ -29,10 +29,9 @@ import static javax.persistence.EnumType.STRING;
 @AllArgsConstructor
 public class VisitEntity implements Visit {
 
-    // TODO Add unique constaint for patient id
     @Id
     @GeneratedValue(generator = "UUID")
-    @Column
+    @Column(unique = true)
     private UUID id;
 
     @OneToOne

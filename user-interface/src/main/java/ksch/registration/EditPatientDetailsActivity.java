@@ -10,11 +10,9 @@ import lombok.Getter;
 import model.PatientResource;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RadioChoice;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
@@ -38,7 +36,7 @@ public class EditPatientDetailsActivity extends Activity {
 
     private final Button startVisitButton;
 
-    private final AjaxLink dischargeButton;
+    private final AjaxLink<Void> dischargeButton;
 
     public EditPatientDetailsActivity(UUID patientId) {
         PatientResource patientResource = toPatientResource(patientService.getById(patientId));
@@ -127,7 +125,8 @@ public class EditPatientDetailsActivity extends Activity {
         public StartVisitForm() {
             super("startVisitForm");
 
-            add(new RadioChoice("visitTypeSelection", new PropertyModel(this, "visitType"), visitTypes)); // TODO Address compiler warning
+            PropertyModel<String> visitType = new PropertyModel<>(this, "visitType");
+            add(new RadioChoice<>("visitTypeSelection", visitType, visitTypes));
         }
 
         @Override

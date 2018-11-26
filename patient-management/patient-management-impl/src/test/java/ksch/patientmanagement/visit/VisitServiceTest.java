@@ -82,7 +82,7 @@ public class VisitServiceTest {
 
             @Override
             public String getPatientNumber() {
-                return "0815";
+                return "0815" + UUID.randomUUID();
             }
 
             @Override
