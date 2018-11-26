@@ -67,7 +67,6 @@ public class VisitServiceTest {
                 visit.getTimeEnd().isAfter(visit.getTimeStart()));
     }
 
-
     private Patient createTestPatient() {
         return patientRepository.save(toPatientEntity(buildTestPatient()));
     }

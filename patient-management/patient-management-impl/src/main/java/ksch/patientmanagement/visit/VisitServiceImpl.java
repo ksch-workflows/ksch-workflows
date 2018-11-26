@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import static java.time.LocalDateTime.now;
 import static ksch.patientmanagement.patient.PatientEntity.toPatientEntity;
 
 @Service
@@ -32,7 +33,7 @@ public class VisitServiceImpl implements VisitService {
     @Override
     public Visit startVisit(Patient patient, VisitType visitType) {
         VisitEntity visit = VisitEntity.builder()
-                .timeStart(LocalDateTime.now())
+                .timeStart(now())
                 .type(visitType)
                 .patient(toPatientEntity(patient))
                 .build();
@@ -47,7 +48,7 @@ public class VisitServiceImpl implements VisitService {
                 .findFirst()
                 .orElseThrow(() -> new NoActiveVisitException(patient.getId()));
 
-        visit.setTimeEnd(LocalDateTime.now());
+        visit.setTimeEnd(now());
         return visitRepository.save(visit);
     }
 
