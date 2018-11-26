@@ -114,6 +114,9 @@ public class EditPatientDetailsActivity extends Activity {
         @Override
         protected void onSubmit() {
             visitService.startVisit(patient, VisitType.valueOf(visitType));
+
+            startVisitButton.setVisible(false);
+            dischargeButton.setVisible(true);
         }
     }
 

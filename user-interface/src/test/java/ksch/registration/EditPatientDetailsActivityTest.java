@@ -69,7 +69,6 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         tester.newFormTester("content:startVisitForm")
                 .select("visitTypeSelection", 1)
                 .submit();
-        openPatientDetails(patient); // TODO Figure out a solution for partial or full page reload after form submission
 
         verify(visitService).startVisit(any(Patient.class), any(VisitType.class));
         assertContains(currentPage(), "button[name='content:dischargeButton']");
