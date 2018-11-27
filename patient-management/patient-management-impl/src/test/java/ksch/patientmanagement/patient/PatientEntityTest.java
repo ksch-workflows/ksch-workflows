@@ -1,4 +1,4 @@
-package ksch.patientmanagement;
+package ksch.patientmanagement.patient;
 
 import org.junit.Test;
 
@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import static ksch.util.CustomAssertions.assertAllPropertiesEqual;
 
-public class PatientEnitityTest {
+public class PatientEntityTest {
 
     private Patient patient;
 

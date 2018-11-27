@@ -1,6 +1,6 @@
 package ksch.registration;
 
-import ksch.patientmanagement.Patient;
+import ksch.patientmanagement.patient.Patient;
 import util.wicket.FormFieldsPanel;
 
 import static com.google.common.collect.Lists.newArrayList;

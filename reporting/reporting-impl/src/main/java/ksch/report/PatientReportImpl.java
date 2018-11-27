@@ -3,7 +3,7 @@ package ksch.report;
 import ksch.event.EventRepository;
 import lombok.RequiredArgsConstructor;
 import ksch.PatientReport;
-import ksch.patientmanagement.PatientCreatedEvent;
+import ksch.patientmanagement.patient.PatientCreatedEvent;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

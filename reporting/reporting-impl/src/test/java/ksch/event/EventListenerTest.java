@@ -2,9 +2,9 @@ package ksch.event;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
-import ksch.patientmanagement.PatientCreatedEvent;
+import ksch.patientmanagement.patient.Gender;
+import ksch.patientmanagement.patient.Patient;
+import ksch.patientmanagement.patient.PatientCreatedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.ApplicationEventPublisher;

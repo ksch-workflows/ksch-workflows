@@ -1,4 +1,4 @@
-package ksch.patientmanagement;
+package ksch.patientmanagement.patient;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

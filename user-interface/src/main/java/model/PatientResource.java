@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
+import ksch.patientmanagement.patient.Gender;
+import ksch.patientmanagement.patient.Patient;
 
 import java.io.Serializable;
 import java.time.LocalDate;

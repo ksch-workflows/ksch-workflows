@@ -1,4 +1,4 @@
-package ksch.patientmanagement;
+package ksch.patientmanagement.patient;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,10 +25,10 @@ public class PatientEntity implements Patient {
 
     @Id
     @GeneratedValue(generator = "UUID")
-    @Column
+    @Column(unique = true)
     private UUID id;
 
-    @Column
+    @Column(unique = true)
     private String patientNumber;
 
     @Column

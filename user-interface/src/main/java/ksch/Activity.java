@@ -8,18 +8,18 @@ import static ksch.ApplicationFrame.MAIN_CONTENT_ID;
 
 public abstract class Activity extends Panel {
 
-    public Activity() {
+    protected Activity() {
         super(MAIN_CONTENT_ID);
 
         add(new ExternalLink("goToPreviousPage", getPreviousPagePath()));
         add(new Label("activityTitle", getActivityTitle()));
     }
 
-    public abstract String getActivityTitle();
+    protected abstract String getActivityTitle();
 
     /**
      * @return URL path with which the link to the previous page for the back button can be build,
      * e.g. "/registration/dashboard"
      */
-    public abstract String getPreviousPagePath();
+    protected abstract String getPreviousPagePath();
 }

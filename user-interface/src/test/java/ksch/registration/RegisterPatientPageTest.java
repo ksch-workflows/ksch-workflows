@@ -4,9 +4,9 @@ import ksch.WebPageTest;
 import model.PatientResource;
 import org.apache.wicket.util.tester.FormTester;
 import org.junit.Test;
-import ksch.patientmanagement.Gender;
-import ksch.patientmanagement.Patient;
-import ksch.patientmanagement.PatientService;
+import ksch.patientmanagement.patient.Gender;
+import ksch.patientmanagement.patient.Patient;
+import ksch.patientmanagement.patient.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
@@ -115,7 +115,7 @@ public class RegisterPatientPageTest extends WebPageTest {
 
         Patient patient1 = PatientResource.builder()
                 .id(UUID.randomUUID())
-                .patientNumber("KSA-18-1001")
+                .patientNumber("KSA-18-1001" + UUID.randomUUID())
                 .name("John Doe")
                 .gender(Gender.MALE)
                 .dateOfBirth(LocalDate.now())
@@ -124,7 +124,7 @@ public class RegisterPatientPageTest extends WebPageTest {
 
         Patient patient2 = PatientResource.builder()
                 .id(UUID.randomUUID())
-                .patientNumber("KSA-18-1002")
+                .patientNumber("KSA-18-1002" + UUID.randomUUID())
                 .name("Jane Doe")
                 .gender(Gender.FEMALE)
                 .dateOfBirth(LocalDate.now())

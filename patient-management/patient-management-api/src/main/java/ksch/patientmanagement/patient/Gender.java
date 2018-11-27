@@ -1,4 +1,4 @@
-package ksch.patientmanagement;
+package ksch.patientmanagement.patient;
 
 public enum Gender {
     MALE,
