@@ -24,5 +24,4 @@ dependencies {
     compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.5'
     compile 'org.springframework.boot:spring-boot-starter-security'
     compile 'org.wicketstuff:wicketstuff-annotation:8.2.0'
-
 }
