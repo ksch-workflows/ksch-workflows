@@ -11,6 +11,7 @@ import model.PatientResource;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.form.Button;
+import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RadioChoice;
 import org.apache.wicket.model.PropertyModel;
@@ -40,13 +41,31 @@ public class EditPatientDetailsActivity extends Activity {
 
     public EditPatientDetailsActivity(UUID patientId) {
         PatientResource patientResource = toPatientResource(patientService.getById(patientId));
+
         this.patient = patientResource;
+        this.startVisitButton = createStartVisitButton();
+        this.dischargeButton = createDischargeButton();
 
-        this.startVisitButton = new Button("startVisitButton");
-        startVisitButton.setOutputMarkupId(true);
-        startVisitButton.setOutputMarkupPlaceholderTag(true);
+        add(new UpdatePatientForm(patientResource));
+        add(new StartVisitForm());
+        add(startVisitButton);
+        add(dischargeButton);
+    }
 
-        this.dischargeButton = new AjaxLink<Void>("dischargeButton") {
+    private Button createStartVisitButton() {
+        Button btn = new Button("startVisitButton");
+        btn.setOutputMarkupId(true);
+        btn.setOutputMarkupPlaceholderTag(true);
+
+        if (visitService.isActive(patient)) {
+            btn.setVisible(false);
+        }
+
+        return btn;
+    }
+
+    private AjaxLink<Void> createDischargeButton() {
+        AjaxLink<Void> btn = new AjaxLink<Void>("dischargeButton") {
             @Override
             public void onClick(AjaxRequestTarget target) {
                 visitService.discharge(patient);
@@ -58,22 +77,14 @@ public class EditPatientDetailsActivity extends Activity {
                 target.add(dischargeButton);
             }
         };
+        btn.setOutputMarkupId(true);
+        btn.setOutputMarkupPlaceholderTag(true);
 
-        dischargeButton.setOutputMarkupId(true);
-        dischargeButton.setOutputMarkupPlaceholderTag(true);
-
-        add(new UpdatePatientForm(patientResource));
-        add(new StartVisitForm());
-        add(startVisitButton);
-        add(dischargeButton);
-
-        if (visitService.isActive(patient)) {
-            startVisitButton.setVisible(false);
-            dischargeButton.setVisible(true);
-        } else {
-            startVisitButton.setVisible(true);
-            dischargeButton.setVisible(false);
+        if (!visitService.isActive(patient)) {
+            btn.setVisible(false);
         }
+
+        return btn;
     }
 
     @Override
@@ -126,7 +137,8 @@ public class EditPatientDetailsActivity extends Activity {
             super("startVisitForm");
 
             PropertyModel<String> visitType = new PropertyModel<>(this, "visitType");
-            add(new RadioChoice<>("visitTypeSelection", visitType, visitTypes));
+            RadioChoice<String> visitTypeSelection = new RadioChoice<>("visitTypeSelection", visitType, visitTypes);
+            add(visitTypeSelection);
         }
 
         @Override
