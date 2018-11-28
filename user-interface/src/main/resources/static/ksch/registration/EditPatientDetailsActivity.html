@@ -9,11 +9,17 @@
 
     <script src="../../js/jquery.min.js" ></script>
     <script src="../../js/bootstrap.min.js" ></script>
+
 </head>
 
 <body>
 
     <wicket:extend>
+
+        <div class="info-bar bg-secondary text-white">
+            <span class="info-bar-item">Patient Number: <span wicket:id="patientNumberLabel">[patient number]</span></span>
+        </div>
+
         <div class="row">
             <div class="col-md-6">
                 <button wicket:id="startVisitButton" type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#startVisitDialog">
