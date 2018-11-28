@@ -44,13 +44,14 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
     }
 
     @Test
-    public void should_open_patient_details() {
+    public void should_render_patient_details_page() {
         Patient patient = createTestPatient();
         PageParameters parameters = buildPageParameters(patient);
 
         tester.startPage(EditPatientDetailsPage.class, parameters);
 
         tester.assertRenderedPage(EditPatientDetailsPage.class);
+        tester.assertContains(patient.getPatientNumber());
         tester.assertContains(patient.getName());
     }
 
