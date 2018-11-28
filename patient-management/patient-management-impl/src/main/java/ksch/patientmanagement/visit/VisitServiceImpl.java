@@ -5,7 +5,6 @@ import ksch.patientmanagement.patient.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static java.time.LocalDateTime.now;
