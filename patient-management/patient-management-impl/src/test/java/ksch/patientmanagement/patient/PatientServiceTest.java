@@ -1,5 +1,6 @@
 package ksch.patientmanagement.patient;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -15,11 +16,14 @@ import java.util.UUID;
 import static java.time.LocalDate.now;
 import static java.time.temporal.ChronoUnit.YEARS;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PatientServiceTest {
@@ -33,12 +37,19 @@ public class PatientServiceTest {
     @Mock
     private ApplicationEventPublisher eventPublisher;
 
+    @Mock
+    private PatientNumberGenerator patientNumberGenerator;
+
     @Test
     public void should_create_patient() {
+        when(patientNumberGenerator.generatePatientNumber()).thenReturn("18-5322");
+        when(patientRepository.save(any(PatientEntity.class))).then(returnsFirstArg());
         PatientEntity p = PatientEntity.builder().id(UUID.randomUUID()).build();
 
-        patientService.create(p);
+        Patient createdPatient = patientService.create(p);
 
+        assertNotNull(createdPatient);
+        assertEquals("18-5322", createdPatient.getPatientNumber());
         verify(patientRepository).save(any(PatientEntity.class));
         verify(eventPublisher).publishEvent(any(PatientCreatedEvent.class));
     }

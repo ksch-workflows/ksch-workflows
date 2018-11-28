@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import static java.time.LocalDate.now;
 import static java.time.temporal.ChronoUnit.YEARS;
+import static ksch.patientmanagement.patient.PatientEntity.toPatientEntity;
 
 @Service
 @RequiredArgsConstructor
@@ -17,13 +18,17 @@ public class PatientServiceImpl implements PatientService {
 
     private final PatientRepository patientRepository;
 
+    private final PatientNumberGenerator patientNumberGenerator;
+
     private final ApplicationEventPublisher eventPublisher;
 
     @Override
     public Patient create(Patient patient) {
-        PatientEntity p = patientRepository.save(PatientEntity.toPatientEntity(patient));
-        eventPublisher.publishEvent(new PatientCreatedEvent(p));
-        return p;
+        PatientEntity patientEntity = toPatientEntity(patient);
+        patientEntity.setPatientNumber(patientNumberGenerator.generatePatientNumber());
+        patientEntity = patientRepository.save(patientEntity);
+        eventPublisher.publishEvent(new PatientCreatedEvent(patientEntity));
+        return patientEntity;
     }
 
     @Override
@@ -49,6 +54,6 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void update(Patient patient) {
-        patientRepository.save(PatientEntity.toPatientEntity(patient));
+        patientRepository.save(toPatientEntity(patient));
     }
 }
