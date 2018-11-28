@@ -91,7 +91,8 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         tester.clickLink("content:dischargeButton");
 
         tester.assertContains(AJAX_RESPONSE_WITH_START_VISIT_BUTTON);
-        openPatientDetails(patient); // Without re-opening of the page only the Ajax response is available for verifications
+        // Without re-opening of the page only the Ajax response is available for verifications
+        openPatientDetails(patient);
         assertContains(currentPage(), CSS_SELECTOR_START_VISIT_BUTTON);
         assertNotContains(currentPage(), CSS_SELECTOR_DISCHARGE_BUTTON);
     }

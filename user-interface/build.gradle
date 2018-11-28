@@ -21,8 +21,8 @@ dependencies {
     compile project(':patient-management')
     compile project(':reporting')
 
-    compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.1'
+    compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.5'
     compile 'org.springframework.boot:spring-boot-starter-security'
-    compile 'org.wicketstuff:wicketstuff-annotation:8.0.0'
+    compile 'org.wicketstuff:wicketstuff-annotation:8.2.0'
 
 }
