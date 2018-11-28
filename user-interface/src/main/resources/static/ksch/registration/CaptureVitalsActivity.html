@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <script src="../../js/jquery.min.js" ></script>
+    <script src="../../js/bootstrap.min.js" ></script>
+
+
+    <wicket:head>
+        <style type="text/css">
+
+            * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+.row {
+    margin: 10px;
+}
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+input {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+    display: table-cell;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    margin: 0;
+}
+
+.suffix input {
+    border-radius: 4px 0px 0px 4px;
+}
+.suffix .input-group-addon {
+    border-left: 0;
+    border-radius: 0px 4px 4px 0px;
+}
+.prefix input {
+    border-radius: 0px 4px 4px 0px;
+}
+.prefix .input-group-addon {
+    border-right: 0;
+    border-radius: 4px 0px 0px 4px;
+}
+.presuffix input {
+    border-radius: 0px;
+}
+.input-group-addon.prefix {
+    border-radius: 4px 0px 0px 4px;
+    border-right: 0;
+}
+.input-group-addon.suffix {
+    border-radius: 0px 4px 4px 0px;
+    border-left: 0;
+}
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+
+
+        </style>
+    </wicket:head>
+</head>
+
+<body>
+
+    <wicket:extend>
+
+        <div class="info-bar bg-secondary text-white">
+            <span class="info-bar-item">Patient Number: <span wicket:id="patientNumberInfoBarItem">[patient number]</span></span>
+            <span class="info-bar-item">Name: <span wicket:id="nameInfoBarItem">[name]</span></span>
+            <span class="info-bar-item">Gender: <span wicket:id="genderInfoBarItem">[gender]</span></span>
+            <span class="info-bar-item">Age: <span wicket:id="ageInfoBarItem">[age]</span></span>
+        </div>
+
+        <!-- TODO Server side form validation -->
+        <form>
+            <div class="form-group row">
+                <label for="systolic" class="col-md-1 col-form-label">Systolic</label>
+                <div class="col-md-2 input-group suffix">
+                    <input type="text" name="input" id="systolic">
+                    <span class="input-group-addon">mmHg</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="diastolic" class="col-md-1 col-form-label">Diastolic</label>
+                <div class="col-md-2 input-group suffix">
+                    <input type="text" name="input" id="diastolic">
+                    <span class="input-group-addon">mmHg</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="temperature" class="col-md-1 col-form-label">Temperature</label>
+                <div class="col-md-2 input-group suffix">
+                    <input type="text" name="input" id="temperature">
+                    <span class="input-group-addon">°F</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="pulse" class="col-md-1 col-form-label">Pulse</label>
+                <div class="col-md-2 input-group suffix">
+                    <input type="text" name="input" id="pulse">
+                    <span class="input-group-addon">BPM</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="weight" class="col-md-1 col-form-label">Weight</label>
+                <div class="col-md-2 input-group suffix">
+                    <input type="text" name="input" id="weight">
+                    <span class="input-group-addon">KG</span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </form>
+
+    </wicket:extend>
+
+</body>
+
+</html>
