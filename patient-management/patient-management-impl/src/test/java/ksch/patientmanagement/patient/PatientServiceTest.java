@@ -1,6 +1,5 @@
 package ksch.patientmanagement.patient;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -55,14 +54,25 @@ public class PatientServiceTest {
     }
 
     @Test
+    public void should_use_existing_patient_number_during_patient_creation() {
+        when(patientRepository.save(any(PatientEntity.class))).then(returnsFirstArg());
+        PatientEntity p = PatientEntity.builder().id(UUID.randomUUID()).patientNumber("KSA-15-97433").build();
+
+        Patient createdPatient = patientService.create(p);
+
+        assertEquals("KSA-15-97433", createdPatient.getPatientNumber());
+    }
+
+    @Test
     public void should_retrieve_patient_by_patient_number() {
         String patientNumber = "1234";
-        given(patientRepository.findByIdOrName(patientNumber)).willReturn(listOf(buildTestPatient(patientNumber)));
+        // TODO Use "when*" varariation for mocking this method.
+        given(patientRepository.findByPatientNumberOrName(patientNumber)).willReturn(listOf(buildTestPatient(patientNumber)));
 
         List<Patient> patients = patientService.findByNameOrNumber(patientNumber);
 
         assertTrue("Could not find patient by patient number.", patients.size() > 0);
-        verify(patientRepository).findByIdOrName(patientNumber);
+        verify(patientRepository).findByPatientNumberOrName(patientNumber);
     }
 
     @Test

@@ -18,6 +18,7 @@ sourceSets.main.resources {
 }
 
 dependencies {
+    compile project(':medical-records')
     compile project(':patient-management')
     compile project(':reporting')
 

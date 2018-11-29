@@ -1,0 +1,5 @@
+
+dependencies {
+    api project(':medical-records:medical-records-api')
+    implementation project(':medical-records:medical-records-impl')
+}

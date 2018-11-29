@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.UUID;
 
 import static ksch.patientmanagement.patient.PatientEntity.toPatientEntity;
@@ -38,6 +39,25 @@ public class VisitServiceTest {
         boolean hasActiveVisit = visitService.isActive(patient);
 
         assertFalse("Patient has an active visit while it was actually not yet started", hasActiveVisit);
+    }
+
+    @Test
+    public void should_retrieve_active_visit_entity() {
+        Patient patient = createTestPatient();
+        visitService.startVisit(patient, VisitType.IPD);
+
+        Optional<Visit> activeVisit = visitService.getActiveVisit(patient);
+
+        assertTrue("Could not find an active visit for the test patient.", activeVisit.isPresent());
+    }
+
+    @Test
+    public void should_retrieve_emtpy_visit_entity_if_no_active_visit() {
+        Patient patient = createTestPatient();
+
+        Optional<Visit> activeVisit = visitService.getActiveVisit(patient);
+
+        assertFalse("There should not be an active visit for the test patient.", activeVisit.isPresent());
     }
 
     @Test
@@ -80,7 +100,7 @@ public class VisitServiceTest {
 
             @Override
             public String getPatientNumber() {
-                return "0815" + UUID.randomUUID();
+                return "0815-" + UUID.randomUUID();
             }
 
             @Override

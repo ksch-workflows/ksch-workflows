@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,9 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Patient create(Patient patient) {
         PatientEntity patientEntity = toPatientEntity(patient);
-        patientEntity.setPatientNumber(patientNumberGenerator.generatePatientNumber());
+        if (patient.getPatientNumber() == null) {
+            patientEntity.setPatientNumber(patientNumberGenerator.generatePatientNumber());
+        }
         patientEntity = patientRepository.save(patientEntity);
         eventPublisher.publishEvent(new PatientCreatedEvent(patientEntity));
         return patientEntity;
@@ -33,9 +36,14 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<Patient> findByNameOrNumber(String nameOrNumber) {
-        return patientRepository.findByIdOrName(nameOrNumber).stream()
+        return patientRepository.findByPatientNumberOrName(nameOrNumber).stream()
                 .map(p -> (Patient) p)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<Patient> findByPatientNumber(String patientNumber) {
+        return patientRepository.findByPatientNumber(patientNumber).map(p -> (Patient) p);
     }
 
     @Override

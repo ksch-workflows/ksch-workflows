@@ -1,10 +1,12 @@
 package ksch;
 
+import lombok.NoArgsConstructor;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
+@NoArgsConstructor
 public abstract class ApplicationFrame extends WebPage {
 
     public static final String MAIN_CONTENT_ID = "content";

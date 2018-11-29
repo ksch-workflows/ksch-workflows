@@ -1,21 +1,16 @@
 package ksch.registration;
 
 import ksch.WebPageTest;
-import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientService;
 import ksch.patientmanagement.visit.VisitService;
 import ksch.patientmanagement.visit.VisitType;
-import model.PatientResource;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-
-import java.time.LocalDate;
-import java.util.UUID;
 
 import static ksch.util.HtmlAssertions.assertContains;
 import static ksch.util.HtmlAssertions.assertNotContains;
@@ -96,19 +91,6 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         openPatientDetails(patient);
         assertContains(currentPage(), CSS_SELECTOR_START_VISIT_BUTTON);
         assertNotContains(currentPage(), CSS_SELECTOR_DISCHARGE_BUTTON);
-    }
-
-    private Patient createTestPatient() {
-        PatientResource patient = PatientResource.builder()
-                .id(UUID.randomUUID())
-                .patientNumber(UUID.randomUUID().toString())
-                .name("John Doe")
-                .gender(Gender.MALE)
-                .dateOfBirth(LocalDate.now())
-                .address("Kirpal Sagar")
-                .build();
-
-        return patientService.create(patient);
     }
 
     private PageParameters buildPageParameters(Patient patient) {

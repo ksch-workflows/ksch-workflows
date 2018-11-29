@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <script src="../../js/jquery.min.js" ></script>
+    <script src="../../js/bootstrap.min.js" ></script>
+
+    <wicket:head>
+        <style type="text/css">
+            input.patientNumberInput {
+                min-width: 350px;
+                margin-right: 15px;
+            }
+        </style>
+    </wicket:head>
+
+</head>
+
+<body>
+
+    <wicket:extend>
+
+        <div class="row">
+            <div class="col-md-12">
+                Please enter the patient number:
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form wicket:id="patientNumberForm" class="form-inline">
+                    <input wicket:id="patientNumberInput" type="text" class="patientNumberInput form-control" placeholder="Patient number">
+                    <input class="btn btn-outline-secondary" type="submit" value="Start"/>
+                </form>
+            </div>
+        </div>
+
+    </wicket:extend>
+
+</body>
+
+</html>

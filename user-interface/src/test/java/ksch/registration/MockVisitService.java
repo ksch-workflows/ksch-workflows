@@ -6,12 +6,11 @@ import ksch.patientmanagement.visit.VisitService;
 import ksch.patientmanagement.visit.VisitType;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
-@Configuration
 public class MockVisitService {
 
     @Bean
@@ -26,6 +25,11 @@ public class MockVisitService {
         @Override
         public boolean isActive(Patient patient) {
             return isActive;
+        }
+
+        @Override
+        public Optional<Visit> getActiveVisit(Patient patient) {
+            return Optional.empty();
         }
 
         @Override

@@ -5,6 +5,7 @@ import ksch.patientmanagement.patient.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static java.time.LocalDateTime.now;
@@ -14,9 +15,9 @@ import static ksch.patientmanagement.patient.PatientEntity.toPatientEntity;
 @RequiredArgsConstructor
 public class VisitServiceImpl implements VisitService {
 
-    private final PatientRepository patientRepository;
-
     private final VisitRepository visitRepository;
+
+    private final PatientRepository patientRepository;
 
     @Override
     public boolean isActive(Patient patient) {
@@ -27,6 +28,15 @@ public class VisitServiceImpl implements VisitService {
 
     private boolean hasStartAndNoEnd(VisitEntity v) {
         return v.getTimeStart() != null && v.getTimeEnd() == null;
+    }
+
+    @Override
+    public Optional<Visit> getActiveVisit(Patient patient) {
+        return visitRepository.findAllByPatientId(patient.getId())
+                .stream()
+                .filter(this::hasStartAndNoEnd)
+                .map(e -> (Visit) e)
+                .findFirst();
     }
 
     @Override
