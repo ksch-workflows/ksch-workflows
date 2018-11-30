@@ -11,6 +11,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class CaptureVitalsActivity extends Activity {
@@ -64,9 +65,12 @@ public class CaptureVitalsActivity extends Activity {
 
         private final UUID visitId;
 
+        private final LocalDateTime time;
+
         public VitalsResource(Vitals vitals) {
             this.id = vitals.getId();
             this.visitId = vitals.getVisitId();
+            this.time = vitals.getTime();
         }
 
         private Integer systolicInMmHg;

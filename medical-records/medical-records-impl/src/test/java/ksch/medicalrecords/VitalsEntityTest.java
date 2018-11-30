@@ -2,6 +2,7 @@ package ksch.medicalrecords;
 
 import org.junit.Test;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static ksch.util.CustomAssertions.assertAllPropertiesEqual;
@@ -28,6 +29,11 @@ public class VitalsEntityTest {
             @Override
             public UUID getVisitId() {
                 return UUID.fromString("95a82244-15b6-4115-951a-b99ccae86e9c");
+            }
+
+            @Override
+            public LocalDateTime getTime() {
+                return LocalDateTime.of(2018, 11, 30, 14, 56);
             }
 
             @Override

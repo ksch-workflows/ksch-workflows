@@ -10,12 +10,9 @@ import ksch.patientmanagement.visit.VisitService;
 import ksch.patientmanagement.visit.VisitType;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.tester.FormTester;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
-import util.Debug;
 
 import static org.junit.Assert.assertEquals;
 

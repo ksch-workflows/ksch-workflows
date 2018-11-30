@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.UUID;
 
+import static java.time.LocalDateTime.now;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
@@ -21,6 +22,7 @@ public class VitalsRepositoryTest {
     public void should_create_vitals_entity() {
         VitalsEntity vitals = VitalsEntity.builder()
                 .visitId(UUID.randomUUID())
+                .time(now())
                 .systolicInMmHg(100)
                 .diastolicInMmHg(70)
                 .build();

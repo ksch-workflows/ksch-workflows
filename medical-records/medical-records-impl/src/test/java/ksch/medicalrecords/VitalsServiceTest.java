@@ -72,6 +72,11 @@ class ExampleVitals implements Vitals {
     }
 
     @Override
+    public LocalDateTime getTime() {
+        return LocalDateTime.now();
+    }
+
+    @Override
     public Integer getSystolicInMmHg() {
         return 130;
     }

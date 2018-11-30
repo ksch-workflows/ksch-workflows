@@ -13,8 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static java.time.LocalDateTime.now;
 
 @Entity
 @Table
@@ -27,12 +29,16 @@ public class VitalsEntity implements Vitals {
 
     @Id
     @GeneratedValue(generator = "UUID")
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private UUID id;
 
     @NonNull
     @Column(nullable = false)
     private UUID visitId;
+
+    @NonNull
+    @Column(nullable = false)
+    private LocalDateTime time;
 
     @Column
     private Integer systolicInMmHg;
@@ -51,12 +57,14 @@ public class VitalsEntity implements Vitals {
 
     public VitalsEntity(Visit visit) {
         this.visitId = visit.getId();
+        this.setTime(now());
     }
 
     public static VitalsEntity toVitalsEntity(Vitals vitals) {
         return VitalsEntity.builder()
                 .id(vitals.getId())
                 .visitId(vitals.getVisitId())
+                .time(vitals.getTime())
                 .systolicInMmHg(vitals.getSystolicInMmHg())
                 .diastolicInMmHg(vitals.getDiastolicInMmHg())
                 .temperatureInF(vitals.getTemperatureInF())

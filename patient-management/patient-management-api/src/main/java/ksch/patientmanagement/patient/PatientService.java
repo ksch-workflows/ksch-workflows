@@ -12,7 +12,7 @@ public interface PatientService {
     Patient create(Patient patient);
 
     /**
-     * Searches for patients in the by their name or patient number.
+     * Searches for patients in the database by their name or patient number.
      */
     List<Patient> findByNameOrNumber(String nameOrNumber);
 
