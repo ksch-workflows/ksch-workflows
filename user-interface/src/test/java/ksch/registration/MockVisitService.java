@@ -43,6 +43,11 @@ public class MockVisitService {
             isActive = false;
             return new NullVisit();
         }
+
+        @Override
+        public Patient getPatient(UUID visitId) {
+            return null;
+        }
     }
 
     class NullVisit implements Visit {

@@ -16,10 +16,6 @@
 
     <wicket:extend>
 
-        <div class="info-bar bg-secondary text-white">
-            <span class="info-bar-item">Patient Number: <span wicket:id="patientNumberLabel">[patient number]</span></span>
-        </div>
-
         <div class="row">
             <div class="col-md-6">
                 <button wicket:id="startVisitButton" type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#startVisitDialog">
@@ -37,6 +33,9 @@
                     General information
                 </div>
                 <div class="card-body">
+
+                    <!-- TODO Display patient number in read-only field -->
+
                     <form wicket:id="updatePatientForm" class="needs-validation" novalidate>
                         <div wicket:id="patientFormFields" class="modal-body">
                             [patient form fields]

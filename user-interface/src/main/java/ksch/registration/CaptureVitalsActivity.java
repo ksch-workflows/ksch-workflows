@@ -1,8 +1,12 @@
 package ksch.registration;
 
 import ksch.Activity;
+import ksch.PatientInfoBar;
 import ksch.medicalrecords.Vitals;
 import ksch.medicalrecords.VitalsService;
+import ksch.patientmanagement.patient.Patient;
+import ksch.patientmanagement.visit.Visit;
+import ksch.patientmanagement.visit.VisitService;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.wicket.markup.html.form.Form;
@@ -19,8 +23,15 @@ public class CaptureVitalsActivity extends Activity {
     @SpringBean
     private VitalsService vitalsService;
 
+    @SpringBean
+    private VisitService visitService;
+
     public CaptureVitalsActivity(UUID vitalsId) {
-        add(new VitalsForm(vitalsService.get(vitalsId)));
+        Vitals vitals = vitalsService.get(vitalsId);
+        Patient patient = visitService.getPatient(vitals.getVisitId());
+
+        add(new PatientInfoBar(patient));
+        add(new VitalsForm(vitals));
     }
 
     @Override

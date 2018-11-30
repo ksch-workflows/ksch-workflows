@@ -3,6 +3,7 @@ package ksch.patientmanagement.visit;
 import ksch.patientmanagement.patient.Patient;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public interface VisitService {
 
@@ -16,4 +17,6 @@ public interface VisitService {
     Visit startVisit(Patient patient, VisitType visitType);
 
     Visit discharge(Patient patient);
+
+    Patient getPatient(UUID visitId);
 }

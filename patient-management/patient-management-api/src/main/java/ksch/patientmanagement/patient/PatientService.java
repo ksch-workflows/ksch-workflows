@@ -32,4 +32,28 @@ public interface PatientService {
      * Notifies the system about changes in the patient details.
      */
     void update(Patient patient);
+
+    /**
+     * @return The patients name, including the names of their parents. E.g. "Nakula Karamchand, s/o Chander Limbu"
+     */
+    static String getFullName(Patient patient) {
+
+        if (patient.getNameFather() == null) {
+            return patient.getName();
+        }
+
+        String relationToFather;
+        switch (patient.getGender()) {
+            case MALE:
+                relationToFather = "s/o";
+                break;
+            case FEMALE:
+                relationToFather = "d/o";
+                break;
+            default:
+                relationToFather = "c/o";
+        }
+
+        return String.format("%s, %s %s", patient.getName(), relationToFather, patient.getNameFather());
+    }
 }

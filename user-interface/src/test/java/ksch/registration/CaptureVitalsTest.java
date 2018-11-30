@@ -13,6 +13,7 @@ import org.apache.wicket.util.tester.FormTester;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import util.Debug;
 
 import static org.junit.Assert.assertEquals;
 
@@ -40,6 +41,7 @@ public class CaptureVitalsTest extends WebPageTest {
         openCaptureVitalsPage(vitals);
 
         tester.assertRenderedPage(CaptureVitalsPage.class);
+        Debug.printLastResponse(tester);
     }
 
     @Test

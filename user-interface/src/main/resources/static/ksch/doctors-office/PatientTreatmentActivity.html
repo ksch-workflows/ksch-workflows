@@ -10,19 +10,17 @@
     <script src="../../js/jquery.min.js" ></script>
     <script src="../../js/bootstrap.min.js" ></script>
 
-    <!-- FIXME this is not yet included in deployed HTML -->
-    <style type="text/css">
-
-
-        .card-header .fa {
-          transition: .3s transform ease-in-out;
-        }
-        .card-header .collapsed .fa {
-          transform: rotate(90deg);
-        }
-
-
-    </style>
+    <wicket:head>
+        <style type="text/css">
+            /* Layout info for collapsible panels */
+            .card-header .fa {
+              transition: .3s transform ease-in-out;
+            }
+            .card-header .collapsed .fa {
+              transform: rotate(90deg);
+            }
+        </style>
+    </wicket:head>
 
 </head>
 

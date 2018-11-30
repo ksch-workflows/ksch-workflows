@@ -61,6 +61,13 @@ public class VisitServiceImpl implements VisitService {
         return visitRepository.save(visit);
     }
 
+    @Override
+    public Patient getPatient(UUID visitId) {
+        // TODO Throw domain exeption instead of raw runtime exception
+        Visit visit = visitRepository.findById(visitId).orElseThrow(() -> new RuntimeException("Could not find visit '" + visitId + "' in database"));
+        return visit.getPatient();
+    }
+
     class NoActiveVisitException extends RuntimeException {
         public NoActiveVisitException(UUID patientId) {
             super("There is no active visit for patient " + patientId);

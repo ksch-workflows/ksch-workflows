@@ -14,6 +14,8 @@ import java.util.UUID;
 
 import static java.time.LocalDate.now;
 import static java.time.temporal.ChronoUnit.YEARS;
+import static ksch.patientmanagement.patient.Gender.FEMALE;
+import static ksch.patientmanagement.patient.Gender.MALE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -95,12 +97,50 @@ public class PatientServiceTest {
 
     @Test
     public void should_skip_patient_age_calculation_if_no_age_specified() {
-
         Patient patient = buildTestPatientWithoutDateOfBirth();
 
         Integer patientAgeInYears = patientService.getAgeInYears(patient);
 
         assertNull("Patient age is expected to be null if not date of birth is specified", patientAgeInYears);
+    }
+
+    @Test
+    public void test_full_name_is_standard_name_if_father_unknown() {
+        PatientEntity patient = buildTestPatient();
+        patient.setName("Jaswant Ashtikar");
+        patient.setNameFather(null);
+
+        String fullName = PatientService.getFullName(patient);
+
+        assertEquals("Jaswant Ashtikar", fullName);
+    }
+
+    @Test
+    public void test_full_name_includes_name_of_father_for_man() {
+        PatientEntity patient = buildTestPatient();
+        patient.setName("Jaswant Ashtikar");
+        patient.setGender(MALE);
+        patient.setNameFather("Waazir Sirasikar");
+
+        String fullName = PatientService.getFullName(patient);
+
+        assertEquals("Jaswant Ashtikar, s/o Waazir Sirasikar", fullName);
+    }
+
+    @Test
+    public void test_full_name_includes_name_of_father_for_women() {
+        PatientEntity patient = buildTestPatient();
+        patient.setName("Surya Limbu");
+        patient.setGender(FEMALE);
+        patient.setNameFather("Waazir Sirasikar");
+
+        String fullName = PatientService.getFullName(patient);
+
+        assertEquals("Surya Limbu, d/o Waazir Sirasikar", fullName);
+    }
+
+    private PatientEntity buildTestPatient() {
+        return buildTestPatient("0815");
     }
 
     private PatientEntity buildTestPatient(String patientNumber) {
@@ -109,7 +149,7 @@ public class PatientServiceTest {
                 .patientNumber(patientNumber)
                 .name("John Doe")
                 .dateOfBirth(now())
-                .gender(Gender.MALE)
+                .gender(MALE)
                 .address("Kirpal Sagar")
                 .build();
     }
@@ -120,7 +160,7 @@ public class PatientServiceTest {
                 .patientNumber("KSA-18-1005")
                 .name("John Doe")
                 .dateOfBirth(dateOfBirth)
-                .gender(Gender.MALE)
+                .gender(MALE)
                 .address("Kirpal Sagar")
                 .build();
     }
@@ -131,7 +171,7 @@ public class PatientServiceTest {
                 .patientNumber("KSA-18-1005")
                 .name("John Doe")
                 .dateOfBirth(null)
-                .gender(Gender.MALE)
+                .gender(MALE)
                 .address("Kirpal Sagar")
                 .build();
     }

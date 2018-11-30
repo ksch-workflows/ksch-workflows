@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static ksch.patientmanagement.patient.PatientEntity.toPatientEntity;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -85,6 +86,16 @@ public class VisitServiceTest {
                 visit.getTimeEnd());
         assertTrue("End time of the visit is not after the start time of the visit",
                 visit.getTimeEnd().isAfter(visit.getTimeStart()));
+    }
+
+    @Test
+    public void test_access_on_patient() {
+        Patient patient = createTestPatient();
+        Visit visit = visitService.startVisit(patient, VisitType.IPD);
+
+        Patient retrievedPatient = visitService.getPatient(visit.getId());
+
+        assertEquals(patient.getId(), retrievedPatient.getId());
     }
 
     private Patient createTestPatient() {

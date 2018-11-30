@@ -100,13 +100,7 @@
 
     <wicket:extend>
 
-        <!-- TODO Create custom component for Patient Info Bar -->
-        <div class="info-bar bg-secondary text-white">
-            <span class="info-bar-item">Patient Number: <span>[patient number]</span></span>
-            <span class="info-bar-item">Name: <span>[name]</span></span>
-            <span class="info-bar-item">Gender: <span>[gender]</span></span>
-            <span class="info-bar-item">Age: <span>[age]</span></span>
-        </div>
+        <span wicket:id="patientInfoBar"></span>
 
         <!-- TODO Server side form validation -->
         <form wicket:id="vitalsForm">
