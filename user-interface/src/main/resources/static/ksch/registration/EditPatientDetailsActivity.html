@@ -33,15 +33,18 @@
                     General information
                 </div>
                 <div class="card-body">
-
-                    <!-- TODO Display patient number in read-only field -->
-
-                    <form wicket:id="updatePatientForm" class="needs-validation" novalidate>
-                        <div wicket:id="patientFormFields" class="modal-body">
-                            [patient form fields]
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="patientNumber">Patient number</label>
+                            <input wicket:id="patientNumber" value="[0000]" type="text" class="form-control" id="patientNumber" readonly>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </form>
+                        <form wicket:id="updatePatientForm" class="needs-validation" novalidate>
+                            <span wicket:id="patientFormFields" >
+                                [patient form fields]
+                            </span>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import util.Debug;
 
 import static ksch.util.HtmlAssertions.assertContains;
 import static ksch.util.HtmlAssertions.assertNotContains;
@@ -48,6 +49,7 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         tester.assertRenderedPage(EditPatientDetailsPage.class);
         tester.assertContains(patient.getPatientNumber());
         tester.assertContains(patient.getName());
+        Debug.printLastResponse(tester);
     }
 
     @Test
