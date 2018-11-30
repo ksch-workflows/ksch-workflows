@@ -109,39 +109,40 @@
         </div>
 
         <!-- TODO Server side form validation -->
-        <form>
+        <form wicket:id="vitalsForm">
             <div class="form-group row">
-                <label for="systolic" class="col-md-1 col-form-label">Systolic</label>
-                <div class="col-md-2 input-group suffix">
-                    <input type="text" name="input" id="systolic">
+                <label for="systolic" class="col-md-2 col-form-label">Systolic</label>
+                <div class="col-md-3 input-group suffix">
+                    <input wicket:id="systolicInMmHg" type="number" name="input" id="systolic">
                     <span class="input-group-addon">mmHg</span>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="diastolic" class="col-md-1 col-form-label">Diastolic</label>
-                <div class="col-md-2 input-group suffix">
-                    <input type="text" name="input" id="diastolic">
+                <label for="diastolic" class="col-md-2 col-form-label">Diastolic</label>
+                <div class="col-md-3 input-group suffix">
+                    <input wicket:id="diastolicInMmHg" type="number" name="input" id="diastolic">
                     <span class="input-group-addon">mmHg</span>
                 </div>
             </div>
+            <!-- TODO Allow floating point numbers (also in English format with German browser!?) -->
             <div class="form-group row">
-                <label for="temperature" class="col-md-1 col-form-label">Temperature</label>
-                <div class="col-md-2 input-group suffix">
-                    <input type="text" name="input" id="temperature">
+                <label for="temperature" class="col-md-2 col-form-label">Temperature</label>
+                <div class="col-md-3 input-group suffix">
+                    <input wicket:id="temperatureInF" type="number" name="input" id="temperature">
                     <span class="input-group-addon">°F</span>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="pulse" class="col-md-1 col-form-label">Pulse</label>
-                <div class="col-md-2 input-group suffix">
-                    <input type="text" name="input" id="pulse">
+                <label for="pulse" class="col-md-2 col-form-label">Pulse</label>
+                <div class="col-md-3 input-group suffix">
+                    <input wicket:id="pulseInBPM" type="number" name="input" id="pulse">
                     <span class="input-group-addon">BPM</span>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="weight" class="col-md-1 col-form-label">Weight</label>
-                <div class="col-md-2 input-group suffix">
-                    <input type="text" name="input" id="weight">
+                <label for="weight" class="col-md-2 col-form-label">Weight</label>
+                <div class="col-md-3 input-group suffix">
+                    <input wicket:id="weightInKG" type="number" name="input" id="weight">
                     <span class="input-group-addon">KG</span>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 package ksch.registration;
 
-import ksch.medicalrecords.Vitals;
 import ksch.medicalrecords.VitalsService;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -14,7 +13,7 @@ import java.util.UUID;
 @AuthorizeInstantiation({"NURSE", "CLERK"})
 public class CaptureVitalsPage extends RegistrationPage {
 
-    private final Vitals vitals;
+    private final UUID vitalsId;
 
     @SpringBean
     private VitalsService vitalsService;
@@ -22,12 +21,11 @@ public class CaptureVitalsPage extends RegistrationPage {
     public CaptureVitalsPage(PageParameters pageParameters) {
         super(pageParameters);
 
-        UUID vitalsRecordId = UUID.fromString(pageParameters.get("vitalsRecordId").toString());
-        this.vitals = vitalsService.get(vitalsRecordId);
+        this.vitalsId = UUID.fromString(pageParameters.get("vitalsRecordId").toString());
     }
 
     @Override
     protected Panel getContent() {
-        return new CaptureVitalsActivity(vitals);
+        return new CaptureVitalsActivity(vitalsId);
     }
 }

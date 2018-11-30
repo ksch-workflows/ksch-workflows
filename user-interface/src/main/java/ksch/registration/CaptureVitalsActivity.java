@@ -2,16 +2,24 @@ package ksch.registration;
 
 import ksch.Activity;
 import ksch.medicalrecords.Vitals;
-import org.apache.wicket.markup.head.CssHeaderItem;
-import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.request.resource.PackageResourceReference;
+import ksch.medicalrecords.VitalsService;
+import lombok.Getter;
+import lombok.Setter;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.NumberTextField;
+import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.spring.injection.annot.SpringBean;
+
+import java.io.Serializable;
+import java.util.UUID;
 
 public class CaptureVitalsActivity extends Activity {
 
-    private final Vitals vitals;
+    @SpringBean
+    private VitalsService vitalsService;
 
-    public CaptureVitalsActivity(Vitals vitals) {
-        this.vitals = vitals;
+    public CaptureVitalsActivity(UUID vitalsId) {
+        add(new VitalsForm(vitalsService.get(vitalsId)));
     }
 
     @Override
@@ -24,11 +32,51 @@ public class CaptureVitalsActivity extends Activity {
         return "/registration";
     }
 
-    @Override
-    public void renderHead(IHeaderResponse response) {
-        PackageResourceReference cssFile = new PackageResourceReference(this.getClass(), "CaptureVitalsActivity.css");
-        CssHeaderItem cssItem = CssHeaderItem.forReference(cssFile);
+    class VitalsForm extends Form<Void> {
 
-        response.render(cssItem);
+        private final VitalsResource vitalsResource;
+
+        public VitalsForm(Vitals vitals) {
+            super("vitalsForm");
+
+            this.vitalsResource = new VitalsResource(vitals);
+
+            setDefaultModel(new CompoundPropertyModel<>(vitalsResource));
+
+            add(new NumberTextField<Integer>("systolicInMmHg"));
+            add(new NumberTextField<Integer>("diastolicInMmHg"));
+            add(new NumberTextField<Float>("temperatureInF"));
+            add(new NumberTextField<Integer>("pulseInBPM"));
+            add(new NumberTextField<Integer>("weightInKG"));
+        }
+
+        @Override
+        protected void onSubmit() {
+            vitalsService.save(vitalsResource);
+        }
+    }
+
+    @Getter
+    @Setter
+    class VitalsResource implements Vitals, Serializable {
+
+        private final UUID id;
+
+        private final UUID visitId;
+
+        public VitalsResource(Vitals vitals) {
+            this.id = vitals.getId();
+            this.visitId = vitals.getVisitId();
+        }
+
+        private Integer systolicInMmHg;
+
+        private Integer diastolicInMmHg;
+
+        private Float temperatureInF;
+
+        private Integer pulseInBPM;
+
+        private Integer weightInKG;
     }
 }

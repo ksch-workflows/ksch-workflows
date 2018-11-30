@@ -13,8 +13,14 @@ public interface Vitals extends MedicalRecordEntry {
      */
     Integer getDiastolicInMmHg();
 
+    /**
+     * @see "https://en.wikipedia.org/wiki/Human_body_temperature"
+     */
     Float getTemperatureInF();
 
+    /**
+     * @see "https://en.wikipedia.org/wiki/Heart_rate"
+     */
     Integer getPulseInBPM();
 
     Integer getWeightInKG();
