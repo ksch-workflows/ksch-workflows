@@ -14,7 +14,19 @@
         <style type="text/css">
             input.patientNumberInput {
                 min-width: 350px;
+                width: 100%;
                 margin-right: 15px;
+            }
+
+            .feedbackPanel {
+                color: #856404;
+                background-color: #fff3cd;
+                border-color: #ffeeba;
+                padding: 10px;
+            }
+
+            ul.feedbackPanel {
+                list-style-type: none;
             }
         </style>
     </wicket:head>
@@ -30,12 +42,23 @@
                 Please enter the patient number:
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-12">
                 <form wicket:id="patientNumberForm" class="form-inline">
                     <input wicket:id="patientNumberInput" type="text" class="patientNumberInput form-control" placeholder="Patient number">
                     <input class="btn btn-outline-secondary" type="submit" value="Start"/>
                 </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div wicket:id="feedbackMessage" class="col-md-12">
+                <ul class="feedbackPanel">
+                    <li class="feedbackPanelERROR">
+                        <span class="feedbackPanelERROR">[validation error message]</span>
+                    </li>
+                </ul>
             </div>
         </div>
 

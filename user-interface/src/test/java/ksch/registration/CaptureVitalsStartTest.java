@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.UUID;
+
 public class CaptureVitalsStartTest extends WebPageTest {
 
     @Autowired
@@ -24,6 +26,7 @@ public class CaptureVitalsStartTest extends WebPageTest {
         tester.startPage(CaptureVitalsStartPage.class);
 
         tester.assertRenderedPage(CaptureVitalsStartPage.class);
+        tester.assertNoErrorMessage();
     }
 
     @Test
@@ -41,6 +44,26 @@ public class CaptureVitalsStartTest extends WebPageTest {
 
     @Test
     public void should_display_error_message_if_entered_patient_not_found() {
-        // TODO Implement test + feature
+        String randomPatientNumber = "0815" + UUID.randomUUID().toString();
+        tester.startPage(CaptureVitalsStartPage.class);
+
+        FormTester formTester = tester.newFormTester("content:patientNumberForm", false);
+        formTester.setValue("patientNumberInput", randomPatientNumber);
+        formTester.submit();
+
+        tester.assertRenderedPage(CaptureVitalsStartPage.class);
+        tester.assertErrorMessages("Could not find patient with number " + randomPatientNumber);
+    }
+
+    @Test
+    public void should_display_error_message_if_no_active_visit() {
+        Patient patient = createTestPatient();
+        tester.startPage(CaptureVitalsStartPage.class);
+
+        FormTester formTester = tester.newFormTester("content:patientNumberForm", false);
+        formTester.setValue("patientNumberInput", patient.getPatientNumber());
+        formTester.submit();
+
+        tester.assertErrorMessages("Could not find active visit for patient " + patient.getPatientNumber());
     }
 }
