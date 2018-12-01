@@ -21,7 +21,5 @@ public interface PatientRepository extends CrudRepository<PatientEntity, UUID> {
 
     PatientEntity getById(UUID patientId);
 
-    PatientEntity getByPatientNumber(String patientNumber);
-
     Optional<PatientEntity> findByPatientNumber(String patientNumber);
 }

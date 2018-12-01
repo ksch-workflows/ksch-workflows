@@ -17,7 +17,7 @@ import javax.persistence.TableGenerator;
 @AllArgsConstructor
 @Getter
 @Setter
-@TableGenerator(name="patient_index_number", initialValue = 999)
+@TableGenerator(name = "patient_index_number", initialValue = 999)
 class PatientNumberIndex {
 
     @Id

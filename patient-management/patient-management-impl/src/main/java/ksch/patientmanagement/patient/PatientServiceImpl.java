@@ -52,16 +52,37 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public void update(Patient patient) {
+        patientRepository.save(toPatientEntity(patient));
+    }
+
+    @Override
+    public String getFullName(Patient patient) {
+        if (patient.getNameFather() == null) {
+            return patient.getName();
+        }
+
+        String relationToFather;
+        switch (patient.getGender()) {
+            case MALE:
+                relationToFather = "s/o";
+                break;
+            case FEMALE:
+                relationToFather = "d/o";
+                break;
+            default:
+                relationToFather = "c/o";
+        }
+
+        return String.format("%s, %s %s", patient.getName(), relationToFather, patient.getNameFather());
+    }
+
+    @Override
     public Integer getAgeInYears(Patient patient) {
         if (patient.getDateOfBirth() == null) {
             return null;
         }
 
         return (int) patient.getDateOfBirth().until(now(), YEARS);
-    }
-
-    @Override
-    public void update(Patient patient) {
-        patientRepository.save(toPatientEntity(patient));
     }
 }

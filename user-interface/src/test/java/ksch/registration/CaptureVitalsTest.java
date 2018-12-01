@@ -1,10 +1,7 @@
 package ksch.registration;
 
 import ksch.WebPageTest;
-import ksch.medicalrecords.Vitals;
-import ksch.medicalrecords.VitalsService;
 import ksch.patientmanagement.patient.Patient;
-import ksch.patientmanagement.patient.PatientService;
 import ksch.patientmanagement.visit.Visit;
 import ksch.patientmanagement.visit.VisitService;
 import ksch.patientmanagement.visit.VisitType;
@@ -16,18 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
-
 public class CaptureVitalsTest extends WebPageTest {
 
     @Autowired
-    private PatientService patientService;
-
-    @Autowired
     private VisitService visitService;
-
-    @Autowired
-    private VitalsService vitalsService;
 
     @Before
     public void setup() {

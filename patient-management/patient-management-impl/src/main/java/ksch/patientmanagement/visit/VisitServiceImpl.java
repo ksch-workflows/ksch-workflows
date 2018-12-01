@@ -1,7 +1,7 @@
 package ksch.patientmanagement.visit;
 
+import ksch.patientmanagement.DatabaseRecordNotFoundException;
 import ksch.patientmanagement.patient.Patient;
-import ksch.patientmanagement.patient.PatientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +16,6 @@ import static ksch.patientmanagement.patient.PatientEntity.toPatientEntity;
 public class VisitServiceImpl implements VisitService {
 
     private final VisitRepository visitRepository;
-
-    private final PatientRepository patientRepository;
 
     @Override
     public Visit get(UUID visitId) {
@@ -69,8 +67,8 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public Patient getPatient(UUID visitId) {
-        // TODO Throw domain exeption instead of raw runtime exception
-        Visit visit = visitRepository.findById(visitId).orElseThrow(() -> new RuntimeException("Could not find visit '" + visitId + "' in database"));
+        Visit visit = visitRepository.findById(visitId)
+                .orElseThrow(() -> new DatabaseRecordNotFoundException(visitId, VisitEntity.class));
         return visit.getPatient();
     }
 

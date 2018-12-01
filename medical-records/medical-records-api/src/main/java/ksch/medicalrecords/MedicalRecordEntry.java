@@ -14,10 +14,8 @@ public interface MedicalRecordEntry {
     UUID getId();
 
     /**
-     * @return The reference to the technical indentifier of the Visit during which this medical
-     * record entry was taken.
-     *
-     * @see ksch.patientmanagement.visit.Visit
+     * @return The reference to the technical indentifier of the {@link ksch.patientmanagement.visit.Visit}
+     * during which this medical record entry was taken.
      */
     UUID getVisitId();
 

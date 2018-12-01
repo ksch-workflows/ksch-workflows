@@ -8,7 +8,6 @@ import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.visit.Visit;
 import ksch.patientmanagement.visit.VisitService;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -65,7 +64,7 @@ public class CaptureVitalsActivity extends Activity {
 
             add(new NumberTextField<Integer>("systolicInMmHg"));
             add(new NumberTextField<Integer>("diastolicInMmHg"));
-            add(new NumberTextField<Float>("temperatureInF")); // FIXME Float value is not handled properly in UI
+            add(new NumberTextField<Float>("temperatureInF")); // TODO Fix that Float value is not handled properly in UI
             add(new NumberTextField<Integer>("pulseInBPM"));
             add(new NumberTextField<Integer>("weightInKG"));
         }

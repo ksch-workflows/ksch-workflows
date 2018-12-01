@@ -2,7 +2,6 @@ package ksch.registration;
 
 import ksch.WebPageTest;
 import ksch.patientmanagement.patient.Patient;
-import ksch.patientmanagement.patient.PatientService;
 import ksch.patientmanagement.visit.VisitService;
 import ksch.patientmanagement.visit.VisitType;
 import org.apache.wicket.util.tester.FormTester;
@@ -11,9 +10,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CaptureVitalsStartTest extends WebPageTest {
-
-    @Autowired
-    private PatientService patientService;
 
     @Autowired
     private VisitService visitService;

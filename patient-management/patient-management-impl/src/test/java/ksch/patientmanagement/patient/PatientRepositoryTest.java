@@ -1,6 +1,5 @@
 package ksch.patientmanagement.patient;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,16 +52,6 @@ public class PatientRepositoryTest {
 
         assertEquals("Could not find patient in database by searching her medical record number",
                 1, retrievedPatients.size());
-    }
-
-    @Test
-    public void should_get_patient_by_patient_number() {
-        createTestPatient("KSA-19-1003", "Jane Doe");
-
-        // TODO Do we still need this method?
-        PatientEntity patient = patientRepository.getByPatientNumber("KSA-19-1003");
-
-        assertNotNull(patient);
     }
 
     @Test

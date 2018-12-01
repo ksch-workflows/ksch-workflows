@@ -22,7 +22,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -68,8 +67,7 @@ public class PatientServiceTest {
     @Test
     public void should_retrieve_patient_by_patient_number() {
         String patientNumber = "1234";
-        // TODO Use "when*" varariation for mocking this method.
-        given(patientRepository.findByPatientNumberOrName(patientNumber)).willReturn(listOf(buildTestPatient(patientNumber)));
+        when(patientRepository.findByPatientNumberOrName(patientNumber)).thenReturn(listOf(buildTestPatient(patientNumber)));
 
         List<Patient> patients = patientService.findByNameOrNumber(patientNumber);
 
@@ -110,7 +108,7 @@ public class PatientServiceTest {
         patient.setName("Jaswant Ashtikar");
         patient.setNameFather(null);
 
-        String fullName = PatientService.getFullName(patient);
+        String fullName = patientService.getFullName(patient);
 
         assertEquals("Jaswant Ashtikar", fullName);
     }
@@ -122,7 +120,7 @@ public class PatientServiceTest {
         patient.setGender(MALE);
         patient.setNameFather("Waazir Sirasikar");
 
-        String fullName = PatientService.getFullName(patient);
+        String fullName = patientService.getFullName(patient);
 
         assertEquals("Jaswant Ashtikar, s/o Waazir Sirasikar", fullName);
     }
@@ -134,7 +132,7 @@ public class PatientServiceTest {
         patient.setGender(FEMALE);
         patient.setNameFather("Waazir Sirasikar");
 
-        String fullName = PatientService.getFullName(patient);
+        String fullName = patientService.getFullName(patient);
 
         assertEquals("Surya Limbu, d/o Waazir Sirasikar", fullName);
     }

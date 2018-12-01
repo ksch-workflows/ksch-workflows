@@ -15,7 +15,7 @@ public class PatientInfoBar extends Panel {
         super("patientInfoBar");
 
         add(new Label("patientNumber", patient.getPatientNumber()));
-        add(new Label("name", PatientService.getFullName(patient))); // TODO Use normal service method here as well?
+        add(new Label("name", patientService.getFullName(patient)));
         add(new Label("age", patientService.getAgeInYears(patient)));
     }
 }

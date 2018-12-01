@@ -1,13 +1,10 @@
 package ksch.registration;
 
 import ksch.Activity;
-import ksch.medicalrecords.Vitals;
-import ksch.medicalrecords.VitalsService;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientService;
 import ksch.patientmanagement.visit.Visit;
 import ksch.patientmanagement.visit.VisitService;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -19,9 +16,6 @@ import java.util.Optional;
 
 @Slf4j
 public class CaptureVitalsStartActivity extends Activity {
-
-    @SpringBean
-    private VitalsService vitalsService;
 
     @SpringBean
     private VisitService visitService;
@@ -43,14 +37,14 @@ public class CaptureVitalsStartActivity extends Activity {
         return "/registration";
     }
 
-    class PatientNumberForm extends Form<Void> {
+    class PatientNumberForm extends Form<PatientNumberForm> {
 
         private String patientNumberInput;
 
-        public PatientNumberForm() {
+        PatientNumberForm() {
             super("patientNumberForm");
 
-            setModel(new CompoundPropertyModel(this)); // TODO Address compiler warning
+            setModel(new CompoundPropertyModel<>(this));
 
             add(new TextField<>("patientNumberInput"));
         }
