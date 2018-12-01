@@ -20,6 +20,12 @@ public class VisitServiceImpl implements VisitService {
     private final PatientRepository patientRepository;
 
     @Override
+    public Visit get(UUID visitId) {
+        return visitRepository.findById(visitId)
+                .orElseThrow(() -> new RuntimeException("Could not find Visit entity with ID " + visitId));
+    }
+
+    @Override
     public boolean isActive(Patient patient) {
         return visitRepository.findAllByPatientId(patient.getId())
                 .stream()

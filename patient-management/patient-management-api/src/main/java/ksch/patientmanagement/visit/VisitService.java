@@ -7,6 +7,8 @@ import java.util.UUID;
 
 public interface VisitService {
 
+    Visit get(UUID visitId);
+
     /**
      * @return {@code true} if the Patient is currently treated in the hospital, otherwise {@code false}.
      */

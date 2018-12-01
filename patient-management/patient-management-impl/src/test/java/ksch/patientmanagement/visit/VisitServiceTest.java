@@ -4,6 +4,7 @@ import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientRepository;
 import ksch.patientmanagement.patient.PatientService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,16 @@ public class VisitServiceTest {
 
     @Autowired
     private PatientService patientService;
+
+    @Test
+    public void should_retrieve_visit_entity_by_id() {
+        Patient patient = createTestPatient();
+        Visit visit = visitService.startVisit(patient, VisitType.IPD);
+
+        Visit retrievedVisit = visitService.get(visit.getId());
+
+        assertNotNull("Could not retrieve existing Visit entity by its technical identifier.", retrievedVisit);
+    }
 
     @Test
     public void should_not_be_active_for_new_patient() {

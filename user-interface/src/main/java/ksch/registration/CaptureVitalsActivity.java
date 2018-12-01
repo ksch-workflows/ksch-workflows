@@ -8,7 +8,10 @@ import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.visit.Visit;
 import ksch.patientmanagement.visit.VisitService;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -18,6 +21,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Slf4j
 public class CaptureVitalsActivity extends Activity {
 
     @SpringBean
@@ -26,12 +30,16 @@ public class CaptureVitalsActivity extends Activity {
     @SpringBean
     private VisitService visitService;
 
-    public CaptureVitalsActivity(UUID vitalsId) {
-        Vitals vitals = vitalsService.get(vitalsId);
-        Patient patient = visitService.getPatient(vitals.getVisitId());
+    private final UUID visitId;
+
+    public CaptureVitalsActivity(UUID visitId) {
+        this.visitId = visitId;
+
+        Visit visit = visitService.get(visitId);
+        Patient patient = visit.getPatient();
 
         add(new PatientInfoBar(patient));
-        add(new VitalsForm(vitals));
+        add(new VitalsForm());
     }
 
     @Override
@@ -48,41 +56,49 @@ public class CaptureVitalsActivity extends Activity {
 
         private final VitalsResource vitalsResource;
 
-        public VitalsForm(Vitals vitals) {
+        public VitalsForm() {
             super("vitalsForm");
 
-            this.vitalsResource = new VitalsResource(vitals);
+            this.vitalsResource = new VitalsResource();
 
             setDefaultModel(new CompoundPropertyModel<>(vitalsResource));
 
             add(new NumberTextField<Integer>("systolicInMmHg"));
             add(new NumberTextField<Integer>("diastolicInMmHg"));
-            add(new NumberTextField<Float>("temperatureInF"));
+            add(new NumberTextField<Float>("temperatureInF")); // FIXME Float value is not handled properly in UI
             add(new NumberTextField<Integer>("pulseInBPM"));
             add(new NumberTextField<Integer>("weightInKG"));
         }
 
         @Override
         protected void onSubmit() {
+            if (isFirstFormSubmission()) {
+                Vitals medicalRecordEntry = vitalsService.createMedicalRecordEntry(visitService.get(visitId));
+
+                vitalsResource.setId(medicalRecordEntry.getId());
+                vitalsResource.setVisitId(medicalRecordEntry.getVisitId());
+                vitalsResource.setTime(medicalRecordEntry.getTime());
+            }
+
             vitalsService.save(vitalsResource);
+            log.debug("Saved Vitals: " + vitalsResource);
+        }
+
+        private boolean isFirstFormSubmission() {
+            return vitalsResource.getId() == null;
         }
     }
 
     @Getter
     @Setter
+    @ToString
     class VitalsResource implements Vitals, Serializable {
 
-        private final UUID id;
+        private UUID id;
 
-        private final UUID visitId;
+        private UUID visitId;
 
-        private final LocalDateTime time;
-
-        public VitalsResource(Vitals vitals) {
-            this.id = vitals.getId();
-            this.visitId = vitals.getVisitId();
-            this.time = vitals.getTime();
-        }
+        private LocalDateTime time;
 
         private Integer systolicInMmHg;
 

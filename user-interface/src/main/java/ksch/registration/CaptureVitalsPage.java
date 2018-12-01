@@ -9,11 +9,11 @@ import org.wicketstuff.annotation.mount.MountPath;
 
 import java.util.UUID;
 
-@MountPath("/registration/capture-vitals/${vitalsRecordId}")
+@MountPath("/registration/capture-vitals")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
 public class CaptureVitalsPage extends RegistrationPage {
 
-    private final UUID vitalsId;
+    private final UUID visitId;
 
     @SpringBean
     private VitalsService vitalsService;
@@ -21,11 +21,13 @@ public class CaptureVitalsPage extends RegistrationPage {
     public CaptureVitalsPage(PageParameters pageParameters) {
         super(pageParameters);
 
-        this.vitalsId = UUID.fromString(pageParameters.get("vitalsRecordId").toString());
+        this.visitId = UUID.fromString(pageParameters.get("visitId").toString());
+
+        // TODO Throw exception if no valid vitalsId or visitId
     }
 
     @Override
     protected Panel getContent() {
-        return new CaptureVitalsActivity(vitalsId);
+        return new CaptureVitalsActivity(visitId);
     }
 }

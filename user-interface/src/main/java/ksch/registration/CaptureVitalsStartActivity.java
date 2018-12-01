@@ -62,11 +62,11 @@ public class CaptureVitalsStartActivity extends Activity {
             if (patient.isPresent()) {
                 Optional<Visit> activeVisit = visitService.getActiveVisit(patient.get());
                 if (activeVisit.isPresent()) {
-                    Vitals vitals = vitalsService.createMedicalRecordEntry(activeVisit.get());
+                    //Vitals vitals = vitalsService.createMedicalRecordEntry(activeVisit.get());
 
                     // TODO Move this block into a private method
                     PageParameters parameters = new PageParameters();
-                    parameters.add("vitalsRecordId", vitals.getId());
+                    parameters.add("visitId", activeVisit.get().getId());
                     getRequestCycle().setResponsePage(CaptureVitalsPage.class, parameters);
                 } else {
                     log.error("Could not find active visit for patient " + patient.get().getId());

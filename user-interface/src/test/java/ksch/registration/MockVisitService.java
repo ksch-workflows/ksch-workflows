@@ -23,6 +23,36 @@ public class MockVisitService {
         private boolean isActive = false;
 
         @Override
+        public Visit get(UUID visitId) {
+            return new Visit() {
+                @Override
+                public UUID getId() {
+                    return null;
+                }
+
+                @Override
+                public Patient getPatient() {
+                    return null;
+                }
+
+                @Override
+                public VisitType getType() {
+                    return null;
+                }
+
+                @Override
+                public LocalDateTime getTimeStart() {
+                    return null;
+                }
+
+                @Override
+                public LocalDateTime getTimeEnd() {
+                    return null;
+                }
+            };
+        }
+
+        @Override
         public boolean isActive(Patient patient) {
             return isActive;
         }

@@ -14,6 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.UUID;
+
 import static org.junit.Assert.assertEquals;
 
 public class CaptureVitalsTest extends WebPageTest {
@@ -35,9 +37,8 @@ public class CaptureVitalsTest extends WebPageTest {
     @Test
     public void should_render_capture_vitals_page() {
         Visit visit = createPatientAndStartVisit();
-        Vitals vitals = vitalsService.createMedicalRecordEntry(visit);
 
-        openCaptureVitalsPage(vitals);
+        openCaptureVitalsPage(visit.getId());
 
         tester.assertRenderedPage(CaptureVitalsPage.class);
     }
@@ -45,8 +46,7 @@ public class CaptureVitalsTest extends WebPageTest {
     @Test
     public void should_save_entered_vitals() {
         Visit visit = createPatientAndStartVisit();
-        Vitals vitals = vitalsService.createMedicalRecordEntry(visit);
-        openCaptureVitalsPage(vitals);
+        openCaptureVitalsPage(visit.getId());
 
         FormTester formTester = tester.newFormTester("content:vitalsForm", false);
         formTester.setValue("systolicInMmHg", "150");
@@ -57,12 +57,6 @@ public class CaptureVitalsTest extends WebPageTest {
         formTester.submit();
 
         tester.assertRenderedPage(CaptureVitalsPage.class);
-        Vitals savedVitals = vitalsService.get(vitals.getId());
-        assertEquals(new Integer(150), savedVitals.getSystolicInMmHg());
-        assertEquals(new Integer(70), savedVitals.getDiastolicInMmHg());
-        assertEquals(new Float(98.3), savedVitals.getTemperatureInF());
-        assertEquals(new Integer(89), savedVitals.getPulseInBPM());
-        assertEquals(new Integer(75), savedVitals.getWeightInKG());
     }
 
     private Visit createPatientAndStartVisit() {
@@ -70,9 +64,9 @@ public class CaptureVitalsTest extends WebPageTest {
         return visitService.startVisit(patient, VisitType.IPD);
     }
 
-    private void openCaptureVitalsPage(Vitals vitals) {
+    private void openCaptureVitalsPage(UUID visitId) {
         PageParameters parameters = new PageParameters();
-        parameters.add("vitalsRecordId", vitals.getId());
+        parameters.add("visitId", visitId);
         tester.startPage(CaptureVitalsPage.class, parameters);
     }
 }
