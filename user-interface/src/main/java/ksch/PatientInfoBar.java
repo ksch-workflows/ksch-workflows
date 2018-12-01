@@ -16,7 +16,6 @@ public class PatientInfoBar extends Panel {
 
         add(new Label("patientNumber", patient.getPatientNumber()));
         add(new Label("name", PatientService.getFullName(patient))); // TODO Use normal service method here as well?
-        add(new Label("location", "")); // TODO Include patient location
         add(new Label("age", patientService.getAgeInYears(patient)));
     }
 }
