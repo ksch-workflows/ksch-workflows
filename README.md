@@ -45,7 +45,7 @@ Please refer to the following wiki pages for explanations for configuring those 
 The application can be started for development tests with the following Gradle task:
 
 ```
-./gradlew clean bootRun -Dspring.profiles.active=qa
+gradle clean bootRun -Dspring.profiles.active=qa
 ```
 
 Then it is accessible in the browser under the URL http://localhost:8080 (login: user / pwd).
@@ -62,7 +62,7 @@ instances where the injected defects where not caught are hints about parts of t
 source code for which better unit tests should be created.
 
 ```
-./gradlew clean pitest
+gradle clean pitest
 ```
 
 Afterwards HTML reports are generated for each respective subproject and can be found in the directory `build/reports/pitest`:
@@ -76,7 +76,7 @@ find . -name "index.html" | grep "pitest"
 The executable JAR file can be compiled with the following Gradle task:
 
 ```
-./gradlew clean bootJar
+gradle clean bootJar
 ```
 
 Afterwards you can find the JAR file in the following directory:

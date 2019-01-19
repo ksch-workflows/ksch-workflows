@@ -67,7 +67,8 @@ public class PatientServiceTest {
     @Test
     public void should_retrieve_patient_by_patient_number() {
         String patientNumber = "1234";
-        when(patientRepository.findByPatientNumberOrName(patientNumber)).thenReturn(listOf(buildTestPatient(patientNumber)));
+        when(patientRepository.findByPatientNumberOrName(patientNumber))
+                .thenReturn(listOf(buildTestPatient(patientNumber)));
 
         List<Patient> patients = patientService.findByNameOrNumber(patientNumber);
 
