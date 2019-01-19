@@ -41,6 +41,10 @@ subprojects {
     dependencies {
         compileOnly 'org.projectlombok:lombok:1.18.2' // https://projectlombok.org/download
     }
+
+    checkstyle {
+        configFile = rootProject.file('.checkstyle.xml')
+    }
 }
 
 configure(subprojects.findAll { !it.name.endsWith('-api')} ) {
@@ -76,3 +80,7 @@ configure(subprojects.findAll { !it.name.endsWith('-api')} ) {
         failWhenNoMutations = false
     }
 }
+
+
+
+
