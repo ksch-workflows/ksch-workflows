@@ -3,6 +3,7 @@ package ksch.registration;
 import ksch.WebPageTest;
 import model.PatientResource;
 import org.apache.wicket.util.tester.FormTester;
+import org.junit.Before;
 import org.junit.Test;
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
@@ -22,10 +23,14 @@ public class RegisterPatientPageTest extends WebPageTest {
     @Autowired
     private PatientService patientService;
 
+    @Before
+    public void setup() {
+        login("user", "pwd");
+    }
+
     @Test
     public void should_render_patient_search_result_list() {
-        createDummyPatients();
-        login("user", "pwd");
+        createPatients();
         tester.startPage(RegisterPatientPage.class);
 
         FormTester formTester = tester.newFormTester("content:patientSearchForm", false);
@@ -38,8 +43,7 @@ public class RegisterPatientPageTest extends WebPageTest {
 
     @Test
     public void should_open_patient_details() {
-        createDummyPatients();
-        login("user", "pwd");
+        createPatients();
         tester.startPage(RegisterPatientPage.class);
 
         FormTester formTester = tester.newFormTester("content:patientSearchForm", false);
@@ -52,8 +56,7 @@ public class RegisterPatientPageTest extends WebPageTest {
 
     @Test
     public void should_resubmit_patient_search() {
-        createDummyPatients();
-        login("user", "pwd");
+        createPatients();
         tester.startPage(RegisterPatientPage.class);
         FormTester formTester = tester.newFormTester("content:patientSearchForm", false);
         formTester.setValue("patientSearchTerm", "doe");
@@ -69,7 +72,6 @@ public class RegisterPatientPageTest extends WebPageTest {
 
     @Test
     public void should_render_message_about_no_search_results() {
-        login("user", "pwd");
         tester.startPage(RegisterPatientPage.class);
 
         FormTester formTester = tester.newFormTester("content:patientSearchForm", false);
@@ -83,7 +85,6 @@ public class RegisterPatientPageTest extends WebPageTest {
 
     @Test
     public void should_add_new_patient() {
-        login("user", "pwd");
         tester.startPage(RegisterPatientPage.class);
 
         FormTester formTester = tester.newFormTester("content:addPatientForm", false);
@@ -111,7 +112,7 @@ public class RegisterPatientPageTest extends WebPageTest {
                 LocalDate.of(2000, 7, 27), retrievedPatient.getDateOfBirth());
     }
 
-    private void createDummyPatients() {
+    private void createPatients() {
 
         Patient patient1 = PatientResource.builder()
                 .id(UUID.randomUUID())

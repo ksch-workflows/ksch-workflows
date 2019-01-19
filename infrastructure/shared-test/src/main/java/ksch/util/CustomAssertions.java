@@ -10,20 +10,21 @@ public class CustomAssertions {
     /**
      * Checks that different implementations of a model type are equal.
      */
-    public static void assertAllPropertiesEqual(Class model, Object a, Object b) {
+    public static void assertAllPropertiesEqual(Class dataClass, Object a, Object b) {
 
-        if (!model.isInstance(a) || !model.isInstance(b)) {
-            throw new IllegalArgumentException("Objects to be compared need to be instances of the model class.");
+        if (!dataClass.isInstance(a) || !dataClass.isInstance(b)) {
+            throw new IllegalArgumentException("Objects to be compared need to be instances of the data class '"
+                    + dataClass.getSimpleName() + "'.");
         }
 
-        Method[] methods = model.getDeclaredMethods();
+        Method[] methods = dataClass.getMethods();
 
         for (Method m : methods) {
             Object valueA = invokeMethod(m, a);
             Object valueB = invokeMethod(m, b);
 
             Assert.assertEquals(String.format("Object of type '%s' differ for method '%s()'.",
-                    model.getName(), m.getName()), valueA, valueB);
+                    dataClass.getName(), m.getName()), valueA, valueB);
         }
     }
 

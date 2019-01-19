@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Transactional
@@ -16,7 +17,9 @@ public interface PatientRepository extends CrudRepository<PatientEntity, UUID> {
     @Query("Select p from PatientEntity p where " +
             "lower(p.name) like lower(concat('%',:patientNumberOrName,'%')) or " +
             "lower(p.patientNumber) like lower(concat('%',:patientNumberOrName,'%'))" )
-    List<PatientEntity> findByIdOrName(@Param("patientNumberOrName") String patientNumberOrName);
+    List<PatientEntity> findByPatientNumberOrName(@Param("patientNumberOrName") String patientNumberOrName);
 
     PatientEntity getById(UUID patientId);
+
+    Optional<PatientEntity> findByPatientNumber(String patientNumber);
 }

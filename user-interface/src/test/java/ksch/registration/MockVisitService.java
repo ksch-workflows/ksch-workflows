@@ -4,14 +4,13 @@ import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.visit.Visit;
 import ksch.patientmanagement.visit.VisitService;
 import ksch.patientmanagement.visit.VisitType;
+import ksch.testdata.NullVisit;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
-@Configuration
 public class MockVisitService {
 
     @Bean
@@ -24,8 +23,18 @@ public class MockVisitService {
         private boolean isActive = false;
 
         @Override
+        public Visit get(UUID visitId) {
+            return new NullVisit();
+        }
+
+        @Override
         public boolean isActive(Patient patient) {
             return isActive;
+        }
+
+        @Override
+        public Optional<Visit> getActiveVisit(Patient patient) {
+            return Optional.empty();
         }
 
         @Override
@@ -39,32 +48,9 @@ public class MockVisitService {
             isActive = false;
             return new NullVisit();
         }
-    }
-
-    class NullVisit implements Visit {
 
         @Override
-        public UUID getId() {
-            return null;
-        }
-
-        @Override
-        public Patient getPatient() {
-            return null;
-        }
-
-        @Override
-        public VisitType getType() {
-            return null;
-        }
-
-        @Override
-        public LocalDateTime getTimeStart() {
-            return null;
-        }
-
-        @Override
-        public LocalDateTime getTimeEnd() {
+        public Patient getPatient(UUID visitId) {
             return null;
         }
     }

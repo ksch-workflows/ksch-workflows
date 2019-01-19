@@ -1,6 +1,9 @@
 package ksch;
 
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
+import ksch.patientmanagement.patient.Patient;
+import ksch.patientmanagement.patient.PatientService;
+import ksch.testdata.TestPatient;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
@@ -28,6 +31,9 @@ public abstract class WebPageTest {
     @Autowired
     private ApplicationContext applicationContextMock;
 
+    @Autowired
+    private PatientService patientService;
+
     @Before
     public void setUp() {
         ReflectionTestUtils.setField(wicketApplication, "applicationContext", applicationContextMock);
@@ -42,5 +48,9 @@ public abstract class WebPageTest {
         formTester.setValue("username", username);
         formTester.setValue("password", password);
         formTester.submit();
+    }
+
+    protected Patient createTestPatient() {
+        return patientService.create(new TestPatient());
     }
 }

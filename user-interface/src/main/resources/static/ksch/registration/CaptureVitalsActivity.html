@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <script src="../../js/jquery.min.js" ></script>
+    <script src="../../js/bootstrap.min.js" ></script>
+
+    <wicket:head>
+        <link href="../../css/input-field-addon.css" rel="stylesheet">
+    </wicket:head>
+
+</head>
+
+<body>
+
+    <wicket:extend>
+
+        <span wicket:id="patientInfoBar"></span>
+
+        <div class="card">
+            <div class="card-header">
+                Vitals
+            </div>
+            <div class="card-body">
+                <form wicket:id="vitalsForm">
+                    <div class="form-group row">
+                        <label for="systolic" class="col-md-2 col-form-label">Systolic</label>
+                        <div class="col-md-3 input-group suffix">
+                            <input wicket:id="systolicInMmHg" type="number" name="input" id="systolic">
+                            <span class="input-group-addon">mmHg</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="diastolic" class="col-md-2 col-form-label">Diastolic</label>
+                        <div class="col-md-3 input-group suffix">
+                            <input wicket:id="diastolicInMmHg" type="number" name="input" id="diastolic">
+                            <span class="input-group-addon">mmHg</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="temperature" class="col-md-2 col-form-label">Temperature</label>
+                        <div class="col-md-3 input-group suffix">
+                            <input wicket:id="temperatureInF" type="number" step="0.1" name="input" id="temperature">
+                            <span class="input-group-addon">°F</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="pulse" class="col-md-2 col-form-label">Pulse</label>
+                        <div class="col-md-3 input-group suffix">
+                            <input wicket:id="pulseInBpm" type="number" name="input" id="pulse">
+                            <span class="input-group-addon">bpm</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="weight" class="col-md-2 col-form-label">Weight</label>
+                        <div class="col-md-3 input-group suffix">
+                            <input wicket:id="weightInKg" type="number" name="input" id="weight">
+                            <span class="input-group-addon">kg</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </wicket:extend>
+
+</body>
+
+</html>

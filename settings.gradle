@@ -12,5 +12,5 @@ def includeModule(moduleName) {
 }
 
 includeModule("patient-management")
+includeModule("medical-records")
 includeModule("reporting")
-

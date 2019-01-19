@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <wicket:head>
+        <style type="text/css">
+            .info-bar {
+                padding: 0.5em;
+                margin-bottom: 1.5em;
+                border-style: solid;
+                border-width: 2px;
+                border-color: rgba(0,0,0,.125);
+            }
+            .info-bar-item {
+                padding-right: 4em;
+            }
+        </style>
+    </wicket:head>
+</head>
+
+<body>
+
+    <wicket:panel>
+
+        <div class="info-bar bg-light">
+            <span class="info-bar-item">Patient Number: <span wicket:id="patientNumber">[patient number]</span></span>
+            <span class="info-bar-item">Name: <span wicket:id="name">[name]</span></span>
+            <span class="info-bar-item">Age: <span wicket:id="age">[age]</span></span>
+        </div>
+
+    </wicket:panel>
+
+</body>
+
+</html>

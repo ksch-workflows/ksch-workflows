@@ -1,6 +1,5 @@
 package ksch.patientmanagement.patient;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -15,13 +14,14 @@ import java.util.UUID;
 
 import static java.time.LocalDate.now;
 import static java.time.temporal.ChronoUnit.YEARS;
+import static ksch.patientmanagement.patient.Gender.FEMALE;
+import static ksch.patientmanagement.patient.Gender.MALE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -55,14 +55,24 @@ public class PatientServiceTest {
     }
 
     @Test
+    public void should_use_existing_patient_number_during_patient_creation() {
+        when(patientRepository.save(any(PatientEntity.class))).then(returnsFirstArg());
+        PatientEntity p = PatientEntity.builder().id(UUID.randomUUID()).patientNumber("KSA-15-97433").build();
+
+        Patient createdPatient = patientService.create(p);
+
+        assertEquals("KSA-15-97433", createdPatient.getPatientNumber());
+    }
+
+    @Test
     public void should_retrieve_patient_by_patient_number() {
         String patientNumber = "1234";
-        given(patientRepository.findByIdOrName(patientNumber)).willReturn(listOf(buildTestPatient(patientNumber)));
+        when(patientRepository.findByPatientNumberOrName(patientNumber)).thenReturn(listOf(buildTestPatient(patientNumber)));
 
         List<Patient> patients = patientService.findByNameOrNumber(patientNumber);
 
         assertTrue("Could not find patient by patient number.", patients.size() > 0);
-        verify(patientRepository).findByIdOrName(patientNumber);
+        verify(patientRepository).findByPatientNumberOrName(patientNumber);
     }
 
     @Test
@@ -85,12 +95,50 @@ public class PatientServiceTest {
 
     @Test
     public void should_skip_patient_age_calculation_if_no_age_specified() {
-
         Patient patient = buildTestPatientWithoutDateOfBirth();
 
         Integer patientAgeInYears = patientService.getAgeInYears(patient);
 
         assertNull("Patient age is expected to be null if not date of birth is specified", patientAgeInYears);
+    }
+
+    @Test
+    public void test_full_name_is_standard_name_if_father_unknown() {
+        PatientEntity patient = buildTestPatient();
+        patient.setName("Jaswant Ashtikar");
+        patient.setNameFather(null);
+
+        String fullName = patientService.getFullName(patient);
+
+        assertEquals("Jaswant Ashtikar", fullName);
+    }
+
+    @Test
+    public void test_full_name_includes_name_of_father_for_man() {
+        PatientEntity patient = buildTestPatient();
+        patient.setName("Jaswant Ashtikar");
+        patient.setGender(MALE);
+        patient.setNameFather("Waazir Sirasikar");
+
+        String fullName = patientService.getFullName(patient);
+
+        assertEquals("Jaswant Ashtikar, s/o Waazir Sirasikar", fullName);
+    }
+
+    @Test
+    public void test_full_name_includes_name_of_father_for_women() {
+        PatientEntity patient = buildTestPatient();
+        patient.setName("Surya Limbu");
+        patient.setGender(FEMALE);
+        patient.setNameFather("Waazir Sirasikar");
+
+        String fullName = patientService.getFullName(patient);
+
+        assertEquals("Surya Limbu, d/o Waazir Sirasikar", fullName);
+    }
+
+    private PatientEntity buildTestPatient() {
+        return buildTestPatient("0815");
     }
 
     private PatientEntity buildTestPatient(String patientNumber) {
@@ -99,7 +147,7 @@ public class PatientServiceTest {
                 .patientNumber(patientNumber)
                 .name("John Doe")
                 .dateOfBirth(now())
-                .gender(Gender.MALE)
+                .gender(MALE)
                 .address("Kirpal Sagar")
                 .build();
     }
@@ -110,7 +158,7 @@ public class PatientServiceTest {
                 .patientNumber("KSA-18-1005")
                 .name("John Doe")
                 .dateOfBirth(dateOfBirth)
-                .gender(Gender.MALE)
+                .gender(MALE)
                 .address("Kirpal Sagar")
                 .build();
     }
@@ -121,7 +169,7 @@ public class PatientServiceTest {
                 .patientNumber("KSA-18-1005")
                 .name("John Doe")
                 .dateOfBirth(null)
-                .gender(Gender.MALE)
+                .gender(MALE)
                 .address("Kirpal Sagar")
                 .build();
     }

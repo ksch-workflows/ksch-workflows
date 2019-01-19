@@ -1,0 +1,55 @@
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    width: 1%;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+input {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+}
+
+.suffix input {
+    border-radius: 4px 0px 0px 4px;
+}
+
+.suffix .input-group-addon {
+    border-left: 0;
+    border-radius: 0px 4px 4px 0px;
+}
+
+.prefix input {
+    border-radius: 0px 4px 4px 0px;
+}
+
+.prefix .input-group-addon {
+    border-right: 0;
+    border-radius: 4px 0px 0px 4px;
+}
+
+.presuffix input {
+    border-radius: 0px;
+}
+
+.input-group-addon.prefix {
+    border-radius: 4px 0px 0px 4px;
+    border-right: 0;
+}
+
+.input-group-addon.suffix {
+    border-radius: 0px 4px 4px 0px;
+    border-left: 0;
+}
+
+.input-group {
+    display: table;
+}

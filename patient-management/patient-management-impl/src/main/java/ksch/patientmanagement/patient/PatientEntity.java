@@ -8,11 +8,15 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.UUID;
+
+import static javax.persistence.EnumType.STRING;
 
 @Entity
 @Table
@@ -41,6 +45,7 @@ public class PatientEntity implements Patient {
     private LocalDate dateOfBirth;
 
     @Column
+    @Enumerated(STRING)
     private Gender gender;
 
     @Column

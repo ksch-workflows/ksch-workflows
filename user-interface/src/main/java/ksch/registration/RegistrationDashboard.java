@@ -19,7 +19,8 @@ public class RegistrationDashboard extends ApplicationFrame {
     @Override
     protected Panel getContent() {
         return new Dashboard("Registration dashboard",
-                new ActivityLink("Register patient", "/registration/register-patient", "fa fa-book")
+                new ActivityLink("Register patient", "/registration/register-patient", "fa fa-book"),
+                new ActivityLink("Capture vitals", "/registration/capture-vitals/start", "fa fa-heartbeat")
         );
     }
 
