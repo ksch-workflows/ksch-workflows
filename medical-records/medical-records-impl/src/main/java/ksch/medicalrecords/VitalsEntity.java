@@ -50,10 +50,10 @@ public class VitalsEntity implements Vitals {
     private Float temperatureInF;
 
     @Column
-    private Integer pulseInBPM;
+    private Integer pulseInBpm;
 
     @Column
-    private Integer weightInKG;
+    private Integer weightInKg;
 
     public VitalsEntity(Visit visit) {
         this.visitId = visit.getId();
@@ -68,8 +68,8 @@ public class VitalsEntity implements Vitals {
                 .systolicInMmHg(vitals.getSystolicInMmHg())
                 .diastolicInMmHg(vitals.getDiastolicInMmHg())
                 .temperatureInF(vitals.getTemperatureInF())
-                .pulseInBPM(vitals.getPulseInBPM())
-                .weightInKG(vitals.getWeightInKG())
+                .pulseInBpm(vitals.getPulseInBpm())
+                .weightInKg(vitals.getWeightInKg())
                 .build();
     }
 }

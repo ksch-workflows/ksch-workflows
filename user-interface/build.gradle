@@ -26,3 +26,5 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-security'
     compile 'org.wicketstuff:wicketstuff-annotation:8.2.0'
 }
+
+bootRun.systemProperties = System.properties

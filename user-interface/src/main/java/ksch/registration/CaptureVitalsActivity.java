@@ -64,9 +64,9 @@ public class CaptureVitalsActivity extends Activity {
 
             add(new NumberTextField<Integer>("systolicInMmHg"));
             add(new NumberTextField<Integer>("diastolicInMmHg"));
-            add(new NumberTextField<Float>("temperatureInF")); // TODO Fix that Float value is not handled properly in UI
-            add(new NumberTextField<Integer>("pulseInBPM"));
-            add(new NumberTextField<Integer>("weightInKG"));
+            add(new NumberTextField<Float>("temperatureInF").setStep(0.1f));
+            add(new NumberTextField<Integer>("pulseInBpm"));
+            add(new NumberTextField<Integer>("weightInKg"));
         }
 
         @Override
@@ -105,8 +105,8 @@ public class CaptureVitalsActivity extends Activity {
 
         private Float temperatureInF;
 
-        private Integer pulseInBPM;
+        private Integer pulseInBpm;
 
-        private Integer weightInKG;
+        private Integer weightInKg;
     }
 }

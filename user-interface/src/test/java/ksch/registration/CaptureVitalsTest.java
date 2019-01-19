@@ -41,8 +41,8 @@ public class CaptureVitalsTest extends WebPageTest {
         formTester.setValue("systolicInMmHg", "150");
         formTester.setValue("diastolicInMmHg", "70");
         formTester.setValue("temperatureInF", "98.3");
-        formTester.setValue("pulseInBPM", "89");
-        formTester.setValue("weightInKG", "75");
+        formTester.setValue("pulseInBpm", "89");
+        formTester.setValue("weightInKg", "75");
         formTester.submit();
 
         tester.assertRenderedPage(CaptureVitalsPage.class);

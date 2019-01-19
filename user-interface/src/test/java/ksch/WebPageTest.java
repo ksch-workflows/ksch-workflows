@@ -1,10 +1,9 @@
 package ksch;
 
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
-import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientService;
-import model.PatientResource;
+import ksch.testdata.TestPatient;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
@@ -17,9 +16,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
-
-import java.time.LocalDate;
-import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = KschWorkflowsApplication.class)
@@ -55,15 +51,6 @@ public abstract class WebPageTest {
     }
 
     protected Patient createTestPatient() {
-        Patient patient = PatientResource.builder()
-                .id(UUID.randomUUID())
-                .name("John Doe")
-                .patientNumber("0815-" + UUID.randomUUID())
-                .gender(Gender.MALE)
-                .dateOfBirth(LocalDate.now())
-                .address("Kirpal Sagar")
-                .build();
-
-        return patientService.create(patient);
+        return patientService.create(new TestPatient());
     }
 }

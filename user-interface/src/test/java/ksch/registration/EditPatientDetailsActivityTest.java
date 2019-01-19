@@ -49,7 +49,6 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         tester.assertRenderedPage(EditPatientDetailsPage.class);
         tester.assertContains(patient.getPatientNumber());
         tester.assertContains(patient.getName());
-        Debug.printLastResponse(tester);
     }
 
     @Test

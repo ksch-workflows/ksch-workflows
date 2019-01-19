@@ -33,14 +33,14 @@ public interface Vitals extends MedicalRecordEntry {
     Float getTemperatureInF();
 
     /**
-     * @return The heart rate in "beats per minute" (BPM).
+     * @return The heart rate in "beats per minute" (bpm).
      *
-     * @see <a href="https://en.wikipedia.org/wiki/Heart_rate">Heart read (wikipedia.org)</a>
+     * @see <a href="https://en.wikipedia.org/wiki/Heart_rate">Heart rate (wikipedia.org)</a>
      */
-    Integer getPulseInBPM();
+    Integer getPulseInBpm();
 
     /**
-     * @return The weight of the patient in kilogram (KG).
+     * @return The weight of the patient in kilogram (kg).
      */
-    Integer getWeightInKG();
+    Integer getWeightInKg();
 }

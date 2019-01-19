@@ -1,15 +1,12 @@
 package ksch.medicalrecords;
 
-import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.visit.Visit;
-import ksch.patientmanagement.visit.VisitType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -56,76 +53,5 @@ public class VitalsServiceTest {
         Vitals retrievedVitals = vitalsService.get(vitals.getId());
 
         assertNotNull(retrievedVitals);
-    }
-}
-
-class ExampleVitals implements Vitals {
-
-    @Override
-    public UUID getId() {
-        return UUID.randomUUID();
-    }
-
-    @Override
-    public UUID getVisitId() {
-        return UUID.randomUUID();
-    }
-
-    @Override
-    public LocalDateTime getTime() {
-        return LocalDateTime.now();
-    }
-
-    @Override
-    public Integer getSystolicInMmHg() {
-        return 130;
-    }
-
-    @Override
-    public Integer getDiastolicInMmHg() {
-        return 80;
-    }
-
-    @Override
-    public Float getTemperatureInF() {
-        return 98.4f;
-    }
-
-    @Override
-    public Integer getPulseInBPM() {
-        return 80;
-    }
-
-    @Override
-    public Integer getWeightInKG() {
-        return 73;
-    }
-}
-
-class ExampleVisit implements Visit {
-
-    @Override
-    public UUID getId() {
-        return UUID.randomUUID();
-    }
-
-    @Override
-    public Patient getPatient() {
-        return null;
-    }
-
-    @Override
-    public VisitType getType() {
-        return null;
-    }
-
-    @Override
-    public LocalDateTime getTimeStart() {
-        return null;
-    }
-
-    @Override
-    public LocalDateTime getTimeEnd() {
-        return null;
     }
 }

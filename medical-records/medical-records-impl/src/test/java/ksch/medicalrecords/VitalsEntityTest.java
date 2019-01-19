@@ -52,12 +52,12 @@ public class VitalsEntityTest {
             }
 
             @Override
-            public Integer getPulseInBPM() {
+            public Integer getPulseInBpm() {
                 return 100;
             }
 
             @Override
-            public Integer getWeightInKG() {
+            public Integer getWeightInKg() {
                 return 80;
             }
         };
