@@ -3,10 +3,11 @@ package ksch.registration;
 import ksch.Activity;
 import ksch.PatientInfoBar;
 import ksch.medicalrecords.Vitals;
-import ksch.medicalrecords.VitalsService;
+import ksch.medicalrecords.VitalsTransactions;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.visit.Visit;
-import ksch.patientmanagement.visit.VisitService;
+import ksch.patientmanagement.visit.VisitQueries;
+import ksch.patientmanagement.visit.VisitTransactions;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -24,17 +25,20 @@ import java.util.UUID;
 public class CaptureVitalsActivity extends Activity {
 
     @SpringBean
-    private VitalsService vitalsService;
+    private VitalsTransactions vitalsTransactions;
 
     @SpringBean
-    private VisitService visitService;
+    private VisitTransactions visitTransactions;
+
+    @SpringBean
+    private VisitQueries visitQueries;
 
     private final UUID visitId;
 
     public CaptureVitalsActivity(UUID visitId) {
         this.visitId = visitId;
 
-        Visit visit = visitService.get(visitId);
+        Visit visit = visitQueries.get(visitId);
         Patient patient = visit.getPatient();
 
         add(new PatientInfoBar(patient));
@@ -72,14 +76,14 @@ public class CaptureVitalsActivity extends Activity {
         @Override
         protected void onSubmit() {
             if (isFirstFormSubmission()) {
-                Vitals medicalRecordEntry = vitalsService.createMedicalRecordEntry(visitService.get(visitId));
+                Vitals medicalRecordEntry = vitalsTransactions.createMedicalRecordEntry(visitQueries.get(visitId));
 
                 vitalsResource.setId(medicalRecordEntry.getId());
                 vitalsResource.setVisitId(medicalRecordEntry.getVisitId());
                 vitalsResource.setTime(medicalRecordEntry.getTime());
             }
 
-            vitalsService.save(vitalsResource);
+            vitalsTransactions.save(vitalsResource);
             log.debug("Saved Vitals: " + vitalsResource);
         }
 

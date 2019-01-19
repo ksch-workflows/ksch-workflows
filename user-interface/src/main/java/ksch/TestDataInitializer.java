@@ -2,8 +2,8 @@ package ksch;
 
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
-import ksch.patientmanagement.patient.PatientService;
-import ksch.patientmanagement.visit.VisitService;
+import ksch.patientmanagement.patient.PatientTransactions;
+import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,16 +27,16 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TestDataInitializer implements ApplicationRunner {
 
-    private final PatientService patientService;
+    private final PatientTransactions patientTransactions;
 
-    private final VisitService visitService;
+    private final VisitTransactions visitTransactions;
 
     @Override
     public void run(ApplicationArguments args) {
         log.info("Initializing test data");
 
-        Patient testPatient = patientService.create(new TestPatient());
-        visitService.startVisit(testPatient, VisitType.IPD);
+        Patient testPatient = patientTransactions.create(new TestPatient());
+        visitTransactions.startVisit(testPatient, VisitType.IPD);
     }
 }
 

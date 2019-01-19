@@ -40,6 +40,7 @@ subprojects {
 
     dependencies {
         compileOnly 'org.projectlombok:lombok:1.18.2' // https://projectlombok.org/download
+        testCompile 'org.projectlombok:lombok:1.18.2' // https://projectlombok.org/download
     }
 
     checkstyle {
@@ -60,7 +61,6 @@ configure(subprojects.findAll { !it.name.endsWith('-api')} ) {
 
         testCompile 'org.springframework.boot:spring-boot-starter-test'
         testCompile 'org.mockito:mockito-core'
-        
         testCompile project(path: ':infrastructure:shared-test')
     }
 

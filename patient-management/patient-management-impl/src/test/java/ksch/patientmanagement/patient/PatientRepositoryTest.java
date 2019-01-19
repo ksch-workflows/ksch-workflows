@@ -63,8 +63,8 @@ public class PatientRepositoryTest {
         assertTrue("Could not find patient by patient number.", patient.isPresent());
     }
 
-    private Patient createTestPatient(String patientNumber, String name) {
-        return patientRepository.save(PatientEntity.builder()
+    private void createTestPatient(String patientNumber, String name) {
+        patientRepository.save(PatientEntity.builder()
                 .dateOfBirth(LocalDate.now())
                 .gender(Gender.FEMALE)
                 .name(name)

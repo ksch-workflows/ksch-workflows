@@ -81,6 +81,6 @@ public class CustomAssertionsTest {
     }
 
     private AnotherExampleInterface getAnotherExampleObject() {
-        return () -> "anything";
+        return () -> null;
     }
 }

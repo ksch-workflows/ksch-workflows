@@ -1,6 +1,7 @@
 package ksch.registration;
 
 import ksch.Activity;
+import ksch.patientmanagement.patient.PatientQueries;
 import model.PatientResource;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
@@ -14,7 +15,7 @@ import org.apache.wicket.request.flow.RedirectToUrlException;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
-import ksch.patientmanagement.patient.PatientService;
+import ksch.patientmanagement.patient.PatientTransactions;
 
 import java.util.List;
 import java.util.UUID;
@@ -29,7 +30,10 @@ public class RegisterPatientActivity extends Activity {
     private WebMarkupContainer noSearchResultsMessageContainer;
 
     @SpringBean
-    private PatientService patientService;
+    private PatientTransactions patientTransactions;
+
+    @SpringBean
+    private PatientQueries patientQueries;
 
     public RegisterPatientActivity() {
         createPatientList();
@@ -75,7 +79,7 @@ public class RegisterPatientActivity extends Activity {
                 item.add(new Label("patientNumber", patient.getPatientNumber()));
                 item.add(new Label("name", patient.getName()));
                 item.add(new Label("gender", patient.getGender()));
-                item.add(new Label("age", patientService.getAgeInYears(patient)));
+                item.add(new Label("age", patient.getAgeInYears()));
 
                 item.add(new ExternalLink("openPatientDetails", "/registration/edit-patient/" + patient.getId()));
             }
@@ -109,7 +113,7 @@ public class RegisterPatientActivity extends Activity {
                     .dateOfBirth(parseDate(patientFormFields.getAndResetValue("inputDateOfBirth")))
                     .build();
 
-            UUID patientId = patientService.create(patient).getId();
+            UUID patientId = patientTransactions.create(patient).getId();
 
             throw new RedirectToUrlException("/registration/edit-patient/" + patientId);
         }
@@ -129,7 +133,7 @@ public class RegisterPatientActivity extends Activity {
 
         @Override
         protected void onSubmit() {
-            List<PatientResource> matchingPatients = patientService.findByNameOrNumber(patientSearchTerm)
+            List<PatientResource> matchingPatients = patientQueries.findByNameOrNumber(patientSearchTerm)
                     .stream()
                     .map(PatientResource::toPatientResource)
                     .collect(Collectors.toList());

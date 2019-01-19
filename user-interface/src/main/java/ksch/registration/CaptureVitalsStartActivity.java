@@ -2,9 +2,11 @@ package ksch.registration;
 
 import ksch.Activity;
 import ksch.patientmanagement.patient.Patient;
-import ksch.patientmanagement.patient.PatientService;
+import ksch.patientmanagement.patient.PatientQueries;
+import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.Visit;
-import ksch.patientmanagement.visit.VisitService;
+import ksch.patientmanagement.visit.VisitQueries;
+import ksch.patientmanagement.visit.VisitTransactions;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -22,10 +24,16 @@ import java.util.Optional;
 public class CaptureVitalsStartActivity extends Activity {
 
     @SpringBean
-    private VisitService visitService;
+    private VisitTransactions visitTransactions;
 
     @SpringBean
-    private PatientService patientService;
+    private VisitQueries visitQueries;
+
+    @SpringBean
+    private PatientTransactions patientTransactions;
+
+    @SpringBean
+    private PatientQueries patientQueries;
 
     public CaptureVitalsStartActivity() {
         add(new PatientNumberForm());
@@ -59,8 +67,8 @@ public class CaptureVitalsStartActivity extends Activity {
 
         @Override
         protected void onSubmit() {
-            patientService.findByPatientNumber(patientNumberInput)
-                    .map(patient -> visitService.getActiveVisit(patient))
+            patientQueries.findByPatientNumber(patientNumberInput)
+                    .map(patient -> visitQueries.getActiveVisit(patient))
                     .ifPresent(visit -> {
                         PageParameters parameters = new PageParameters();
                         parameters.add("visitId", visit.get().getId());
@@ -73,7 +81,7 @@ public class CaptureVitalsStartActivity extends Activity {
 
         @Override
         public void validate(IValidatable<String> enteredPatientNumber) {
-            Optional<Patient> patient = patientService.findByPatientNumber(enteredPatientNumber.getValue());
+            Optional<Patient> patient = patientQueries.findByPatientNumber(enteredPatientNumber.getValue());
             if (!patient.isPresent()) {
                 ValidationError error = new ValidationError(this);
                 error.setMessage("Could not find patient with number " + enteredPatientNumber.getValue());
@@ -86,9 +94,9 @@ public class CaptureVitalsStartActivity extends Activity {
 
         @Override
         public void validate(IValidatable<String> enteredPatientNumber) {
-            Optional<Patient> patient = patientService.findByPatientNumber(enteredPatientNumber.getValue());
+            Optional<Patient> patient = patientQueries.findByPatientNumber(enteredPatientNumber.getValue());
             if (patient.isPresent()) {
-                Optional<Visit> activeVisit = visitService.getActiveVisit(patient.get());
+                Optional<Visit> activeVisit = visitQueries.getActiveVisit(patient.get());
                 if (!activeVisit.isPresent()) {
                     ValidationError error = new ValidationError(this);
                     error.setMessage("Could not find active visit for patient " + enteredPatientNumber.getValue());

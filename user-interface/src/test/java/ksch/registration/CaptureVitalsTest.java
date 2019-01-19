@@ -3,7 +3,7 @@ package ksch.registration;
 import ksch.WebPageTest;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.visit.Visit;
-import ksch.patientmanagement.visit.VisitService;
+import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.tester.FormTester;
@@ -16,7 +16,7 @@ import java.util.UUID;
 public class CaptureVitalsTest extends WebPageTest {
 
     @Autowired
-    private VisitService visitService;
+    private VisitTransactions visitTransactions;
 
     @Before
     public void setup() {
@@ -50,7 +50,7 @@ public class CaptureVitalsTest extends WebPageTest {
 
     private Visit createPatientAndStartVisit() {
         Patient patient = createTestPatient();
-        return visitService.startVisit(patient, VisitType.IPD);
+        return visitTransactions.startVisit(patient, VisitType.IPD);
     }
 
     private void openCaptureVitalsPage(UUID visitId) {

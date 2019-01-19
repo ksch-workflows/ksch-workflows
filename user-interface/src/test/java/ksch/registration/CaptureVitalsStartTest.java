@@ -2,7 +2,7 @@ package ksch.registration;
 
 import ksch.WebPageTest;
 import ksch.patientmanagement.patient.Patient;
-import ksch.patientmanagement.visit.VisitService;
+import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
 import org.apache.wicket.util.tester.FormTester;
 import org.junit.Before;
@@ -14,7 +14,7 @@ import java.util.UUID;
 public class CaptureVitalsStartTest extends WebPageTest {
 
     @Autowired
-    private VisitService visitService;
+    private VisitTransactions visitTransactions;
 
     @Before
     public void setup() {
@@ -32,7 +32,7 @@ public class CaptureVitalsStartTest extends WebPageTest {
     @Test
     public void should_open_capture_vitals_page_after_patient_number_input() {
         Patient patient = createTestPatient();
-        visitService.startVisit(patient, VisitType.IPD);
+        visitTransactions.startVisit(patient, VisitType.IPD);
         tester.startPage(CaptureVitalsStartPage.class);
 
         FormTester formTester = tester.newFormTester("content:patientNumberForm", false);

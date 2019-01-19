@@ -24,7 +24,7 @@ public class PatientNumberGeneratorTest {
     @Mock
     private PatientNumberIndexRepository patientNumberIndexRepository;
 
-    private int currentYearWithTwoDigits = Calendar.getInstance().get(Calendar.YEAR) % 100;
+    private final int currentYearWithTwoDigits = Calendar.getInstance().get(Calendar.YEAR) % 100;
 
     @Before
     public void setup() {
