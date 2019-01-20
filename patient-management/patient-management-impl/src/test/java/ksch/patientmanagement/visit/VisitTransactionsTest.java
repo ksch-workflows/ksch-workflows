@@ -1,6 +1,5 @@
 package ksch.patientmanagement.visit;
 
-import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientRepository;
 import org.junit.Test;
@@ -8,9 +7,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.time.LocalDate;
-import java.util.UUID;
 
 import static ksch.patientmanagement.patient.PatientEntity.toPatientEntity;
 import static org.junit.Assert.assertFalse;
@@ -58,45 +54,6 @@ public class VisitTransactionsTest {
     }
 
     private Patient createTestPatient() {
-        return patientRepository.save(toPatientEntity(buildTestPatient()));
-    }
-
-    private Patient buildTestPatient() {
-        return new Patient() {
-            @Override
-            public UUID getId() {
-                return UUID.randomUUID();
-            }
-
-            @Override
-            public String getPatientNumber() {
-                return "0815-" + UUID.randomUUID();
-            }
-
-            @Override
-            public String getName() {
-                return "John";
-            }
-
-            @Override
-            public String getNameFather() {
-                return null;
-            }
-
-            @Override
-            public LocalDate getDateOfBirth() {
-                return LocalDate.now();
-            }
-
-            @Override
-            public Gender getGender() {
-                return Gender.MALE;
-            }
-
-            @Override
-            public String getAddress() {
-                return "Jena, Germany";
-            }
-        };
+        return patientRepository.save(toPatientEntity(new TestPatient()));
     }
 }
