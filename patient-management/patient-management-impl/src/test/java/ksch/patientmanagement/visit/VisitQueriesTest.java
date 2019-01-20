@@ -21,10 +21,13 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class VisitServiceTest {
+public class VisitQueriesTest {
 
     @Autowired
-    private VisitService visitService;
+    private VisitQueries visitQueries;
+
+    @Autowired
+    private VisitTransactions visitTransactions;
 
     @Autowired
     private PatientRepository patientRepository;
@@ -32,9 +35,9 @@ public class VisitServiceTest {
     @Test
     public void should_retrieve_visit_entity_by_id() {
         Patient patient = createTestPatient();
-        Visit visit = visitService.startVisit(patient, VisitType.IPD);
+        Visit visit = visitTransactions.startVisit(patient, VisitType.IPD);
 
-        Visit retrievedVisit = visitService.get(visit.getId());
+        Visit retrievedVisit = visitQueries.get(visit.getId());
 
         assertNotNull("Could not retrieve existing Visit entity by its technical identifier.", retrievedVisit);
     }
@@ -43,7 +46,7 @@ public class VisitServiceTest {
     public void should_not_be_active_for_new_patient() {
         Patient patient = createTestPatient();
 
-        boolean hasActiveVisit = visitService.isActive(patient);
+        boolean hasActiveVisit = visitQueries.isActive(patient);
 
         assertFalse("Patient has an active visit while it was actually not yet started", hasActiveVisit);
     }
@@ -51,9 +54,9 @@ public class VisitServiceTest {
     @Test
     public void should_retrieve_active_visit_entity() {
         Patient patient = createTestPatient();
-        visitService.startVisit(patient, VisitType.IPD);
+        visitTransactions.startVisit(patient, VisitType.IPD);
 
-        Optional<Visit> activeVisit = visitService.getActiveVisit(patient);
+        Optional<Visit> activeVisit = visitQueries.getActiveVisit(patient);
 
         assertTrue("Could not find an active visit for the test patient.", activeVisit.isPresent());
     }
@@ -62,44 +65,17 @@ public class VisitServiceTest {
     public void should_retrieve_emtpy_visit_entity_if_no_active_visit() {
         Patient patient = createTestPatient();
 
-        Optional<Visit> activeVisit = visitService.getActiveVisit(patient);
+        Optional<Visit> activeVisit = visitQueries.getActiveVisit(patient);
 
         assertFalse("There should not be an active visit for the test patient.", activeVisit.isPresent());
     }
 
     @Test
-    public void should_start_visit() {
-        Patient patient = createTestPatient();
-
-        Visit visit = visitService.startVisit(patient, VisitType.IPD);
-        boolean hasActiveVisit = visitService.isActive(patient);
-
-        assertTrue("Patient has no active visit even though it has just been started", hasActiveVisit);
-        assertNotNull("Database did not generate a primariy key for the database record for the visit", visit.getId());
-    }
-
-    @Test
-    public void should_discharge_patient() {
-        Patient patient = createTestPatient();
-        visitService.startVisit(patient, VisitType.IPD);
-
-        Visit visit = visitService.discharge(patient);
-        boolean hasActiveVisit = visitService.isActive(patient);
-
-        assertFalse("Patient visit is still active even though he has just been discharged",
-                hasActiveVisit);
-        assertNotNull("Time of discharge not set",
-                visit.getTimeEnd());
-        assertTrue("End time of the visit is not after the start time of the visit",
-                visit.getTimeEnd().isAfter(visit.getTimeStart()));
-    }
-
-    @Test
     public void test_access_on_patient() {
         Patient patient = createTestPatient();
-        Visit visit = visitService.startVisit(patient, VisitType.IPD);
+        Visit visit = visitTransactions.startVisit(patient, VisitType.IPD);
 
-        Patient retrievedPatient = visitService.getPatient(visit.getId());
+        Patient retrievedPatient = visitQueries.getPatient(visit.getId());
 
         assertEquals(patient.getId(), retrievedPatient.getId());
     }

@@ -5,7 +5,7 @@ import ksch.patientmanagement.patient.Patient;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface VisitService {
+public interface VisitQueries {
 
     Visit get(UUID visitId);
 
@@ -15,10 +15,6 @@ public interface VisitService {
     boolean isActive(Patient patient);
 
     Optional<Visit> getActiveVisit(Patient patient);
-
-    Visit startVisit(Patient patient, VisitType visitType);
-
-    Visit discharge(Patient patient);
 
     Patient getPatient(UUID visitId);
 }

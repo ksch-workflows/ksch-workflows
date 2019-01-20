@@ -92,6 +92,12 @@ The JAR file can then be copied onto the server and started like this:
 java -jar ksch-workflows-0.1.0-SNAPSHOT.jar
 ```
 
+## Check for updates of dependencies
+
+```
+gradle dependencyUpdates -Drevision=release
+```
+
 ## Contact information
 
 If you have any question or idea, please join this chat room and post it there:

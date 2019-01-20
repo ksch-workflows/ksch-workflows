@@ -3,8 +3,10 @@ package ksch.registration;
 import ksch.Activity;
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
-import ksch.patientmanagement.patient.PatientService;
-import ksch.patientmanagement.visit.VisitService;
+import ksch.patientmanagement.patient.PatientQueries;
+import ksch.patientmanagement.patient.PatientTransactions;
+import ksch.patientmanagement.visit.VisitQueries;
+import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
 import lombok.Getter;
 import model.PatientResource;
@@ -29,10 +31,16 @@ import static util.Time.parseDate;
 public class EditPatientDetailsActivity extends Activity {
 
     @SpringBean
-    private PatientService patientService;
+    private PatientTransactions patientTransactions;
 
     @SpringBean
-    private VisitService visitService;
+    private PatientQueries patientQueries;
+
+    @SpringBean
+    private VisitTransactions visitTransactions;
+
+    @SpringBean
+    private VisitQueries visitQueries;
 
     private final Patient patient;
 
@@ -41,7 +49,7 @@ public class EditPatientDetailsActivity extends Activity {
     private final AjaxLink<Void> dischargeButton;
 
     public EditPatientDetailsActivity(UUID patientId) {
-        PatientResource patientResource = toPatientResource(patientService.getById(patientId));
+        PatientResource patientResource = toPatientResource(patientQueries.getById(patientId));
 
         this.patient = patientResource;
         this.startVisitButton = createStartVisitButton();
@@ -59,7 +67,7 @@ public class EditPatientDetailsActivity extends Activity {
         btn.setOutputMarkupId(true);
         btn.setOutputMarkupPlaceholderTag(true);
 
-        if (visitService.isActive(patient)) {
+        if (visitQueries.isActive(patient)) {
             btn.setVisible(false);
         }
 
@@ -70,7 +78,7 @@ public class EditPatientDetailsActivity extends Activity {
         AjaxLink<Void> btn = new AjaxLink<Void>("dischargeButton") {
             @Override
             public void onClick(AjaxRequestTarget target) {
-                visitService.discharge(patient);
+                visitTransactions.discharge(patient);
 
                 startVisitButton.setVisible(true);
                 dischargeButton.setVisible(false);
@@ -82,7 +90,7 @@ public class EditPatientDetailsActivity extends Activity {
         btn.setOutputMarkupId(true);
         btn.setOutputMarkupPlaceholderTag(true);
 
-        if (!visitService.isActive(patient)) {
+        if (!visitQueries.isActive(patient)) {
             btn.setVisible(false);
         }
 
@@ -122,7 +130,7 @@ public class EditPatientDetailsActivity extends Activity {
             patient.setGender(Gender.valueOf(patientFormFields.getValue("inputGender")));
             patient.setDateOfBirth(parseDate(patientFormFields.getValue("inputDateOfBirth")));
 
-            patientService.update(patient);
+            patientTransactions.update(patient);
         }
     }
 
@@ -145,7 +153,7 @@ public class EditPatientDetailsActivity extends Activity {
 
         @Override
         protected void onSubmit() {
-            visitService.startVisit(patient, VisitType.valueOf(visitType));
+            visitTransactions.startVisit(patient, VisitType.valueOf(visitType));
 
             startVisitButton.setVisible(false);
             dischargeButton.setVisible(true);

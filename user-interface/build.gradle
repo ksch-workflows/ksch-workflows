@@ -27,4 +27,4 @@ dependencies {
     compile 'org.wicketstuff:wicketstuff-annotation:8.2.0'
 }
 
-bootRun.systemProperties = System.properties
+bootRun.systemProperties = System.properties as Map<String, ?>

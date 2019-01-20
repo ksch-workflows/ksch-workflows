@@ -1,13 +1,14 @@
 package ksch.registration;
 
 import ksch.WebPageTest;
+import ksch.patientmanagement.patient.PatientQueries;
 import model.PatientResource;
 import org.apache.wicket.util.tester.FormTester;
 import org.junit.Before;
 import org.junit.Test;
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
-import ksch.patientmanagement.patient.PatientService;
+import ksch.patientmanagement.patient.PatientTransactions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
@@ -21,7 +22,10 @@ import static org.junit.Assert.assertTrue;
 public class RegisterPatientPageTest extends WebPageTest {
 
     @Autowired
-    private PatientService patientService;
+    private PatientTransactions patientTransactions;
+
+    @Autowired
+    private PatientQueries patientQueries;
 
     @Before
     public void setup() {
@@ -97,7 +101,7 @@ public class RegisterPatientPageTest extends WebPageTest {
 
         tester.assertRenderedPage(EditPatientDetailsPage.class);
 
-        List<Patient> searchResults = patientService.findByNameOrNumber("Fritz");
+        List<Patient> searchResults = patientQueries.findByNameOrNumber("Fritz");
 
         assertEquals("Could not create new patient",
                 1, searchResults.size());
@@ -132,7 +136,7 @@ public class RegisterPatientPageTest extends WebPageTest {
                 .address("Kirpal Sagar")
                 .build();
 
-        patientService.create(patient1);
-        patientService.create(patient2);
+        patientTransactions.create(patient1);
+        patientTransactions.create(patient2);
     }
 }

@@ -7,20 +7,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Optional;
-import java.util.UUID;
-
-import static ksch.medicalrecords.VitalsEntity.toVitalsEntity;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class VitalsServiceTest {
+public class VitalsTransactionsTest {
 
     @InjectMocks
-    private VitalsServiceImpl vitalsService;
+    private VitalsTransactionsImpl vitalsService;
 
     @Mock
     private VitalsRepository vitalsRepository;
@@ -43,15 +39,5 @@ public class VitalsServiceTest {
         Vitals updatedVitals = vitalsService.save(vitals);
 
         assertNotNull(updatedVitals);
-    }
-
-    @Test
-    public void should_retrieve_vitals_record() {
-        VitalsEntity vitals = toVitalsEntity(new ExampleVitals());
-        when(vitalsRepository.findById(any(UUID.class))).thenReturn(Optional.of(vitals));
-
-        Vitals retrievedVitals = vitalsService.get(vitals.getId());
-
-        assertNotNull(retrievedVitals);
     }
 }

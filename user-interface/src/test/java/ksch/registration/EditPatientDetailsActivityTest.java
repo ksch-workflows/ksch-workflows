@@ -2,8 +2,9 @@ package ksch.registration;
 
 import ksch.WebPageTest;
 import ksch.patientmanagement.patient.Patient;
-import ksch.patientmanagement.patient.PatientService;
-import ksch.patientmanagement.visit.VisitService;
+import ksch.patientmanagement.patient.PatientQueries;
+import ksch.patientmanagement.patient.PatientTransactions;
+import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
@@ -18,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
-@ContextConfiguration(classes = MockVisitService.class)
+@ContextConfiguration(classes = MockVisitTransactions.class)
 public class EditPatientDetailsActivityTest extends WebPageTest {
 
     public static final String CSS_SELECTOR_DISCHARGE_BUTTON = "a[name='dischargeButton']";
@@ -28,10 +29,13 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
     public static final String AJAX_RESPONSE_WITH_START_VISIT_BUTTON = "ajax-response.*startVisitButton";
 
     @Autowired
-    private PatientService patientService;
+    private PatientTransactions patientTransactions;
 
     @Autowired
-    private VisitService visitService;
+    private PatientQueries patientQueries;
+
+    @Autowired
+    private VisitTransactions visitTransactions;
 
     @Before
     public void setup() {
@@ -59,7 +63,7 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
                 .setValue("patientFormFields:inputAddress", "St. Gilgen")
                 .submit();
 
-        Patient updatedPatient = patientService.getById(patient.getId());
+        Patient updatedPatient = patientQueries.getById(patient.getId());
         assertEquals("St. Gilgen", updatedPatient.getAddress());
     }
 
@@ -73,7 +77,7 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
                 .select("visitTypeSelection", 1)
                 .submit();
 
-        verify(visitService).startVisit(any(Patient.class), any(VisitType.class));
+        verify(visitTransactions).startVisit(any(Patient.class), any(VisitType.class));
         assertContains(currentPage(), CSS_SELECTOR_DISCHARGE_BUTTON);
         assertNotContains(currentPage(), CSS_SELECTOR_START_VISIT_BUTTON);
     }

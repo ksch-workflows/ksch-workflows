@@ -4,16 +4,21 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.3.0' // https://github.com/szpak/gradle-pitest-plugin/releases
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.3.0'
     }
 }
 
 plugins {
-    id "io.spring.dependency-management" version "1.0.6.RELEASE" // https://github.com/spring-gradle-plugins/dependency-management-plugin/releases
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    id "com.github.ben-manes.versions" version "0.20.0"
 }
 
 ext {
-    springBootVersion = '2.1.0.RELEASE' // https://spring.io/projects/spring-boot
+    guavaVersion = '27.0.1-jre'
+    jaxbApiVersion = '2.3.1'
+    junitVersion = '4.12'
+    lombokVersion = '1.18.4'
+    springBootVersion = '2.1.2.RELEASE'
 }
 
 allprojects  {
@@ -39,7 +44,9 @@ subprojects {
     }
 
     dependencies {
-        compileOnly 'org.projectlombok:lombok:1.18.2' // https://projectlombok.org/download
+        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        testCompile "org.projectlombok:lombok:${lombokVersion}"
+        testCompile "junit:junit:${junitVersion}"
     }
 
     checkstyle {
@@ -55,12 +62,11 @@ configure(subprojects.findAll { !it.name.endsWith('-api')} ) {
     dependencies {
         compile 'org.springframework.boot:spring-boot-starter'
         compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-        compile 'javax.xml.bind:jaxb-api:2.3.0' // http://search.maven.org/javax.xml.bind/jaxb-api
-        compile 'com.google.guava:guava:26.0-jre' // https://github.com/google/guava/releases
+        compile "javax.xml.bind:jaxb-api:${jaxbApiVersion}"
+        compile "com.google.guava:guava:${guavaVersion}"
 
         testCompile 'org.springframework.boot:spring-boot-starter-test'
         testCompile 'org.mockito:mockito-core'
-        
         testCompile project(path: ':infrastructure:shared-test')
     }
 
@@ -81,6 +87,15 @@ configure(subprojects.findAll { !it.name.endsWith('-api')} ) {
     }
 }
 
-
-
-
+dependencyUpdates.resolutionStrategy {
+    componentSelection { rules ->
+        rules.all { ComponentSelection selection ->
+            boolean rejected = ['alpha', 'beta', 'b', 'rc', 'cr', 'm', 'preview'].any { qualifier ->
+                selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
+            }
+            if (rejected) {
+                selection.reject('Release candidate')
+            }
+        }
+    }
+}

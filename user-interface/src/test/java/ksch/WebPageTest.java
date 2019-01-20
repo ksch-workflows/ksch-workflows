@@ -2,7 +2,7 @@ package ksch;
 
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
 import ksch.patientmanagement.patient.Patient;
-import ksch.patientmanagement.patient.PatientService;
+import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.testdata.TestPatient;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.util.tester.FormTester;
@@ -32,7 +32,7 @@ public abstract class WebPageTest {
     private ApplicationContext applicationContextMock;
 
     @Autowired
-    private PatientService patientService;
+    private PatientTransactions patientTransactions;
 
     @Before
     public void setUp() {
@@ -51,6 +51,6 @@ public abstract class WebPageTest {
     }
 
     protected Patient createTestPatient() {
-        return patientService.create(new TestPatient());
+        return patientTransactions.create(new TestPatient());
     }
 }
