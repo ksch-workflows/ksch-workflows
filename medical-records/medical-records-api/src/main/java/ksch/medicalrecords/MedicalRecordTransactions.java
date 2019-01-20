@@ -7,7 +7,7 @@ import ksch.patientmanagement.visit.Visit;
  *
  * It is required to make sure that all medical record entries are linked to a {@link Visit}.
  */
-public interface MedicalRecordTransactions {
+interface MedicalRecordTransactions {
 
     MedicalRecordEntry createMedicalRecordEntry(Visit visit);
 }
