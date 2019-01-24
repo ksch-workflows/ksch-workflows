@@ -22,7 +22,7 @@ The project is built upon the following technologies:
 
 The project is split into modules with the help of [Gradle multi-project builds](https://docs.gradle.org/current/userguide/multi_project_builds.html). Each one of the domain modules consists of two sub-modules, one for the API and one for its implementation. The API defines interfaces for the domain's data objects and services which can be executed on it. The implementation specifies the business logic and persistence details with the help of Spring and other common open-source tools. The User Interface then uses the APIs specified by the various domain modules and composes the hospital workflows.
 
-When a module declares a dependency on another module it can use its API via Spring's dependency injection functionality. However, the module dependencies cannot be bi-directional. If the modules need to interact nevertheless, they can do so by using the events and the [publish-subscribe interaction model](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) which is facilitated by [Spring Application Events](https://spring.io/blog/2015/02/11/better-application-events-in-spring-framework-4-2).
+When a module declares a dependency on another module it can use its API via Spring's dependency injection functionality. However, the module dependencies cannot be bi-directional. If the modules need to interact nevertheless, they can do so by using events and the [publish-subscribe interaction model](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) which is facilitated by [Spring Application Events](https://spring.io/blog/2015/02/11/better-application-events-in-spring-framework-4-2).
 
 ![module structure](infrastructure/doc/architecture/ProjectDependencies.png)
 
