@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/ksch-workflows/ksch-workflows.svg?branch=master)](https://travis-ci.com/ksch-workflows/ksch-workflows) [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/2328/badge)](https://bestpractices.coreinfrastructure.org/projects/2328)
 
-The [Kirpal Sagar Charitable Hospital](https://kirpal-sagar.org/en/kirpal-charitable-hospital-en/) is a small hospital in Punjab, India where all people receive treatment and then pay what they can afford. It is envisioned to grow up to 500 beds and become part of a Medical College. The purpose of this project is to support that vision.
+The [Kirpal Sagar Charitable Hospital](https://kirpal-sagar.org/en/kirpal-charitable-hospital-en/) is a small hospital in [Punjab, India](https://www.google.com/maps/place/Kirpal+Sagar+Hospital/@31.02067,76.0855824,16z/data=!4m8!1m2!2m1!1skirpal+sagar!3m4!1s0x0:0xc422150834d1e3a5!8m2!3d31.0187086!4d76.0890837) where all people receive treatment and then pay what they can afford. It is envisioned to grow up to 500 beds and become part of a Medical College. The purpose of this project is to support that vision.
 
 ## Software architecture
 
@@ -20,8 +20,13 @@ The project is built upon the following technologies:
 
 ### Repository structure
 
-The system can be classified as [modular monolith](https://vimeo.com/233980163).
-In order to create a good hospital domain model and enable collaboration with contractors and occasional contributors the software is split into multiple sub-projects.
+The project is split into modules with the help of [Gradle multi-project builds](https://docs.gradle.org/current/userguide/multi_project_builds.html). Each one of the domain modules consists of two sub-modules, one for the API and one for its implementation. The API defines interfaces for the domain's data objects and services which can be executed on it. The implementation specifies the business logic and persistence details with the help of Spring and other common open-source tools. The User Interface then uses the APIs specified by the various domain modules and composes the hospital workflows.
+
+When a module declares a dependency on another module it can use its API via Spring's dependency injection functionality. However, the module dependencies cannot be bi-directional. If the modules need to interact nevertheless, they can do so by using the events and the [publish-subscribe interaction model](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) which is facilitated by [Spring Application Events](https://spring.io/blog/2015/02/11/better-application-events-in-spring-framework-4-2).
+
+![module structure](infrastructure/doc/architecture/ProjectDependencies.png)
+
+
 
 ## Development
 
