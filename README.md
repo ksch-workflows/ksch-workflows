@@ -76,6 +76,12 @@ Afterwards HTML reports are generated for each respective subproject and can be 
 find . -name "index.html" | grep "pitest"
 ```
 
+### Check for updates of dependencies
+
+```
+gradle dependencyUpdates -Drevision=release
+```
+
 ## Deployment
 
 The executable JAR file can be compiled with the following Gradle task:
@@ -95,12 +101,6 @@ The JAR file can then be copied onto the server and started like this:
 
 ```
 java -jar ksch-workflows-0.1.0-SNAPSHOT.jar
-```
-
-## Check for updates of dependencies
-
-```
-gradle dependencyUpdates -Drevision=release
 ```
 
 ## Contact information
