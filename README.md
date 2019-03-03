@@ -43,7 +43,6 @@ Please refer to the following wiki pages for explanations for configuring those 
 
 - [IntelliJ](https://github.com/ksch-workflows/ksch-workflows/wiki/Import-Project-with-IntelliJ)
 - [Eclipse](https://github.com/ksch-workflows/ksch-workflows/wiki/Import-Project-with-Eclipse)
-- [NetBeans](https://github.com/ksch-workflows/ksch-workflows/wiki/Import-Project-with-NetBeans)
 
 ### Starting the application
 
