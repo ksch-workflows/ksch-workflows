@@ -38,7 +38,7 @@ The project uses the JDK 8. Here are some hints for the installation of the Java
 - [Windows](https://github.com/ksch-workflows/ksch-workflows/wiki/Installing-Java-on-Windows)
 - [MacOS](https://github.com/ksch-workflows/ksch-workflows/wiki/Installing-Java-on-MacOS)
 
-For the development environment IntelliJ, Eclipse, and Netbeans are supported.
+For the development environment IntelliJ and Eclipse are supported.
 Please refer to the following wiki pages for explanations for configuring those IDEs for this project:
 
 - [IntelliJ](https://github.com/ksch-workflows/ksch-workflows/wiki/Import-Project-with-IntelliJ)
