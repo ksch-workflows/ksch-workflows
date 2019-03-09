@@ -2,6 +2,7 @@ package ksch.patientmanagement.visit;
 
 import ksch.patientmanagement.patient.Patient;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,6 +16,8 @@ public interface VisitQueries {
     boolean isActive(Patient patient);
 
     Optional<Visit> getActiveVisit(Patient patient);
+
+    List<Visit> getAllActiveOptVisits();
 
     Patient getPatient(UUID visitId);
 }

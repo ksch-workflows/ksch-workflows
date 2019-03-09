@@ -8,7 +8,7 @@ public interface PatientTransactions {
     Patient create(Patient patient);
 
     /**
-     * Notifies the system about changes in the patient details.
+     * Persists changes in the patient details.
      */
     void update(Patient patient);
 }

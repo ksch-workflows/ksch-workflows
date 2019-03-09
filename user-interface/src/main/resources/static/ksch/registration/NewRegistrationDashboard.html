@@ -39,8 +39,8 @@
             </button>
         </div>
         <div class="col-md-7">
-            <form wicket:id="openPatientDetails" class="form-inline float-right">
-                <input wicket:id="optNumber" type="text" class="optNumberInput form-control" placeholder="OPD number">
+            <form class="form-inline float-right">
+                <input type="text" class="optNumberInput form-control" placeholder="OPD number">
                 <input class="btn btn-outline-secondary" type="submit" value="Open patient details"/>
             </form>
         </div>
@@ -87,45 +87,61 @@
         </div>
     </div>
 
-    <div>
-        <table class="table without-top-border table-striped" >
-            <thead>
-            <tr>
-                <th scope="col">OPT No.</th>
-                <th scope="col">Name</th>
-                <th scope="col">Location</th>
-                <th scope="col">Age</th>
-                <th scope="col">Department</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">053452</th>
-                <td>Jvalitri Mandhatri, d/o Ravindra Kodanda</td>
-                <td>Vrindavan</td>
-                <td>44</td>
-                <td>Physiotherapy</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">053453</th>
-                <td>Mathur Tanuja, s/o Akrodhana Kalirai</td>
-                <td>Rahon</td>
-                <td>26</td>
-                <td>TBD</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">053454</th>
-                <td>Kancanabha Nithin, d/o Javeed Sarath</td>
-                <td>Academy</td>
-                <td>12</td>
-                <td>TBD</td>
-                <td></td>
-            </tr>
-            </tbody>
-        </table>
+    <div wicket:id="activeOpdPatientVisits" class="row">
+        <div class="col-md-12">
+            <table class="table table-striped without-top-border" >
+                <thead>
+                <tr>
+                    <th scope="col">OPD No.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Age</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr wicket:id="opdPatients">
+                        <td wicket:id="opdNumber">[opd number]</td>
+                        <td wicket:id="name">[name]</td>
+                        <td wicket:id="location">[location]</td>
+                        <td wicket:id="age">[age]</td>
+                        <td class="float-right">
+                            <a wicket:id="openPatientDetails" href="/registration/edit-patient" class="btn btn-outline-secondary">Open details</a>
+                        </td>
+                    </tr>
+                    <wicket:remove>
+                        <tr>
+                            <td scope="row">053452</td>
+                            <td>Jvalitri Mandhatri, d/o Ravindra Kodanda</td>
+                            <td>Vrindavan</td>
+                            <td>44</td>
+                            <td class="float-right">
+                                <a href="/registration/edit-patient" class="btn btn-outline-secondary">Open details</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row">053453</td>
+                            <td>Mathur Tanuja, s/o Akrodhana Kalirai</td>
+                            <td>Rahon</td>
+                            <td>26</td>
+                            <td class="float-right">
+                                <a href="/registration/edit-patient" class="btn btn-outline-secondary">Open details</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row">053454</td>
+                            <td>Kancanabha Nithin, d/o Javeed Sarath</td>
+                            <td>Academy</td>
+                            <td>12</td>
+                            <td class="float-right">
+                                <a href="/registration/edit-patient" class="btn btn-outline-secondary">Open details</a>
+                            </td>
+                        </tr>
+                    </wicket:remove>
+                </tbody>
+
+            </table>
+        </div>
     </div>
 
 </wicket:panel>

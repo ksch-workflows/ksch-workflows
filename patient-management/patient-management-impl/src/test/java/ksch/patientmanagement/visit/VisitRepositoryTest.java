@@ -47,10 +47,24 @@ public class VisitRepositoryTest {
         assertEquals(1, retrievedVisits.size());
     }
 
+    @Test
+    public void should_find_all_active_opt_visits() {
+        createNewVisit(createTestPatient("KSA-124", "John Doe"), VisitType.OPD);
+        createNewVisit(createTestPatient("KSA-125", "Jane Doe"), VisitType.IPD);
+
+        List<VisitEntity> allActiveOptVisits = visitRepository.findAllActiveOptVisits();
+
+        assertEquals(1, allActiveOptVisits.size());
+    }
+
     private VisitEntity createNewVisit(PatientEntity patient) {
+        return createNewVisit(patient, VisitType.OPD);
+    }
+
+    private VisitEntity createNewVisit(PatientEntity patient, VisitType visitType) {
         VisitEntity visit = VisitEntity.builder()
                 .patient(patient)
-                .type(VisitType.OPD)
+                .type(visitType)
                 .timeStart(LocalDateTime.now())
                 .build();
 
