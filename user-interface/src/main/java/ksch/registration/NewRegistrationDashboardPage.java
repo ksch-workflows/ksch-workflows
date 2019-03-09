@@ -4,6 +4,7 @@ import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.visit.Visit;
 import ksch.patientmanagement.visit.VisitQueries;
+import lombok.Getter;
 import model.PatientResource;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -19,6 +20,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.wicketstuff.annotation.mount.MountPath;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -57,22 +59,21 @@ class NewRegistrationDashboard extends Panel {
     private WebMarkupContainer createOptPatientList() {
         patientListContainer = new WebMarkupContainer("activeOpdPatientVisits");
 
-        List<PatientResource> activeOptVisits = visitQueries.getAllActiveOptVisits().stream()
-                .map(Visit::getPatient)
-                .map(PatientResource::toPatientResource)
+        List<OptPatientVisitRow> activeOptVisits = visitQueries.getAllActiveOptVisits().stream()
+                .map(OptPatientVisitRow::new)
                 .collect(toList());
 
-        ListView lv = new ListView<PatientResource>("opdPatients", activeOptVisits) {
+        ListView lv = new ListView<OptPatientVisitRow>("opdPatients", activeOptVisits) {
             @Override
-            protected void populateItem(ListItem<PatientResource> item) {
-                Patient patient = item.getModelObject();
+            protected void populateItem(ListItem<OptPatientVisitRow> item) {
+                OptPatientVisitRow rowData = item.getModelObject();
 
-                item.add(new Label("opdNumber", patient.getPatientNumber()));
-                item.add(new Label("name", patient.getName()));
-                item.add(new Label("location", patient.getGender()));
-                item.add(new Label("age", patient.getGender()));
+                item.add(new Label("opdNumber", rowData.getOpdNumber()));
+                item.add(new Label("name", rowData.getName()));
+                item.add(new Label("location", rowData.getLocation()));
+                item.add(new Label("age", rowData.getAge()));
 
-                item.add(new ExternalLink("openPatientDetails", "/registration/edit-patient/" + patient.getId()));
+                item.add(new ExternalLink("openPatientDetails", "/registration/edit-patient/" + rowData.getPatientId()));
             }
         };
 
@@ -80,6 +81,26 @@ class NewRegistrationDashboard extends Panel {
 
 
         return patientListContainer;
+    }
+
+    @Getter
+    class OptPatientVisitRow implements Serializable {
+
+        final UUID patientId;
+        final String opdNumber;
+        final String name;
+        final String location;
+        final Integer age;
+
+        public OptPatientVisitRow(Visit visit) {
+            Patient patient = visit.getPatient();
+
+            patientId = patient.getId();
+            opdNumber = visit.getId().toString();
+            name = patient.getName();
+            location = patient.getAddress();
+            age = patient.getAgeInYears();
+        }
     }
 
     class OpenPatientDetails extends Form<OpenPatientDetails> {

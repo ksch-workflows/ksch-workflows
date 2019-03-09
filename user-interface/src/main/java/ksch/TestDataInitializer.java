@@ -36,7 +36,7 @@ public class TestDataInitializer implements ApplicationRunner {
         log.info("Initializing test data");
 
         Patient testPatient = patientTransactions.create(new TestPatient());
-        visitTransactions.startVisit(testPatient, VisitType.IPD);
+        visitTransactions.startVisit(testPatient, VisitType.OPD);
     }
 }
 
