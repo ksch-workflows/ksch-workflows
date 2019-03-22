@@ -23,7 +23,7 @@ See https://martinfowler.com/articles/practical-test-pyramid.html
 
 ## Code style
 
-The code style for this project is specified in the [checkstyle.xml](https://github.com/ksch-workflows/ksch-workflows/blob/master/config/checkstyle/checkstyle.xml) file.
+The code style for this project is specified in the [checkstyle.xml](hhttps://github.com/ksch-workflows/ksch-workflows/blob/master/.checkstyle.xml) file.
 
 During the build process the following Gradle tasks verify whether the source code complies with those rules:
 
