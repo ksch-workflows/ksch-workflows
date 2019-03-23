@@ -26,13 +26,11 @@ When a module declares a dependency on another module it can use its API via Spr
 
 ![module structure](infrastructure/doc/architecture/ProjectDependencies.png)
 
-
-
 ## Development
 
 ### Dependencies
 
-The project uses the JDK 8. Here are some hints for the installation of the Java Development Kit:
+The project uses the JDK 11. Here are some hints for the installation of the Java Development Kit:
 
 - [Ubuntu](https://github.com/ksch-workflows/ksch-workflows/wiki/Installing-Java-on-Ubuntu)
 - [Windows](https://github.com/ksch-workflows/ksch-workflows/wiki/Installing-Java-on-Windows)

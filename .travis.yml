@@ -1,13 +1,12 @@
 sudo: required
 os: linux
+jdk: openjdk11
 
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install --assume-yes --quiet openjdk-8-jdk
   - curl -s http://get.sdkman.io | bash
   - echo sdkman_auto_answer=true > ~/.sdkman/etc/config
   - source "/home/travis/.sdkman/bin/sdkman-init.sh"
-  - sdk install gradle 4.7
+  - sdk install gradle 5.3
 
 script:
 - gradle build
