@@ -81,6 +81,12 @@ find . -name "index.html" | grep "pitest"
 gradle dependencyUpdates -Drevision=release
 ```
 
+Get an overview over transitive dependencies:
+
+```
+gradle dependencyTree
+```
+
 ## Deployment
 
 The executable JAR file can be compiled with the following Gradle task:

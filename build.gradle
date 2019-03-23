@@ -4,21 +4,21 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.3.0'
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.4.0'
     }
 }
 
 plugins {
-    id "io.spring.dependency-management" version "1.0.6.RELEASE"
-    id "com.github.ben-manes.versions" version "0.20.0"
+    id "io.spring.dependency-management" version "1.0.7.RELEASE"
+    id "com.github.ben-manes.versions" version "0.21.0"
 }
 
 ext {
-    guavaVersion = '27.0.1-jre'
+    guavaVersion = '27.1-jre'
     jaxbApiVersion = '2.3.1'
     junitVersion = '4.12'
-    lombokVersion = '1.18.4'
-    springBootVersion = '2.1.2.RELEASE'
+    lombokVersion = '1.18.6'
+    springBootVersion = '2.1.3.RELEASE'
 }
 
 allprojects  {
@@ -52,6 +52,8 @@ subprojects {
     checkstyle {
         configFile = rootProject.file('.checkstyle.xml')
     }
+
+    task dependencyTree(type: DependencyReportTask) {}
 }
 
 configure(subprojects.findAll { !it.name.endsWith('-api')} ) {

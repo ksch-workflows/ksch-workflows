@@ -10,8 +10,11 @@ buildscript {
     }
 }
 
-apply plugin: "org.springframework.boot"
+ext {
+    wicketVersion = '8.3.0'
+}
 
+apply plugin: "org.springframework.boot"
 
 sourceSets.main.resources {
     srcDir "src/main/resources/static"
@@ -24,7 +27,11 @@ dependencies {
 
     compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.5'
     compile 'org.springframework.boot:spring-boot-starter-security'
-    compile 'org.wicketstuff:wicketstuff-annotation:8.2.0'
+    
+    compile "org.apache.wicket:wicket-auth-roles:${wicketVersion}"
+    compile "org.apache.wicket:wicket-ioc:${wicketVersion}"
+    compile "org.apache.wicket:wicket-spring:${wicketVersion}"
+    compile "org.wicketstuff:wicketstuff-annotation:${wicketVersion}"
 }
 
 bootRun.systemProperties = System.properties as Map<String, ?>
