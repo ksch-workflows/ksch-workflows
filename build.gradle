@@ -36,15 +36,17 @@ subprojects {
     apply plugin: 'checkstyle'
     apply plugin: 'java-library'
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = 11
+    targetCompatibility = 11
 
     tasks.withType(JavaCompile) {
         options.encoding = 'UTF-8'
     }
 
     dependencies {
+        annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
         compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
         testCompile "org.projectlombok:lombok:${lombokVersion}"
         testCompile "junit:junit:${junitVersion}"
     }
