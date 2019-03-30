@@ -75,12 +75,15 @@
                         </button>
                     </div>
 
-                    <!-- TODO Apply modal dialog details from "RegisterPatientActivity.html" -->
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
+                    <form wicket:id="addPatientForm" class="needs-validation" novalidate>
+                        <div wicket:id="patientFormFields" class="modal-body">
+                            [patient form fields]
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 

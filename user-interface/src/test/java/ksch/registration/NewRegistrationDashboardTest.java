@@ -8,6 +8,7 @@ import ksch.patientmanagement.visit.VisitType;
 import ksch.testdata.TestPatient;
 import ksch.util.CustomAssertions;
 import ksch.util.HtmlAssertions;
+import org.apache.wicket.util.tester.FormTester;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,21 @@ public class NewRegistrationDashboardTest extends WebPageTest {
         tester.assertRenderedPage(NewRegistrationDashboardPage.class);
 
         tester.assertContains(patient.getName());
+    }
+
+    @Test
+    public void should_register_new_patient() {
+        tester.startPage(NewRegistrationDashboardPage.class);
+
+        FormTester formTester = tester.newFormTester("content:addPatientForm", false);
+        formTester.setValue("patientFormFields:inputName", "Ravindra Kodanda");
+        formTester.setValue("patientFormFields:inputNameFather", "Javeed Sarath");
+        formTester.select("patientFormFields:inputGender", 0);
+        formTester.setValue("patientFormFields:inputDateOfBirth", "27-07-2000");
+        formTester.setValue("patientFormFields:inputAddress", "Kirpal Sagar");
+        formTester.submit();
+
+        tester.assertRenderedPage(EditPatientDetailsPage.class);
     }
 
     @Test

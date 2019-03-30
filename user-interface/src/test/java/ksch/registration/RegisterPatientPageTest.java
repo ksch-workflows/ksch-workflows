@@ -87,6 +87,7 @@ public class RegisterPatientPageTest extends WebPageTest {
                 tester.getLastResponseAsString().contains("<th scope=\"col\">No.</th>"));
     }
 
+    @Deprecated
     @Test
     public void should_add_new_patient() {
         tester.startPage(RegisterPatientPage.class);
