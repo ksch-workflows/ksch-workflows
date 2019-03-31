@@ -20,13 +20,11 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.flow.RedirectToUrlException;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.wicketstuff.annotation.mount.MountPath;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static ksch.ApplicationFrame.MAIN_CONTENT_ID;
@@ -59,7 +57,7 @@ class NewRegistrationDashboard extends Panel {
     public NewRegistrationDashboard() {
         super(MAIN_CONTENT_ID);
 
-        add(createOptPatientList());
+        add(createOpdPatientList());
         add(createEmptyOpdPatientListMessage());
         add(new AddPatientForm());
         add(new OpenPatientDetails());
@@ -81,7 +79,7 @@ class NewRegistrationDashboard extends Panel {
         return result;
     }
 
-    private WebMarkupContainer createOptPatientList() {
+    private WebMarkupContainer createOpdPatientList() {
         patientListContainer = new WebMarkupContainer("activeOpdPatientVisits");
 
         List<OptPatientVisitRow> activeOptVisits = visitQueries.getAllActiveOptVisits().stream()
