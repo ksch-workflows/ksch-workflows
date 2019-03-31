@@ -62,8 +62,6 @@
         </div>
     </div>
 
-    <!-- TODO Show message "There are currently no active OPD visits." if there are no known OPD visits. -->
-
     <div id="registerPatientDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="registerPatientDialogLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-dialog modal-lg" role="document">
@@ -144,6 +142,12 @@
                 </tbody>
 
             </table>
+        </div>
+    </div>
+
+    <div wicket:id="noActiveOpdPatientVisits" class="row">
+        <div class="col-md-12">
+            <p>There are no registered OPD patients.</p>
         </div>
     </div>
 

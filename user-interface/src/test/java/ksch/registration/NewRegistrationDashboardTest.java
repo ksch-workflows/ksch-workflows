@@ -2,13 +2,16 @@ package ksch.registration;
 
 import ksch.WebPageTest;
 import ksch.patientmanagement.patient.Patient;
+import ksch.patientmanagement.patient.PatientRepository;
 import ksch.patientmanagement.patient.PatientTransactions;
+import ksch.patientmanagement.visit.VisitRepository;
 import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
 import ksch.testdata.TestPatient;
 import ksch.util.CustomAssertions;
 import ksch.util.HtmlAssertions;
 import org.apache.wicket.util.tester.FormTester;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +22,23 @@ public class NewRegistrationDashboardTest extends WebPageTest {
     private PatientTransactions patientTransactions;
 
     @Autowired
+    private PatientRepository patientRepository;
+
+    @Autowired
+    private VisitRepository visitRepository;
+
+    @Autowired
     private VisitTransactions visitTransactions;
 
     @Before
     public void setup() {
         login("user", "pwd");
+    }
+
+    @After
+    public void tearDown() {
+        visitRepository.deleteAll();
+        patientRepository.deleteAll();
     }
 
     @Test
@@ -41,6 +56,7 @@ public class NewRegistrationDashboardTest extends WebPageTest {
         tester.assertRenderedPage(NewRegistrationDashboardPage.class);
 
         tester.assertContains(patient.getName());
+        tester.assertContainsNot("There are no registered OPD patients.");
     }
 
     @Test
@@ -60,7 +76,10 @@ public class NewRegistrationDashboardTest extends WebPageTest {
 
     @Test
     public void should_render_message_instead_of_opt_patient_table_if_no_active_opt_visits() {
+        tester.startPage(NewRegistrationDashboardPage.class);
+        tester.assertRenderedPage(NewRegistrationDashboardPage.class);
 
+        tester.assertContains("There are no registered OPD patients.");
     }
 
     @Test

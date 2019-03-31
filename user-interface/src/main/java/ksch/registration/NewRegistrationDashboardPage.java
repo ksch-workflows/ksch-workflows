@@ -60,8 +60,25 @@ class NewRegistrationDashboard extends Panel {
         super(MAIN_CONTENT_ID);
 
         add(createOptPatientList());
+        add(createEmptyOpdPatientListMessage());
         add(new AddPatientForm());
         add(new OpenPatientDetails());
+    }
+
+    private WebMarkupContainer createEmptyOpdPatientListMessage() {
+        if (patientListContainer == null) {
+            throw new IllegalStateException("This method needs to be called after the evaluation of the patient list container.");
+        }
+
+        WebMarkupContainer result = new WebMarkupContainer("noActiveOpdPatientVisits");
+
+        if (patientListContainer.isVisible()) {
+            result.setVisible(false);
+        } else {
+            result.setVisible(true);
+        }
+
+        return result;
     }
 
     private WebMarkupContainer createOptPatientList() {
@@ -86,6 +103,10 @@ class NewRegistrationDashboard extends Panel {
         };
 
         patientListContainer.add(lv);
+
+        if (activeOptVisits.isEmpty()) {
+            patientListContainer.setVisible(false);
+        }
 
         return patientListContainer;
     }
