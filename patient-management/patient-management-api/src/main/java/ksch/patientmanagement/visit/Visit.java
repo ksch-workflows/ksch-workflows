@@ -9,6 +9,8 @@ public interface Visit {
 
     UUID getId();
 
+    String getOpdNumber();
+
     Patient getPatient();
 
     VisitType getType();

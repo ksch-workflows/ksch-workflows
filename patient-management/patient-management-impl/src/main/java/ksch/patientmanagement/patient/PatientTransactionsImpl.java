@@ -20,7 +20,7 @@ public class PatientTransactionsImpl implements PatientTransactions {
     public Patient create(Patient patient) {
         PatientEntity patientEntity = toPatientEntity(patient);
         if (patient.getPatientNumber() == null) {
-            patientEntity.setPatientNumber(patientNumberGenerator.generatePatientNumber());
+            patientEntity.setPatientNumber(patientNumberGenerator.generateOpdNumber());
         }
         patientEntity = patientRepository.save(patientEntity);
         eventPublisher.publishEvent(new PatientCreatedEvent(patientEntity));

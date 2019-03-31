@@ -26,6 +26,8 @@ public class PatientNumberGeneratorTest {
 
     private final int currentYearWithTwoDigits = Calendar.getInstance().get(Calendar.YEAR) % 100;
 
+    // TODO OPD numbers should have format: e.g. 082414
+
     @Before
     public void setup() {
         when(patientNumberIndexRepository.save(any(PatientNumberIndex.class)))
@@ -34,7 +36,7 @@ public class PatientNumberGeneratorTest {
 
     @Test
     public void should_prepend_year() {
-        String generatedPatientNumber = patientNumberGenerator.generatePatientNumber();
+        String generatedPatientNumber = patientNumberGenerator.generateOpdNumber();
 
         assertTrue("Generated patient number '" + generatedPatientNumber + "' doesn't start with current year",
                 generatedPatientNumber.startsWith(currentYearWithTwoDigits + "-"));
@@ -42,7 +44,7 @@ public class PatientNumberGeneratorTest {
 
     @Test
     public void should_contain_patient_index_number() {
-        String generatedPatientNumber = patientNumberGenerator.generatePatientNumber();
+        String generatedPatientNumber = patientNumberGenerator.generateOpdNumber();
 
         assertTrue("Generated patient number '" + generatedPatientNumber +
                         "' doesn't contain the patient index number '" + PATIENT_INDEX_NUMBER + "'.",

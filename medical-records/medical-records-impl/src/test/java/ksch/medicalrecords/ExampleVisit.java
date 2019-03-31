@@ -15,6 +15,11 @@ public class ExampleVisit implements Visit {
     }
 
     @Override
+    public String getOpdNumber() {
+        return "0815";
+    }
+
+    @Override
     public Patient getPatient() {
         return null;
     }

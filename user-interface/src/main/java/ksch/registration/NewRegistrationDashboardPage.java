@@ -87,7 +87,6 @@ class NewRegistrationDashboard extends Panel {
 
         patientListContainer.add(lv);
 
-
         return patientListContainer;
     }
 
@@ -95,16 +94,20 @@ class NewRegistrationDashboard extends Panel {
     class OptPatientVisitRow implements Serializable {
 
         final UUID patientId;
+
         final String opdNumber;
+
         final String name;
+
         final String location;
+
         final Integer age;
 
         public OptPatientVisitRow(Visit visit) {
             Patient patient = visit.getPatient();
 
             patientId = patient.getId();
-            opdNumber = visit.getId().toString();
+            opdNumber = visit.getOpdNumber();
             name = patient.getName();
             location = patient.getAddress();
             age = patient.getAgeInYears();

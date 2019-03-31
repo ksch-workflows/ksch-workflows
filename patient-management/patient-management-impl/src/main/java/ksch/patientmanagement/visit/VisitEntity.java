@@ -33,6 +33,9 @@ public class VisitEntity implements Visit {
     @Column(unique = true)
     private UUID id;
 
+    @Column
+    private String opdNumber;
+
     @OneToOne
     private PatientEntity patient;
 

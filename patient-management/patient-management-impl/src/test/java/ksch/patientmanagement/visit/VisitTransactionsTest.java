@@ -33,8 +33,12 @@ public class VisitTransactionsTest {
         Visit visit = visitTransactions.startVisit(patient, VisitType.IPD);
         boolean hasActiveVisit = visitQueries.isActive(patient);
 
-        assertTrue("Patient has no active visit even though it has just been started", hasActiveVisit);
-        assertNotNull("Database did not generate a primariy key for the database record for the visit", visit.getId());
+        assertTrue("Patient has no active visit even though it has just been started.",
+                hasActiveVisit);
+        assertNotNull("Database did not generate a primariy key for the database record for the visit.",
+                visit.getId());
+        assertNotNull("OPD number for the visit wasn't created.",
+                visit.getOpdNumber());
     }
 
     @Test
