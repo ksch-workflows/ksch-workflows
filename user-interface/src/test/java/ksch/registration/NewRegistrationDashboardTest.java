@@ -4,6 +4,7 @@ import ksch.WebPageTest;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientRepository;
 import ksch.patientmanagement.patient.PatientTransactions;
+import ksch.patientmanagement.visit.Visit;
 import ksch.patientmanagement.visit.VisitRepository;
 import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
@@ -22,23 +23,11 @@ public class NewRegistrationDashboardTest extends WebPageTest {
     private PatientTransactions patientTransactions;
 
     @Autowired
-    private PatientRepository patientRepository;
-
-    @Autowired
-    private VisitRepository visitRepository;
-
-    @Autowired
     private VisitTransactions visitTransactions;
 
     @Before
     public void setup() {
         login("user", "pwd");
-    }
-
-    @After
-    public void tearDown() {
-        visitRepository.deleteAll();
-        patientRepository.deleteAll();
     }
 
     @Test
@@ -84,7 +73,16 @@ public class NewRegistrationDashboardTest extends WebPageTest {
 
     @Test
     public void should_open_patient_details_by_entering_opt_number() {
+        Patient patient = patientTransactions.create(new TestPatient());
+        Visit visit = visitTransactions.startVisit(patient, VisitType.OPD);
+        tester.startPage(NewRegistrationDashboardPage.class);
 
+        FormTester formTester = tester.newFormTester("content:opdPatientForm", false);
+        formTester.setValue("opdNumber", visit.getOpdNumber());
+        formTester.submit();
+
+        tester.assertRenderedPage(EditPatientDetailsPage.class);
+        tester.assertContains(patient.getName());
     }
 
     @Test

@@ -2,11 +2,14 @@ package ksch;
 
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
 import ksch.patientmanagement.patient.Patient;
+import ksch.patientmanagement.patient.PatientRepository;
 import ksch.patientmanagement.patient.PatientTransactions;
+import ksch.patientmanagement.visit.VisitRepository;
 import ksch.testdata.TestPatient;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +37,22 @@ public abstract class WebPageTest {
     @Autowired
     private PatientTransactions patientTransactions;
 
+    @Autowired
+    private PatientRepository patientRepository;
+
+    @Autowired
+    private VisitRepository visitRepository;
+
     @Before
     public void setUp() {
         ReflectionTestUtils.setField(wicketApplication, "applicationContext", applicationContextMock);
         tester = new WicketTester(wicketApplication);
+    }
+
+    @After
+    public void resetDatabase() {
+        visitRepository.deleteAll();
+        patientRepository.deleteAll();
     }
 
     protected void login(String username, String password) {

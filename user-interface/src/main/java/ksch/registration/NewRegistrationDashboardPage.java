@@ -24,7 +24,9 @@ import org.wicketstuff.annotation.mount.MountPath;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static ksch.ApplicationFrame.MAIN_CONTENT_ID;
@@ -60,6 +62,7 @@ class NewRegistrationDashboard extends Panel {
         add(createOpdPatientList());
         add(createEmptyOpdPatientListMessage());
         add(new AddPatientForm());
+        add(new OpenOpdPatientForm());
         add(new OpenPatientDetails());
     }
 
@@ -176,6 +179,28 @@ class NewRegistrationDashboard extends Panel {
             UUID patientId = patientTransactions.create(patient).getId();
 
             throw new RedirectToUrlException("/registration/edit-patient/" + patientId);
+        }
+    }
+
+    class OpenOpdPatientForm extends Form<OpenOpdPatientForm> {
+
+        private String opdNumber;
+
+        public OpenOpdPatientForm() {
+            super("opdPatientForm");
+
+            setModel(new CompoundPropertyModel<>(this));
+
+            add(new TextField<>("opdNumber"));
+        }
+
+        @Override
+        protected void onSubmit() {
+            Optional<Visit> visit = visitQueries.findByOpdNumber(opdNumber);
+            if (visit.isPresent()) {
+                UUID patientId = visit.get().getPatient().getId();
+                throw new RedirectToUrlException("/registration/edit-patient/" + patientId);
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -16,4 +17,6 @@ public interface VisitRepository extends CrudRepository<VisitEntity, UUID> {
 
     @Query("Select v from VisitEntity v where v.timeEnd is null and v.type = 'OPD'")
     List<VisitEntity> findAllActiveOptVisits();
+
+    Optional<Visit> findByOpdNumber(String opdNumber);
 }

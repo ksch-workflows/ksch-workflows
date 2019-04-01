@@ -39,8 +39,8 @@
             </button>
         </div>
         <div class="col-md-7">
-            <form class="form-inline float-right">
-                <input type="text" class="optNumberInput form-control" placeholder="OPD number">
+            <form wicket:id="opdPatientForm" class="form-inline float-right">
+                <input wicket:id="opdNumber" type="text" class="patientSearchTerm form-control" placeholder="OPD number">
                 <input class="btn btn-outline-secondary" type="submit" value="Open patient details"/>
             </form>
         </div>
@@ -107,7 +107,7 @@
                         <td wicket:id="location">[location]</td>
                         <td wicket:id="age">[age]</td>
                         <td class="float-right">
-                            <a wicket:id="openPatientDetails" href="/registration/edit-patient" class="btn btn-outline-secondary">Open details</a>
+                            <a wicket:id="openPatientDetails" href="/registration/edit-patient" class="btn btn-outline-secondary">Open patient details</a>
                         </td>
                     </tr>
                     <wicket:remove>
@@ -117,7 +117,7 @@
                             <td>Vrindavan</td>
                             <td>44</td>
                             <td class="float-right">
-                                <a href="/registration/edit-patient" class="btn btn-outline-secondary">Open details</a>
+                                <a href="/registration/edit-patient" class="btn btn-outline-secondary">Open patient details</a>
                             </td>
                         </tr>
                         <tr>
@@ -126,7 +126,7 @@
                             <td>Rahon</td>
                             <td>26</td>
                             <td class="float-right">
-                                <a href="/registration/edit-patient" class="btn btn-outline-secondary">Open details</a>
+                                <a href="/registration/edit-patient" class="btn btn-outline-secondary">Open patient details</a>
                             </td>
                         </tr>
                         <tr>
@@ -135,7 +135,7 @@
                             <td>Academy</td>
                             <td>12</td>
                             <td class="float-right">
-                                <a href="/registration/edit-patient" class="btn btn-outline-secondary">Open details</a>
+                                <a href="/registration/edit-patient" class="btn btn-outline-secondary">Open patient details</a>
                             </td>
                         </tr>
                     </wicket:remove>

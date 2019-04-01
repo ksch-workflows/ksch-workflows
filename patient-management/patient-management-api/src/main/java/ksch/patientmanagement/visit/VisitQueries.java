@@ -20,4 +20,6 @@ public interface VisitQueries {
     List<Visit> getAllActiveOptVisits();
 
     Patient getPatient(UUID visitId);
+
+    Optional<Visit> findByOpdNumber(String opdNumber);
 }

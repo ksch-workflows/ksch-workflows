@@ -57,4 +57,9 @@ public class VisitQueriesImpl implements VisitQueries {
                 .orElseThrow(() -> new DatabaseRecordNotFoundException(visitId, VisitEntity.class));
         return visit.getPatient();
     }
+
+    @Override
+    public Optional<Visit> findByOpdNumber(String opdNumber) {
+        return visitRepository.findByOpdNumber(opdNumber);
+    }
 }

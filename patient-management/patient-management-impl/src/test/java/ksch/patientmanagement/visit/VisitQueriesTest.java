@@ -43,6 +43,16 @@ public class VisitQueriesTest {
     }
 
     @Test
+    public void should_retrieve_visit_entity_by_opd_number() {
+        Patient patient = createTestPatient();
+        Visit visit = visitTransactions.startVisit(patient, VisitType.IPD);
+
+        Optional<Visit> retrievedVisit = visitQueries.findByOpdNumber(visit.getOpdNumber());
+
+        assertTrue("Could not retrieve existing Visit entity by OPD number.", retrievedVisit.isPresent());
+    }
+
+    @Test
     public void should_not_be_active_for_new_patient() {
         Patient patient = createTestPatient();
 
