@@ -114,6 +114,15 @@ The JAR file can then be copied onto the server and started like this:
 java -jar ksch-workflows-0.1.0-SNAPSHOT.jar
 ```
 
+### Build Docker image
+
+```
+docker build --tag expsoftware/ksch-workflows .
+docker push expsoftware/ksch-workflows
+
+docker run -p 80:8080 expsoftware/ksch-workflows
+```
+
 ## Contact information
 
 If you have any question or idea, please join this chat room and post it there:
