@@ -45,7 +45,7 @@ public class VisitQueriesImpl implements VisitQueries {
     }
 
     @Override
-    public List<Visit> getAllActiveOptVisits() {
+    public List<Visit> getAllActiveOpdVisits() {
         return visitRepository.findAllActiveOptVisits().stream()
                 .map(e -> (Visit) e)
                 .collect(toList());

@@ -26,24 +26,22 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static ksch.ApplicationFrame.MAIN_CONTENT_ID;
 import static util.Time.parseDate;
 
-@MountPath("/registration-new")
+@MountPath("/registration")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
-// TODO Remove "new" from class name before merge
-public class NewRegistrationDashboardPage extends RegistrationPage {
+public class RegistrationDashboardPage extends RegistrationPage {
 
     @Override
     protected Panel getContent() {
-        return new NewRegistrationDashboard();
+        return new RegistrationDashboard();
     }
 }
 
-class NewRegistrationDashboard extends Panel {
+class RegistrationDashboard extends Panel {
 
     @SpringBean
     private PatientQueries patientQueries;
@@ -56,14 +54,13 @@ class NewRegistrationDashboard extends Panel {
 
     private WebMarkupContainer patientListContainer;
 
-    public NewRegistrationDashboard() {
+    public RegistrationDashboard() {
         super(MAIN_CONTENT_ID);
 
         add(createOpdPatientList());
         add(createEmptyOpdPatientListMessage());
         add(new AddPatientForm());
         add(new OpenOpdPatientForm());
-        add(new OpenPatientDetails());
     }
 
     private WebMarkupContainer createEmptyOpdPatientListMessage() {
@@ -85,7 +82,7 @@ class NewRegistrationDashboard extends Panel {
     private WebMarkupContainer createOpdPatientList() {
         patientListContainer = new WebMarkupContainer("activeOpdPatientVisits");
 
-        List<OptPatientVisitRow> activeOptVisits = visitQueries.getAllActiveOptVisits().stream()
+        List<OptPatientVisitRow> activeOptVisits = visitQueries.getAllActiveOpdVisits().stream()
                 .map(OptPatientVisitRow::new)
                 .collect(toList());
 
@@ -136,24 +133,6 @@ class NewRegistrationDashboard extends Panel {
         }
     }
 
-    class OpenPatientDetails extends Form<OpenPatientDetails> {
-
-        private String optNumber;
-
-        public OpenPatientDetails() {
-            super("openPatientDetails");
-
-            setModel(new CompoundPropertyModel<>(this));
-
-            add(new TextField<>("optNumber"));
-        }
-
-        @Override
-        protected void onSubmit() {
-            throw new RuntimeException("Not implemented yet.");
-        }
-    }
-
     class AddPatientForm extends Form<Void> {
 
         private final PatientFormFields patientFormFields;
@@ -200,6 +179,9 @@ class NewRegistrationDashboard extends Panel {
             if (visit.isPresent()) {
                 UUID patientId = visit.get().getPatient().getId();
                 throw new RedirectToUrlException("/registration/edit-patient/" + patientId);
+            } else {
+                // TODO open dialog with message that patient with this number can't be found
+                opdNumber = "";
             }
         }
     }

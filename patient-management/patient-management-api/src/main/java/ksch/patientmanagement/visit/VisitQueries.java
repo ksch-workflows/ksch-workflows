@@ -17,7 +17,7 @@ public interface VisitQueries {
 
     Optional<Visit> getActiveVisit(Patient patient);
 
-    List<Visit> getAllActiveOptVisits();
+    List<Visit> getAllActiveOpdVisits();
 
     Patient getPatient(UUID visitId);
 
