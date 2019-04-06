@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 
 import static util.Time.parseDate;
 
+@Deprecated
 public class RegisterPatientActivity extends Activity {
 
     private WebMarkupContainer patientListContainer;

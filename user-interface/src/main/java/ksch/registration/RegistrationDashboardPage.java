@@ -180,7 +180,6 @@ class RegistrationDashboard extends Panel {
                 UUID patientId = visit.get().getPatient().getId();
                 throw new RedirectToUrlException("/registration/edit-patient/" + patientId);
             } else {
-                // TODO open dialog with message that patient with this number can't be found
                 opdNumber = "";
             }
         }

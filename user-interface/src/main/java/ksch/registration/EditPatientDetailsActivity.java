@@ -153,7 +153,6 @@ public class EditPatientDetailsActivity extends Activity {
 
         @Override
         protected void onSubmit() {
-            // TODO Visit should be started directly after the patient registration
             visitTransactions.startVisit(patient, VisitType.valueOf(visitType));
 
             startVisitButton.setVisible(false);

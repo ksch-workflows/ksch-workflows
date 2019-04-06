@@ -79,9 +79,4 @@ public class RegistrationDashboardTest extends WebPageTest {
         tester.assertRenderedPage(EditPatientDetailsPage.class);
         tester.assertContains(patient.getName());
     }
-
-    @Test
-    public void should_open_patient_details_by_click_in_opt_patients_table() {
-
-    }
 }

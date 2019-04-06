@@ -7,6 +7,7 @@ import org.wicketstuff.annotation.mount.MountPath;
 
 import java.util.UUID;
 
+@Deprecated
 @MountPath("/registration/capture-vitals")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
 public class CaptureVitalsPage extends RegistrationPage {
