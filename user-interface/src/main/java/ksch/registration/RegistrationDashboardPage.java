@@ -65,7 +65,8 @@ class RegistrationDashboard extends Panel {
 
     private WebMarkupContainer createEmptyOpdPatientListMessage() {
         if (patientListContainer == null) {
-            throw new IllegalStateException("This method needs to be called after the evaluation of the patient list container.");
+            throw new IllegalStateException(
+                    "This method needs to be called after the evaluation of the patient list container.");
         }
 
         WebMarkupContainer result = new WebMarkupContainer("noActiveOpdPatientVisits");
@@ -96,7 +97,10 @@ class RegistrationDashboard extends Panel {
                 item.add(new Label("location", rowData.getLocation()));
                 item.add(new Label("age", rowData.getAge()));
 
-                item.add(new ExternalLink("openPatientDetails", "/registration/edit-patient/" + rowData.getPatientId()));
+                item.add(new ExternalLink(
+                        "openPatientDetails",
+                        "/registration/edit-patient/" + rowData.getPatientId())
+                );
             }
         };
 
