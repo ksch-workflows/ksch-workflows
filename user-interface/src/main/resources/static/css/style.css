@@ -18,3 +18,7 @@ a.fa, a.fas {
 div.row {
     margin-bottom: 25px;
 }
+
+table.without-top-border thead th {
+    border-top: 0;
+}

@@ -1,6 +1,7 @@
 package ksch.patientmanagement.visit;
 
 import ksch.patientmanagement.patient.Patient;
+import ksch.patientmanagement.patient.PatientNumberGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,12 @@ public class VisitTransactionsImpl implements VisitTransactions {
 
     private final VisitRepository visitRepository;
 
+    private final PatientNumberGenerator patientNumberGenerator;
+
     @Override
     public Visit startVisit(Patient patient, VisitType visitType) {
         VisitEntity visit = VisitEntity.builder()
+                .opdNumber(patientNumberGenerator.generateOpdNumber())
                 .timeStart(now())
                 .type(visitType)
                 .patient(toPatientEntity(patient))

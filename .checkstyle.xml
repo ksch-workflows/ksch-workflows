@@ -56,6 +56,17 @@
             <property name="exceptionVariableName" value="ignore|expected"/>
         </module>
 
+        <!-- http://checkstyle.sourceforge.net/config_misc.html#TodoComment -->
+        <module name="TodoComment">
+            <property name="format" value="(TODO)"/>
+        </module>
+
+        <!-- http://checkstyle.sourceforge.net/config_misc.html#TodoComment -->
+        <module name="TodoComment">
+            <property name="severity" value="error"/>
+            <property name="format" value="(FIXME)"/>
+        </module>
+
     </module>
 
     <module name="NewlineAtEndOfFile" />

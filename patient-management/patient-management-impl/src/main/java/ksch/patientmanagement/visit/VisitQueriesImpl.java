@@ -5,8 +5,11 @@ import ksch.patientmanagement.patient.Patient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
@@ -41,9 +44,21 @@ public class VisitQueriesImpl implements VisitQueries {
     }
 
     @Override
+    public List<Visit> getAllActiveOpdVisits() {
+        return visitRepository.findAllActiveOptVisits().stream()
+                .map(e -> (Visit) e)
+                .collect(toList());
+    }
+
+    @Override
     public Patient getPatient(UUID visitId) {
         Visit visit = visitRepository.findById(visitId)
                 .orElseThrow(() -> new DatabaseRecordNotFoundException(visitId, VisitEntity.class));
         return visit.getPatient();
+    }
+
+    @Override
+    public Optional<Visit> findByOpdNumber(String opdNumber) {
+        return visitRepository.findByOpdNumber(opdNumber);
     }
 }

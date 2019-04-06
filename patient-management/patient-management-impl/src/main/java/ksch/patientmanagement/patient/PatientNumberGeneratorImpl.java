@@ -14,7 +14,7 @@ public class PatientNumberGeneratorImpl implements PatientNumberGenerator {
     private final PatientNumberIndexRepository patientNumberIndexRepository;
 
     @Override
-    public synchronized String generatePatientNumber() {
+    public synchronized String generateOpdNumber() {
         PatientNumberIndex patientNumberIndex = patientNumberIndexRepository.save(new PatientNumberIndex());
         return String.format("%s-%s", currentYearWithTwoDigits, patientNumberIndex);
     }

@@ -15,6 +15,11 @@ public class NullVisit implements Visit {
     }
 
     @Override
+    public String getOpdNumber() {
+        return null;
+    }
+
+    @Override
     public Patient getPatient() {
         return null;
     }

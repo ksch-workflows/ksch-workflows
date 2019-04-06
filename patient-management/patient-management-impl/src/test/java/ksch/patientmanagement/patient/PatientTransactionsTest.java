@@ -33,7 +33,7 @@ public class PatientTransactionsTest {
 
     @Test
     public void should_create_patient() {
-        when(patientNumberGenerator.generatePatientNumber()).thenReturn("18-5322");
+        when(patientNumberGenerator.generateOpdNumber()).thenReturn("18-5322");
         when(patientRepository.save(any(PatientEntity.class))).then(returnsFirstArg());
         PatientEntity p = PatientEntity.builder().id(UUID.randomUUID()).build();
 

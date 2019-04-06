@@ -21,6 +21,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Deprecated
 @Slf4j
 public class CaptureVitalsActivity extends Activity {
 
