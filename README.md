@@ -62,6 +62,20 @@ Then it is accessible in the browser under the URL http://localhost:8080 (login:
 
 The database can be inspected under this URL: http://localhost:8080/h2-console (login: sa / <empty password>).
 
+### Run Java unit tests
+
+```
+gradle check
+```
+
+### Run JavaScript unit tests
+
+```
+find . -name "*.test.js" | sed "s|^\./||" | xargs qunit
+```
+
+See https://qunitjs.com/ for setup of `qunit`.
+
 ### Run mutation tests
 
 With the help of mutation tests it is possible to improve the quality of the unit
