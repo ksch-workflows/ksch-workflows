@@ -87,7 +87,7 @@ class RegistrationDashboard extends Panel {
                 .map(OptPatientVisitRow::new)
                 .collect(toList());
 
-        ListView lv = new ListView<OptPatientVisitRow>("opdPatients", activeOptVisits) {
+        ListView lv = new ListView<>("opdPatients", activeOptVisits) {
             @Override
             protected void populateItem(ListItem<OptPatientVisitRow> item) {
                 OptPatientVisitRow rowData = item.getModelObject();

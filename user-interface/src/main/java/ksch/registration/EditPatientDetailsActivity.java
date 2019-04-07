@@ -104,7 +104,7 @@ public class EditPatientDetailsActivity extends Activity {
 
     @Override
     public String getPreviousPagePath() {
-        return "/registration/register-patient";
+        return "/registration";
     }
 
     class UpdatePatientForm extends Form<Void> {
