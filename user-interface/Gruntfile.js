@@ -5,6 +5,5 @@ module.exports = function(grunt) {
         }
     });
 
-    // Call these here instead, where the variable grunt is defined.
     grunt.loadNpmTasks('grunt-contrib-qunit');
 };

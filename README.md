@@ -72,11 +72,13 @@ gradle check
 
 The unit tests for the project's JavaScript files are implemented with [QUnit](https://qunitjs.com/) and executed via [Grunt](https://gruntjs.com/).
 
+Given that [Node.js](https://www.npmjs.com/get-npm) is installed, they can be executed like this:
+
 ```
 cd user-interface/
 
 # Download dependencies
-npm install grunt --save-dev
+npm install -g grunt-cli
 npm install grunt-contrib-qunit --save-dev
 
 # Execute tests in headless Chromium browser
