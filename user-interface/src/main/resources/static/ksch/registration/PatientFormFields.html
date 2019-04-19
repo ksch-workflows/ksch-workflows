@@ -9,6 +9,8 @@
 
     <script src="../../js/jquery.min.js" ></script>
     <script src="../../js/bootstrap.min.js" ></script>
+
+    <!-- TODO: Include in rendered HTML -->
     <script src="./PatientFormFields.js"></script>
 </head>
 
@@ -34,16 +36,28 @@
                 <div class="row">
                     <div class="form-group col">
                         <label for="inputDateOfBirth">Date of birth</label>
-                        <input required wicket:id="inputDateOfBirth" type="text" class="form-control" id="inputDateOfBirth"
-                               placeholder="Patient date of birth (dd-mm-yyyy)" pattern="[0-3]?[0-9]-[0-1]?[0-9]-[1-2][0-9][0-9][0-9]">
+                        <input required
+                            wicket:id="inputDateOfBirth"
+                            type="text"
+                            class="form-control"
+                            id="inputDateOfBirth"
+                            placeholder="Patient date of birth (dd-mm-yyyy)"
+                            pattern="[0-3]?[0-9]-[0-1]?[0-9]-[1-2][0-9][0-9][0-9]"
+                            onfocusout="console.log('updateAge()');"
+                        />
                         <div class="invalid-feedback">
                             Please enter the patient date of birth here.
                         </div>
                     </div>
                     <div class="form-group col">
                         <label for="age">Age</label>
-                        <input required type="text" class="form-control" id="age"
-                               placeholder="Patient age">
+                        <input required
+                            type="text"
+                            class="form-control"
+                            id="age"
+                            placeholder="Patient age"
+                            onfocusout="console.log('updateDateOfBirth()');"
+                        />
                         <div class="invalid-feedback">
                             Please enter the patient age here.
                         </div>
