@@ -10,7 +10,6 @@ function date(year, month, day) {
     return new Date(year + "-" + month + "-" + day);
 }
 
-if (typeof module !== 'undefined' && module.exports) {
-    exports.age = age;
-    exports.date = date;
+function onAgeChanged() {
+
 }
