@@ -2,10 +2,25 @@
 var YEAR_EPOCH = 1970;
 var DD_MM_YYYY = "[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}"
 
-function updateDateOfBirth() {
+// -----------------------------------------------------------------------------
+//  Humble, untested functions
+// -----------------------------------------------------------------------------
+
+function onDateOfBirthUpdated() {
     var dateOfBirth = getDateOfBirth("inputDateOfBirth");
-    setAge(calculateAge(dateOfBirth));
+    if (dateOfBirth) {
+        setAge("age", calculateAge(dateOfBirth));
+    }
 }
+
+function onAgeUpdated() {
+    var yearOfBirth = new Date().getFullYear() - getAge("age");
+    setDateOfBirth("inputDateOfBirth", new Date(yearOfBirth, 0, 1));
+}
+
+// -----------------------------------------------------------------------------
+//  Unit tested functions
+// -----------------------------------------------------------------------------
 
 function calculateAge(dateOfBirth, today = new Date()) {
     var lifeTimeInMillis = today.getTime() - dateOfBirth.getTime();
