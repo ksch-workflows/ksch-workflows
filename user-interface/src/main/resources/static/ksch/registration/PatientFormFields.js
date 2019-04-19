@@ -31,3 +31,11 @@ function setDateOfBirth(inputId, dateOfBirth) {
     var day = dateOfBirth.getDate();
     document.getElementById(inputId).value = day + "-" + month + "-" + year;
 }
+
+function getAge(inputId) {
+    return parseInt(document.getElementById(inputId).value);
+}
+
+function setAge(inputId, years) {
+    document.getElementById(inputId).value = years;
+}
