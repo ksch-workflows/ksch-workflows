@@ -1,18 +1,7 @@
 
 QUnit.test( "Should calculate age from date of birth", function( assert ) {
-    assert.equal( age(new Date("2000-01-01"), new Date("2019-01-01")), 19 );
+    assert.equal( calculateAge(new Date("2000-01-01"), new Date("2019-01-01")), 19 );
 });
-
-QUnit.test( "Should create date object", function( assert ) {
-    assert.equal( date("2005", "11", "25").getTime(), new Date("2005-11-25").getTime() );
-});
-
-QUnit.test( "xxx", function( assert ) {
-    assert.ok( 1, "Passed!" );
-});
-
-
-// update age
 
 QUnit.test( "Should read in date of birth", function( assert ) {
     var dateOfBirth = getDateOfBirth("dateOfBirth");
