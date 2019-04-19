@@ -70,11 +70,18 @@ gradle check
 
 ### Run JavaScript unit tests
 
-```
-find . -name "*.test.js" | sed "s|^\./||" | xargs qunit
-```
+The unit tests for the project's JavaScript files are implemented with [QUnit](https://qunitjs.com/) and executed via [Grunt](https://gruntjs.com/).
 
-See https://qunitjs.com/ for setup of `qunit`.
+```
+cd user-interface/
+
+# Download dependencies
+npm install grunt --save-dev
+npm install grunt-contrib-qunit --save-dev
+
+# Execute tests in headless Chromium browser
+grunt qunit
+```
 
 ### Run mutation tests
 
