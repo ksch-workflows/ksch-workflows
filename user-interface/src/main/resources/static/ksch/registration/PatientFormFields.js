@@ -22,7 +22,7 @@ function getDateOfBirth(inputId) {
     var day = dateOfBirthElements[0];
     var month = dateOfBirthElements[1];
     var year = dateOfBirthElements[2];
-    return new Date(year, month - 1, day, 0, 0, 0);
+    return new Date(year, month - 1, day);
 }
 
 function setDateOfBirth(inputId, dateOfBirth) {
