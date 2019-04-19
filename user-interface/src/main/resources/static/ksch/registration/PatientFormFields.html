@@ -31,14 +31,32 @@
                     <input wicket:id="inputNameFather" type="text" class="form-control" id="inputNameFather"
                            placeholder="Patient father's name">
                 </div>
-                <div class="form-group">
-                    <label for="inputDateOfBirth">Date of birth</label>
-                    <input required wicket:id="inputDateOfBirth" type="text" class="form-control" id="inputDateOfBirth"
-                           placeholder="Patient date of birth (dd-mm-yyyy)" pattern="[0-3]?[0-9]-[0-1]?[0-9]-[1-2][0-9][0-9][0-9]">
-                    <div class="invalid-feedback">
-                        Please enter the patient date of birth here.
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="inputDateOfBirth">Date of birth</label>
+                        <input required wicket:id="inputDateOfBirth" type="text" class="form-control" id="inputDateOfBirth"
+                               placeholder="Patient date of birth (dd-mm-yyyy)" pattern="[0-3]?[0-9]-[0-1]?[0-9]-[1-2][0-9][0-9][0-9]">
+                        <div class="invalid-feedback">
+                            Please enter the patient date of birth here.
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label for="age">Age</label>
+                        <input required wicket:id="age" type="text" class="form-control" id="age"
+                               placeholder="Patient age">
+                        <div class="invalid-feedback">
+                            Please enter the patient age here.
+                        </div>
                     </div>
                 </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        estimated
+                    </label>
+                </div>
+
                 <div class="form-group">
                     <label for="inputGender">Gender</label>
                     <select required wicket:id="inputGender" class="form-control" id="inputGender">
