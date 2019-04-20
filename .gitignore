@@ -1,13 +1,13 @@
 # Gradle
 .gradle/
 build/
-out/
 
 # IntelliJ
 .idea/
 *.iml
 *.ipr
 *.iws
+out/
 
 # Eclipse
 .classpath
@@ -18,10 +18,9 @@ out/
 *.orig
 
 # Miscellaneous
-notes.org
+.notes/
 \#*
 .#*
 *~
 *~*
 codealike.json
-

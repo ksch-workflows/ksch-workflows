@@ -1,0 +1,7 @@
+{
+  "main": "Gruntfile.js",
+  "devDependencies": {
+    "grunt-contrib-qunit": "latest",
+    "grunt": "latest"
+  }
+}

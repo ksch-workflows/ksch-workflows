@@ -62,6 +62,29 @@ Then it is accessible in the browser under the URL http://localhost:8080 (login:
 
 The database can be inspected under this URL: http://localhost:8080/h2-console (login: sa / <empty password>).
 
+### Run Java tests
+
+```
+gradle test
+```
+
+### Run JavaScript tests
+
+The unit tests for the project's JavaScript files are implemented with [QUnit](https://qunitjs.com/) and executed via [Grunt](https://gruntjs.com/).
+
+Given that [Node.js](https://www.npmjs.com/get-npm) is installed, they can be executed like this:
+
+```
+cd user-interface/
+
+# Install dependencies
+npm install -g grunt-cli
+npm install --save-dev
+
+# Execute tests
+grunt qunit
+```
+
 ### Run mutation tests
 
 With the help of mutation tests it is possible to improve the quality of the unit

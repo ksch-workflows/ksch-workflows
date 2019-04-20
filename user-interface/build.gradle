@@ -27,11 +27,16 @@ dependencies {
 
     compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.5'
     compile 'org.springframework.boot:spring-boot-starter-security'
-    
+
     compile "org.apache.wicket:wicket-auth-roles:${wicketVersion}"
     compile "org.apache.wicket:wicket-ioc:${wicketVersion}"
     compile "org.apache.wicket:wicket-spring:${wicketVersion}"
     compile "org.wicketstuff:wicketstuff-annotation:${wicketVersion}"
+}
+
+bootJar {
+    exclude '**/*.test.html'
+    exclude '**/*.test.js'
 }
 
 bootRun.systemProperties = System.properties as Map<String, ?>
