@@ -7,19 +7,19 @@ var DD_MM_YYYY = "[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}"
 // -----------------------------------------------------------------------------
 
 function onDateOfBirthUpdated() {
-    var dateOfBirth = getDateOfBirth("dateOfBirth");
+    var dateOfBirth = getDateOfBirth();
     if (dateOfBirth) {
-        setAge("age", calculateAge(dateOfBirth));
+        setAge(calculateAge(dateOfBirth));
     }
 }
 
 function onAgeUpdated() {
-    var patientAge = getAge("age");
+    var patientAge = getAge();
     if (patientAge) {
         var yearOfBirth = new Date().getFullYear() - getAge("age");
-        setDateOfBirth("dateOfBirth", new Date(yearOfBirth, 0, 1));
+        setDateOfBirth(new Date(yearOfBirth, 0, 1));
     } else {
-        setAge("age", "");
+        setAge("");
     }
 }
 
@@ -32,7 +32,7 @@ function calculateAge(dateOfBirth, today = new Date()) {
     return Math.abs(new Date(lifeTimeInMillis).getUTCFullYear() - YEAR_EPOCH);
 }
 
-function getDateOfBirth(inputId) {
+function getDateOfBirth(inputId = "dateOfBirth") {
     var dateOfBirthValue = document.getElementById(inputId).value
     if (!new RegExp(DD_MM_YYYY).test(dateOfBirthValue)) {
         console.log("[Warning] Cannot parse date from: " + dateOfBirthValue);
