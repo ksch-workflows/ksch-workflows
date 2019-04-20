@@ -1,18 +1,31 @@
 
 // -----------------------------------------------------------------------------
-QUnit.module("onDateOfBirthUpdated");
-// -----------------------------------------------------------------------------
-
-// Should update age after input of date of birth
-
-// Should skip age update if date of birth could not be read
-
-// -----------------------------------------------------------------------------
-QUnit.module("onAgeUpdated", {
+QUnit.module("onDateOfBirthUpdated", {
     beforeEach: function() {
+        document.getElementById("dateOfBirth").value = "";
         setAge("");
     }
 });
+// -----------------------------------------------------------------------------
+
+QUnit.test("Should update age after input of date of birth", function(assert) {
+    setDateOfBirth(new Date(2000, 1, 1));
+
+    onDateOfBirthUpdated();
+
+    assert.ok(Number.isInteger(getAge()));
+});
+
+QUnit.test("Should skip age update if date of birth could not be read", function(assert) {
+    document.getElementById("dateOfBirth").value = "";
+
+    onDateOfBirthUpdated();
+
+    assert.notOk(Number.isInteger(getAge()));
+});
+
+// -----------------------------------------------------------------------------
+QUnit.module("onAgeUpdated");
 // -----------------------------------------------------------------------------
 
 QUnit.test("Should set estimated date of birth after input of the patient age", function(assert) {
@@ -20,15 +33,24 @@ QUnit.test("Should set estimated date of birth after input of the patient age", 
 
     onAgeUpdated();
 
+    assert.ok(getAge());
     assert.ok(getDateOfBirth());
 });
 
 QUnit.test("Should reset age if user input was not a number", function(assert) {
-    assert.ok(1);
+    setAge("Fifteen");
+
+    onAgeUpdated();
+
+    assert.notOk(getAge());
 });
 
 QUnit.test("Should reset age if user input is greater than 150", function(assert) {
-    assert.ok(1);
+    setAge(151);
+
+    onAgeUpdated();
+
+    assert.notOk(getAge());
 });
 
 // -----------------------------------------------------------------------------

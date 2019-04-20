@@ -11,10 +11,11 @@ function onDateOfBirthUpdated() {
 
 function onAgeUpdated() {
     var patientAge = getAge();
-    if (patientAge) {
+    if (patientAge && patientAge < 150) {
         var yearOfBirth = new Date().getFullYear() - getAge("age");
         setDateOfBirth(new Date(yearOfBirth, 0, 1));
     } else {
+        console.log("[INFO] Resetting age");
         setAge("");
     }
 }
@@ -27,7 +28,7 @@ function calculateAge(dateOfBirth, today = new Date()) {
 function getDateOfBirth(inputId = "dateOfBirth") {
     var dateOfBirthValue = document.getElementById(inputId).value
     if (!new RegExp(DD_MM_YYYY).test(dateOfBirthValue)) {
-        console.log("[Warning] Cannot parse date from: " + dateOfBirthValue);
+        console.log("[WARNING] Cannot parse date from: " + dateOfBirthValue);
         return null;
     }
     var dateOfBirthElements = dateOfBirthValue.split("-");
