@@ -8,9 +8,7 @@ before_install:
   - echo sdkman_auto_answer=true > ~/.sdkman/etc/config
   - source "/home/travis/.sdkman/bin/sdkman-init.sh"
   - sdk install gradle 5.3
-
-before_script:
-  - npm install -g grunt-cli
+  - npm install -g grunt-cli  
 
 script:
 - gradle build
