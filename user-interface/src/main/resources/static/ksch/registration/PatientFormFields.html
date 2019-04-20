@@ -38,13 +38,13 @@
                     <div class="form-group col">
                         <label for="inputDateOfBirth">Date of birth</label>
                         <input required
-                            wicket:id="inputDateOfBirth"
-                            type="text"
-                            class="form-control"
                             id="inputDateOfBirth"
+                            wicket:id="inputDateOfBirth"
+                            class="form-control"
+                            type="text"
                             placeholder="Patient date of birth (dd-mm-yyyy)"
                             pattern="[0-3]?[0-9]-[0-1]?[0-9]-[1-2][0-9][0-9][0-9]"
-                            onfocusout="onDateOfBirthUpdated();"
+                            onchange="onDateOfBirthUpdated();"
                         />
                         <div class="invalid-feedback">
                             Please enter the patient date of birth here.
@@ -52,17 +52,14 @@
                     </div>
                     <div class="form-group col">
                         <label for="age">Age</label>
-                        <input required
-                            type="text"
-                            class="form-control"
+                        <input
                             id="age"
+                            class="form-control"
+                            type="text"
                             placeholder="Patient age"
+                            pattern="[0-9]{1,3}"
                             onchange="onAgeUpdated();"
-                            onload="onDateOfBirthUpdated();"
                         />
-                        <div class="invalid-feedback">
-                            Please enter the patient age here.
-                        </div>
                     </div>
                 </div>
 

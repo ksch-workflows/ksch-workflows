@@ -62,13 +62,13 @@ Then it is accessible in the browser under the URL http://localhost:8080 (login:
 
 The database can be inspected under this URL: http://localhost:8080/h2-console (login: sa / <empty password>).
 
-### Run Java unit tests
+### Run Java tests
 
 ```
 gradle test
 ```
 
-### Run JavaScript unit tests
+### Run JavaScript tests
 
 The unit tests for the project's JavaScript files are implemented with [QUnit](https://qunitjs.com/) and executed via [Grunt](https://gruntjs.com/).
 
@@ -77,11 +77,11 @@ Given that [Node.js](https://www.npmjs.com/get-npm) is installed, they can be ex
 ```
 cd user-interface/
 
-# Download dependencies
+# Install dependencies
 npm install -g grunt-cli
-npm install grunt-contrib-qunit --save-dev
+npm install --save-dev
 
-# Execute tests in headless Chromium browser
+# Execute tests
 grunt qunit
 ```
 

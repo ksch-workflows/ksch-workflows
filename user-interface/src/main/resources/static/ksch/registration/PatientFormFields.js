@@ -14,8 +14,13 @@ function onDateOfBirthUpdated() {
 }
 
 function onAgeUpdated() {
-    var yearOfBirth = new Date().getFullYear() - getAge("age");
-    setDateOfBirth("inputDateOfBirth", new Date(yearOfBirth, 0, 1));
+    var patientAge = getAge("age");
+    if (patientAge) {
+        var yearOfBirth = new Date().getFullYear() - getAge("age");
+        setDateOfBirth("inputDateOfBirth", new Date(yearOfBirth, 0, 1));
+    } else {
+        setAge("age", "");
+    }
 }
 
 // -----------------------------------------------------------------------------
@@ -28,7 +33,7 @@ function calculateAge(dateOfBirth, today = new Date()) {
 }
 
 function getDateOfBirth(inputId) {
-    var dateOfBirthValue = document.getElementById( inputId ).value
+    var dateOfBirthValue = document.getElementById(inputId).value
     if (!new RegExp(DD_MM_YYYY).test(dateOfBirthValue)) {
         console.log("[Warning] Cannot parse date from: " + dateOfBirthValue);
         return null;
@@ -48,7 +53,12 @@ function setDateOfBirth(inputId, dateOfBirth) {
 }
 
 function getAge(inputId) {
-    return parseInt(document.getElementById(inputId).value);
+    var ageUserInput = document.getElementById(inputId).value
+    if(Number.isInteger(parseInt(ageUserInput))) {
+        return parseInt(ageUserInput);
+    } else {
+        return null;
+    }
 }
 
 function setAge(inputId, years) {

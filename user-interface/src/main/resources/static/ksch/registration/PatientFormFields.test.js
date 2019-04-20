@@ -17,10 +17,6 @@ QUnit.test( "Should skip empty date of birth", function( assert ) {
     assert.notOk(dateOfBirth);
 });
 
-QUnit.test( "Should fail", function( assert ) {
-    assert.ok(null);
-});
-
 QUnit.test( "Should skip incomplete date of birth", function( assert ) {
     var dateOfBirth = getDateOfBirth("dateOfBirth_incomplete");
     assert.notOk(dateOfBirth);
