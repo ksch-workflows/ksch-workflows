@@ -111,7 +111,7 @@ public class RegisterPatientActivity extends Activity {
                     .nameFather(patientFormFields.getAndResetValue("inputNameFather"))
                     .address(patientFormFields.getAndResetValue("inputAddress"))
                     .gender(Gender.valueOf(patientFormFields.getAndResetValue("inputGender").toUpperCase()))
-                    .dateOfBirth(parseDate(patientFormFields.getAndResetValue("inputDateOfBirth")))
+                    .dateOfBirth(parseDate(patientFormFields.getAndResetValue("dateOfBirth")))
                     .build();
 
             UUID patientId = patientTransactions.create(patient).getId();

@@ -96,7 +96,7 @@ public class RegisterPatientPageTest extends WebPageTest {
         formTester.setValue("patientFormFields:inputName", "Fritz");
         formTester.setValue("patientFormFields:inputNameFather", "Carl");
         formTester.select("patientFormFields:inputGender", 0);
-        formTester.setValue("patientFormFields:inputDateOfBirth", "27-07-2000");
+        formTester.setValue("patientFormFields:dateOfBirth", "27-07-2000");
         formTester.setValue("patientFormFields:inputAddress", "Kirpal Sagar");
         formTester.submit();
 
