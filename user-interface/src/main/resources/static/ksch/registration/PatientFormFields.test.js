@@ -2,8 +2,8 @@
 // -----------------------------------------------------------------------------
 QUnit.module("onDateOfBirthUpdated", {
     beforeEach: function() {
-        document.getElementById("dateOfBirth").value = "";
-        setAge("");
+        resetDateOfBirth();
+        resetAge();
     }
 });
 // -----------------------------------------------------------------------------
@@ -68,6 +68,7 @@ QUnit.module("getDateOfBirth");
 QUnit.test("Should read in date of birth", function(assert) {
     var expectedDateOfBirth = new Date("2005-11-25");
     expectedDateOfBirth.setHours(0);
+    setDateOfBirth(expectedDateOfBirth);
 
     var dateOfBirth = getDateOfBirth("dateOfBirth_predefined");
 
@@ -75,7 +76,10 @@ QUnit.test("Should read in date of birth", function(assert) {
 });
 
 QUnit.test("Should skip empty date of birth", function(assert) {
-    var dateOfBirth = getDateOfBirth("dateOfBirth_empty");
+    resetDateOfBirth();
+
+    var dateOfBirth = getDateOfBirth();
+
     assert.notOk(dateOfBirth);
 });
 
@@ -92,9 +96,9 @@ QUnit.test("Should set date of birth input field", function(assert) {
     var dateOfBirth = new Date("2005-11-25");
     dateOfBirth.setHours(0);
 
-    setDateOfBirth(dateOfBirth, "dateOfBirth_testSetValue");
+    setDateOfBirth(dateOfBirth);
 
-    assert.equal(getDateOfBirth("dateOfBirth_testSetValue").getTime(), dateOfBirth.getTime());
+    assert.equal(getDateOfBirth().getTime(), dateOfBirth.getTime());
 });
 
 // -----------------------------------------------------------------------------
@@ -102,11 +106,11 @@ QUnit.module("getAge");
 // -----------------------------------------------------------------------------
 
 QUnit.test("Should read in age", function(assert) {
-    var expectedAge = 25;
+    setAge(25);
 
-    var retrievedAge = getAge("age_withInitialValue");
+    var retrievedAge = getAge();
 
-    assert.equal(retrievedAge, expectedAge);
+    assert.equal(retrievedAge, 25);
 });
 
 // -----------------------------------------------------------------------------
