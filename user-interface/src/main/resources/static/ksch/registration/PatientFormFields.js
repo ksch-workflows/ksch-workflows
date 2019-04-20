@@ -2,10 +2,6 @@
 var YEAR_EPOCH = 1970;
 var DD_MM_YYYY = "[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}"
 
-// -----------------------------------------------------------------------------
-//  Humble, untested functions
-// -----------------------------------------------------------------------------
-
 function onDateOfBirthUpdated() {
     var dateOfBirth = getDateOfBirth();
     if (dateOfBirth) {
@@ -22,10 +18,6 @@ function onAgeUpdated() {
         setAge("");
     }
 }
-
-// -----------------------------------------------------------------------------
-//  Unit tested functions
-// -----------------------------------------------------------------------------
 
 function calculateAge(dateOfBirth, today = new Date()) {
     var lifeTimeInMillis = today.getTime() - dateOfBirth.getTime();

@@ -1,5 +1,33 @@
 
 // -----------------------------------------------------------------------------
+QUnit.module("onDateOfBirthUpdated");
+// -----------------------------------------------------------------------------
+
+// Should update age after input of date of birth
+
+// Should skip age update if date of birth could not be read
+
+// -----------------------------------------------------------------------------
+QUnit.module("onAgeUpdated", {
+    beforeEach: function() {
+        setAge("");
+    }
+});
+// -----------------------------------------------------------------------------
+
+QUnit.test("Should set estimated date of birth after input of the patient age", function(assert) {
+    assert.ok(1);
+});
+
+QUnit.test("Should reset age if user input was not a number", function(assert) {
+    assert.ok(1);
+});
+
+QUnit.test("Should reset age if user input is greater than 150", function(assert) {
+    assert.ok(1);
+});
+
+// -----------------------------------------------------------------------------
 QUnit.module("calculateAge");
 // -----------------------------------------------------------------------------
 
