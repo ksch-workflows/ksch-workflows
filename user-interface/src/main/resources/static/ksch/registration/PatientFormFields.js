@@ -45,7 +45,7 @@ function getDateOfBirth(inputId) {
     return new Date(year, month - 1, day);
 }
 
-function setDateOfBirth(inputId, dateOfBirth) {
+function setDateOfBirth(dateOfBirth, inputId = "dateOfBirth") {
     var year = dateOfBirth.getFullYear();
     var month = dateOfBirth.getMonth() + 1;
     var day = dateOfBirth.getDate();

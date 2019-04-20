@@ -26,7 +26,7 @@ QUnit.test( "Should set date of birth input field", function( assert ) {
     var dateOfBirth = new Date("2005-11-25");
     dateOfBirth.setHours(0);
 
-    setDateOfBirth("dateOfBirth_testSetValue", dateOfBirth);
+    setDateOfBirth(dateOfBirth, "dateOfBirth_testSetValue");
 
     assert.equal(getDateOfBirth("dateOfBirth_testSetValue").getTime(), dateOfBirth.getTime());
 });
