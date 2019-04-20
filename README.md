@@ -65,7 +65,7 @@ The database can be inspected under this URL: http://localhost:8080/h2-console (
 ### Run Java unit tests
 
 ```
-gradle check
+gradle test
 ```
 
 ### Run JavaScript unit tests
