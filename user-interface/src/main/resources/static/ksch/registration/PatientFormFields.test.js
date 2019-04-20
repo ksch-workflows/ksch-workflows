@@ -20,7 +20,7 @@ QUnit.test("Should set estimated date of birth after input of the patient age", 
 
     onAgeUpdated();
 
-    assert.ok(getDateOfBirth() != null);
+    assert.ok(getDateOfBirth());
 });
 
 QUnit.test("Should reset age if user input was not a number", function(assert) {
@@ -47,7 +47,7 @@ QUnit.test("Should read in date of birth", function(assert) {
     var expectedDateOfBirth = new Date("2005-11-25");
     expectedDateOfBirth.setHours(0);
 
-    var dateOfBirth = getDateOfBirth("dateOfBirth");
+    var dateOfBirth = getDateOfBirth("dateOfBirth_predefined");
 
     assert.equal(dateOfBirth.getTime(), expectedDateOfBirth.getTime());
 });
