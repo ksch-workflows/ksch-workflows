@@ -40,6 +40,6 @@ QUnit.test( "Should read in age", function( assert ) {
 });
 
 QUnit.test( "Should set age", function( assert ) {
-    setAge("age_withoutValue", 15);
+    setAge(15, "age_withoutValue");
     assert.equal(getAge("age_withoutValue"), 15);
 });

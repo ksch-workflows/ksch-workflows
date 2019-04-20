@@ -52,7 +52,7 @@ function setDateOfBirth(inputId, dateOfBirth) {
     document.getElementById(inputId).value = day + "-" + month + "-" + year;
 }
 
-function getAge(inputId) {
+function getAge(inputId = "age") {
     var ageUserInput = document.getElementById(inputId).value
     if(Number.isInteger(parseInt(ageUserInput))) {
         return parseInt(ageUserInput);
@@ -61,6 +61,6 @@ function getAge(inputId) {
     }
 }
 
-function setAge(inputId, years) {
+function setAge(years, inputId = "age") {
     document.getElementById(inputId).value = years;
 }
