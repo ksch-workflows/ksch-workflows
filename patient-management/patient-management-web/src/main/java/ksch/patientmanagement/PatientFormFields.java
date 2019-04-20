@@ -28,7 +28,7 @@ public class PatientFormFields extends FormFieldsPanel {
 
         addTextField("inputName");
         addTextField("inputNameFather");
-        addTextField("inputDateOfBirth");
+        addTextField("dateOfBirth");
         addTextArea("inputAddress");
         addDropDownChoice("inputGender", newArrayList("MALE", "FEMALE", "OTHER"));
     }
@@ -38,7 +38,7 @@ public class PatientFormFields extends FormFieldsPanel {
 
         addTextField("inputName", patient.getName());
         addTextField("inputNameFather", patient.getNameFather());
-        addTextField("inputDateOfBirth", patient.getDateOfBirth().format(INDIAN_DATE_FORMAT));
+        addTextField("dateOfBirth", patient.getDateOfBirth().format(INDIAN_DATE_FORMAT));
         addTextArea("inputAddress", patient.getAddress());
         addDropDownChoice("inputGender", newArrayList("MALE", "FEMALE", "OTHER"), patient.getGender().toString());
     }

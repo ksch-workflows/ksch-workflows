@@ -66,7 +66,7 @@ public class RegistrationDashboardTest extends WebPageTest {
         formTester.setValue("patientFormFields:inputName", "Ravindra Kodanda");
         formTester.setValue("patientFormFields:inputNameFather", "Javeed Sarath");
         formTester.select("patientFormFields:inputGender", 0);
-        formTester.setValue("patientFormFields:inputDateOfBirth", "27-07-2000");
+        formTester.setValue("patientFormFields:dateOfBirth", "27-07-2000");
         formTester.setValue("patientFormFields:inputAddress", "Kirpal Sagar");
         formTester.submit();
 

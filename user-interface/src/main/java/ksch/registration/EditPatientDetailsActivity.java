@@ -144,7 +144,7 @@ public class EditPatientDetailsActivity extends Activity {
             patient.setNameFather(patientFormFields.getValue("inputNameFather"));
             patient.setAddress(patientFormFields.getValue("inputAddress"));
             patient.setGender(Gender.valueOf(patientFormFields.getValue("inputGender")));
-            patient.setDateOfBirth(parseDate(patientFormFields.getValue("inputDateOfBirth")));
+            patient.setDateOfBirth(parseDate(patientFormFields.getValue("dateOfBirth")));
 
             patientTransactions.update(patient);
         }
@@ -176,5 +176,3 @@ public class EditPatientDetailsActivity extends Activity {
         }
     }
 }
-
-

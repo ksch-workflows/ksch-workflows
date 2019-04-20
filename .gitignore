@@ -1,7 +1,6 @@
 # Gradle
 .gradle/
 build/
-out/
 
 # IntelliJ
 .idea/
@@ -9,6 +8,7 @@ out/
 *.ipr
 *.iws
 fileTemplates/
+out/
 
 # Eclipse
 .classpath
@@ -19,10 +19,9 @@ fileTemplates/
 *.orig
 
 # Miscellaneous
-notes.org
+.notes/
 \#*
 .#*
 *~
 *~*
 codealike.json
-
