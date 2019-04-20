@@ -1,6 +1,7 @@
 sudo: required
 os: linux
 jdk: openjdk11
+node_js: 8
 
 before_install:
   - curl -s http://get.sdkman.io | bash
@@ -8,5 +9,9 @@ before_install:
   - source "/home/travis/.sdkman/bin/sdkman-init.sh"
   - sdk install gradle 5.3
 
+before_script:
+  - npm install -g grunt-cli
+
 script:
 - gradle build
+- cd user-interface/ && npm install grunt-contrib-qunit --save-dev && grunt qunit
