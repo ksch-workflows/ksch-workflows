@@ -16,7 +16,11 @@ QUnit.module("onAgeUpdated", {
 // -----------------------------------------------------------------------------
 
 QUnit.test("Should set estimated date of birth after input of the patient age", function(assert) {
-    assert.ok(1);
+    setAge(15);
+
+    onAgeUpdated();
+
+    assert.ok(getDateOfBirth() != null);
 });
 
 QUnit.test("Should reset age if user input was not a number", function(assert) {
