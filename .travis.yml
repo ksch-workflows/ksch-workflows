@@ -1,7 +1,7 @@
 sudo: required
 os: linux
 jdk: openjdk11
-node_js: 8
+node_js: 9
 
 before_install:
   - curl -s http://get.sdkman.io | bash
@@ -14,4 +14,4 @@ before_script:
 
 script:
 - gradle build
-- cd user-interface/ && npm install grunt-contrib-qunit --save-dev && grunt qunit
+- cd user-interface/ && npm install --save-dev && grunt qunit
