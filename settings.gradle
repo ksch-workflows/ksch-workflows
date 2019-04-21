@@ -1,6 +1,7 @@
 include 'user-interface'
 project(":user-interface").name = "ksch-workflows"
 
+include 'infrastructure:configuration'
 include 'infrastructure:shared-test'
 include 'infrastructure:wicket-utils'
 
