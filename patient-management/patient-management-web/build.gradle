@@ -3,6 +3,7 @@ ext {
 }
 
 dependencies {
+    compile project(':infrastructure:wicket-utils')
     compile project(':patient-management')
 
     compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.5'

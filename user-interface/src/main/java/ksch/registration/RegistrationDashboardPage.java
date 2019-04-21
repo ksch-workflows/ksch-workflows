@@ -1,5 +1,6 @@
 package ksch.registration;
 
+import ksch.patientmanagement.PatientFormFields;
 import ksch.patientmanagement.PatientResource;
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
@@ -29,7 +30,7 @@ import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
 import static ksch.ApplicationFrame.MAIN_CONTENT_ID;
-import static util.Time.parseDate;
+import static ksch.wicket.Time.parseDate;
 
 @MountPath("/registration")
 @AuthorizeInstantiation({"NURSE", "CLERK"})

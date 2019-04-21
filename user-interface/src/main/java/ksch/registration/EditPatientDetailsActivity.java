@@ -1,6 +1,7 @@
 package ksch.registration;
 
 import ksch.Activity;
+import ksch.patientmanagement.PatientFormFields;
 import ksch.patientmanagement.PatientResource;
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
@@ -26,7 +27,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static ksch.patientmanagement.PatientResource.toPatientResource;
-import static util.Time.parseDate;
+import static ksch.wicket.Time.parseDate;
 
 public class EditPatientDetailsActivity extends Activity {
 
