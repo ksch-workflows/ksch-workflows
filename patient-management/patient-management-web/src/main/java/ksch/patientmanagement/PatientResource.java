@@ -1,4 +1,4 @@
-package model;
+package ksch.patientmanagement;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

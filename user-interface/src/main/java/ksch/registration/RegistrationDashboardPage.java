@@ -1,5 +1,6 @@
 package ksch.registration;
 
+import ksch.patientmanagement.PatientResource;
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientQueries;
@@ -7,7 +8,6 @@ import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.Visit;
 import ksch.patientmanagement.visit.VisitQueries;
 import lombok.Getter;
-import model.PatientResource;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;

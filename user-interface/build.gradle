@@ -23,7 +23,7 @@ sourceSets.main.resources {
 dependencies {
     compile project(':medical-records')
     compile project(':patient-management')
-    compile project(':patient-management-web')
+    compile project(':patient-management:patient-management-web')
     compile project(':reporting')
 
     compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.5'
