@@ -25,6 +25,7 @@ dependencies {
     compile project(':patient-management')
     compile project(':patient-management:patient-management-web')
     compile project(':reporting')
+    compile project(':infrastructure:wicket-utils')
 
     compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.5'
     compile 'org.springframework.boot:spring-boot-starter-security'

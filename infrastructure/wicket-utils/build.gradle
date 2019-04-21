@@ -1,0 +1,9 @@
+ext {
+    wicketVersion = '8.3.0'
+}
+
+dependencies {
+    compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.5'
+
+    compile "org.apache.wicket:wicket-spring:${wicketVersion}"
+}

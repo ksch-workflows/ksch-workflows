@@ -2,6 +2,7 @@ include 'user-interface'
 project(":user-interface").name = "ksch-workflows"
 
 include 'infrastructure:shared-test'
+include 'infrastructure:wicket-utils'
 
 def includeModule(moduleName) {
     include "$moduleName"

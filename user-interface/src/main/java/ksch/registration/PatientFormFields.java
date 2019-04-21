@@ -1,7 +1,7 @@
 package ksch.registration;
 
 import ksch.patientmanagement.patient.Patient;
-import util.wicket.FormFieldsPanel;
+import ksch.wicket.FormFieldsPanel;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static util.Time.INDIAN_DATE_FORMAT;
