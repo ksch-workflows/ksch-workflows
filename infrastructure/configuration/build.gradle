@@ -1,6 +1,4 @@
-ext {
-    wicketVersion = '8.3.0'
-}
+
 
 dependencies {
     compile project(':patient-management')
