@@ -1,6 +1,8 @@
 package ksch.registration;
 
 import ksch.Activity;
+import ksch.patientmanagement.PatientFormFields;
+import ksch.patientmanagement.PatientResource;
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientQueries;
@@ -9,7 +11,6 @@ import ksch.patientmanagement.visit.VisitQueries;
 import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
 import lombok.Getter;
-import model.PatientResource;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.form.Button;
@@ -25,8 +26,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static model.PatientResource.toPatientResource;
-import static util.Time.parseDate;
+import static ksch.patientmanagement.PatientResource.toPatientResource;
+import static ksch.wicket.Time.parseDate;
 
 public class EditPatientDetailsActivity extends Activity {
 

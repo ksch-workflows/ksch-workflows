@@ -1,0 +1,7 @@
+
+dependencies {
+    compile project(':patient-management')
+
+    compile "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
+    compile "org.springframework.boot:spring-boot-starter-security"
+}

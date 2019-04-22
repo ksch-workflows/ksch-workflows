@@ -1,4 +1,4 @@
-package util;
+package ksch.wicket;
 
 import org.junit.Test;
 

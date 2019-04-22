@@ -2,4 +2,6 @@
 dependencies {
     compile 'junit:junit'
     compile 'org.jsoup:jsoup:1.11.3'
+
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 }

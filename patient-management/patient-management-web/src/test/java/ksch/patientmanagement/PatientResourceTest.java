@@ -1,4 +1,4 @@
-package model;
+package ksch.patientmanagement;
 
 import org.junit.Test;
 import ksch.patientmanagement.patient.Gender;

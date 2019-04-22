@@ -1,5 +1,7 @@
 package ksch.registration;
 
+import ksch.patientmanagement.PatientFormFields;
+import ksch.patientmanagement.PatientResource;
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientQueries;
@@ -7,7 +9,6 @@ import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.Visit;
 import ksch.patientmanagement.visit.VisitQueries;
 import lombok.Getter;
-import model.PatientResource;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
@@ -29,7 +30,7 @@ import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
 import static ksch.ApplicationFrame.MAIN_CONTENT_ID;
-import static util.Time.parseDate;
+import static ksch.wicket.Time.parseDate;
 
 @MountPath("/registration")
 @AuthorizeInstantiation({"NURSE", "CLERK"})

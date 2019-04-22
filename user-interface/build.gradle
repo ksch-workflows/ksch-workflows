@@ -10,10 +10,6 @@ buildscript {
     }
 }
 
-ext {
-    wicketVersion = '8.3.0'
-}
-
 apply plugin: "org.springframework.boot"
 
 sourceSets.main.resources {
@@ -21,17 +17,23 @@ sourceSets.main.resources {
 }
 
 dependencies {
+    compile project(':infrastructure:configuration')
+    compile project(':infrastructure:wicket-utils')
     compile project(':medical-records')
     compile project(':patient-management')
+    compile project(':patient-management:patient-management-web')
     compile project(':reporting')
 
-    compile 'com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:2.1.5'
-    compile 'org.springframework.boot:spring-boot-starter-security'
-    
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
     compile "org.apache.wicket:wicket-auth-roles:${wicketVersion}"
     compile "org.apache.wicket:wicket-ioc:${wicketVersion}"
     compile "org.apache.wicket:wicket-spring:${wicketVersion}"
+    compile "org.springframework.boot:spring-boot-starter-security"
     compile "org.wicketstuff:wicketstuff-annotation:${wicketVersion}"
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile project(path: ':infrastructure:shared-test')
 }
 
 bootRun.systemProperties = System.properties as Map<String, ?>

@@ -1,4 +1,4 @@
-package ksch;
+package ksch.patientmanagement;
 
 import ksch.patientmanagement.patient.Patient;
 import org.apache.wicket.markup.html.basic.Label;

@@ -1,16 +1,16 @@
-include 'user-interface'
+include "user-interface"
 project(":user-interface").name = "ksch-workflows"
 
-include 'infrastructure:shared-test'
+include "infrastructure:configuration"
+include "infrastructure:shared-test"
+include "infrastructure:wicket-utils"
 
-def includeModule(moduleName) {
-    include "$moduleName"
-    include "$moduleName:$moduleName-api"
-    findProject(":$moduleName:$moduleName-api")?.name = "$moduleName-api"
-    include "$moduleName:$moduleName-impl"
-    findProject(":$moduleName:$moduleName-impl")?.name = "$moduleName-impl"
-}
+include("medical-records:medical-records-api")
+include("medical-records:medical-records-impl")
 
-includeModule("patient-management")
-includeModule("medical-records")
-includeModule("reporting")
+include("reporting:reporting-api")
+include("reporting:reporting-impl")
+
+include("patient-management:patient-management-api")
+include("patient-management:patient-management-impl")
+include("patient-management:patient-management-web")
