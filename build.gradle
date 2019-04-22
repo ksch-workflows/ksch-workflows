@@ -67,7 +67,7 @@ configure(subprojects.findAll { !it.name.endsWith('-api')} ) {
 
     dependencies {
         compile 'org.springframework.boot:spring-boot-starter'
-        compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+
         compile "javax.xml.bind:jaxb-api:${jaxbApiVersion}"
         compile "com.google.guava:guava:${guavaVersion}"
 
@@ -90,6 +90,12 @@ configure(subprojects.findAll { !it.name.endsWith('-api')} ) {
         threads = 4
 
         failWhenNoMutations = false
+    }
+}
+
+configure(subprojects.findAll { it.name.endsWith('-impl')} ) {
+    dependencies {
+        compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     }
 }
 
