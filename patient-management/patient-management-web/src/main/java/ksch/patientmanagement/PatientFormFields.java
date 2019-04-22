@@ -1,10 +1,10 @@
-package ksch.registration;
+package ksch.patientmanagement;
 
 import ksch.patientmanagement.patient.Patient;
-import util.wicket.FormFieldsPanel;
+import ksch.wicket.FormFieldsPanel;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static util.Time.INDIAN_DATE_FORMAT;
+import static ksch.wicket.Time.INDIAN_DATE_FORMAT;
 
 public class PatientFormFields extends FormFieldsPanel {
 

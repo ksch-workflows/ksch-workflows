@@ -13,14 +13,6 @@ plugins {
     id "io.spring.dependency-management" version "1.0.7.RELEASE"
 }
 
-ext {
-    guavaVersion = '27.1-jre'
-    jaxbApiVersion = '2.3.1'
-    junitVersion = '4.12'
-    lombokVersion = '1.18.6'
-    springBootVersion = '2.1.3.RELEASE'
-}
-
 allprojects  {
     group = 'org.ks-plus'
     version = '0.1.0-SNAPSHOT'
@@ -41,6 +33,15 @@ subprojects {
 
     tasks.withType(JavaCompile) {
         options.encoding = 'UTF-8'
+    }
+
+    ext {
+        guavaVersion = '27.1-jre'
+        junitVersion = '4.12'
+        lombokVersion = '1.18.6'
+        springBootVersion = '2.1.3.RELEASE'
+        wicketVersion = '8.3.0'
+        wicketSpringBootStarterVersion = '2.1.5'
     }
 
     dependencies {
@@ -65,29 +66,34 @@ configure(subprojects.findAll { !it.name.endsWith('-api')} ) {
 
     dependencies {
         compile 'org.springframework.boot:spring-boot-starter'
-        compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-        compile "javax.xml.bind:jaxb-api:${jaxbApiVersion}"
         compile "com.google.guava:guava:${guavaVersion}"
 
-        testCompile 'org.springframework.boot:spring-boot-starter-test'
         testCompile 'org.mockito:mockito-core'
-        testCompile project(path: ':infrastructure:shared-test')
     }
 
     dependencyManagement {
         imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
     }
 
-    configurations {
-        testImplementation.extendsFrom compileOnly
-    }
-
     pitest {
         targetClasses = ['ksch.*']
-
         threads = 4
-
         failWhenNoMutations = false
+    }
+}
+
+configure(subprojects.findAll { it.name.endsWith('-impl')} ) {
+    dependencies {
+        compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+        testCompile 'org.springframework.boot:spring-boot-starter-test'
+        testCompile project(path: ':infrastructure:shared-test')
+    }
+}
+
+configure(subprojects.findAll { it.name.endsWith('-web')} ) {
+    dependencies {
+        testCompile project(path: ':infrastructure:shared-test')
     }
 }
 

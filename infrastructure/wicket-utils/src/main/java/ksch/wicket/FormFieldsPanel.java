@@ -1,4 +1,4 @@
-package util.wicket;
+package ksch.wicket;
 
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.FormComponent;
