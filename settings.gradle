@@ -6,7 +6,6 @@ include 'infrastructure:shared-test'
 include 'infrastructure:wicket-utils'
 
 def includeModule(moduleName) {
-    include "$moduleName"
     include "$moduleName:$moduleName-api"
     include "$moduleName:$moduleName-impl"
 }
