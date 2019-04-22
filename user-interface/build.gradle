@@ -10,10 +10,6 @@ buildscript {
     }
 }
 
-ext {
-    wicketVersion = '8.3.0'
-}
-
 apply plugin: "org.springframework.boot"
 
 sourceSets.main.resources {
