@@ -8,9 +8,7 @@ include 'infrastructure:wicket-utils'
 def includeModule(moduleName) {
     include "$moduleName"
     include "$moduleName:$moduleName-api"
-    findProject(":$moduleName:$moduleName-api")?.name = "$moduleName-api"
     include "$moduleName:$moduleName-impl"
-    findProject(":$moduleName:$moduleName-impl")?.name = "$moduleName-impl"
 }
 
 includeModule("patient-management")
@@ -18,4 +16,3 @@ includeModule("medical-records")
 includeModule("reporting")
 
 include("patient-management:patient-management-web")
-findProject(":patient-management:patient-management-web")?.name = "patient-management-web"
