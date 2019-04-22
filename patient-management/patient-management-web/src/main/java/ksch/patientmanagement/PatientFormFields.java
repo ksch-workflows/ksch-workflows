@@ -2,9 +2,9 @@ package ksch.patientmanagement;
 
 import ksch.patientmanagement.patient.Patient;
 import ksch.wicket.FormFieldsPanel;
-import ksch.wicket.Time;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static ksch.wicket.Time.INDIAN_DATE_FORMAT;
 
 public class PatientFormFields extends FormFieldsPanel {
 
@@ -23,7 +23,7 @@ public class PatientFormFields extends FormFieldsPanel {
 
         addTextField("inputName", patient.getName());
         addTextField("inputNameFather", patient.getNameFather());
-        addTextField("inputDateOfBirth", patient.getDateOfBirth().format(Time.INDIAN_DATE_FORMAT));
+        addTextField("inputDateOfBirth", patient.getDateOfBirth().format(INDIAN_DATE_FORMAT));
         addTextArea("inputAddress", patient.getAddress());
         addDropDownChoice("inputGender", newArrayList("MALE", "FEMALE", "OTHER"), patient.getGender().toString());
     }
