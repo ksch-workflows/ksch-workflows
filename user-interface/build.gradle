@@ -31,6 +31,8 @@ dependencies {
     compile "org.apache.wicket:wicket-spring:${wicketVersion}"
     compile "org.springframework.boot:spring-boot-starter-security"
     compile "org.wicketstuff:wicketstuff-annotation:${wicketVersion}"
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
 bootRun.systemProperties = System.properties as Map<String, ?>
