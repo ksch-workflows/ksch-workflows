@@ -1,5 +1,7 @@
 package ksch;
 
+import ksch.wicket.TestHomePage;
+import ksch.wicket.WicketTestApplication;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +16,7 @@ public class IndexTest {
     }
 
     @Test
-    public void should_render_index_page(){
+    public void should_render_index_page() {
         tester.startPage(Index.class);
         tester.assertRenderedPage(Index.class);
     }

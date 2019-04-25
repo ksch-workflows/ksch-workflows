@@ -1,4 +1,4 @@
-package ksch;
+package ksch.wicket;
 
 import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * This Wicket application can be used fastly executed Wicket component tests which don't need to use Spring features.
+ * This Wicket application can be used to fastly execute Wicket component tests which don't need to use Spring features.
  *
  * @see "https://ci.apache.org/projects/wicket/guide/8.x/single.html#_test_driven_development_with_wicket"
  * @see "https://ci.apache.org/projects/wicket/guide/8.x/single.html#_test_driven_development_with_wicket_and_spring"
@@ -36,6 +36,6 @@ public class WicketTestApplication extends WebApplication {
 
     @Override
     public Class<? extends Page> getHomePage() {
-        return Index.class;
+        return TestHomePage.class;
     }
 }

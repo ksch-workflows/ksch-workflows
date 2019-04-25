@@ -1,4 +1,4 @@
-package ksch;
+package ksch.wicket;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class MockBean<T> {
         return () -> Mockito.mock(classToBeMocked);
     }
 
-    public static <T> MockBean mockBean(Class<T> classToBeMocked) {
+    public static <T> MockBean of(Class<T> classToBeMocked) {
         return new MockBean<>(classToBeMocked);
     }
 }
