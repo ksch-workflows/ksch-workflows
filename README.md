@@ -87,7 +87,7 @@ find . -name "index.html" | grep "pitest"
 
 ```
 docker run -d --name sonarqube -p 9000:9000 sonarqube
-gradle sonarqube -Dsonar.host.url=http://localhost:9000
+./gradlew sonarqube -Dsonar.host.url=http://localhost:9000
 ```
 
 ### Check for updates of dependencies
@@ -140,4 +140,7 @@ https://gitter.im/ksch-workflows/Lobby
 
 ## License
 
-This software licensed under the [Apache License Version 2.0](https://github.com/ksch-workflows/ksch-workflows/blob/master/LICENSE).
+K.S.C.H. Workflows is maintained by [KS-plus](https://ks-plus.org/en/welcome/),
+an association dedicated to supporting the [Kirpal Sagar](https://kirpal-sagar.org/en/welcome/) project.
+
+It is licensed under the [Apache License Version 2.0](https://github.com/ksch-workflows/ksch-workflows/blob/master/LICENSE).
