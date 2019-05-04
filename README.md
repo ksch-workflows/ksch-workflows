@@ -87,7 +87,7 @@ find . -name "index.html" | grep "pitest"
 
 ```
 docker run -d --name sonarqube -p 9000:9000 sonarqube
-gradle sonarqube -Dsonar.host.url=http://localhost:9000
+./gradlew sonarqube -Dsonar.host.url=http://localhost:9000
 ```
 
 ### Check for updates of dependencies
