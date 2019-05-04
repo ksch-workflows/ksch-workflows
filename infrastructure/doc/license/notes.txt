@@ -1,0 +1,3 @@
+
+How to add a license header to existing files:
+https://stackoverflow.com/a/151690/2339010
