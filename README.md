@@ -55,7 +55,7 @@ Please refer to the following wiki pages for explanations for configuring those 
 The application can be started for development tests with the following Gradle task:
 
 ```
-gradle clean bootRun -Dspring.profiles.active=qa
+./gradlew clean bootRun -Dspring.profiles.active=qa
 ```
 
 Then it is accessible in the browser under the URL http://localhost:8080 (login: user / pwd).
@@ -72,7 +72,7 @@ instances where the injected defects where not caught are hints about parts of t
 source code for which better unit tests should be created.
 
 ```
-gradle clean pitest
+./gradlew clean pitest
 ```
 
 Afterwards HTML reports are generated for each respective subproject and can be found in the directory `build/reports/pitest`:
@@ -93,13 +93,13 @@ gradle sonarqube -Dsonar.host.url=http://localhost:9000
 ### Check for updates of dependencies
 
 ```
-gradle dependencyUpdates -Drevision=release
+./gradlew dependencyUpdates -Drevision=release
 ```
 
 Get an overview over transitive dependencies:
 
 ```
-gradle dependencyTree
+./gradlew dependencyTree
 ```
 
 ## Deployment
@@ -107,7 +107,7 @@ gradle dependencyTree
 The executable JAR file can be compiled with the following Gradle task:
 
 ```
-gradle clean bootJar
+./gradlew clean bootJar
 ```
 
 Afterwards you can find the JAR file in the following directory:

@@ -98,6 +98,11 @@ configure(subprojects.findAll { it.name.endsWith('-web')} ) {
     }
 }
 
+/**
+ * Configuration of the versions which should be recommended for library updates.
+ * 
+ * @see "https://github.com/ben-manes/gradle-versions-plugin"
+ */
 dependencyUpdates.resolutionStrategy {
     componentSelection { rules ->
         rules.all { ComponentSelection selection ->
@@ -109,4 +114,11 @@ dependencyUpdates.resolutionStrategy {
             }
         }
     }
+}
+
+/**
+ * @see "https://docs.gradle.org/current/userguide/gradle_wrapper.html"
+ */
+wrapper {
+    jarFile = "infrastructure/gradle/gradle-wrapper.jar"
 }
