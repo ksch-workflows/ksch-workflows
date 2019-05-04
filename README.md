@@ -81,6 +81,15 @@ Afterwards HTML reports are generated for each respective subproject and can be 
 find . -name "index.html" | grep "pitest"
 ```
 
+## Maintenance
+
+### SonarCube analysis
+
+```
+docker run -d --name sonarqube -p 9000:9000 sonarqube
+gradle sonarqube -Dsonar.host.url=http://localhost:9000
+```
+
 ### Check for updates of dependencies
 
 ```
