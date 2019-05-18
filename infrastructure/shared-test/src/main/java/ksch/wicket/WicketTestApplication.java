@@ -1,3 +1,18 @@
+/**
+ * Copyright 2019 KS-plus e.V.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ksch.wicket;
 
 import org.apache.wicket.Page;
@@ -10,7 +25,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * This Wicket application can be used to fastly execute Wicket component tests which don't need to use Spring features.
+ * This Wicket application can be used to fastly execute Wicket component tests which don't need to use
+ * Spring features.
  *
  * @see "https://ci.apache.org/projects/wicket/guide/8.x/single.html#_test_driven_development_with_wicket"
  * @see "https://ci.apache.org/projects/wicket/guide/8.x/single.html#_test_driven_development_with_wicket_and_spring"
