@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package util;
+package ksch.wicket;
 
-import org.apache.wicket.util.tester.WicketTester;
+import org.apache.wicket.markup.html.WebPage;
 
-public class Debug {
+public class TestHomePage extends WebPage {
 
-    public static void printLastResponse(WicketTester tester) {
-        System.out.println(tester.getLastResponseAsString());
+    private static final long serialVersionUID = 1L;
+
+    public TestHomePage() {
+
     }
 }
