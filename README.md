@@ -89,9 +89,10 @@ find . -name "index.html" | grep "pitest"
 
 ### Run JavaScript tests
 
-The JavaScript unit tests can be executed by opening the respective `*.test.html` file in a web browser.
+The unit tests for the JavaScript files are implemented with the [QUnit](https://api.qunitjs.com/) library.
+They can be executed by opening the respective `*.test.html` file in a web browser.
 
-Within the build system they are executed automatically in a headless browser (see [.travis.yml](.travis.yml#L6)).
+The build system is doing this automatically in a headless browser (see [.travis.yml](.travis.yml#L6)).
 
 
 ## Maintenance
