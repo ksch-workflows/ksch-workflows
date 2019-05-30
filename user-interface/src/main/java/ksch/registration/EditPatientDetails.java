@@ -69,6 +69,12 @@ public class EditPatientDetails extends RegistrationPage {
 
 class EditPatientDetailsActivity extends Activity {
 
+    private final Patient patient;
+
+    private final Button startVisitButton;
+
+    private final AjaxLink<Void> dischargeButton;
+
     @SpringBean
     private PatientTransactions patientTransactions;
 
@@ -80,12 +86,6 @@ class EditPatientDetailsActivity extends Activity {
 
     @SpringBean
     private VisitQueries visitQueries;
-
-    private final Patient patient;
-
-    private final Button startVisitButton;
-
-    private final AjaxLink<Void> dischargeButton;
 
     public EditPatientDetailsActivity(UUID patientId) {
         PatientResource patientResource = toPatientResource(patientQueries.getById(patientId));
@@ -99,6 +99,16 @@ class EditPatientDetailsActivity extends Activity {
         add(new StartVisitForm());
         add(startVisitButton);
         add(dischargeButton);
+    }
+
+    @Override
+    public String getActivityTitle() {
+        return "Patient details";
+    }
+
+    @Override
+    public String getPreviousPagePath() {
+        return "/registration";
     }
 
     private Button createStartVisitButton() {
@@ -134,16 +144,6 @@ class EditPatientDetailsActivity extends Activity {
         }
 
         return btn;
-    }
-
-    @Override
-    public String getActivityTitle() {
-        return "Patient details";
-    }
-
-    @Override
-    public String getPreviousPagePath() {
-        return "/registration";
     }
 
     class UpdatePatientForm extends Form<Void> {
