@@ -62,9 +62,9 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         Patient patient = createTestPatient();
         PageParameters parameters = buildPageParameters(patient);
 
-        tester.startPage(EditPatientDetailsPage.class, parameters);
+        tester.startPage(EditPatientDetails.class, parameters);
 
-        tester.assertRenderedPage(EditPatientDetailsPage.class);
+        tester.assertRenderedPage(EditPatientDetails.class);
         tester.assertContains(patient.getPatientNumber());
         tester.assertContains(patient.getName());
     }
@@ -120,7 +120,7 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
 
     private void openPatientDetails(Patient patient) {
         PageParameters parameters = buildPageParameters(patient);
-        tester.startPage(EditPatientDetailsPage.class, parameters);
+        tester.startPage(EditPatientDetails.class, parameters);
     }
 
     private void startVisit() {

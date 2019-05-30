@@ -51,11 +51,11 @@ import static ksch.wicket.Time.parseDate;
 
 @MountPath("/registration/edit-patient/${id}")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
-public class EditPatientDetailsPage extends RegistrationPage {
+public class EditPatientDetails extends RegistrationPage {
 
     private final UUID patientId;
 
-    public EditPatientDetailsPage(PageParameters pageParameters) {
+    public EditPatientDetails(PageParameters pageParameters) {
         super(pageParameters);
 
         patientId = UUID.fromString(pageParameters.get("id").toString());

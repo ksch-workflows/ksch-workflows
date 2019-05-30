@@ -70,7 +70,7 @@ public class RegistrationDashboardTest extends WebPageTest {
         formTester.setValue("patientFormFields:inputAddress", "Kirpal Sagar");
         formTester.submit();
 
-        tester.assertRenderedPage(EditPatientDetailsPage.class);
+        tester.assertRenderedPage(EditPatientDetails.class);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class RegistrationDashboardTest extends WebPageTest {
         formTester.setValue("opdNumber", visit.getOpdNumber());
         formTester.submit();
 
-        tester.assertRenderedPage(EditPatientDetailsPage.class);
+        tester.assertRenderedPage(EditPatientDetails.class);
         tester.assertContains(patient.getName());
     }
 }
