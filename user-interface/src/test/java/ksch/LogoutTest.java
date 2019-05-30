@@ -15,7 +15,7 @@
  */
 package ksch;
 
-import ksch.registration.RegistrationDashboardPage;
+import ksch.registration.RegistrationDashboard;
 import org.junit.Test;
 
 public class LogoutTest extends WebPageTest {
@@ -25,7 +25,7 @@ public class LogoutTest extends WebPageTest {
         login("user", "pwd");
 
         tester.startPage(Logout.class);
-        tester.startPage(RegistrationDashboardPage.class);
+        tester.startPage(RegistrationDashboard.class);
 
         tester.assertRenderedPage(Login.class);
     }

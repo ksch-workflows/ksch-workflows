@@ -50,15 +50,15 @@ import static ksch.wicket.Time.parseDate;
 
 @MountPath("/registration")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
-public class RegistrationDashboardPage extends RegistrationPage {
+public class RegistrationDashboard extends RegistrationPage {
 
     @Override
     protected Panel getContent() {
-        return new RegistrationDashboard();
+        return new RegistrationDashboardPanel();
     }
 }
 
-class RegistrationDashboard extends Panel {
+class RegistrationDashboardPanel extends Panel {
 
     @SpringBean
     private PatientQueries patientQueries;
@@ -71,7 +71,7 @@ class RegistrationDashboard extends Panel {
 
     private WebMarkupContainer patientListContainer;
 
-    public RegistrationDashboard() {
+    public RegistrationDashboardPanel() {
         super(MAIN_CONTENT_ID);
 
         add(createOpdPatientList());

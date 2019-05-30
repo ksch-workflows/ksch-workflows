@@ -42,8 +42,8 @@ public class RegistrationDashboardTest extends WebPageTest {
 
     @Test
     public void should_render_registration_dashboard() {
-        tester.startPage(RegistrationDashboardPage.class);
-        tester.assertRenderedPage(RegistrationDashboardPage.class);
+        tester.startPage(RegistrationDashboard.class);
+        tester.assertRenderedPage(RegistrationDashboard.class);
     }
 
     @Test
@@ -51,8 +51,8 @@ public class RegistrationDashboardTest extends WebPageTest {
         Patient patient = patientTransactions.create(new TestPatient());
         visitTransactions.startVisit(patient, VisitType.OPD);
 
-        tester.startPage(RegistrationDashboardPage.class);
-        tester.assertRenderedPage(RegistrationDashboardPage.class);
+        tester.startPage(RegistrationDashboard.class);
+        tester.assertRenderedPage(RegistrationDashboard.class);
 
         tester.assertContains(patient.getName());
         tester.assertContainsNot("There are no registered OPD patients.");
@@ -60,7 +60,7 @@ public class RegistrationDashboardTest extends WebPageTest {
 
     @Test
     public void should_register_new_patient() {
-        tester.startPage(RegistrationDashboardPage.class);
+        tester.startPage(RegistrationDashboard.class);
 
         FormTester formTester = tester.newFormTester("content:addPatientForm", false);
         formTester.setValue("patientFormFields:inputName", "Ravindra Kodanda");
@@ -75,8 +75,8 @@ public class RegistrationDashboardTest extends WebPageTest {
 
     @Test
     public void should_render_message_instead_of_opt_patient_table_if_no_active_opt_visits() {
-        tester.startPage(RegistrationDashboardPage.class);
-        tester.assertRenderedPage(RegistrationDashboardPage.class);
+        tester.startPage(RegistrationDashboard.class);
+        tester.assertRenderedPage(RegistrationDashboard.class);
 
         tester.assertContains("There are no registered OPD patients.");
     }
@@ -85,7 +85,7 @@ public class RegistrationDashboardTest extends WebPageTest {
     public void should_open_patient_details_by_entering_opt_number() {
         Patient patient = patientTransactions.create(new TestPatient());
         Visit visit = visitTransactions.startVisit(patient, VisitType.OPD);
-        tester.startPage(RegistrationDashboardPage.class);
+        tester.startPage(RegistrationDashboard.class);
 
         FormTester formTester = tester.newFormTester("content:opdPatientForm", false);
         formTester.setValue("opdNumber", visit.getOpdNumber());

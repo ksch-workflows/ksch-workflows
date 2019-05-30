@@ -18,7 +18,7 @@ package ksch.report;
 
 import ksch.event.EventRepository;
 import lombok.RequiredArgsConstructor;
-import ksch.PatientReport;
+import ksch.PatientReportQueries;
 import ksch.patientmanagement.patient.PatientCreatedEvent;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-public class PatientReportImpl implements PatientReport {
+public class PatientReportImpl implements PatientReportQueries {
 
     private final EventRepository eventRepository;
 

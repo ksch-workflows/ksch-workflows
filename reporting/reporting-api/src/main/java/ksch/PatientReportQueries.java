@@ -18,7 +18,7 @@ package ksch;
 
 import java.time.LocalDateTime;
 
-public interface PatientReport {
+public interface PatientReportQueries {
 
     int getNumberOfNewPatients(LocalDateTime from, LocalDateTime to);
 }

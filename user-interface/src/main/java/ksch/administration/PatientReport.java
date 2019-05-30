@@ -17,7 +17,7 @@
 package ksch.administration;
 
 import ksch.Activity;
-import ksch.PatientReport;
+import ksch.PatientReportQueries;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -29,9 +29,9 @@ import static java.time.LocalDateTime.now;
 
 @MountPath("/administration/patient-report")
 @AuthorizeInstantiation({"ADMINISTRATOR"})
-public class PatientReportPage extends AdministrationPage {
+public class PatientReport extends AdministrationPage {
 
-    public PatientReportPage(PageParameters pageParameters) {
+    public PatientReport(PageParameters pageParameters) {
         super(pageParameters);
     }
 
@@ -44,7 +44,7 @@ public class PatientReportPage extends AdministrationPage {
 class PatientReportActivity extends Activity {
 
     @SpringBean
-    private PatientReport patientReport;
+    private PatientReportQueries patientReport;
 
     public PatientReportActivity() {
         add(new Label("numberOfNewPatient", patientReport.getNumberOfNewPatients(now().minusDays(7), now())));
