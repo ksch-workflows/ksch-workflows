@@ -62,6 +62,12 @@ Then it is accessible in the browser under the URL http://localhost:8080 (login:
 
 The database can be inspected under this URL: http://localhost:8080/h2-console (login: sa / <empty password>).
 
+### Run Java tests
+
+```
+./gradlew test
+```
+
 ### Run mutation tests
 
 With the help of mutation tests it is possible to improve the quality of the unit
@@ -80,6 +86,14 @@ Afterwards HTML reports are generated for each respective subproject and can be 
 ```
 find . -name "index.html" | grep "pitest"
 ```
+
+### Run JavaScript tests
+
+The unit tests for the JavaScript files are implemented with the [QUnit](https://api.qunitjs.com/) library.
+They can be executed by opening the respective `*.test.html` file in a web browser.
+
+The build system is doing this automatically in a headless browser (see [.travis.yml](.travis.yml#L6)).
+
 
 ## Maintenance
 

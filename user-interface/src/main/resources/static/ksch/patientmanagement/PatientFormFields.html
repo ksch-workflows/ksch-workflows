@@ -24,6 +24,10 @@ limitations under the License.
 
     <script src="../../js/jquery.min.js" ></script>
     <script src="../../js/bootstrap.min.js" ></script>
+
+    <wicket:head>
+        <script src="../../ksch/registration/PatientFormFields.js"></script>
+    </wicket:head>
 </head>
 
 <body>
@@ -45,14 +49,35 @@ limitations under the License.
                     <input wicket:id="inputNameFather" type="text" class="form-control" id="inputNameFather"
                            placeholder="Patient father's name">
                 </div>
-                <div class="form-group">
-                    <label for="inputDateOfBirth">Date of birth</label>
-                    <input required wicket:id="inputDateOfBirth" type="text" class="form-control" id="inputDateOfBirth"
-                           placeholder="Patient date of birth (dd-mm-yyyy)" pattern="[0-3]?[0-9]-[0-1]?[0-9]-[1-2][0-9][0-9][0-9]">
-                    <div class="invalid-feedback">
-                        Please enter the patient date of birth here.
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="dateOfBirth">Date of birth</label>
+                        <input required
+                            id="dateOfBirth"
+                            wicket:id="dateOfBirth"
+                            class="form-control"
+                            type="text"
+                            placeholder="Patient date of birth (dd-mm-yyyy)"
+                            pattern="[0-3]?[0-9]-[0-1]?[0-9]-[1-2][0-9][0-9][0-9]"
+                            onchange="onDateOfBirthUpdated();"
+                        />
+                        <div class="invalid-feedback">
+                            Please enter the patient date of birth here.
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label for="age">Age</label>
+                        <input
+                            id="age"
+                            class="form-control"
+                            type="text"
+                            placeholder="Patient age"
+                            pattern="[0-9]{1,3}"
+                            onchange="onAgeUpdated();"
+                        />
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label for="inputGender">Gender</label>
                     <select required wicket:id="inputGender" class="form-control" id="inputGender">

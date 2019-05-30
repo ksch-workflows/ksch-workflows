@@ -1,7 +1,6 @@
 # Gradle
 .gradle/
 build/
-out/
 
 # IntelliJ
 .idea/
@@ -9,20 +8,24 @@ out/
 *.ipr
 *.iws
 fileTemplates/
+out/
 
 # Eclipse
 .classpath
 .project
 .settings/
 
-# Coala
-*.orig
+# JavaScript
+node_modules/
+package-lock.json
 
 # Miscellaneous
-notes.org
+.notes/
+.scannerwork/
 \#*
 .#*
 *~
 *~*
 codealike.json
+*.orig
 
