@@ -1,11 +1,11 @@
 sudo: required
 os: linux
 jdk: openjdk11
-node_js: 9
+node_js: "9"
 
 before_install:
   - npm install -g grunt-cli
 
 script:
   - ./gradlew build
-  - cd user-interface/ && npm install --save-dev && grunt qunit
+  - npm install --save-dev && grunt qunit
