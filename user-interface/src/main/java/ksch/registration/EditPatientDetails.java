@@ -69,8 +69,11 @@ public class EditPatientDetails extends RegistrationPage {
 
 class EditPatientDetailsActivity extends Activity {
 
+    @SpringBean
+    private PatientQueries patientQueries;
+
     EditPatientDetailsActivity(UUID patientId) {
-        add(new GeneralPatientInformation(patientId));
+        add(new GeneralPatientInformation(patientQueries.getById(patientId)));
     }
 
     @Override

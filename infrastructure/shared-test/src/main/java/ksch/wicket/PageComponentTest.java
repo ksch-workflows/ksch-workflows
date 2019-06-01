@@ -16,11 +16,12 @@ public class PageComponentTest {
     protected void setMockBeans(MockBean... mockBeans) {
         this.mockBeans = new ArrayList<>();
         this.mockBeans.addAll(Arrays.asList(mockBeans));
+
+        tester = new WicketTester(new PageComponentTestApplication(this.mockBeans));
     }
 
     @Before
     public void setUp() {
-        setMockBeans();
         tester = new WicketTester(new PageComponentTestApplication(mockBeans));
     }
 }
