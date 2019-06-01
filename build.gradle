@@ -96,6 +96,10 @@ configure(subprojects.findAll { it.name.endsWith('-web')} ) {
     dependencies {
         testCompile project(path: ':infrastructure:shared-test')
     }
+
+    sourceSets.main.resources {
+        srcDir "src/main/resources/static"
+    }
 }
 
 /**
