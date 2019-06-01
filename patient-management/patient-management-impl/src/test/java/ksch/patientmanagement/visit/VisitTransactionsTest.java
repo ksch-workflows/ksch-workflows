@@ -15,6 +15,7 @@
  */
 package ksch.patientmanagement.visit;
 
+import ksch.patientmanagement.TestPatient;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientRepository;
 import org.junit.Test;

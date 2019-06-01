@@ -94,6 +94,9 @@ class EditPatientDetailsActivity extends Activity {
         this.startVisitButton = createStartVisitButton();
         this.dischargeButton = createDischargeButton();
 
+        // TODO add(new GeneralPatientInfoPanel(patient));
+        // TODO add(new VisitBillingPanel(patient));
+        // TODO add(new CreateOrderPanel(patient));
         add(new TextField<>("patientNumber", new Model<>(patient.getPatientNumber())));
         add(new UpdatePatientForm(patientResource));
         add(new StartVisitForm());

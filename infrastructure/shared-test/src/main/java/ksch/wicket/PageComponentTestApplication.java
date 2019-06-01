@@ -32,12 +32,12 @@ import java.util.List;
  * @see "https://ci.apache.org/projects/wicket/guide/8.x/single.html#_test_driven_development_with_wicket"
  * @see "https://ci.apache.org/projects/wicket/guide/8.x/single.html#_test_driven_development_with_wicket_and_spring"
  */
-public class WicketTestApplication extends WebApplication {
+public class PageComponentTestApplication extends WebApplication {
 
-    private List<MockBean> mockBeans = new ArrayList<>();
+    private final List<MockBean> mockBeans;
 
-    public WicketTestApplication(MockBean... mockBeans) {
-        this.mockBeans.addAll(Arrays.asList(mockBeans));
+    public PageComponentTestApplication(List<MockBean> mockBeans) {
+        this.mockBeans = mockBeans;
     }
 
     @Override
