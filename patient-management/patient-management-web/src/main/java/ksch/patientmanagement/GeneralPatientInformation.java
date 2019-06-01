@@ -52,9 +52,6 @@ public class GeneralPatientInformation extends Panel {
     private PatientTransactions patientTransactions;
 
     @SpringBean
-    private PatientQueries patientQueries;
-
-    @SpringBean
     private VisitTransactions visitTransactions;
 
     @SpringBean
