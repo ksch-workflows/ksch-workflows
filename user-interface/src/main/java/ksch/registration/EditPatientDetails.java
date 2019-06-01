@@ -96,8 +96,6 @@ class EditPatientDetailsActivity extends Activity {
         this.dischargeButton = createDischargeButton();
 
         add(new GeneralPatientInformation(patient));
-
-        // TODO add(new GeneralPatientInfoPanel(patient));
         // TODO add(new VisitBillingPanel(patient));
         // TODO add(new CreateOrderPanel(patient));
         add(new TextField<>("patientNumber", new Model<>(patient.getPatientNumber())));
