@@ -26,7 +26,11 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static ksch.patientmanagement.PatientResource.toPatientResource;
+
 public class GeneralPatientInformationTest extends PageComponentTest {
+
+    private PatientResource patient = toPatientResource(new TestPatient());
 
     @Override
     protected List<MockBean> getMockBeans() {
@@ -40,7 +44,7 @@ public class GeneralPatientInformationTest extends PageComponentTest {
 
     @Test
     public void should_render_panel_with_general_information_about_a_patient() {
-        GeneralPatientInformation generalPatientInformation = new GeneralPatientInformation(new TestPatient());
+        GeneralPatientInformation generalPatientInformation = new GeneralPatientInformation(patient);
 
         tester.startComponentInPage(generalPatientInformation);
     }
