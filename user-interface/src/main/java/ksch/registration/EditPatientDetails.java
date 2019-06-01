@@ -69,35 +69,8 @@ public class EditPatientDetails extends RegistrationPage {
 
 class EditPatientDetailsActivity extends Activity {
 
-    private final Patient patient;
-
-    // TODO Remove unused spring beans.
-
-    @SpringBean
-    private PatientTransactions patientTransactions;
-
-    @SpringBean
-    private PatientQueries patientQueries;
-
-    @SpringBean
-    private VisitTransactions visitTransactions;
-
-    @SpringBean
-    private VisitQueries visitQueries;
-
-    public EditPatientDetailsActivity(UUID patientId) {
-        PatientResource patientResource = toPatientResource(patientQueries.getById(patientId));
-
-        this.patient = patientResource;
-
-
-        add(new GeneralPatientInformation(patient));
-        // TODO add(new VisitBillingPanel(patient));
-        // TODO add(new CreateOrderPanel(patient));
-        add(new TextField<>("patientNumber", new Model<>(patient.getPatientNumber())));
-        add(new UpdatePatientForm(patientResource));
-
-
+    EditPatientDetailsActivity(UUID patientId) {
+        add(new GeneralPatientInformation(patientId));
     }
 
     @Override
@@ -108,32 +81,5 @@ class EditPatientDetailsActivity extends Activity {
     @Override
     public String getPreviousPagePath() {
         return "/registration";
-    }
-
-    class UpdatePatientForm extends Form<Void> {
-
-        private final PatientResource patient;
-
-        private final PatientFormFields patientFormFields;
-
-        public UpdatePatientForm(PatientResource patient) {
-            super("updatePatientForm");
-
-            this.patient = patient;
-            this.patientFormFields = new PatientFormFields(patient);
-
-            add(patientFormFields);
-        }
-
-        @Override
-        protected void onSubmit() {
-            patient.setName(patientFormFields.getValue("inputName"));
-            patient.setNameFather(patientFormFields.getValue("inputNameFather"));
-            patient.setAddress(patientFormFields.getValue("inputAddress"));
-            patient.setGender(Gender.valueOf(patientFormFields.getValue("inputGender")));
-            patient.setDateOfBirth(parseDate(patientFormFields.getValue("dateOfBirth")));
-
-            patientTransactions.update(patient);
-        }
     }
 }

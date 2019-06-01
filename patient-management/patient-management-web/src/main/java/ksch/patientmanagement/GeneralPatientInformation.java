@@ -1,6 +1,7 @@
 package ksch.patientmanagement;
 
 
+import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.patient.PatientTransactions;
@@ -13,13 +14,19 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RadioChoice;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
+
+import static ksch.patientmanagement.PatientResource.toPatientResource;
+import static ksch.wicket.Time.parseDate;
 
 public class GeneralPatientInformation extends Panel {
 
@@ -42,16 +49,18 @@ public class GeneralPatientInformation extends Panel {
     private VisitQueries visitQueries;
 
 
-    public GeneralPatientInformation(Patient patient) {
+    public GeneralPatientInformation(UUID patientId) {
         super("generalPatientInformation");
 
-        this.patient = patient;
+        this.patient = patientQueries.getById(patientId);
         this.startVisitButton = createStartVisitButton();
         this.dischargeButton = createDischargeButton();
 
         add(startVisitButton);
         add(dischargeButton);
         add(new StartVisitForm());
+        add(new UpdatePatientForm(toPatientResource(patientQueries.getById(patient.getId()))));
+        add(new TextField<>("patientNumber", new Model<>(patient.getPatientNumber())));
     }
 
     private Button createStartVisitButton() {
@@ -112,6 +121,33 @@ public class GeneralPatientInformation extends Panel {
 
             startVisitButton.setVisible(false);
             dischargeButton.setVisible(true);
+        }
+    }
+
+    class UpdatePatientForm extends Form<Void> {
+
+        private final PatientResource patient;
+
+        private final PatientFormFields patientFormFields;
+
+        public UpdatePatientForm(PatientResource patient) {
+            super("updatePatientForm");
+
+            this.patient = patient;
+            this.patientFormFields = new PatientFormFields(patient);
+
+            add(patientFormFields);
+        }
+
+        @Override
+        protected void onSubmit() {
+            patient.setName(patientFormFields.getValue("inputName"));
+            patient.setNameFather(patientFormFields.getValue("inputNameFather"));
+            patient.setAddress(patientFormFields.getValue("inputAddress"));
+            patient.setGender(Gender.valueOf(patientFormFields.getValue("inputGender")));
+            patient.setDateOfBirth(parseDate(patientFormFields.getValue("dateOfBirth")));
+
+            patientTransactions.update(patient);
         }
     }
 }

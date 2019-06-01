@@ -74,7 +74,7 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         Patient patient = createTestPatient();
         openPatientDetails(patient);
 
-        tester.newFormTester("content:updatePatientForm", false)
+        tester.newFormTester("content:generalPatientInformation:updatePatientForm", false)
                 .setValue("patientFormFields:inputAddress", "St. Gilgen")
                 .submit();
 
