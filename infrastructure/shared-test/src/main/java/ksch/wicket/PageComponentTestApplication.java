@@ -32,7 +32,7 @@ import java.util.List;
  * @see "https://ci.apache.org/projects/wicket/guide/8.x/single.html#_test_driven_development_with_wicket"
  * @see "https://ci.apache.org/projects/wicket/guide/8.x/single.html#_test_driven_development_with_wicket_and_spring"
  */
-public class PageComponentTestApplication extends WebApplication {
+class PageComponentTestApplication extends WebApplication {
 
     private final List<MockBean> mockBeans;
 
