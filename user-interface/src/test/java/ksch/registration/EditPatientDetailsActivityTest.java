@@ -39,7 +39,7 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
 
     public static final String CSS_SELECTOR_DISCHARGE_BUTTON = "a[name='dischargeButton']";
 
-    public static final String CSS_SELECTOR_START_VISIT_BUTTON = "button[name='content:startVisitButton']";
+    public static final String CSS_SELECTOR_START_VISIT_BUTTON = "button[name='content:generalPatientInformation:startVisitButton']";
 
     public static final String AJAX_RESPONSE_WITH_START_VISIT_BUTTON = "ajax-response.*startVisitButton";
 
@@ -67,7 +67,6 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         tester.assertRenderedPage(EditPatientDetails.class);
         tester.assertContains(patient.getPatientNumber());
         tester.assertContains(patient.getName());
-        tester.assertContains("Placeholder for general patient information.");
     }
 
     @Test
@@ -89,7 +88,7 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         openPatientDetails(patient);
         assertNotContains(currentPage(), CSS_SELECTOR_DISCHARGE_BUTTON);
 
-        tester.newFormTester("content:startVisitForm")
+        tester.newFormTester("content:generalPatientInformation:startVisitForm")
                 .select("visitTypeSelection", 1)
                 .submit();
 
@@ -104,11 +103,12 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         openPatientDetails(patient);
         startVisit();
 
-        tester.clickLink("content:dischargeButton");
+        tester.clickLink("content:generalPatientInformation:dischargeButton");
 
         tester.assertContains(AJAX_RESPONSE_WITH_START_VISIT_BUTTON);
         // Without re-opening of the page only the Ajax response is available for verifications
         openPatientDetails(patient);
+
         assertContains(currentPage(), CSS_SELECTOR_START_VISIT_BUTTON);
         assertNotContains(currentPage(), CSS_SELECTOR_DISCHARGE_BUTTON);
     }
@@ -125,10 +125,10 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
     }
 
     private void startVisit() {
-        tester.newFormTester("content:startVisitForm")
+        tester.newFormTester("content:generalPatientInformation:startVisitForm")
                 .select("visitTypeSelection", 1)
                 .submit();
-        tester.assertComponent("content:dischargeButton", AjaxLink.class);
+        tester.assertComponent("content:generalPatientInformation:dischargeButton", AjaxLink.class);
         assertNotContains(currentPage(), CSS_SELECTOR_START_VISIT_BUTTON);
     }
 

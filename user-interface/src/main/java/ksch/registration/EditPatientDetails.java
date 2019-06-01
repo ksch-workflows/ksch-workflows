@@ -28,7 +28,6 @@ import ksch.patientmanagement.visit.VisitQueries;
 import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
 import lombok.Getter;
-import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Button;
@@ -72,9 +71,7 @@ class EditPatientDetailsActivity extends Activity {
 
     private final Patient patient;
 
-    private final Button startVisitButton;
-
-    private final AjaxLink<Void> dischargeButton;
+    // TODO Remove unused spring beans.
 
     @SpringBean
     private PatientTransactions patientTransactions;
@@ -92,17 +89,15 @@ class EditPatientDetailsActivity extends Activity {
         PatientResource patientResource = toPatientResource(patientQueries.getById(patientId));
 
         this.patient = patientResource;
-        this.startVisitButton = createStartVisitButton();
-        this.dischargeButton = createDischargeButton();
+
 
         add(new GeneralPatientInformation(patient));
         // TODO add(new VisitBillingPanel(patient));
         // TODO add(new CreateOrderPanel(patient));
         add(new TextField<>("patientNumber", new Model<>(patient.getPatientNumber())));
         add(new UpdatePatientForm(patientResource));
-        add(new StartVisitForm());
-        add(startVisitButton);
-        add(dischargeButton);
+
+
     }
 
     @Override
@@ -113,41 +108,6 @@ class EditPatientDetailsActivity extends Activity {
     @Override
     public String getPreviousPagePath() {
         return "/registration";
-    }
-
-    private Button createStartVisitButton() {
-        Button btn = new Button("startVisitButton");
-        btn.setOutputMarkupId(true);
-        btn.setOutputMarkupPlaceholderTag(true);
-
-        if (visitQueries.isActive(patient)) {
-            btn.setVisible(false);
-        }
-
-        return btn;
-    }
-
-    private AjaxLink<Void> createDischargeButton() {
-        AjaxLink<Void> btn = new AjaxLink<>("dischargeButton") {
-            @Override
-            public void onClick(AjaxRequestTarget target) {
-                visitTransactions.discharge(patient);
-
-                startVisitButton.setVisible(true);
-                dischargeButton.setVisible(false);
-
-                target.add(startVisitButton);
-                target.add(dischargeButton);
-            }
-        };
-        btn.setOutputMarkupId(true);
-        btn.setOutputMarkupPlaceholderTag(true);
-
-        if (!visitQueries.isActive(patient)) {
-            btn.setVisible(false);
-        }
-
-        return btn;
     }
 
     class UpdatePatientForm extends Form<Void> {
@@ -174,32 +134,6 @@ class EditPatientDetailsActivity extends Activity {
             patient.setDateOfBirth(parseDate(patientFormFields.getValue("dateOfBirth")));
 
             patientTransactions.update(patient);
-        }
-    }
-
-    @Getter
-    class StartVisitForm extends Form<Void> {
-
-        private final List<String> visitTypes = Arrays.stream(VisitType.values())
-                .map(Enum::toString)
-                .collect(Collectors.toList());
-
-        private String visitType;
-
-        public StartVisitForm() {
-            super("startVisitForm");
-
-            PropertyModel<String> visitType = new PropertyModel<>(this, "visitType");
-            RadioChoice<String> visitTypeSelection = new RadioChoice<>("visitTypeSelection", visitType, visitTypes);
-            add(visitTypeSelection);
-        }
-
-        @Override
-        protected void onSubmit() {
-            visitTransactions.startVisit(patient, VisitType.valueOf(visitType));
-
-            startVisitButton.setVisible(false);
-            dischargeButton.setVisible(true);
         }
     }
 }
