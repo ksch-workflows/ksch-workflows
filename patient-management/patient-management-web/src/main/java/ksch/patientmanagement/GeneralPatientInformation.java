@@ -17,7 +17,6 @@
 package ksch.patientmanagement;
 
 import ksch.patientmanagement.patient.Gender;
-import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.VisitQueries;
@@ -39,7 +38,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ksch.patientmanagement.PatientResource.toPatientResource;
 import static ksch.wicket.Time.parseDate;
 
 public class GeneralPatientInformation extends Panel {
