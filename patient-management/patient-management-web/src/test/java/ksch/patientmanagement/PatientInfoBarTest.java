@@ -13,20 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch;
 
-import ksch.registration.RegistrationDashboard;
+package ksch.patientmanagement;
+
+import ksch.wicket.PageComponentTest;
 import org.junit.Test;
 
-public class LogoutTest extends WebPageTest {
+public class PatientInfoBarTest extends PageComponentTest {
 
     @Test
-    public void should_log_out_user() {
-        login("user", "pwd");
+    public void should_render_patient_info_bar() {
+        PatientInfoBar patientInfoBar = new PatientInfoBar(new TestPatient());
 
-        tester.startPage(Logout.class);
-        tester.startPage(RegistrationDashboard.class);
-
-        tester.assertRenderedPage(Login.class);
+        tester.startComponentInPage(patientInfoBar);
     }
 }

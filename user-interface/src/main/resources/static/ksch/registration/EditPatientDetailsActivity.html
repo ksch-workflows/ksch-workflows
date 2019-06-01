@@ -31,66 +31,7 @@ limitations under the License.
 
     <wicket:extend>
 
-        <div class="row">
-            <div class="col-md-6">
-                <button wicket:id="startVisitButton" type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#startVisitDialog">
-                    Start visit
-                </button>
-
-                <a wicket:id="dischargeButton" name="dischargeButton" class="btn btn-outline-secondary" href="#">
-                    Discharge
-                </a>
-            </div>
-        </div>
-        <div>
-            <div class="card">
-                <div class="card-header">
-                    General information
-                </div>
-                <div class="card-body">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="patientNumber">Patient number</label>
-                            <input wicket:id="patientNumber" value="[0000]" type="text" class="form-control" id="patientNumber" readonly>
-                        </div>
-                        <form wicket:id="updatePatientForm" class="needs-validation" novalidate>
-                            <span wicket:id="patientFormFields" >
-                                [patient form fields]
-                            </span>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="startVisitDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="startVisitDialogLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="startVisitDialogLabel">Start visit</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form wicket:id="startVisitForm" class="modal-body">
-                        <p>Please select the visit type:</p>
-                        <div class="form-group" wicket:id="visitTypeSelection">
-                            <span class="test">
-                                <input type="radio" class="form-control" id="Example1">
-                            </span>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-
+        <span wicket:id="generalPatientInformation"/>
 
     </wicket:extend>
 

@@ -15,20 +15,10 @@
  */
 package ksch;
 
-import ksch.wicket.TestHomePage;
-import ksch.wicket.WicketTestApplication;
-import org.apache.wicket.util.tester.WicketTester;
-import org.junit.Before;
+import ksch.wicket.PageComponentTest;
 import org.junit.Test;
 
-public class IndexTest {
-
-    private WicketTester tester;
-
-    @Before
-    public void setUp() {
-        tester = new WicketTester(new WicketTestApplication());
-    }
+public class IndexTest extends PageComponentTest {
 
     @Test
     public void should_render_index_page() {

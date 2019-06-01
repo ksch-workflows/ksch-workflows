@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ksch.patientmanagement.visit;
+package ksch.patientmanagement;
 
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;

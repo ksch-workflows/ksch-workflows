@@ -14,14 +14,9 @@
  * limitations under the License.
  */
 
-package ksch.registration;
+package ksch.patientmanagement;
 
-import ksch.Activity;
-import ksch.patientmanagement.PatientFormFields;
-import ksch.patientmanagement.PatientResource;
 import ksch.patientmanagement.patient.Gender;
-import ksch.patientmanagement.patient.Patient;
-import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.VisitQueries;
 import ksch.patientmanagement.visit.VisitTransactions;
@@ -33,25 +28,27 @@ import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RadioChoice;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static ksch.patientmanagement.PatientResource.toPatientResource;
 import static ksch.wicket.Time.parseDate;
 
-public class EditPatientDetailsActivity extends Activity {
+public class GeneralPatientInformation extends Panel {
+
+    private final PatientResource patient;
+
+    private final Button startVisitButton;
+
+    private final AjaxLink<Void> dischargeButton;
 
     @SpringBean
     private PatientTransactions patientTransactions;
-
-    @SpringBean
-    private PatientQueries patientQueries;
 
     @SpringBean
     private VisitTransactions visitTransactions;
@@ -59,24 +56,19 @@ public class EditPatientDetailsActivity extends Activity {
     @SpringBean
     private VisitQueries visitQueries;
 
-    private final Patient patient;
 
-    private final Button startVisitButton;
+    public GeneralPatientInformation(PatientResource patient) {
+        super("generalPatientInformation");
 
-    private final AjaxLink<Void> dischargeButton;
-
-    public EditPatientDetailsActivity(UUID patientId) {
-        PatientResource patientResource = toPatientResource(patientQueries.getById(patientId));
-
-        this.patient = patientResource;
+        this.patient = patient;
         this.startVisitButton = createStartVisitButton();
         this.dischargeButton = createDischargeButton();
 
-        add(new TextField<>("patientNumber", new Model<>(patient.getPatientNumber())));
-        add(new UpdatePatientForm(patientResource));
-        add(new StartVisitForm());
         add(startVisitButton);
         add(dischargeButton);
+        add(new StartVisitForm());
+        add(new UpdatePatientForm(patient));
+        add(new TextField<>("patientNumber", new Model<>(patient.getPatientNumber())));
     }
 
     private Button createStartVisitButton() {
@@ -92,7 +84,7 @@ public class EditPatientDetailsActivity extends Activity {
     }
 
     private AjaxLink<Void> createDischargeButton() {
-        AjaxLink<Void> btn = new AjaxLink<Void>("dischargeButton") {
+        AjaxLink<Void> btn = new AjaxLink<>("dischargeButton") {
             @Override
             public void onClick(AjaxRequestTarget target) {
                 visitTransactions.discharge(patient);
@@ -114,14 +106,30 @@ public class EditPatientDetailsActivity extends Activity {
         return btn;
     }
 
-    @Override
-    public String getActivityTitle() {
-        return "Patient details";
-    }
+    @Getter
+    class StartVisitForm extends Form<Void> {
 
-    @Override
-    public String getPreviousPagePath() {
-        return "/registration";
+        private final List<String> visitTypes = Arrays.stream(VisitType.values())
+                .map(Enum::toString)
+                .collect(Collectors.toList());
+
+        private String visitType;
+
+        public StartVisitForm() {
+            super("startVisitForm");
+
+            PropertyModel<String> visitType = new PropertyModel<>(this, "visitType");
+            RadioChoice<String> visitTypeSelection = new RadioChoice<>("visitTypeSelection", visitType, visitTypes);
+            add(visitTypeSelection);
+        }
+
+        @Override
+        protected void onSubmit() {
+            visitTransactions.startVisit(patient, VisitType.valueOf(visitType));
+
+            startVisitButton.setVisible(false);
+            dischargeButton.setVisible(true);
+        }
     }
 
     class UpdatePatientForm extends Form<Void> {
@@ -148,32 +156,6 @@ public class EditPatientDetailsActivity extends Activity {
             patient.setDateOfBirth(parseDate(patientFormFields.getValue("dateOfBirth")));
 
             patientTransactions.update(patient);
-        }
-    }
-
-    @Getter
-    class StartVisitForm extends Form<Void> {
-
-        private final List<String> visitTypes = Arrays.stream(VisitType.values())
-                .map(Enum::toString)
-                .collect(Collectors.toList());
-
-        private String visitType;
-
-        public StartVisitForm() {
-            super("startVisitForm");
-
-            PropertyModel<String> visitType = new PropertyModel<>(this, "visitType");
-            RadioChoice<String> visitTypeSelection = new RadioChoice<>("visitTypeSelection", visitType, visitTypes);
-            add(visitTypeSelection);
-        }
-
-        @Override
-        protected void onSubmit() {
-            visitTransactions.startVisit(patient, VisitType.valueOf(visitType));
-
-            startVisitButton.setVisible(false);
-            dischargeButton.setVisible(true);
         }
     }
 }

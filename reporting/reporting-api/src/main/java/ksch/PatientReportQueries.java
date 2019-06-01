@@ -13,20 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package ksch;
 
-import ksch.registration.RegistrationDashboard;
-import org.junit.Test;
+import java.time.LocalDateTime;
 
-public class LogoutTest extends WebPageTest {
+public interface PatientReportQueries {
 
-    @Test
-    public void should_log_out_user() {
-        login("user", "pwd");
-
-        tester.startPage(Logout.class);
-        tester.startPage(RegistrationDashboard.class);
-
-        tester.assertRenderedPage(Login.class);
-    }
+    int getNumberOfNewPatients(LocalDateTime from, LocalDateTime to);
 }

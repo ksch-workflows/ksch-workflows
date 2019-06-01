@@ -14,11 +14,24 @@
  * limitations under the License.
  */
 
-package ksch;
+package ksch.wicket;
 
-import java.time.LocalDateTime;
+import org.apache.wicket.util.tester.WicketTester;
+import org.junit.Before;
 
-public interface PatientReport {
+import java.util.ArrayList;
+import java.util.List;
 
-    int getNumberOfNewPatients(LocalDateTime from, LocalDateTime to);
+public class PageComponentTest {
+
+    protected WicketTester tester;
+
+    protected List<MockBean> getMockBeans() {
+        return new ArrayList<>();
+    }
+
+    @Before
+    public void setUp() {
+        tester = new WicketTester(new PageComponentTestApplication(getMockBeans()));
+    }
 }
