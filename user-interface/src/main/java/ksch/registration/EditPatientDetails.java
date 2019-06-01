@@ -17,6 +17,7 @@
 package ksch.registration;
 
 import ksch.Activity;
+import ksch.patientmanagement.GeneralPatientInformation;
 import ksch.patientmanagement.PatientFormFields;
 import ksch.patientmanagement.PatientResource;
 import ksch.patientmanagement.patient.Gender;
@@ -93,6 +94,8 @@ class EditPatientDetailsActivity extends Activity {
         this.patient = patientResource;
         this.startVisitButton = createStartVisitButton();
         this.dischargeButton = createDischargeButton();
+
+        add(new GeneralPatientInformation(patient));
 
         // TODO add(new GeneralPatientInfoPanel(patient));
         // TODO add(new VisitBillingPanel(patient));
