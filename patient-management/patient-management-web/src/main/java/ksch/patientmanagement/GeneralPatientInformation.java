@@ -17,7 +17,6 @@
 package ksch.patientmanagement;
 
 import ksch.patientmanagement.patient.Gender;
-import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.VisitQueries;
 import ksch.patientmanagement.visit.VisitTransactions;
