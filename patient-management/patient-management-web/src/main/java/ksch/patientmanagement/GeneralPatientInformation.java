@@ -44,7 +44,7 @@ import static ksch.wicket.Time.parseDate;
 
 public class GeneralPatientInformation extends Panel {
 
-    private final Patient patient;
+    private final PatientResource patient;
 
     private final Button startVisitButton;
 
@@ -63,7 +63,7 @@ public class GeneralPatientInformation extends Panel {
     private VisitQueries visitQueries;
 
 
-    public GeneralPatientInformation(Patient patient) {
+    public GeneralPatientInformation(PatientResource patient) {
         super("generalPatientInformation");
 
         this.patient = patient;
@@ -73,7 +73,7 @@ public class GeneralPatientInformation extends Panel {
         add(startVisitButton);
         add(dischargeButton);
         add(new StartVisitForm());
-        add(new UpdatePatientForm(toPatientResource(patient)));
+        add(new UpdatePatientForm(patient));
         add(new TextField<>("patientNumber", new Model<>(patient.getPatientNumber())));
     }
 

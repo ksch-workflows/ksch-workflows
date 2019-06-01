@@ -73,7 +73,8 @@ class EditPatientDetailsActivity extends Activity {
     private PatientQueries patientQueries;
 
     EditPatientDetailsActivity(UUID patientId) {
-        add(new GeneralPatientInformation(patientQueries.getById(patientId)));
+        Patient patientEntity = patientQueries.getById(patientId);
+        add(new GeneralPatientInformation(toPatientResource(patientEntity)));
     }
 
     @Override

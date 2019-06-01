@@ -22,21 +22,21 @@ import ksch.patientmanagement.visit.VisitQueries;
 import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.wicket.MockBean;
 import ksch.wicket.PageComponentTest;
-import lombok.Getter;
 import org.junit.Test;
 
 import java.util.List;
 
-
 public class GeneralPatientInformationTest extends PageComponentTest {
 
-    @Getter
-    private List<MockBean> mockBeans = List.of(
-            MockBean.of(PatientTransactions.class),
-            MockBean.of(PatientQueries.class),
-            MockBean.of(VisitTransactions.class),
-            MockBean.of(VisitQueries.class)
-    );
+    @Override
+    protected List<MockBean> getMockBeans() {
+        return List.of(
+                MockBean.of(PatientTransactions.class),
+                MockBean.of(PatientQueries.class),
+                MockBean.of(VisitTransactions.class),
+                MockBean.of(VisitQueries.class)
+        );
+    }
 
     @Test
     public void should_render_panel_with_general_information_about_a_patient() {
