@@ -14,3 +14,13 @@
  * limitations under the License.
  */
 
+package ksch.orderentry;
+
+import org.apache.wicket.markup.html.panel.Panel;
+
+public class OrderManagement extends Panel {
+
+    public OrderManagement() {
+        super("orderManagement");
+    }
+}

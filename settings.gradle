@@ -14,3 +14,5 @@ include("reporting:reporting-impl")
 include("patient-management:patient-management-api")
 include("patient-management:patient-management-impl")
 include("patient-management:patient-management-web")
+
+include("order-entry:order-entry-web")

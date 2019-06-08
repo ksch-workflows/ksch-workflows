@@ -14,3 +14,17 @@
  * limitations under the License.
  */
 
+package ksch.orderentry;
+
+import ksch.wicket.PageComponentTest;
+import org.junit.Test;
+
+public class OrderManagementTest extends PageComponentTest {
+
+    @Test
+    public void should_render_panel_with_order_management_table() {
+        OrderManagement orderManagement = new OrderManagement();
+
+        tester.startComponentInPage(orderManagement);
+    }
+}
