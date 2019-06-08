@@ -18,20 +18,50 @@ limitations under the License.
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link href="../../css/style.css" rel="stylesheet">
 
-    <script src="../../js/jquery.min.js" ></script>
-    <script src="../../js/bootstrap.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
+    <wicket:head>
+        <style type="text/css">
+            .tab-content {
+                margin-top: 15px;
+            }
+        </style>
+    </wicket:head>
 </head>
 
 <body>
 
     <wicket:extend>
 
-        <span wicket:id="generalPatientInformation"/>
+        <ul class="nav nav-tabs" id="tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="generalTab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true">General</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="ordersTab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="billingTab" data-toggle="tab" href="#billing" role="tab" aria-controls="billing" aria-selected="false">Billing</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="tabContent">
+            <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="generalTab">
+                <span wicket:id="generalPatientInformation">[general patient information]</span>
+            </div>
+            <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="ordersTab">
+                Coming soon: Manage orders for examinations.
+            </div>
+            <div class="tab-pane fade" id="billing" role="tabpanel" aria-labelledby="billingTab">
+                Coming soon: Creation of patient visit bills.
+            </div>
+        </div>
 
     </wicket:extend>
 
