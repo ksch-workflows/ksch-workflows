@@ -57,6 +57,11 @@ subprojects {
         configFile = rootProject.file('.checkstyle.xml')
     }
 
+    task checkstyle {
+        dependsOn('checkstyleMain')
+        dependsOn('checkstyleTest')
+    }
+
     task dependencyTree(type: DependencyReportTask) {}
 }
 

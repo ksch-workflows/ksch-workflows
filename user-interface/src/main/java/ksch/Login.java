@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright notice:
  *
  * This class is derived from `LoginPage.java` in the `spring-security` example from
