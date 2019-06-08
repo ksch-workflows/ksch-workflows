@@ -28,4 +28,6 @@ package-lock.json
 *~*
 codealike.json
 *.orig
+*.hprof
+
 

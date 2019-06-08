@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2019 KS-plus e.V.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package ksch.registration;
 
 import ksch.WebPageTest;
@@ -39,7 +40,8 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
 
     public static final String CSS_SELECTOR_DISCHARGE_BUTTON = "a[name='dischargeButton']";
 
-    public static final String CSS_SELECTOR_START_VISIT_BUTTON = "button[name='content:generalPatientInformation:startVisitButton']";
+    public static final String CSS_SELECTOR_START_VISIT_BUTTON =
+            "button[name='content:generalPatientInformation:startVisitButton']";
 
     public static final String AJAX_RESPONSE_WITH_START_VISIT_BUTTON = "ajax-response.*startVisitButton";
 

@@ -18,36 +18,17 @@ package ksch.registration;
 
 import ksch.Activity;
 import ksch.patientmanagement.GeneralPatientInformation;
-import ksch.patientmanagement.PatientFormFields;
-import ksch.patientmanagement.PatientResource;
-import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientQueries;
-import ksch.patientmanagement.patient.PatientTransactions;
-import ksch.patientmanagement.visit.VisitQueries;
-import ksch.patientmanagement.visit.VisitTransactions;
-import ksch.patientmanagement.visit.VisitType;
-import lombok.Getter;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
-import org.apache.wicket.markup.html.form.Button;
-import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.RadioChoice;
-import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.Model;
-import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static ksch.patientmanagement.PatientResource.toPatientResource;
-import static ksch.wicket.Time.parseDate;
 
 @MountPath("/registration/edit-patient/${id}")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
