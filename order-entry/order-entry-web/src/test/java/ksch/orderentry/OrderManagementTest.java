@@ -34,7 +34,18 @@ public class OrderManagementTest extends PageComponentTest {
         OrderManagement orderManagement = new OrderManagement();
         tester.startComponentInPage(orderManagement);
 
-        tester.assertContains("Not required");
+        tester.assertContains("labOrderStatus.*Not required");
+
+        Debug.printLastResponse(tester);
+        tester.clickLink("orderManagement:labOrderAction", true);
+
+        tester.assertContains("labOrderStatus.*Pending");
+
+
+//        tester.assertContains("ecgOrderStatus.*Not required");
+//        tester.assertContains("usgOrderStatus.*Not required");
+//        tester.assertContains("xRayOrderStatus.*Not required");
+//        tester.assertContains("surgeryOrderStatus.*Not required");
 
         Debug.printLastResponse(tester);
     }

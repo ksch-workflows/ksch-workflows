@@ -16,6 +16,8 @@
 
 package ksch.orderentry;
 
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 
@@ -24,8 +26,19 @@ public class OrderManagement extends Panel {
     public OrderManagement() {
         super("orderManagement");
 
+
         final Label label = new Label("labOrderStatus", "Not required");
+        label.setOutputMarkupId(true);
+
+        AjaxLink<Void> labOrderAction = new AjaxLink<>("labOrderAction") {
+            @Override
+            public void onClick(AjaxRequestTarget target) {
+                label.setDefaultModelObject("Pending");
+                target.add(label);
+            }
+        };
 
         add(label);
+        add(labOrderAction);
     }
 }
