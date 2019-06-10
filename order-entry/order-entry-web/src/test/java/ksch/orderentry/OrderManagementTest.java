@@ -27,7 +27,4 @@ public class OrderManagementTest extends PageComponentTest {
 
         tester.startComponentInPage(orderManagement);
     }
-
-    @Test
-    public void should_
 }
