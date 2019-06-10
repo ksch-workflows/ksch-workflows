@@ -16,11 +16,16 @@
 
 package ksch.orderentry;
 
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 
 public class OrderManagement extends Panel {
 
     public OrderManagement() {
         super("orderManagement");
+
+        final Label label = new Label("labOrderStatus", "Not required");
+
+        add(label);
     }
 }

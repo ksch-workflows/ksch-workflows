@@ -16,6 +16,7 @@
 
 package ksch.orderentry;
 
+import ksch.util.Debug;
 import ksch.wicket.PageComponentTest;
 import org.junit.Test;
 
@@ -26,5 +27,15 @@ public class OrderManagementTest extends PageComponentTest {
         OrderManagement orderManagement = new OrderManagement();
 
         tester.startComponentInPage(orderManagement);
+    }
+
+    @Test
+    public void test_all_order_types_are_intially_not_required() {
+        OrderManagement orderManagement = new OrderManagement();
+        tester.startComponentInPage(orderManagement);
+
+        tester.assertContains("Not required");
+
+        Debug.printLastResponse(tester);
     }
 }
