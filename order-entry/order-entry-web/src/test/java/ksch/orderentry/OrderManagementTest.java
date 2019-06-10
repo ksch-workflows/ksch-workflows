@@ -20,8 +20,6 @@ import ksch.wicket.PageComponentTest;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static ksch.util.HtmlAssertions.linkWithBody;
-
 public class OrderManagementTest extends PageComponentTest {
 
     @Test
@@ -35,12 +33,14 @@ public class OrderManagementTest extends PageComponentTest {
     public void should_request_lab_order() {
         OrderManagement orderManagement = new OrderManagement();
         tester.startComponentInPage(orderManagement);
+        tester.assertContains(componentWithText("labOrderStatus", "Not required"));
+        tester.assertContains(componentWithText("labOrderAction", "Request"));
 
         tester.clickLink("orderManagement:labOrderAction");
 
         tester.startPage(tester.getLastRenderedPage());
-        tester.assertContains("labOrderStatus.*Pending");
-        tester.assertContains(linkWithBody("Edit"));
+        tester.assertContains(componentWithText("labOrderStatus", "Pending"));
+        tester.assertContains(componentWithText("labOrderAction", "Edit"));
     }
 
     @Ignore
@@ -50,5 +50,9 @@ public class OrderManagementTest extends PageComponentTest {
 //        tester.assertContains("usgOrderStatus.*Not required");
 //        tester.assertContains("xRayOrderStatus.*Not required");
 //        tester.assertContains("surgeryOrderStatus.*Not required");
+    }
+
+    private static String componentWithText(String wicketId, String text) {
+        return String.format("wicket:id=\"%s\".*>%s</", wicketId, text);
     }
 }

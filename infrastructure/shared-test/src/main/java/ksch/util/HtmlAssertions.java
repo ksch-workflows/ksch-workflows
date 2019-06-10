@@ -44,11 +44,4 @@ public class HtmlAssertions {
         String msg = String.format("Should not have found pattern '%s' in HTML: %s", regularExpression.toString(), html);
         assertFalse(msg, regularExpression.matcher(html).find());
     }
-
-    /**
-     * @return TODO document return values
-     */
-    public static String linkWithBody(String body) {
-        return String.format("<a.*>%s</a>", body);
-    }
 }
