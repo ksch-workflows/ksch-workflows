@@ -62,6 +62,16 @@ Then it is accessible in the browser under the URL http://localhost:8080 (login:
 
 The database can be inspected under this URL: http://localhost:8080/h2-console (login: sa / <empty password>).
 
+### Hot reload of Wicket markup
+
+When the application is [started in development mode](https://ci.apache.org/projects/wicket/guide/8.x/single.html#_switching_wicket_to_deployment_mode),
+it is possible to apply changes in Wicket markup files without restarting the application.
+
+It doesn't work with the `bootRun` task though. The application needs to be started by running the `main` method in
+the `KschWorkflowsApplication` class from within the IDE. Then after a build of the project the next page load
+should render the new data.
+
+
 ### Run Java tests
 
 ```
