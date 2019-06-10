@@ -16,7 +16,6 @@
 
 package ksch.util;
 
-import org.apache.wicket.Page;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -41,24 +40,15 @@ public class HtmlAssertions {
         assertEquals("Could find CSS selector '" + cssSelector + "' in HTML " + html, searchResults.size(), 0);
     }
 
-    public static void assertContains(String html, Pattern regularExpression) {
-        String msg = String.format("Could not find pattern '%s' in HTML: ", regularExpression.toString(), html);
-        assertTrue(msg, regularExpression.matcher(html).find());
-    }
-
-    public static void assertContains(Page page, Pattern regularExpression) {
-        assertContains(page.toString(), regularExpression);
-    }
-
     public static void assertNotContains(String html, Pattern regularExpression) {
         String msg = String.format("Should not have found pattern '%s' in HTML: %s", regularExpression.toString(), html);
         assertFalse(msg, regularExpression.matcher(html).find());
     }
 
     /**
-     * @return regex
+     * @return TODO document return values
      */
-    public static String link(String body) {
+    public static String linkWithBody(String body) {
         return String.format("<a.*>%s</a>", body);
     }
 }

@@ -19,8 +19,6 @@ package ksch;
 import ksch.util.HtmlAssertions;
 import org.junit.Test;
 
-import java.util.regex.Pattern;
-
 public class HtmlAssertionsTest {
 
     @Test
@@ -49,20 +47,6 @@ public class HtmlAssertionsTest {
         String html = getHtmlPageWithLink();
 
         HtmlAssertions.assertNotContains(html, "a");
-    }
-
-    @Test
-    public void should_pass_if_regex_is_found() {
-        String html = "<p>Hello, World</p>";
-
-        HtmlAssertions.assertContains(html, Pattern.compile("Hello.*World"));
-    }
-
-    @Test
-    public void should_check_that_regex_is_not_found() {
-        String html = "<p>Hello, World</p>";
-
-        HtmlAssertions.assertNotContains(html, Pattern.compile("Hello.*World"));
     }
 
     private String getHtmlPageWithLink() {

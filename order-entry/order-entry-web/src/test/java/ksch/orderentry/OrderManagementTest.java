@@ -20,7 +20,7 @@ import ksch.wicket.PageComponentTest;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static ksch.util.HtmlAssertions.link;
+import static ksch.util.HtmlAssertions.linkWithBody;
 
 public class OrderManagementTest extends PageComponentTest {
 
@@ -35,14 +35,12 @@ public class OrderManagementTest extends PageComponentTest {
     public void should_request_lab_order() {
         OrderManagement orderManagement = new OrderManagement();
         tester.startComponentInPage(orderManagement);
-        tester.assertContains(link("Request"));
-        tester.assertContains("labOrderStatus.*Not required");
 
         tester.clickLink("orderManagement:labOrderAction");
 
         tester.startPage(tester.getLastRenderedPage());
         tester.assertContains("labOrderStatus.*Pending");
-        tester.assertContains(link("Edit"));
+        tester.assertContains(linkWithBody("Edit"));
     }
 
     @Ignore
