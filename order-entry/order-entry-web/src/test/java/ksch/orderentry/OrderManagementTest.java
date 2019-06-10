@@ -16,9 +16,11 @@
 
 package ksch.orderentry;
 
-import ksch.util.Debug;
 import ksch.wicket.PageComponentTest;
+import org.junit.Ignore;
 import org.junit.Test;
+
+import static ksch.util.HtmlAssertions.link;
 
 public class OrderManagementTest extends PageComponentTest {
 
@@ -30,23 +32,25 @@ public class OrderManagementTest extends PageComponentTest {
     }
 
     @Test
-    public void test_all_order_types_are_intially_not_required() {
+    public void should_request_lab_order() {
         OrderManagement orderManagement = new OrderManagement();
         tester.startComponentInPage(orderManagement);
-
+        tester.assertContains(link("Request"));
         tester.assertContains("labOrderStatus.*Not required");
 
-        Debug.printLastResponse(tester);
-        tester.clickLink("orderManagement:labOrderAction", true);
+        tester.clickLink("orderManagement:labOrderAction");
 
+        tester.startPage(tester.getLastRenderedPage());
         tester.assertContains("labOrderStatus.*Pending");
+        tester.assertContains(link("Edit"));
+    }
 
-
-//        tester.assertContains("ecgOrderStatus.*Not required");
+    @Ignore
+    @Test
+    public void test_all_order_types_are_initially_not_required() {
+        //        tester.assertContains("ecgOrderStatus.*Not required");
 //        tester.assertContains("usgOrderStatus.*Not required");
 //        tester.assertContains("xRayOrderStatus.*Not required");
 //        tester.assertContains("surgeryOrderStatus.*Not required");
-
-        Debug.printLastResponse(tester);
     }
 }

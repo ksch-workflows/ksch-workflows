@@ -20,6 +20,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.Model;
 
 public class OrderManagement extends Panel {
 
@@ -30,13 +31,17 @@ public class OrderManagement extends Panel {
         final Label label = new Label("labOrderStatus", "Not required");
         label.setOutputMarkupId(true);
 
-        AjaxLink<Void> labOrderAction = new AjaxLink<>("labOrderAction") {
+        Model<String> requestActionText = Model.of("Request");
+
+        AjaxLink<String> labOrderAction = new AjaxLink<>("labOrderAction") {
             @Override
             public void onClick(AjaxRequestTarget target) {
                 label.setDefaultModelObject("Pending");
+                requestActionText.setObject("Edit");
                 target.add(label);
             }
         };
+        labOrderAction.setBody(requestActionText);
 
         add(label);
         add(labOrderAction);
