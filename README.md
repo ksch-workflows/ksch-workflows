@@ -4,17 +4,13 @@
 
 The [Kirpal Sagar Charitable Hospital](https://kirpal-sagar.org/en/kirpal-charitable-hospital-en/) is a small hospital in [Punjab, India](https://www.google.com/maps/place/Kirpal+Sagar+Hospital/@31.02067,76.0855824,16z/data=!4m8!1m2!2m1!1skirpal+sagar!3m4!1s0x0:0xc422150834d1e3a5!8m2!3d31.0187086!4d76.0890837) where all people receive treatment and then pay what they can afford. It is envisioned to grow up to 500 beds and become part of a Medical College. The purpose of this project is to support that vision.
 
-## Domain language
-
-| Term | Description |
-|------|-------------|
-| OPD | Outpatient department. |
-| IPD | Inpatient department. |
-| OPD number | Used as visit number which is assigned to each patient who enters the hospital, including IPD patients |
 
 ## Software architecture
 
-In order to be aplicable in a low-resource environment we try to keep the system as simple as possible. Another important architectural goal is evolvability in terms of the business requirements. Further we need high quality in terms of robustness, test coverage, and technical documentation.
+### Values
+- Simplicity
+- Robustness
+- High test coverage
 
 ### Technology stack
 
@@ -161,6 +157,15 @@ docker run -p 80:8080 expsoftware/ksch-workflows
 If you have any question or idea, please join this chat room and post it there:
 
 https://gitter.im/ksch-workflows/Lobby
+
+
+## Glossary
+
+| Term | Description |
+|------|-------------|
+| OPD | Outpatient department. |
+| IPD | Inpatient department. |
+| OPD number | Used as visit number which is assigned to each patient who enters the hospital, including IPD patients |
 
 ## License
 
