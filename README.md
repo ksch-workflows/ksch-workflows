@@ -4,7 +4,6 @@
 
 The [Kirpal Sagar Charitable Hospital](https://kirpal-sagar.org/en/kirpal-charitable-hospital-en/) is a small hospital in [Punjab, India](https://www.google.com/maps/place/Kirpal+Sagar+Hospital/@31.02067,76.0855824,16z/data=!4m8!1m2!2m1!1skirpal+sagar!3m4!1s0x0:0xc422150834d1e3a5!8m2!3d31.0187086!4d76.0890837) where all people receive treatment and then pay what they can afford. It is envisioned to grow up to 500 beds and become part of a Medical College. The purpose of this project is to support that vision.
 
-
 ## Software architecture
 
 ### Values
@@ -102,6 +101,10 @@ The build system is doing this automatically in a headless browser (see [.travis
 
 
 ## Maintenance
+
+### Code Scene analysis
+
+[![](https://codescene.io/projects/5094/status.svg) Get more details at **codescene.io**.](https://codescene.io/projects/5094/jobs/latest-successful/results)
 
 ### SonarCube analysis
 
