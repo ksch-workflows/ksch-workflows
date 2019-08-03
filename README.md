@@ -8,7 +8,6 @@ The [Kirpal Sagar Charitable Hospital](https://kirpal-sagar.org/en/kirpal-charit
 
 ### Values
 - Simplicity
-- Robustness
 - High test coverage
 
 ### Technology stack
