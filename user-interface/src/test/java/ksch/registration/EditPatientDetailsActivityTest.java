@@ -24,6 +24,7 @@ import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ import static ksch.util.HtmlAssertions.assertContains;
 import static ksch.util.HtmlAssertions.assertNotContains;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 
 @ContextConfiguration(classes = MockVisitTransactions.class)
@@ -57,6 +59,11 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
     @Before
     public void setup() {
         login("user", "pwd");
+    }
+
+    @After
+    public void cleanup() {
+        reset(visitTransactions);
     }
 
     @Test
@@ -91,6 +98,7 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
 
     @Test
     public void should_start_visit() {
+
         Patient patient = createTestPatient();
         openPatientDetails(patient);
         assertNotContains(currentPage(), CSS_SELECTOR_DISCHARGE_BUTTON);
