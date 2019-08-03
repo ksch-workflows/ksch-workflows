@@ -88,7 +88,7 @@ source code for which better unit tests should be created.
 Afterwards HTML reports are generated for each respective subproject and can be found in the directory `build/reports/pitest`:
 
 ```
-find . -name "index.html" | grep "pitest"
+find . -name "index.html" | grep --regexp="pitest/[0-9]*/index\.html"
 ```
 
 ### Run JavaScript tests
