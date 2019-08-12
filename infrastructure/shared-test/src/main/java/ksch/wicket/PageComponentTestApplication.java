@@ -34,11 +34,12 @@ class PageComponentTestApplication extends WebApplication {
 
     private final List<MockBean> mockBeans;
 
-    public PageComponentTestApplication(List<MockBean> mockBeans) {
+    PageComponentTestApplication(List<MockBean> mockBeans) {
         this.mockBeans = mockBeans;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void init() {
         super.init();
 
