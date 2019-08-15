@@ -103,8 +103,7 @@ The build system is doing this automatically in a headless browser (see [.travis
 
 ### Code Scene analysis
 
-
-[![](https://codescene.io/projects/5094/status.svg) Get more details at **codescene.io**.](https://codescene.io/projects/5094/jobs/latest-successful/results)
+https://codescene.io/projects/5094/jobs/latest-successful/results
 
 
 ### SonarCube analysis
