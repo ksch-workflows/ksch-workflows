@@ -30,7 +30,7 @@ public interface PatientQueries {
     Optional<Patient> findByPatientNumber(String patientNumber);
 
     /**
-     * Prodives access on the details of a patient with the given technical identifiert.
+     * Provides access on the details of a patient with the given technical identifier.
      */
     Patient getById(UUID patientId);
 }

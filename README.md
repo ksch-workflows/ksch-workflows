@@ -54,7 +54,16 @@ The application can be started for development tests with the following Gradle t
 
 Then it is accessible in the browser under the URL http://localhost:8080 (login: user / pwd).
 
-The database can be inspected under this URL: http://localhost:8080/h2-console (login: sa / <empty password>).
+The database can be inspected under this URL: http://localhost:8080/h2-console
+
+The following values need to be entered for getting access:
+
+| Option | Value |
+|--------|-------|
+| Driver Class | org.h2.Driver |
+| JDBC URL | jdbc:h2:mem:test-db |
+| User Name | sa |
+| Password | <empty string> |
 
 ### Hot reload of Wicket markup
 
@@ -85,7 +94,7 @@ source code for which better unit tests should be created.
 ./gradlew clean pitest
 ```
 
-Afterwards HTML reports are generated for each respective subproject and can be found in the directory `build/reports/pitest`:
+Afterwards HTML reports are generated for each respective sub-project and can be found in the directory `build/reports/pitest`:
 
 ```
 find . -name "index.html" | grep --regexp="pitest/[0-9]*/index\.html"
@@ -172,7 +181,7 @@ https://gitter.im/ksch-workflows/Lobby
 
 ## License
 
-K.S.C.H. Workflows is maintained by [KS-plus](https://ks-plus.org/en/welcome/),
-an association dedicated to supporting the [Kirpal Sagar](https://kirpal-sagar.org/en/welcome/) project.
+K.S.C.H. Workflows is maintained by [KS-plus e.V.](https://ks-plus.org/en/welcome/),
+a non-profit association dedicated to supporting the [Kirpal Sagar](https://kirpal-sagar.org/en/welcome/) project.
 
 It is licensed under the [Apache License Version 2.0](https://github.com/ksch-workflows/ksch-workflows/blob/master/LICENSE).
