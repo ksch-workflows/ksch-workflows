@@ -17,7 +17,6 @@
 package ksch.orderentry;
 
 import ksch.wicket.PageComponentTest;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class OrderManagementTest extends PageComponentTest {
@@ -41,15 +40,6 @@ public class OrderManagementTest extends PageComponentTest {
         tester.startPage(tester.getLastRenderedPage());
         tester.assertContains(componentWithText("labOrderStatus", "Pending"));
         tester.assertContains(componentWithText("labOrderAction", "Edit"));
-    }
-
-    @Ignore
-    @Test
-    public void test_all_order_types_are_initially_not_required() {
-        //        tester.assertContains("ecgOrderStatus.*Not required");
-//        tester.assertContains("usgOrderStatus.*Not required");
-//        tester.assertContains("xRayOrderStatus.*Not required");
-//        tester.assertContains("surgeryOrderStatus.*Not required");
     }
 
     private static String componentWithText(String wicketId, String text) {
