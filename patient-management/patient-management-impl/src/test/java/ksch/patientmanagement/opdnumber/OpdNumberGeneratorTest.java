@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ksch.patientmanagement.patient;
+package ksch.patientmanagement.opdnumber;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,38 +30,38 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PatientNumberGeneratorTest {
+public class OpdNumberGeneratorTest {
 
-    private static final int PATIENT_INDEX_NUMBER = 1011;
+    private static final int NUMERIC_VALUE = 1011;
 
     @InjectMocks
-    private PatientNumberGeneratorImpl patientNumberGenerator;
+    private OpdNumberGeneratorImpl opdNumberGenerator;
 
     @Mock
-    private PatientNumberIndexRepository patientNumberIndexRepository;
+    private OpdNumberRepository opdNumberRepository;
 
     private final int currentYearWithTwoDigits = Calendar.getInstance().get(Calendar.YEAR) % 100;
 
     @Before
     public void setup() {
-        when(patientNumberIndexRepository.save(any(PatientNumberIndex.class)))
-                .thenReturn(new PatientNumberIndex(PATIENT_INDEX_NUMBER));
+        when(opdNumberRepository.save(any(NumericValue.class)))
+                .thenReturn(new NumericValue(NUMERIC_VALUE));
     }
 
     @Test
     public void should_prepend_year() {
-        String generatedPatientNumber = patientNumberGenerator.generateOpdNumber();
+        String generatedOpdNumber = opdNumberGenerator.generateOpdNumber();
 
-        assertTrue("Generated patient number '" + generatedPatientNumber + "' doesn't start with current year",
-                generatedPatientNumber.startsWith(currentYearWithTwoDigits + "-"));
+        assertTrue("Generated OPD number '" + generatedOpdNumber + "' doesn't start with current year",
+                generatedOpdNumber.startsWith(currentYearWithTwoDigits + "-"));
     }
 
     @Test
     public void should_contain_patient_index_number() {
-        String generatedPatientNumber = patientNumberGenerator.generateOpdNumber();
+        String generatedPatientNumber = opdNumberGenerator.generateOpdNumber();
 
         assertTrue("Generated patient number '" + generatedPatientNumber +
-                        "' doesn't contain the patient index number '" + PATIENT_INDEX_NUMBER + "'.",
-                generatedPatientNumber.contains("-" + PATIENT_INDEX_NUMBER));
+                        "' doesn't contain the patient index number '" + NUMERIC_VALUE + "'.",
+                generatedPatientNumber.contains("-" + NUMERIC_VALUE));
     }
 }

@@ -27,9 +27,7 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RadioChoice;
-import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
@@ -68,7 +66,6 @@ public class GeneralPatientInformation extends Panel {
         add(dischargeButton);
         add(new StartVisitForm());
         add(new UpdatePatientForm(patient));
-        add(new TextField<>("patientNumber", new Model<>(patient.getPatientNumber())));
     }
 
     private Button createStartVisitButton() {

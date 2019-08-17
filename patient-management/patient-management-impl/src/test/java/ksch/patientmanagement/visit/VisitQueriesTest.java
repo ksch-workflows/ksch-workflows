@@ -118,11 +118,6 @@ public class VisitQueriesTest {
             }
 
             @Override
-            public String getPatientNumber() {
-                return "0815-" + UUID.randomUUID();
-            }
-
-            @Override
             public String getName() {
                 return "John";
             }

@@ -28,16 +28,11 @@ public class PatientTransactionsImpl implements PatientTransactions {
 
     private final PatientRepository patientRepository;
 
-    private final PatientNumberGenerator patientNumberGenerator;
-
     private final ApplicationEventPublisher eventPublisher;
 
     @Override
     public Patient create(Patient patient) {
         PatientEntity patientEntity = toPatientEntity(patient);
-        if (patient.getPatientNumber() == null) {
-            patientEntity.setPatientNumber(patientNumberGenerator.generateOpdNumber());
-        }
         patientEntity = patientRepository.save(patientEntity);
         eventPublisher.publishEvent(new PatientCreatedEvent(patientEntity));
         return patientEntity;

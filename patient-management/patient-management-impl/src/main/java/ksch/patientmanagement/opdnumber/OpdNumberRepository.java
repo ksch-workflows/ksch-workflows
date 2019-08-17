@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package ksch.patientmanagement.patient;
+package ksch.patientmanagement.opdnumber;
 
-public interface PatientNumberGenerator {
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-    String generateOpdNumber();
+@Repository
+interface OpdNumberRepository extends CrudRepository<NumericValue, Integer> {
 }

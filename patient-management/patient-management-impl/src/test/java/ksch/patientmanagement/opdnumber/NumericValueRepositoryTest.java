@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ksch.patientmanagement.patient;
+package ksch.patientmanagement.opdnumber;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,19 +26,19 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class PatientNumberIndexRepositoryTest {
+public class NumericValueRepositoryTest {
 
     @Autowired
-    private PatientNumberIndexRepository repo;
+    private OpdNumberRepository repo;
 
     @Test
     public void should_retrieve_incremented_number_from_database() {
-        PatientNumberIndex no1 = repo.save(new PatientNumberIndex());
-        PatientNumberIndex no2 = repo.save(new PatientNumberIndex());
+        NumericValue no1 = repo.save(new NumericValue());
+        NumericValue no2 = repo.save(new NumericValue());
 
         assertEquals("Patient number index doesn't start with expected initial value.",
-                1000, no1.getIndex());
+                1000, no1.getValue());
         assertEquals("Patient number index didn't get incremented by one for the second value.",
-                1001, no2.getIndex());
+                1001, no2.getValue());
     }
 }

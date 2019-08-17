@@ -46,11 +46,6 @@ public class PatientResourceTest {
             }
 
             @Override
-            public String getPatientNumber() {
-                return "1234-123";
-            }
-
-            @Override
             public String getName() {
                 return "John C. Doe";
             }
