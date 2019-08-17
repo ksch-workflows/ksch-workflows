@@ -45,7 +45,7 @@ public class VisitRepositoryTest {
 
     @Test
     public void should_store_visit() {
-        PatientEntity patient = createTestPatient("KSA-123", "John Doe");
+        PatientEntity patient = createTestPatient("John Doe");
 
         VisitEntity visit = createNewVisit(patient);
 
@@ -55,8 +55,8 @@ public class VisitRepositoryTest {
 
     @Test
     public void should_find_visits_by_patient_id() {
-        PatientEntity patient = createTestPatient("KSA-124", "John Doe");
-        VisitEntity visit = createNewVisit(patient);
+        PatientEntity patient = createTestPatient("John Doe");
+        createNewVisit(patient);
 
         List<VisitEntity> retrievedVisits = visitRepository.findAllByPatientId(patient.getId());
 
@@ -65,8 +65,8 @@ public class VisitRepositoryTest {
 
     @Test
     public void should_find_all_active_opt_visits() {
-        createNewVisit(createTestPatient("KSA-124", "John Doe"), VisitType.OPD);
-        createNewVisit(createTestPatient("KSA-125", "Jane Doe"), VisitType.IPD);
+        createNewVisit(createTestPatient("John Doe"), VisitType.OPD);
+        createNewVisit(createTestPatient("Jane Doe"), VisitType.IPD);
 
         List<VisitEntity> allActiveOptVisits = visitRepository.findAllActiveOptVisits();
 
@@ -87,12 +87,11 @@ public class VisitRepositoryTest {
         return visitRepository.save(visit);
     }
 
-    private PatientEntity createTestPatient(String patientNumber, String name) {
+    private PatientEntity createTestPatient(String name) {
         return patientRepository.save(PatientEntity.builder()
                 .dateOfBirth(LocalDate.now())
                 .gender(Gender.FEMALE)
                 .name(name)
-                .patientNumber(patientNumber)
                 .build());
     }
 }

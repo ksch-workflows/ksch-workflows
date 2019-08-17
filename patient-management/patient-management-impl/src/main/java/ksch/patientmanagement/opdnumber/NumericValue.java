@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ksch.patientmanagement.patient;
+package ksch.patientmanagement.opdnumber;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,21 +28,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.TableGenerator;
 
+/**
+ * Utility class for generation of the numeric part of new OPD numbers.
+ */
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@TableGenerator(name = "patient_index_number", initialValue = 999)
-class PatientNumberIndex {
+@TableGenerator(name = "numeric_part_of_opd_number", initialValue = 999)
+class NumericValue {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "patient_index_number")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "numeric_part_of_opd_number")
     @Column(unique = true)
-    private int index;
+    private int value;
 
     @Override
     public String toString() {
-        return String.valueOf(index);
+        return String.valueOf(value);
     }
 }

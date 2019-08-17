@@ -76,7 +76,6 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         tester.assertRenderedPage(EditPatientDetails.class);
 
         // General tab
-        tester.assertContains(patient.getPatientNumber());
         tester.assertContains(patient.getName());
 
         // Orders tab

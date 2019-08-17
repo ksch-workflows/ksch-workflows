@@ -14,11 +14,16 @@
  * limitations under the License.
  */
 
-package ksch.patientmanagement.patient;
+package ksch;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import ksch.wicket.PageComponentTest;
+import org.junit.Test;
 
-@Repository
-interface PatientNumberIndexRepository extends CrudRepository<PatientNumberIndex, Integer> {
+public class NumericValueTest extends PageComponentTest {
+
+    @Test
+    public void should_render_index_page() {
+        tester.startPage(Index.class);
+        tester.assertRenderedPage(Index.class);
+    }
 }

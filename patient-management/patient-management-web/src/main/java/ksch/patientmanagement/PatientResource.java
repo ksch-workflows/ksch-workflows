@@ -37,8 +37,6 @@ public class PatientResource implements Patient, Serializable {
 
     private UUID id;
 
-    private String patientNumber;
-
     private String name;
 
     private String nameFather;
@@ -52,7 +50,6 @@ public class PatientResource implements Patient, Serializable {
     public static PatientResource toPatientResource(Patient patient) {
         return PatientResource.builder()
                 .id(patient.getId())
-                .patientNumber(patient.getPatientNumber())
                 .name(patient.getName())
                 .nameFather(patient.getNameFather())
                 .dateOfBirth(patient.getDateOfBirth())

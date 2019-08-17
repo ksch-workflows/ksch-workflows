@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ksch.patientmanagement.patient;
+package ksch.patientmanagement.opdnumber;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,15 +23,15 @@ import java.util.Calendar;
 
 @Service
 @RequiredArgsConstructor
-public class PatientNumberGeneratorImpl implements PatientNumberGenerator {
+class OpdNumberGeneratorImpl implements OpdNumberGenerator {
 
     private static final int currentYearWithTwoDigits = Calendar.getInstance().get(Calendar.YEAR) % 100;
 
-    private final PatientNumberIndexRepository patientNumberIndexRepository;
+    private final OpdNumberRepository opdNumberRepository;
 
     @Override
     public synchronized String generateOpdNumber() {
-        PatientNumberIndex patientNumberIndex = patientNumberIndexRepository.save(new PatientNumberIndex());
-        return String.format("%s-%s", currentYearWithTwoDigits, patientNumberIndex);
+        NumericValue numericValue = opdNumberRepository.save(new NumericValue());
+        return String.format("%s-%s", currentYearWithTwoDigits, numericValue);
     }
 }

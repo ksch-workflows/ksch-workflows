@@ -70,11 +70,6 @@ class PatientAdapter implements Patient {
     }
 
     @Override
-    public String getPatientNumber() {
-        return null;
-    }
-
-    @Override
     public String getName() {
         return null;
     }

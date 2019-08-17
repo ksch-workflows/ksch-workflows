@@ -64,11 +64,6 @@ class TestPatient implements Patient {
     }
 
     @Override
-    public String getPatientNumber() {
-        return null;
-    }
-
-    @Override
     public String getName() {
         return "Jayadev Mitali";
     }

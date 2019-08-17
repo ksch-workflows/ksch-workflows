@@ -26,8 +26,6 @@ public interface Patient {
 
     UUID getId();
 
-    String getPatientNumber();
-
     String getName();
 
     String getNameFather();

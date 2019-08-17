@@ -30,8 +30,6 @@ public class TestPatient implements Patient {
 
     private UUID id = UUID.randomUUID();
 
-    private String patientNumber = "0815-" + UUID.randomUUID();
-
     private String name = "Jane Doe";
 
     private String nameFather = "John Doe";

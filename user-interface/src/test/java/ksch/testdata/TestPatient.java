@@ -30,11 +30,6 @@ public class TestPatient implements Patient {
     }
 
     @Override
-    public String getPatientNumber() {
-        return "0815-" + UUID.randomUUID();
-    }
-
-    @Override
     public String getName() {
         return "John Doe";
     }

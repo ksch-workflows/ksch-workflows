@@ -47,9 +47,6 @@ public class PatientEntity implements Patient {
     @Column(unique = true)
     private UUID id;
 
-    @Column(unique = true)
-    private String patientNumber;
-
     @Column
     private String name;
 
@@ -69,7 +66,6 @@ public class PatientEntity implements Patient {
     public static PatientEntity toPatientEntity(Patient patient) {
         return PatientEntity.builder()
                 .id(patient.getId())
-                .patientNumber(patient.getPatientNumber())
                 .name(patient.getName())
                 .nameFather(patient.getNameFather())
                 .dateOfBirth(patient.getDateOfBirth())

@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 
-package ksch;
+package ksch.patientmanagement.opdnumber;
 
-import ksch.wicket.PageComponentTest;
-import org.junit.Test;
+public interface OpdNumberGenerator {
 
-public class IndexTest extends PageComponentTest {
-
-    @Test
-    public void should_render_index_page() {
-        tester.startPage(Index.class);
-        tester.assertRenderedPage(Index.class);
-    }
+    /**
+     * Generates a new OPD number as identifier for the hospital visit.
+     */
+    String generateOpdNumber();
 }
