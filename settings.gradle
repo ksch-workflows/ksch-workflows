@@ -5,8 +5,10 @@ include "infrastructure:configuration"
 include "infrastructure:shared-test"
 include "infrastructure:wicket-utils"
 
+include("medical-records:clinical-terminologies")
 include("medical-records:medical-records-api")
 include("medical-records:medical-records-impl")
+include("medical-records:openehr-impl")
 
 include("reporting:reporting-api")
 include("reporting:reporting-impl")
