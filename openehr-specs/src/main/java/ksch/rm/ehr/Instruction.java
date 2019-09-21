@@ -1,11 +1,16 @@
-package ksch.openehr.rm.ehr;
+package ksch.rm.ehr;
 
 import java.util.List;
 
 /**
  * https://specifications.openehr.org/releases/RM/latest/ehr.html#_instruction_and_action
  */
-public class Instruction {
+public class Instruction extends CareEntry {
+
+    /**
+     * Narrative description of the instruction.
+     */
+    private String narrative;
 
     private State state;
 

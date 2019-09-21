@@ -8,7 +8,8 @@ include "infrastructure:wicket-utils"
 include("medical-records:clinical-terminologies")
 include("medical-records:medical-records-api")
 include("medical-records:medical-records-impl")
-include("medical-records:openehr-impl")
+
+include("openehr-specs")
 
 include("reporting:reporting-api")
 include("reporting:reporting-impl")
