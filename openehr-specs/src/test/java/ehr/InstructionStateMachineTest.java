@@ -1,15 +1,25 @@
 package ksch.openehr.rm.ehr;
 
-import org.junit.Test;
+import ehr.DummyEventPublisher;
+import ehr.TestController;
 import ksch.instruction_state_machine.InstructionStateMachine;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.openehr.rm.composition.ISM_TRANSITION;
 
-import static org.junit.Assert.assertEquals;
 import static ksch.instruction_state_machine.InstructionStateMachine.Event.schedule;
 import static ksch.instruction_state_machine.InstructionStateMachine.State.INITIAL;
 import static ksch.instruction_state_machine.InstructionStateMachine.State.SCHEDULED;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 
+@RunWith(MockitoJUnitRunner.class)
 public class InstructionStateMachineTest {
+
+    @Spy
+    private DummyEventPublisher dummyEventPublisher = new DummyEventPublisher();
 
     /**
      * @see "https://specifications.openehr.org/releases/RM/latest/ehr.html#_the_standard_instruction_state_machine_ism"
@@ -29,6 +39,12 @@ public class InstructionStateMachineTest {
 
     @Test
     public void should_publish_application_event_after_state_transition() {
+        InstructionStateMachine instructionStateMachine = new InstructionStateMachine(
+                INITIAL, new TestController(dummyEventPublisher)
+        );
 
+        ISM_TRANSITION transition = instructionStateMachine.process(schedule);
+
+        verify(dummyEventPublisher).publishStateChangeEvent(SCHEDULED);
     }
 }

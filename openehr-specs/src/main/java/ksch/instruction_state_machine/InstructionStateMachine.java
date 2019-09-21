@@ -38,11 +38,13 @@ public class InstructionStateMachine {
     public ISM_TRANSITION process(Event careflowStep) {
         Optional<TransitionDefinition> transition = possibleTransitionDefinitions.stream()
                 .filter(t -> t.getSourceState().equals(currentState) && t.getEvent().equals(careflowStep))
-                .findFirst(); // TODO Figuring out the required transition can be moved into a separate utility method
+                .findFirst();
 
         if (transition.isPresent()) {
             TransitionDefinition t = transition.get();
             currentState = t.getTargetState();
+
+            controller.handleStateChanged(currentState);
 
             return new ISM_TRANSITION(new StateInfo(currentState));
         } else {
@@ -59,7 +61,12 @@ public class InstructionStateMachine {
 
     public interface InstructionStateMachineController {
 
-        void activated(State previousState);
+        /**
+         * Method which gets called when the state machine has changed its state.
+         *
+         * @param currentState
+         */
+        void handleStateChanged(State currentState);
     }
 
     /**
