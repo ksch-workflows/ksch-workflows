@@ -1,6 +1,6 @@
 package ehr;
 
-import ksch.instruction_state_machine.InstructionStateMachine;
+import ksch.instruction.InstructionStateMachine;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

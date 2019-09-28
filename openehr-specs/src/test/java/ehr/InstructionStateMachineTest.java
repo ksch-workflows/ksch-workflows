@@ -2,16 +2,16 @@ package ksch.openehr.rm.ehr;
 
 import ehr.DummyEventPublisher;
 import ehr.TestController;
-import ksch.instruction_state_machine.InstructionStateMachine;
+import ksch.instruction.InstructionStateMachine;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openehr.rm.composition.ISM_TRANSITION;
 
-import static ksch.instruction_state_machine.InstructionStateMachine.Event.schedule;
-import static ksch.instruction_state_machine.InstructionStateMachine.State.INITIAL;
-import static ksch.instruction_state_machine.InstructionStateMachine.State.SCHEDULED;
+import static ksch.instruction.InstructionStateMachine.Event.schedule;
+import static ksch.instruction.InstructionStateMachine.State.INITIAL;
+import static ksch.instruction.InstructionStateMachine.State.SCHEDULED;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 
@@ -31,7 +31,7 @@ public class InstructionStateMachineTest {
         ISM_TRANSITION transition = instructionStateMachine.process(schedule);
 
         assertEquals("SCHEDULED", transition.getCurrentState().getValue());
-        assertEquals("ksch.instruction_state_machine.InstructionStateMachine$State",
+        assertEquals("ksch.instruction.InstructionStateMachine$State",
                 transition.getCurrentState().getDefiningCode().getCodeString());
         assertEquals("ksch", transition.getCurrentState().getDefiningCode().getTerminologyId().toString());
         assertEquals(SCHEDULED, instructionStateMachine.getCurrentState());

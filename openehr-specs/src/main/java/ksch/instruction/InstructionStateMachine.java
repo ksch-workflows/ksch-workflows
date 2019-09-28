@@ -1,4 +1,4 @@
-package ksch.instruction_state_machine;
+package ksch.instruction;
 
 import com.google.common.collect.Lists;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import org.openehr.rm.composition.ISM_TRANSITION;
 import java.util.List;
 import java.util.Optional;
 
-import static ksch.instruction_state_machine.InstructionStateMachine.Event.*;
+import static ksch.instruction.InstructionStateMachine.Event.*;
 
 /**
  * @see <a href="https://specifications.openehr.org/releases/RM/latest/ehr.html#_the_standard_instruction_state_machine_ism">

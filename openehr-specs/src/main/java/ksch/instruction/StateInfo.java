@@ -1,4 +1,4 @@
-package ksch.instruction_state_machine;
+package ksch.instruction;
 
 import org.openehr.base.base_types.TERMINOLOGY_ID;
 import org.openehr.rm.data_types.CODE_PHRASE;
