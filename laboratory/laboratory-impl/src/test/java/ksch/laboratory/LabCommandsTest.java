@@ -5,9 +5,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LabCommandsTest {
@@ -18,22 +19,11 @@ public class LabCommandsTest {
     @Test
     public void should_request_blood_examination() {
         UUID opdNumber = UUID.randomUUID();
+        List<LabOrderCode> tests = LabOrderCode.labOrderCodes("44907-4", "3299-5");
 
-        List<LabOrderCode> tests = Collections.emptyList();
-        tests.add(new LabOrderCode("44907-4"));
-        tests.add(new LabOrderCode("3299-5"));
+        LabOrder labOrder = labCommands.requestExamination(opdNumber, tests);
 
-        //UUID labExaminationId = labCommands.requestExamination(opdNumber, tests);
-    }
-
-    @Test
-    public void should_request_urin_examination() {
-
-    }
-
-    @Test
-    public void should_request_stool_examination() {
-
+        assertNotNull(labOrder);
     }
 
 }
