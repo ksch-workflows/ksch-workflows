@@ -13,7 +13,6 @@ import static java.util.stream.Collectors.toList;
 @Entity
 @Table
 @Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,11 +27,12 @@ public class LabOrderEntity implements LabOrder {
     private List<LabTest> labTests = newArrayList();
 
     @Enumerated(EnumType.STRING)
+    @Setter
     private Status status;
 
     public LabOrderEntity(List<LabOrderCode> requestedTests) {
         labTests = requestedTests.stream()
-                .map(c -> new LabTest())
+                .map(LabTest::new)
                 .collect(Collectors.toList());
         status = Status.NEW;
     }
@@ -43,4 +43,6 @@ public class LabOrderEntity implements LabOrder {
                 .map(LabTest::getRequest)
                 .collect(toList());
     }
+
+
 }

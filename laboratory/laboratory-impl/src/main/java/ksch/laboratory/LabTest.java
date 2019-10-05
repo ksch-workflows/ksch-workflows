@@ -18,6 +18,10 @@ public class LabTest {
     @Column
     private String result;
 
+    public LabTest(LabOrderCode labOrderCode) {
+        this.labOrderCode = labOrderCode.toString();
+    }
+
     public LabOrderCode getRequest() {
         return new LabOrderCode(labOrderCode);
     }
