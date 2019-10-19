@@ -11,8 +11,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.util.UUID;
 
-// TODO Maybe rename to LabOrderPanel
-public class LabOrder extends Panel {
+public class LabOrderPanel extends Panel {
 
     @SpringBean
     private LabCommands labCommands;
@@ -21,7 +20,7 @@ public class LabOrder extends Panel {
 
     private Button addLabOrderButton;
 
-    public LabOrder(UUID visitId) {
+    public LabOrderPanel(UUID visitId) {
         super("labOrder");
 
         this.visitId = visitId;

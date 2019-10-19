@@ -18,7 +18,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
 @SuppressWarnings("unchecked")
-public class LabOrderTest extends PageComponentTest {
+public class LabOrderPanelTest extends PageComponentTest {
 
     private MockBean<LabCommands> labCommands = MockBean.of(LabCommands.class);
 
@@ -26,9 +26,9 @@ public class LabOrderTest extends PageComponentTest {
 
     @Test
     public void should_render_panel_lab_order_table() {
-        LabOrder labOrder = new LabOrder(visitId);
+        LabOrderPanel labOrderPanel = new LabOrderPanel(visitId);
 
-        tester.startComponentInPage(labOrder);
+        tester.startComponentInPage(labOrderPanel);
 
         assertContains(lastRenderedPage(), doc -> doc.getElementsByTag("button"));
     }
@@ -56,7 +56,7 @@ public class LabOrderTest extends PageComponentTest {
     }
 
     private void renderLabOrderPage() {
-        LabOrder labOrder = new LabOrder(visitId);
-        tester.startComponentInPage(labOrder);
+        LabOrderPanel labOrderPanel = new LabOrderPanel(visitId);
+        tester.startComponentInPage(labOrderPanel);
     }
 }
