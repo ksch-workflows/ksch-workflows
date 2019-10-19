@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-package ksch.util;
+package ksch.assertions;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import java.util.function.Function;
+
+import static org.junit.Assert.*;
 
 public class HtmlAssertions {
 
@@ -29,6 +30,12 @@ public class HtmlAssertions {
         Document doc = Jsoup.parse(html);
         Elements searchResults = doc.select(cssSelector);
         assertTrue("Cannot find CSS selector '" + cssSelector + "' in HTML " + html, searchResults.size() > 0);
+    }
+
+    public static void assertContains(String html, Function<Document, Elements> thingy) {
+        Document doc = Jsoup.parse(html);
+        Elements retrievedElements = thingy.apply(doc);
+        assertFalse("Cannot find any element in HTML " + html, retrievedElements.isEmpty());
     }
 
     public static void assertNotContains(String html, String cssSelector) {

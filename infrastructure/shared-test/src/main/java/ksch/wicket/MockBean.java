@@ -16,6 +16,7 @@
 
 package ksch.wicket;
 
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.mockito.Mockito;
@@ -28,15 +29,18 @@ public class MockBean<T> {
     @NonNull
     private final Class<T> classToBeMocked;
 
+    @Getter
+    private final T mock;
+
     public Class<T> getBeanClass() {
         return classToBeMocked;
     }
 
     public Supplier<T> getSupplier() {
-        return () -> Mockito.mock(classToBeMocked);
+        return () -> mock;
     }
 
     public static <T> MockBean of(Class<T> classToBeMocked) {
-        return new MockBean<>(classToBeMocked);
+        return new MockBean<>(classToBeMocked, Mockito.mock(classToBeMocked));
     }
 }
