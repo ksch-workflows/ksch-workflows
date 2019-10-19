@@ -1,6 +1,5 @@
 package ksch.laboratory;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface LabOrder {
@@ -9,7 +8,7 @@ public interface LabOrder {
 
     Status getStatus();
 
-    List<LabOrderCode> getRequestedTests();
+    LabOrderCode getRequestedTest();
 
     enum Status {
         NEW,

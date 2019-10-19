@@ -1,10 +1,13 @@
 package ksch.laboratory;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface LabCommands {
-    LabOrder requestExamination(UUID opdNumber, List<LabOrderCode> tests);
 
+    /**
+     * TODO Write javadocs
+     * @param visitId
+     * @param labOrderCode
+     */
     void requestExamination(UUID visitId, LabOrderCode labOrderCode);
 }

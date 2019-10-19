@@ -13,10 +13,8 @@ public class LabOrderEntityTest {
     public void should_build_new_lab_order_entity() {
         List<LabOrderCode> labOrderCodes = labOrderCodes("44907-4", "3299-5");
 
-        LabOrderEntity labOrderEntity = new LabOrderEntity(labOrderCodes);
+        LabOrderEntity labOrderEntity = new LabOrderEntity(new LabOrderCode("44907-4"));
 
         assertEquals(LabOrder.Status.NEW, labOrderEntity.getStatus());
-        assertEquals(2, labOrderEntity.getRequestedTests().size());
-        assertEquals(2, labOrderEntity.getLabTests().size());
     }
 }

@@ -1,12 +1,24 @@
 package ksch.laboratory;
 
-import java.util.List;
+import ksch.patientmanagement.visit.VisitQueries;
+import lombok.RequiredArgsConstructor;
+
 import java.util.UUID;
 
+@RequiredArgsConstructor
 public class LabCommandsImpl implements LabCommands {
 
+    private final LabOrderRepository labOrderRepository;
+
+    private final VisitQueries visitQueries;
+
     @Override
-    public LabOrder requestExamination(UUID opdNumber, List<LabOrderCode> tests) {
-        return null;
+    public void requestExamination(UUID visitId, LabOrderCode labOrderCode) {
+        LabOrderEntity labOrder = LabOrderEntity.builder()
+                .visitId(visitId)
+                .labTest(new LabTest(labOrderCode))
+                .status(LabOrder.Status.NEW)
+                .build();
+        labOrderRepository.save(labOrder);
     }
 }

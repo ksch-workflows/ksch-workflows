@@ -3,16 +3,12 @@ package ksch.laboratory;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-
-import static com.google.common.collect.Lists.newArrayList;
-import static java.util.stream.Collectors.toList;
 
 @Entity
 @Table
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,26 +19,23 @@ public class LabOrderEntity implements LabOrder {
     @Column(unique = true)
     private UUID id;
 
-    @ElementCollection
-    private List<LabTest> labTests = newArrayList();
+    @Column(nullable = false)
+    private UUID visitId;
+
+    @Column(nullable = false)
+    private LabTest labTest;
 
     @Enumerated(EnumType.STRING)
     @Setter
     private Status status;
 
-    public LabOrderEntity(List<LabOrderCode> requestedTests) {
-        labTests = requestedTests.stream()
-                .map(LabTest::new)
-                .collect(Collectors.toList());
+    public LabOrderEntity(LabOrderCode labOrderCode) {
+        labTest = new LabTest(labOrderCode);
         status = Status.NEW;
     }
 
     @Override
-    public List<LabOrderCode> getRequestedTests() {
-        return labTests.stream()
-                .map(LabTest::getRequest)
-                .collect(toList());
+    public LabOrderCode getRequestedTest() {
+        return labTest.getRequest();
     }
-
-
 }

@@ -1,5 +1,7 @@
 dependencies {
     compile project(':laboratory:laboratory-api')
+    compile project(':laboratory:laboratory-api')
+    compile project(':patient-management:patient-management-api')
 
     compile 'com.h2database:h2'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'

@@ -6,11 +6,13 @@ import ksch.wicket.MockBean;
 import ksch.wicket.PageComponentTest;
 import org.apache.wicket.util.tester.FormTester;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static ksch.assertions.HtmlAssertions.assertContains;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
@@ -24,11 +26,6 @@ public class LabOrderTest extends PageComponentTest {
         LabOrder labOrder = new LabOrder();
 
         tester.startComponentInPage(labOrder);
-    }
-
-    @Test
-    public void should_provide_button_to_add_lab_order() {
-        renderLabOrderPage();
 
         assertContains(lastRenderedPage(), doc -> doc.getElementsByTag("button"));
     }
@@ -41,7 +38,9 @@ public class LabOrderTest extends PageComponentTest {
         formTester.setValue("loincNumber", "34530-6");
         formTester.submit();
 
-        verify(labCommands.getMock()).requestExamination(any(), any(LabOrderCode.class));
+        ArgumentCaptor<LabOrderCode> argumentCaptor = ArgumentCaptor.forClass(LabOrderCode.class);
+        verify(labCommands.getMock()).requestExamination(any(), argumentCaptor.capture());
+        assertEquals("34530-6", argumentCaptor.getValue().toString());
     }
 
     @Override
