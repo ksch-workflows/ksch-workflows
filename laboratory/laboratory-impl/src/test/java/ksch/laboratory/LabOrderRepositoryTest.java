@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+import java.util.UUID;
+
 import static ksch.laboratory.LabOrder.Status.DONE;
 import static org.junit.Assert.*;
 
@@ -15,6 +18,8 @@ public class LabOrderRepositoryTest {
 
     @Autowired
     private LabOrderRepository labOrderRepository;
+
+    private final UUID visitId = UUID.randomUUID();
 
     @Test
     public void should_create_lab_order() {
@@ -38,9 +43,26 @@ public class LabOrderRepositoryTest {
         assertEquals(DONE, retrievedLabOrder.getStatus());
     }
 
+    @Test
+    public void should_find_all_lab_orders_for_a_visit() {
+        persistedLabOrder("6765-2");
+        persistedLabOrder("49054-0");
+
+        List<LabOrderEntity> result = labOrderRepository.findByVisitId(visitId);
+
+        assertEquals(2, result.size());
+    }
+
     private LabOrderEntity persistedLabOrder() {
-        LabOrderEntity labOrder = new LabOrderEntity();
-        labOrder.setLabTest(new LabTest(new LabOrderCode("44907-4")));
+        return persistedLabOrder("44907-4");
+    }
+
+    private LabOrderEntity persistedLabOrder(String loincNumber) {
+        LabOrderEntity labOrder = LabOrderEntity.builder()
+                .visitId(visitId)
+                .status(LabOrder.Status.NEW)
+                .labTest(new LabTest(new LabOrderCode(loincNumber)))
+                .build();
         return labOrderRepository.save(labOrder);
     }
 }

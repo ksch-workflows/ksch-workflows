@@ -5,12 +5,14 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.UUID;
 
+import static lombok.AccessLevel.PRIVATE;
+
 @Entity
 @Table
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = PRIVATE)
 @AllArgsConstructor
 public class LabOrderEntity implements LabOrder {
 
