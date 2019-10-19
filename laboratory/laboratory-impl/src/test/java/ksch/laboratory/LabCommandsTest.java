@@ -1,6 +1,5 @@
 package ksch.laboratory;
 
-import ksch.patientmanagement.visit.VisitQueries;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -23,9 +22,6 @@ public class LabCommandsTest {
     @Mock
     private LabOrderRepository labOrderRepository;
 
-    @Mock
-    private VisitQueries visitQueries;
-
     @Captor
     private ArgumentCaptor<LabOrderEntity> labOrderArgumentCaptor;
 
@@ -41,10 +37,5 @@ public class LabCommandsTest {
         assertEquals(visitId, savedLabOrder.getVisitId());
         assertEquals(LabOrder.Status.NEW, savedLabOrder.getStatus());
         assertEquals(labOrderCode, savedLabOrder.getLabTest().getRequest());
-    }
-
-    @Test
-    public void should_check_that_visit_exists() {
-        // TODO implement test case
     }
 }

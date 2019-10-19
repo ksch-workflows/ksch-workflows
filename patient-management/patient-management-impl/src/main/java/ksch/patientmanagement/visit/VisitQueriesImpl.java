@@ -36,7 +36,7 @@ public class VisitQueriesImpl implements VisitQueries {
     @Override
     public Visit get(UUID visitId) {
         return visitRepository.findById(visitId)
-                .orElseThrow(() -> new RuntimeException("Could not find Visit entity with ID " + visitId));
+                .orElseThrow(() -> new IllegalArgumentException("Could not find Visit entity with ID " + visitId));
     }
 
     @Override

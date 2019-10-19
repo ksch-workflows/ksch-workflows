@@ -11,16 +11,20 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.util.UUID;
 
-// TODO Maybe rename to LabOrderEntry
+// TODO Maybe rename to LabOrderPanel
 public class LabOrder extends Panel {
 
     @SpringBean
     private LabCommands labCommands;
 
+    private final UUID visitId;
+
     private Button addLabOrderButton;
 
-    public LabOrder() {
+    public LabOrder(UUID visitId) {
         super("labOrder");
+
+        this.visitId = visitId;
 
         add(createAddLabOrderButton());
         add(new AddLabOrderForm());
@@ -47,7 +51,7 @@ public class LabOrder extends Panel {
         protected void onSubmit() {
             String enteredLoincNumber = getValue("loincNumber");
 
-            labCommands.requestExamination(UUID.randomUUID(), new LabOrderCode(enteredLoincNumber));
+            labCommands.requestExamination(visitId, new LabOrderCode(enteredLoincNumber));
         }
 
         private void addTextField(String wicketId) {

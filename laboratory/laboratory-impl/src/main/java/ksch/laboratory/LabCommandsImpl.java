@@ -1,6 +1,5 @@
 package ksch.laboratory;
 
-import ksch.patientmanagement.visit.VisitQueries;
 import lombok.RequiredArgsConstructor;
 
 import java.util.UUID;
@@ -9,8 +8,6 @@ import java.util.UUID;
 public class LabCommandsImpl implements LabCommands {
 
     private final LabOrderRepository labOrderRepository;
-
-    private final VisitQueries visitQueries;
 
     @Override
     public void requestExamination(UUID visitId, LabOrderCode labOrderCode) {

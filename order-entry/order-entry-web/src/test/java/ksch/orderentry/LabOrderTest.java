@@ -9,11 +9,12 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 import java.util.List;
+import java.util.UUID;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static ksch.assertions.HtmlAssertions.assertContains;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
 @SuppressWarnings("unchecked")
@@ -21,9 +22,11 @@ public class LabOrderTest extends PageComponentTest {
 
     private MockBean<LabCommands> labCommands = MockBean.of(LabCommands.class);
 
+    private final UUID visitId = UUID.randomUUID();
+
     @Test
     public void should_render_panel_lab_order_table() {
-        LabOrder labOrder = new LabOrder();
+        LabOrder labOrder = new LabOrder(visitId);
 
         tester.startComponentInPage(labOrder);
 
@@ -39,7 +42,7 @@ public class LabOrderTest extends PageComponentTest {
         formTester.submit();
 
         ArgumentCaptor<LabOrderCode> argumentCaptor = ArgumentCaptor.forClass(LabOrderCode.class);
-        verify(labCommands.getMock()).requestExamination(any(), argumentCaptor.capture());
+        verify(labCommands.getMock()).requestExamination(eq(visitId), argumentCaptor.capture());
         assertEquals("34530-6", argumentCaptor.getValue().toString());
     }
 
@@ -53,7 +56,7 @@ public class LabOrderTest extends PageComponentTest {
     }
 
     private void renderLabOrderPage() {
-        LabOrder labOrder = new LabOrder();
+        LabOrder labOrder = new LabOrder(visitId);
         tester.startComponentInPage(labOrder);
     }
 }
