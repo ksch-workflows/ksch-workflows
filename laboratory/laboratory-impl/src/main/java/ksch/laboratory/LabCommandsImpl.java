@@ -1,10 +1,12 @@
 package ksch.laboratory;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @RequiredArgsConstructor
+@Service
 public class LabCommandsImpl implements LabCommands {
 
     private final LabOrderRepository labOrderRepository;

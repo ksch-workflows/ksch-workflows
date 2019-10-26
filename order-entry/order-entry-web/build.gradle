@@ -1,7 +1,7 @@
 
 dependencies {
     compile project(':infrastructure:wicket-utils')
-    compile project(':laboratory:laboratory-api')
+    compile project(':laboratory')
     compile project(':medical-records:clinical-terminologies')
 
     compile "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"

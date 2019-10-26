@@ -23,6 +23,7 @@ import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
 
+
 public class LabOrderPanel extends Panel {
 
     @SpringBean
@@ -32,9 +33,6 @@ public class LabOrderPanel extends Panel {
     private LabQueries labQueries;
 
     private final UUID visitId;
-
-    // TODO Connect button with business logic
-    private Button addLabOrderButton;
 
     private WebMarkupContainer labRequests;
 
@@ -54,7 +52,6 @@ public class LabOrderPanel extends Panel {
         result.setOutputMarkupId(true);
         result.setOutputMarkupPlaceholderTag(true);
 
-        this.addLabOrderButton = result;
         return result;
     }
 
@@ -129,6 +126,8 @@ public class LabOrderPanel extends Panel {
             String enteredLoincNumber = getValue("loincNumber");
 
             labCommands.requestExamination(visitId, new LabOrderCode(enteredLoincNumber));
+
+            setResponsePage(getPage()); // TODO Does this work as intended?
         }
 
         private void addTextField(String wicketId) {
