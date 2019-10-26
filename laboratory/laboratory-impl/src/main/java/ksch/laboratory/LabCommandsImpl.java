@@ -20,4 +20,9 @@ public class LabCommandsImpl implements LabCommands {
                 .build();
         labOrderRepository.save(labOrder);
     }
+
+    @Override
+    public void cancel(UUID id) {
+
+    }
 }

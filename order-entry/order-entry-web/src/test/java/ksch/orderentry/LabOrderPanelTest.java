@@ -19,6 +19,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static ksch.assertions.HtmlAssertions.assertContains;
 import static ksch.assertions.HtmlAssertions.assertNotContains;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -80,6 +81,7 @@ public class LabOrderPanelTest extends PageComponentTest {
 
         tester.clickLink("labOrder:labRequests:labOrders:1:cancelLabOrder");
 
+        verify(labCommands.getMock()).cancel(any(UUID.class));
     }
 
     private void createLabOrders() {

@@ -42,14 +42,14 @@ limitations under the License.
     </div>
 
     <div class="row" wicket:id="labRequests">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <table class="table table-striped without-top-border">
                 <thead>
                 <tr>
-                    <th scope="col" style="width: 20%">
+                    <th scope="col" style="width: 15%">
                         LOINC number
                     </th>
-                    <th scope="col" style="width: 80%">
+                    <th scope="col" style="width: 70%">
                         Lab test
                     </th>
                     <th scope="col" style="width: 30%">
@@ -66,9 +66,9 @@ limitations under the License.
                     <td wicket:id="loincNumber">[loinc number]</td>
                     <td wicket:id="labTest">[lab test]</td>
                     <td wicket:id="status">[status]</td>
-                    <td>
+                    <td class="float-right">
                         <a wicket:id="cancelLabOrder" class="btn btn-outline-secondary" href="#">
-                            Discharge
+                            Cancel
                         </a>
                     </td>
                 </tr>

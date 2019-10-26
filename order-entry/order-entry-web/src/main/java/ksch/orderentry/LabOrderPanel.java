@@ -73,20 +73,21 @@ public class LabOrderPanel extends Panel {
             @Override
             protected void populateItem(ListItem<LabOrderRow> item) {
                 LabOrderRow rowData = item.getModelObject();
+                Label statusLabel = new Label("status", rowData.getStatus());
+                statusLabel.setOutputMarkupId(true);
 
                 item.add(new Label("loincNumber", rowData.getLoincNumber()));
                 item.add(new Label("labTest", rowData.getLabTest()));
-                item.add(new Label("status", rowData.getStatus()));
+
+                item.add(statusLabel);
 
                 AjaxLink<Void> btn = new AjaxLink<>("cancelLabOrder") {
                     @Override
                     public void onClick(AjaxRequestTarget target) {
-                        reloadPage();
-                        throw new RuntimeException("HELLLO!");
-                    }
+                        labCommands.cancel(rowData.getId());
+                        statusLabel.setDefaultModelObject(LabOrder.Status.ABORTED.toString());
 
-                    private void reloadPage() {
-                        setResponsePage(getPage().getClass(), getPage().getPageParameters());
+                        target.add(statusLabel);
                     }
                 };
 
@@ -116,6 +117,8 @@ public class LabOrderPanel extends Panel {
     @Getter
     class LabOrderRow implements Serializable {
 
+        final UUID id;
+
         final String loincNumber;
 
         final String labTest;
@@ -123,6 +126,7 @@ public class LabOrderPanel extends Panel {
         final String status;
 
         public LabOrderRow(LabOrder labOrder) {
+            id = labOrder.getId();
             loincNumber = labOrder.getRequestedTest().toString();
             labTest = LoincLabOrderValues.get(loincNumber).getLongCommonName();
             status = labOrder.getStatus().toString();
