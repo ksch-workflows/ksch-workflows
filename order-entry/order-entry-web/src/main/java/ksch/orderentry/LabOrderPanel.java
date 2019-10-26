@@ -127,7 +127,7 @@ public class LabOrderPanel extends Panel {
 
             labCommands.requestExamination(visitId, new LabOrderCode(enteredLoincNumber));
 
-            setResponsePage(getPage()); // TODO Does this work as intended?
+            //setResponsePage(getPage()); // TODO Does this work as intended?
         }
 
         private void addTextField(String wicketId) {

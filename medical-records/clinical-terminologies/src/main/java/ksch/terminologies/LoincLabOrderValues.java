@@ -1,13 +1,14 @@
 package ksch.terminologies;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 public class LoincLabOrderValues {
 
@@ -15,7 +16,8 @@ public class LoincLabOrderValues {
 
     static  {
         values = new HashMap<>();
-        List<String> lineInCsvFile = readLines("/LoincUniversalLabOrdersValueSet.csv");
+
+        List<String> lineInCsvFile = readLines("LoincUniversalLabOrdersValueSet.csv");
 
         for (int i = 1; i < lineInCsvFile.size(); i++) {
             String[] parts = lineInCsvFile.get(i).replace("\"", "").split(",");
@@ -27,29 +29,26 @@ public class LoincLabOrderValues {
         return new ArrayList<>(values.values());
     }
 
-    private static List<String> readLines(String locator) {
-        try {
-            return Files.readAllLines(
-                    Paths.get(resourceUri(locator)), Charset.defaultCharset());
-        } catch (IOException e) {
-            throw new IllegalArgumentException(locator);
-        }
-    }
-
-    private static URI resourceUri(String locator) {
-        URL resource = LoincLabOrderValues.class.getResource(locator);
-        try {
-            return resource.toURI();
-        } catch (URISyntaxException e) {
-            throw new IllegalArgumentException("Not a valid URI: " + locator);
-        }
-    }
-
-    public static LoincLabOrderValue get(String loincNum) {
-        LoincLabOrderValue result = values.get(loincNum);
+    public static LoincLabOrderValue get(String loincNumber) {
+        LoincLabOrderValue result = values.get(loincNumber);
         if (result == null) {
-            throw new IllegalArgumentException(loincNum);
+            throw new IllegalArgumentException(loincNumber);
         }
         return result;
+    }
+
+    private static List<String> readLines(String locator) {
+        try {
+            InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(locator);
+            if (resourceAsStream == null) {
+                throw new IllegalArgumentException("Could not find resource: " + locator);
+            }
+            BufferedReader reader = new BufferedReader(new InputStreamReader(resourceAsStream));
+            List<String> result = reader.lines().collect(toList());
+            reader.close();
+            return result;
+        } catch (Exception e) {
+            throw new IllegalArgumentException(locator, e);
+        }
     }
 }
