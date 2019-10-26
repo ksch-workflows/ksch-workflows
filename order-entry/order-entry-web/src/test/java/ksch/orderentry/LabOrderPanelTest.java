@@ -1,6 +1,7 @@
 package ksch.orderentry;
 
 import ksch.assertions.CssQuery;
+import ksch.assertions.ElementContainingText;
 import ksch.assertions.WicketId;
 import ksch.laboratory.LabCommands;
 import ksch.laboratory.LabOrderCode;
@@ -63,12 +64,13 @@ public class LabOrderPanelTest extends PageComponentTest {
 
     @Test
     public void should_render_table_with_all_lab_orders_for_visit() {
-        givenLabOrder();
+        createLabOrders();
 
         renderLabOrderPage();
 
         assertContains(lastRenderedPage(), new CssQuery("table"));
         assertNotContains(lastRenderedPage(), new WicketId("noLabRequestsMessage"));
+        assertContains(lastRenderedPage(), new ElementContainingText("53962-7"));
     }
 
     @Test
@@ -76,8 +78,14 @@ public class LabOrderPanelTest extends PageComponentTest {
 
     }
 
-    private void givenLabOrder() {
-        when(labQueries.getMock().getLabOrders(visitId)).thenReturn(newArrayList(new TestLabOrder("34530-6")));
+    private void createLabOrders() {
+        when(labQueries.getMock().getLabOrders(visitId)).thenReturn(
+                newArrayList(
+                        new TestLabOrder("34530-6"),
+                        new TestLabOrder("5834-7"),
+                        new TestLabOrder("53962-7")
+                )
+        );
     }
 
     @Override

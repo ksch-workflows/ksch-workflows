@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 public class WicketId {
 
     @NonNull
-    private final String id;
+    private final String value;
 
     public String toString() {
-        return id;
+        return value;
     }
 }

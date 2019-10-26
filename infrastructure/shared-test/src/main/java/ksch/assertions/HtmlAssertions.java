@@ -44,6 +44,10 @@ public class HtmlAssertions {
         assertContains(html, document -> document.getElementsByAttributeValue("wicket:id", wicketId.toString()));
     }
 
+    public static void assertContains(String html, ElementContainingText elementContainingText) {
+        assertContains(html, document -> document.getElementsContainingText(elementContainingText.toString()));
+    }
+
     public static void assertNotContains(String html, WicketId wicketId) {
         assertNotContains(html, document -> document.getElementsByAttributeValue("wicket:id", wicketId.toString()));
     }

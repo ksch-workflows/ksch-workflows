@@ -62,6 +62,16 @@ limitations under the License.
                 </thead>
                 <tbody>
 
+                <tr wicket:id="labOrders">
+                    <td wicket:id="loincNumber">[loinc number]</td>
+                    <td wicket:id="labTest">[lab test]</td>
+                    <td wicket:id="status">[status]</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-secondary">Cancel</button>
+                    </td>
+                </tr>
+
+                <wicket:remove>
                 <tr>
                     <td>
                         34530-6
@@ -106,6 +116,7 @@ limitations under the License.
                         <button type="button" class="btn btn-outline-secondary">Cancel</button>
                     </td>
                 </tr>
+                </wicket:remove>
 
                 </tbody>
             </table>

@@ -4,7 +4,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class CssQuery {
+public class ElementContainingText {
 
     @NonNull
     private final String value;
