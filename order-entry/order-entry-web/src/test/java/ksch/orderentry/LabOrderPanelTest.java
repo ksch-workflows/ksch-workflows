@@ -9,8 +9,6 @@ import ksch.laboratory.LabQueries;
 import ksch.wicket.MockBean;
 import ksch.wicket.PageComponentTest;
 import org.apache.wicket.util.tester.FormTester;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
@@ -72,13 +70,16 @@ public class LabOrderPanelTest extends PageComponentTest {
 
         assertContains(lastRenderedPage(), new CssQuery("table"));
         assertNotContains(lastRenderedPage(), new WicketId("noLabRequestsMessage"));
-        assertContains(lastRenderedPage(), new ElementContainingText("53962-8"));
+        assertContains(lastRenderedPage(), new ElementContainingText("53962-7"));
     }
 
-    @Ignore
     @Test
     public void should_cancel_lab_order() {
-        Assert.fail();
+        createLabOrders();
+        renderLabOrderPage();
+
+        tester.clickLink("labOrder:labRequests:labOrders:1:cancelLabOrder");
+
     }
 
     private void createLabOrders() {

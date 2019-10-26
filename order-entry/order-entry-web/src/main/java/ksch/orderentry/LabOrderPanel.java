@@ -6,6 +6,8 @@ import ksch.laboratory.LabOrderCode;
 import ksch.laboratory.LabQueries;
 import ksch.terminologies.LoincLabOrderValues;
 import lombok.Getter;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
@@ -75,6 +77,20 @@ public class LabOrderPanel extends Panel {
                 item.add(new Label("loincNumber", rowData.getLoincNumber()));
                 item.add(new Label("labTest", rowData.getLabTest()));
                 item.add(new Label("status", rowData.getStatus()));
+
+                AjaxLink<Void> btn = new AjaxLink<>("cancelLabOrder") {
+                    @Override
+                    public void onClick(AjaxRequestTarget target) {
+                        reloadPage();
+                        throw new RuntimeException("HELLLO!");
+                    }
+
+                    private void reloadPage() {
+                        setResponsePage(getPage().getClass(), getPage().getPageParameters());
+                    }
+                };
+
+                item.add(btn);
             }
         };
 
