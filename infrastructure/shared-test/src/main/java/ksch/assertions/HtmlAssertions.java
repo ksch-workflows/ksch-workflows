@@ -32,15 +32,38 @@ public class HtmlAssertions {
         assertTrue("Cannot find CSS selector '" + cssSelector + "' in HTML " + html, searchResults.size() > 0);
     }
 
-    public static void assertContains(String html, Function<Document, Elements> thingy) {
-        Document doc = Jsoup.parse(html);
-        Elements retrievedElements = thingy.apply(doc);
-        assertFalse("Cannot find any element in HTML " + html, retrievedElements.isEmpty());
+    public static void assertContains(String html, CssQuery cssQuery) {
+        assertContains(html, document -> document.select(cssQuery.toString()));
+    }
+
+    public static void assertNotContains(String html, CssQuery cssQuery) {
+        assertNotContains(html, document -> document.select(cssQuery.toString()));
+    }
+
+    public static void assertContains(String html, WicketId wicketId) {
+        assertContains(html, document -> document.getElementsByAttributeValue("wicket:id", wicketId.toString()));
+    }
+
+    public static void assertNotContains(String html, WicketId wicketId) {
+        assertNotContains(html, document -> document.getElementsByAttributeValue("wicket:id", wicketId.toString()));
     }
 
     public static void assertNotContains(String html, String cssSelector) {
         Document doc = Jsoup.parse(html);
         Elements searchResults = doc.select(cssSelector);
-        assertEquals("Could find CSS selector '" + cssSelector + "' in HTML " + html, searchResults.size(), 0);
+        assertEquals("CSS selector '" + cssSelector + "' should not have been found in HTML " + html, searchResults.size(), 0);
+    }
+
+    // TODO I guess this method should be private instead as it's hard to read in the tests
+    public static void assertContains(String html, Function<Document, Elements> elementLocator) {
+        Document doc = Jsoup.parse(html);
+        Elements retrievedElements = elementLocator.apply(doc);
+        assertFalse("Cannot find matching element in HTML " + html, retrievedElements.isEmpty());
+    }
+
+    private static void assertNotContains(String html, Function<Document, Elements> elementLocator) {
+        Document doc = Jsoup.parse(html);
+        Elements retrievedElements = elementLocator.apply(doc);
+        assertTrue("Specified element should not have been found in HTML " + html, retrievedElements.isEmpty());
     }
 }

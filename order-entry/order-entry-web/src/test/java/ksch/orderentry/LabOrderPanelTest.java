@@ -1,7 +1,10 @@
 package ksch.orderentry;
 
+import ksch.assertions.CssQuery;
+import ksch.assertions.WicketId;
 import ksch.laboratory.LabCommands;
 import ksch.laboratory.LabOrderCode;
+import ksch.laboratory.LabQueries;
 import ksch.wicket.MockBean;
 import ksch.wicket.PageComponentTest;
 import org.apache.wicket.util.tester.FormTester;
@@ -13,14 +16,18 @@ import java.util.UUID;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static ksch.assertions.HtmlAssertions.assertContains;
+import static ksch.assertions.HtmlAssertions.assertNotContains;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @SuppressWarnings("unchecked")
 public class LabOrderPanelTest extends PageComponentTest {
 
     private MockBean<LabCommands> labCommands = MockBean.of(LabCommands.class);
+
+    private MockBean<LabQueries> labQueries = MockBean.of(LabQueries.class);
 
     private final UUID visitId = UUID.randomUUID();
 
@@ -30,7 +37,7 @@ public class LabOrderPanelTest extends PageComponentTest {
 
         tester.startComponentInPage(labOrderPanel);
 
-        assertContains(lastRenderedPage(), doc -> doc.getElementsByTag("button"));
+        assertContains(lastRenderedPage(), new CssQuery("button"));
     }
 
     @Test
@@ -46,9 +53,39 @@ public class LabOrderPanelTest extends PageComponentTest {
         assertEquals("34530-6", argumentCaptor.getValue().toString());
     }
 
+    @Test
+    public void should_display_placeholder_if_there_are_no_lab_orders() {
+        renderLabOrderPage();
+
+        assertNotContains(lastRenderedPage(), new CssQuery("table"));
+        assertContains(lastRenderedPage(), new WicketId("noLabRequestsMessage"));
+    }
+
+    @Test
+    public void should_render_table_with_all_lab_orders_for_visit() {
+        givenLabOrder();
+
+        renderLabOrderPage();
+
+        assertContains(lastRenderedPage(), new CssQuery("table"));
+        assertNotContains(lastRenderedPage(), new WicketId("noLabRequestsMessage"));
+    }
+
+    @Test
+    public void should_cancel_lab_order() {
+
+    }
+
+    private void givenLabOrder() {
+        when(labQueries.getMock().getLabOrders(visitId)).thenReturn(newArrayList(new TestLabOrder("34530-6")));
+    }
+
     @Override
     protected List<MockBean> getMockBeans() {
-        return newArrayList(labCommands);
+        return newArrayList(
+                labCommands,
+                labQueries
+        );
     }
 
     private String lastRenderedPage() {

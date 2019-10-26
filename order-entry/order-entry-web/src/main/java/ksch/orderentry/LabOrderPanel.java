@@ -2,6 +2,8 @@ package ksch.orderentry;
 
 import ksch.laboratory.LabCommands;
 import ksch.laboratory.LabOrderCode;
+import ksch.laboratory.LabQueries;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -16,9 +18,15 @@ public class LabOrderPanel extends Panel {
     @SpringBean
     private LabCommands labCommands;
 
+    @SpringBean
+    private LabQueries labQueries;
+
     private final UUID visitId;
 
+    // TODO Connect button with business logic
     private Button addLabOrderButton;
+
+    private WebMarkupContainer labRequests;
 
     public LabOrderPanel(UUID visitId) {
         super("labOrder");
@@ -26,6 +34,8 @@ public class LabOrderPanel extends Panel {
         this.visitId = visitId;
 
         add(createAddLabOrderButton());
+        add(createLabRequestsTable());
+        add(createNoLabRequestsPresentMessage());
         add(new AddLabOrderForm());
     }
 
@@ -36,6 +46,30 @@ public class LabOrderPanel extends Panel {
 
         this.addLabOrderButton = result;
         return result;
+    }
+
+    private WebMarkupContainer createLabRequestsTable() {
+        WebMarkupContainer result = new WebMarkupContainer("labRequests");
+        if (hasLabRequestsForCurrentVisit()) {
+            result.setVisible(true);
+        } else {
+            result.setVisible(false);
+        }
+        return result;
+    }
+
+    private WebMarkupContainer createNoLabRequestsPresentMessage() {
+        WebMarkupContainer result = new WebMarkupContainer("noLabRequestsMessage");
+        if (hasLabRequestsForCurrentVisit()) {
+            result.setVisible(false);
+        } else {
+            result.setVisible(true);
+        }
+        return result;
+    }
+
+    private boolean hasLabRequestsForCurrentVisit() {
+        return labQueries.getLabOrders(visitId).size() > 0;
     }
 
     class AddLabOrderForm extends Form<Void> {
