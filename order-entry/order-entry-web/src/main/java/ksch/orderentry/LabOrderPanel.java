@@ -127,7 +127,7 @@ public class LabOrderPanel extends Panel {
 
             labCommands.requestExamination(visitId, new LabOrderCode(enteredLoincNumber));
 
-            //setResponsePage(getPage()); // TODO Does this work as intended?
+            reloadPage();
         }
 
         private void addTextField(String wicketId) {
@@ -142,6 +142,10 @@ public class LabOrderPanel extends Panel {
         private String getValue(String wicketId) {
             Object object = get(wicketId).getDefaultModel().getObject();
             return object != null ? object.toString() : null;
+        }
+
+        private void reloadPage() {
+            setResponsePage(getPage().getClass(), getPage().getPageParameters());
         }
     }
 }
