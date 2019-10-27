@@ -108,6 +108,8 @@ public class LabOrderPanelTest extends PageComponentTest {
 
     private void renderLabOrderPage() {
         LabOrderPanel labOrderPanel = new LabOrderPanel(visitId);
+
         tester.startComponentInPage(labOrderPanel);
+        //Mockito.doNothing().when(labOrderPanel).reloadPage();
     }
 }
