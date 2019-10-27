@@ -185,3 +185,7 @@ K.S.C.H. Workflows is maintained by [KS-plus e.V.](https://ks-plus.org/en/welcom
 a non-profit association dedicated to supporting the [Kirpal Sagar](https://kirpal-sagar.org/en/welcome/) project.
 
 It is licensed under the [Apache License Version 2.0](https://github.com/ksch-workflows/ksch-workflows/blob/master/LICENSE).
+
+### Third-party licenses
+
+- [LOINC 2.66](infrastructure/doc/third-party-licenses/Loinc_2.66_License_3.0.txt)

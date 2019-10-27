@@ -5,6 +5,7 @@ include "infrastructure:configuration"
 include "infrastructure:shared-test"
 include "infrastructure:wicket-utils"
 
+include("medical-records:clinical-terminologies")
 include("medical-records:medical-records-api")
 include("medical-records:medical-records-impl")
 
