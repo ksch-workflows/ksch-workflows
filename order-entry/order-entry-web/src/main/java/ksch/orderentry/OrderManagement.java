@@ -16,11 +16,16 @@
 
 package ksch.orderentry;
 
+import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.panel.Panel;
+
+import java.util.UUID;
 
 public class OrderManagement extends Panel {
 
-    public OrderManagement() {
+    public OrderManagement(UUID visitId) {
         super("orderManagement");
+
+        add(new ExternalLink("editLabOrdersLink", String.format("/registration/visits/%s/lab-orders", visitId)));
     }
 }

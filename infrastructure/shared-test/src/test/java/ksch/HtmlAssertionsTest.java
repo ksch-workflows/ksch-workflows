@@ -16,7 +16,7 @@
 
 package ksch;
 
-import ksch.util.HtmlAssertions;
+import ksch.assertions.HtmlAssertions;
 import org.junit.Test;
 
 public class HtmlAssertionsTest {

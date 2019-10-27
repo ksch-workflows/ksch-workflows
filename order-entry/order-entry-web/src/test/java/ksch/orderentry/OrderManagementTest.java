@@ -23,7 +23,7 @@ public class OrderManagementTest extends PageComponentTest {
 
     @Test
     public void should_render_panel_with_order_management_table() {
-        OrderManagement orderManagement = new OrderManagement();
+        OrderManagement orderManagement = new OrderManagement(null);
 
         tester.startComponentInPage(orderManagement);
     }

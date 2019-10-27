@@ -30,8 +30,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
-import static ksch.util.HtmlAssertions.assertContains;
-import static ksch.util.HtmlAssertions.assertNotContains;
+import static ksch.assertions.HtmlAssertions.assertContains;
+import static ksch.assertions.HtmlAssertions.assertNotContains;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.reset;
