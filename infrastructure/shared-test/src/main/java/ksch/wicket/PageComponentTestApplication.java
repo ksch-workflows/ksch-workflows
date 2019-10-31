@@ -32,10 +32,10 @@ import java.util.List;
  */
 class PageComponentTestApplication extends WebApplication {
 
-    private final List<MockBean> mockBeans;
+    private final List<MockBeanWrapper> mockBeanWrappers;
 
-    PageComponentTestApplication(List<MockBean> mockBeans) {
-        this.mockBeans = mockBeans;
+    PageComponentTestApplication(List<MockBeanWrapper> mockBeanWrappers) {
+        this.mockBeanWrappers = mockBeanWrappers;
     }
 
     @Override
@@ -44,7 +44,7 @@ class PageComponentTestApplication extends WebApplication {
         super.init();
 
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-        mockBeans.forEach(b -> ctx.registerBean(b.getBeanClass(), b.getSupplier()));
+        mockBeanWrappers.forEach(b -> ctx.registerBean(b.getBeanClass(), b.getSupplier()));
         ctx.refresh();
 
         getComponentInstantiationListeners().add(new SpringComponentInjector(this, ctx));

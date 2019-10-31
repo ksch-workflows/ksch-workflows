@@ -12,7 +12,6 @@ import org.apache.wicket.util.tester.FormTester;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
-import java.util.List;
 import java.util.UUID;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -27,9 +26,11 @@ import static org.mockito.Mockito.when;
 @SuppressWarnings("unchecked")
 public class LabOrderPanelTest extends PageComponentTest {
 
-    private MockBean<LabCommands> labCommands = MockBean.of(LabCommands.class);
+    @MockBean
+    private LabCommands labCommands;
 
-    private MockBean<LabQueries> labQueries = MockBean.of(LabQueries.class);
+    @MockBean
+    private LabQueries labQueries;
 
     private final UUID visitId = UUID.randomUUID();
 
@@ -51,7 +52,7 @@ public class LabOrderPanelTest extends PageComponentTest {
         formTester.submit();
 
         ArgumentCaptor<LabOrderCode> argumentCaptor = ArgumentCaptor.forClass(LabOrderCode.class);
-        verify(labCommands.getMock()).requestExamination(eq(visitId), argumentCaptor.capture());
+        verify(labCommands).requestExamination(eq(visitId), argumentCaptor.capture());
         assertEquals("34530-6", argumentCaptor.getValue().toString());
     }
 
@@ -81,24 +82,16 @@ public class LabOrderPanelTest extends PageComponentTest {
 
         tester.clickLink("labOrder:labRequests:labOrders:1:cancelLabOrder");
 
-        verify(labCommands.getMock()).cancel(any(UUID.class));
+        verify(labCommands).cancel(any(UUID.class));
     }
 
     private void createLabOrders() {
-        when(labQueries.getMock().getLabOrders(visitId)).thenReturn(
+        when(labQueries.getLabOrders(visitId)).thenReturn(
                 newArrayList(
                         new TestLabOrder("34530-6"),
                         new TestLabOrder("5834-7"),
                         new TestLabOrder("53962-7")
                 )
-        );
-    }
-
-    @Override
-    protected List<MockBean> getMockBeans() {
-        return newArrayList(
-                labCommands,
-                labQueries
         );
     }
 
@@ -110,6 +103,5 @@ public class LabOrderPanelTest extends PageComponentTest {
         LabOrderPanel labOrderPanel = new LabOrderPanel(visitId);
 
         tester.startComponentInPage(labOrderPanel);
-        //Mockito.doNothing().when(labOrderPanel).reloadPage();
     }
 }

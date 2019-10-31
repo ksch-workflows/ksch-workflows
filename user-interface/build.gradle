@@ -49,7 +49,7 @@ bootRun.systemProperties = System.properties as Map<String, ?>
 
 task bootRunDev {
     bootRun.configure {
-        systemProperty "spring.profiles.active", 'qa'
+        systemProperty "spring.profiles.active", 'dev'
     }
 }
 

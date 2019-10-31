@@ -38,7 +38,7 @@ import java.util.UUID;
  * This is only be done if the application was started with the specified Spring profile.
  */
 @Component
-@Profile("qa")
+@Profile("dev")
 @Slf4j
 @RequiredArgsConstructor
 public class TestDataInitializer implements ApplicationRunner {
