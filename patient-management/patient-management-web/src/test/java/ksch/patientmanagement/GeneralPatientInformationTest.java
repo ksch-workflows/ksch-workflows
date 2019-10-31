@@ -20,27 +20,27 @@ import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.VisitQueries;
 import ksch.patientmanagement.visit.VisitTransactions;
-import ksch.wicket.MockBean;
 import ksch.wicket.PageComponentTest;
+import ksch.wicket.MockBean;
 import org.junit.Test;
-
-import java.util.List;
 
 import static ksch.patientmanagement.PatientResource.toPatientResource;
 
 public class GeneralPatientInformationTest extends PageComponentTest {
 
-    private PatientResource patient = toPatientResource(new TestPatient());
+    @MockBean
+    private PatientQueries patientQueries;
 
-    @Override
-    protected List<MockBean> getMockBeans() {
-        return List.of(
-                MockBean.of(PatientTransactions.class),
-                MockBean.of(PatientQueries.class),
-                MockBean.of(VisitTransactions.class),
-                MockBean.of(VisitQueries.class)
-        );
-    }
+    @MockBean
+    private PatientTransactions patientTransactions;
+
+    @MockBean
+    private VisitTransactions visitTransactions;
+
+    @MockBean
+    private VisitQueries visitQueries;
+
+    private PatientResource patient = toPatientResource(new TestPatient());
 
     @Test
     public void should_render_panel_with_general_information_about_a_patient() {
