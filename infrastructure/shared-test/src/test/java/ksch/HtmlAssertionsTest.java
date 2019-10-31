@@ -16,40 +16,90 @@
 
 package ksch;
 
-import ksch.util.HtmlAssertions;
+import ksch.assertions.CssQuery;
+import ksch.assertions.ElementContainingText;
+import ksch.assertions.HtmlAssertions;
+import ksch.assertions.WicketId;
 import org.junit.Test;
 
 public class HtmlAssertionsTest {
 
     @Test
-    public void should_pass_if_expected_element_found() {
-        String html = getHtmlPageWithLink();
+    public void should_pass_find_css_query() {
+        String html = "<html><span class=\"hello\"></span></html>";
 
-        HtmlAssertions.assertContains(html, "a");
+        HtmlAssertions.assertContains(html, new CssQuery(".hello"));
     }
 
     @Test(expected = AssertionError.class)
-    public void should_fail_if_expected_element_not_found() {
-        String html = getHtmlPageWithLink();
+    public void should_fail_find_css_query() {
+        String html = "<html><span></span></html>";
 
-        HtmlAssertions.assertContains(html, "button");
+        HtmlAssertions.assertContains(html, new CssQuery(".hello"));
     }
+
+    // --------------------------------------------------------------------------------------------------------------
 
     @Test
-    public void should_pass_if_unexpected_element_not_found() {
-        String html = getHtmlPageWithLink();
+    public void should_pass_preclude_css_query() {
+        String html = "<html><span></span></html>";
 
-        HtmlAssertions.assertNotContains(html, "button");
+        HtmlAssertions.assertNotContains(html, new CssQuery(".hello"));
     }
 
     @Test(expected = AssertionError.class)
-    public void should_fail_if_unexpected_element_found() {
-        String html = getHtmlPageWithLink();
+    public void should_fail_preclude_css_query() {
+        String html = "<html><span class=\"hello\"></span></html>";
 
-        HtmlAssertions.assertNotContains(html, "a");
+        HtmlAssertions.assertNotContains(html, new CssQuery(".hello"));
     }
 
-    private String getHtmlPageWithLink() {
-        return "<html><body><a href='https://www.kirpal-sagar.org'>Click me</a></body></html>";
+    // --------------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void should_pass_find_wicket_id() {
+        String html = "<html><span wicket:id=\"content\"></span></html>";
+
+        HtmlAssertions.assertContains(html, new WicketId("content"));
+    }
+
+    @Test(expected = AssertionError.class)
+    public void should_fail_find_wicket_id() {
+        String html = "<html></html>";
+
+        HtmlAssertions.assertContains(html, new WicketId("content"));
+    }
+
+    // --------------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void should_pass_preclude_wicket_id() {
+        String html = "<html></html>";
+
+        HtmlAssertions.assertNotContains(html, new WicketId("content"));
+    }
+
+    @Test(expected = AssertionError.class)
+    public void should_fail_preclude_wicket_id() {
+        String html = "<html><span wicket:id=\"content\"></span></html>";
+
+        HtmlAssertions.assertNotContains(html, new WicketId("content"));
+    }
+
+    // --------------------------------------------------------------------------------------------------------------
+
+    @Test
+    public void should_pass_find_element_with_containing_text() {
+        String html = "<html><span>Hello</span></html>";
+
+        HtmlAssertions.assertContains(html, new ElementContainingText("Hello"));
+        HtmlAssertions.assertContains(html, new ElementContainingText("hello"));
+    }
+
+    @Test(expected = AssertionError.class)
+    public void should_fail_find_element_with_containing_text() {
+        String html = "<html></html>";
+
+        HtmlAssertions.assertContains(html, new ElementContainingText("hello"));
     }
 }

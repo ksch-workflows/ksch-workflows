@@ -21,7 +21,7 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static ksch.util.CustomAssertions.assertAllPropertiesEqual;
+import static ksch.assertions.CustomAssertions.assertAllPropertiesEqual;
 
 public class VitalsEntityTest {
 

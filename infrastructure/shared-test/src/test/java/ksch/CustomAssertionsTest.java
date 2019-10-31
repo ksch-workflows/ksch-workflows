@@ -16,7 +16,7 @@
 
 package ksch;
 
-import ksch.util.CustomAssertions;
+import ksch.assertions.CustomAssertions;
 import org.junit.Test;
 
 public class CustomAssertionsTest {
