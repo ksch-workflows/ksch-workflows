@@ -23,7 +23,7 @@ import ksch.patientmanagement.patient.Patient;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import static ksch.util.CustomAssertions.assertAllPropertiesEqual;
+import static ksch.assertions.CustomAssertions.assertAllPropertiesEqual;
 
 public class PatientResourceTest {
 

@@ -17,6 +17,7 @@
 package ksch.registration;
 
 import ksch.WebPageTest;
+import ksch.assertions.CssQuery;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.patient.PatientTransactions;
@@ -30,8 +31,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
-import static ksch.util.HtmlAssertions.assertContains;
-import static ksch.util.HtmlAssertions.assertNotContains;
+import static ksch.assertions.HtmlAssertions.assertContains;
+import static ksch.assertions.HtmlAssertions.assertNotContains;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.reset;
@@ -97,18 +98,17 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
 
     @Test
     public void should_start_visit() {
-
         Patient patient = createTestPatient();
         openPatientDetails(patient);
-        assertNotContains(currentPage(), CSS_SELECTOR_DISCHARGE_BUTTON);
+        assertNotContains(currentPage(), new CssQuery(CSS_SELECTOR_DISCHARGE_BUTTON));
 
         tester.newFormTester("content:generalPatientInformation:startVisitForm")
                 .select("visitTypeSelection", 1)
                 .submit();
 
         verify(visitTransactions).startVisit(any(Patient.class), any(VisitType.class));
-        assertContains(currentPage(), CSS_SELECTOR_DISCHARGE_BUTTON);
-        assertNotContains(currentPage(), CSS_SELECTOR_START_VISIT_BUTTON);
+        assertContains(currentPage(), new CssQuery(CSS_SELECTOR_DISCHARGE_BUTTON));
+        assertNotContains(currentPage(), new CssQuery(CSS_SELECTOR_START_VISIT_BUTTON));
     }
 
     @Test
@@ -123,8 +123,8 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
         // Without re-opening of the page only the Ajax response is available for verifications
         openPatientDetails(patient);
 
-        assertContains(currentPage(), CSS_SELECTOR_START_VISIT_BUTTON);
-        assertNotContains(currentPage(), CSS_SELECTOR_DISCHARGE_BUTTON);
+        assertContains(currentPage(), new CssQuery(CSS_SELECTOR_START_VISIT_BUTTON));
+        assertNotContains(currentPage(), new CssQuery(CSS_SELECTOR_DISCHARGE_BUTTON));
     }
 
     private PageParameters buildPageParameters(Patient patient) {
@@ -143,7 +143,7 @@ public class EditPatientDetailsActivityTest extends WebPageTest {
                 .select("visitTypeSelection", 1)
                 .submit();
         tester.assertComponent("content:generalPatientInformation:dischargeButton", AjaxLink.class);
-        assertNotContains(currentPage(), CSS_SELECTOR_START_VISIT_BUTTON);
+        assertNotContains(currentPage(), new CssQuery(CSS_SELECTOR_START_VISIT_BUTTON));
     }
 
     private String currentPage() {
