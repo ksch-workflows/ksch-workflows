@@ -46,3 +46,11 @@ bootJar {
 }
 
 bootRun.systemProperties = System.properties as Map<String, ?>
+
+task bootRunDev {
+    bootRun.configure {
+        systemProperty "spring.profiles.active", 'dev'
+    }
+}
+
+bootRunDev.finalizedBy bootRun
