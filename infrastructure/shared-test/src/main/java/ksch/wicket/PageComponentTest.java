@@ -16,9 +16,11 @@
 
 package ksch.wicket;
 
+import lombok.SneakyThrows;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,12 +28,23 @@ public class PageComponentTest {
 
     protected WicketTester tester;
 
-    protected List<MockBean> getMockBeans() {
-        return new ArrayList<>();
-    }
-
     @Before
     public void setUp() {
         tester = new WicketTester(new PageComponentTestApplication(getMockBeans()));
+    }
+
+    @SneakyThrows
+    private List<MockBeanWrapper> getMockBeans() {
+        List<MockBeanWrapper> mockBeanWrappers = new ArrayList<>();
+        Field[] declaredFields = this.getClass().getDeclaredFields();
+        for (Field f : declaredFields) {
+            if (f.isAnnotationPresent(MockBean.class)) {
+                MockBeanWrapper mockBeanWrapper = MockBeanWrapper.createMockBean(f.getType());
+                f.setAccessible(true);
+                f.set(this, mockBeanWrapper.getMock());
+                mockBeanWrappers.add(mockBeanWrapper);
+            }
+        }
+        return mockBeanWrappers;
     }
 }

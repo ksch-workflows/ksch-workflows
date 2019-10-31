@@ -16,12 +16,31 @@
 
 package ksch.wicket;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.mockito.Mockito;
 
-/**
- * Marker annotation for fields in a test class which represent Spring beans to be mocked for unit tests.
- */
-@Retention(RetentionPolicy.RUNTIME)
-public @interface MockBean {
+import java.util.function.Supplier;
+
+@RequiredArgsConstructor
+class MockBeanWrapper<T> {
+
+    @NonNull
+    private final Class<T> classToBeMocked;
+
+    @Getter
+    private final T mock;
+
+    Class<T> getBeanClass() {
+        return classToBeMocked;
+    }
+
+    Supplier<T> getSupplier() {
+        return () -> mock;
+    }
+
+    static <T> MockBeanWrapper createMockBean(Class<T> classToBeMocked) {
+        return new MockBeanWrapper<>(classToBeMocked, Mockito.mock(classToBeMocked));
+    }
 }
