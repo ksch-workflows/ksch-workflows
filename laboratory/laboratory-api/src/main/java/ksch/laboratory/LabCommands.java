@@ -16,6 +16,8 @@
 
 package ksch.laboratory;
 
+import ksch.laboratory.LabOrder.Status;
+
 import java.util.UUID;
 
 public interface LabCommands {
@@ -33,5 +35,5 @@ public interface LabCommands {
      *
      * @param id The ID of the lab order to be aborted.
      */
-    LabOrder cancel(UUID id);
+    Status cancel(UUID id);
 }

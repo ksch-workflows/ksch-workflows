@@ -103,7 +103,7 @@ public class LabOrderPanel extends Panel {
                 AjaxLink<Void> btn = new AjaxLink<>("cancelLabOrder") {
                     @Override
                     public void onClick(AjaxRequestTarget target) {
-                        var newStatus = labCommands.cancel(rowData.getId()).getStatus();
+                        var newStatus = labCommands.cancel(rowData.getId());
                         statusLabel.setDefaultModelObject(newStatus.toString());
 
                         target.add(statusLabel);

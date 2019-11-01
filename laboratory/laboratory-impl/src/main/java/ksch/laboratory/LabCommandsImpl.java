@@ -16,6 +16,7 @@
 
 package ksch.laboratory;
 
+import ksch.laboratory.LabOrder.Status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,15 +33,16 @@ public class LabCommandsImpl implements LabCommands {
         var labOrder = LabOrderEntity.builder()
                 .visitId(visitId)
                 .labTest(new LabTest(labOrderCode))
-                .status(LabOrder.Status.NEW)
+                .status(Status.NEW)
                 .build();
         return labOrderRepository.save(labOrder);
     }
 
     @Override
-    public LabOrder cancel(UUID labOrderId) {
+    public Status cancel(UUID labOrderId) {
         var labOrderEntity = labOrderRepository.findById(labOrderId).orElseThrow();
-        labOrderEntity.setStatus(LabOrder.Status.ABORTED);
-        return labOrderRepository.save(labOrderEntity);
+        labOrderEntity.setStatus(Status.ABORTED);
+        labOrderRepository.save(labOrderEntity);
+        return labOrderEntity.getStatus();
     }
 }

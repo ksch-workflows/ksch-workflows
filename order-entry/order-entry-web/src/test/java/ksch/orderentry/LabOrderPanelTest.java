@@ -33,13 +33,13 @@ import java.util.UUID;
 import static com.google.common.collect.Lists.newArrayList;
 import static ksch.assertions.HtmlAssertions.assertContains;
 import static ksch.assertions.HtmlAssertions.assertNotContains;
+import static ksch.laboratory.LabOrder.Status.ABORTED;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@SuppressWarnings("unchecked")
 public class LabOrderPanelTest extends PageComponentTest {
 
     @MockBean
@@ -61,7 +61,7 @@ public class LabOrderPanelTest extends PageComponentTest {
 
     @Test
     public void should_add_lab_order_by_filling_in_dialog() {
-        renderLabOrderPage();
+        givenLabOrdersPageRendered();
 
         FormTester formTester = tester.newFormTester("labOrder:addLabOrderForm", false);
         formTester.setValue("loincNumber", "34530-6");
@@ -74,7 +74,7 @@ public class LabOrderPanelTest extends PageComponentTest {
 
     @Test
     public void should_display_placeholder_if_there_are_no_lab_orders() {
-        renderLabOrderPage();
+        givenLabOrdersPageRendered();
 
         assertNotContains(lastRenderedPage(), new CssQuery("table"));
         assertContains(lastRenderedPage(), new WicketId("noLabRequestsMessage"));
@@ -82,9 +82,9 @@ public class LabOrderPanelTest extends PageComponentTest {
 
     @Test
     public void should_render_table_with_all_lab_orders_for_visit() {
-        createLabOrders();
+        givenLabOrders();
 
-        renderLabOrderPage();
+        tester.startComponentInPage(new LabOrderPanel(visitId));
 
         assertContains(lastRenderedPage(), new CssQuery("table"));
         assertNotContains(lastRenderedPage(), new WicketId("noLabRequestsMessage"));
@@ -93,15 +93,20 @@ public class LabOrderPanelTest extends PageComponentTest {
 
     @Test
     public void should_cancel_lab_order() {
-        createLabOrders();
-        renderLabOrderPage();
+        givenLabCommandsMockConfiguration();
+        givenLabOrders();
+        givenLabOrdersPageRendered();
 
         tester.clickLink("labOrder:labRequests:labOrders:1:cancelLabOrder");
 
         verify(labCommands).cancel(any(UUID.class));
     }
 
-    private void createLabOrders() {
+    private void givenLabCommandsMockConfiguration() {
+        when(labCommands.cancel(any(UUID.class))).thenReturn(ABORTED);
+    }
+
+    private void givenLabOrders() {
         when(labQueries.getLabOrders(visitId)).thenReturn(
                 newArrayList(
                         new TestLabOrder("34530-6"),
@@ -111,13 +116,13 @@ public class LabOrderPanelTest extends PageComponentTest {
         );
     }
 
-    private String lastRenderedPage() {
-        return tester.getLastResponseAsString();
-    }
-
-    private void renderLabOrderPage() {
+    private void givenLabOrdersPageRendered() {
         LabOrderPanel labOrderPanel = new LabOrderPanel(visitId);
 
         tester.startComponentInPage(labOrderPanel);
+    }
+
+    private String lastRenderedPage() {
+        return tester.getLastResponseAsString();
     }
 }
