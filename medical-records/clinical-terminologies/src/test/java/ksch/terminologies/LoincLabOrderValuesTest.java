@@ -18,7 +18,7 @@ package ksch.terminologies;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class LoincLabOrderValuesTest {
 
@@ -33,5 +33,15 @@ public class LoincLabOrderValuesTest {
         assertEquals("49054-0", result.getLoincNum());
         assertEquals("25-Hydroxycalciferol [Mass/volume] in Serum or Plasma", result.getLongCommonName());
         assertEquals("Both", result.getOrderObs());
+    }
+
+    @Test
+    public void should_determine_that_loinc_number_is_available() {
+        assertTrue(LoincLabOrderValues.isValid("49054-0"));
+    }
+
+    @Test
+    public void should_determine_that_loinc_number_is_unavailable() {
+        assertFalse(LoincLabOrderValues.isValid("XXXXXXX"));
     }
 }

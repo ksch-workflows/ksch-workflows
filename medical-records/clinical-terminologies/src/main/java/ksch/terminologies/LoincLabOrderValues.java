@@ -46,6 +46,13 @@ public class LoincLabOrderValues {
         return new ArrayList<>(values.values());
     }
 
+    public static boolean isValid(String loincNumber) {
+        return values.containsKey(loincNumber);
+    }
+
+    /**
+     * @throws IllegalArgumentException if the given LOINC number doesn't exist in the available LOINC lab order codes.
+     */
     public static LoincLabOrderValue get(String loincNumber) {
         LoincLabOrderValue result = values.get(loincNumber);
         if (result == null) {

@@ -32,16 +32,21 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.tester.BaseWicketTester;
+import org.apache.wicket.validation.IValidatable;
+import org.apache.wicket.validation.IValidator;
+import org.apache.wicket.validation.ValidationError;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
+import static ksch.terminologies.LoincLabOrderValues.isValid;
 
 @Log
 public class LabOrderPanel extends Panel {
@@ -65,6 +70,7 @@ public class LabOrderPanel extends Panel {
         add(createLabRequestsTable());
         add(createNoLabRequestsPresentMessage());
         add(new AddLabOrderForm());
+        add(new FeedbackPanel("validationError"));
     }
 
     private Button createAddLabOrderButton() {
@@ -106,23 +112,24 @@ public class LabOrderPanel extends Panel {
         AddLabOrderForm() {
             super("addLabOrderForm");
 
-            addTextField("loincNumber");
+            add(createLoincNumberInputField());
         }
 
         @Override
         protected void onSubmit() {
-            String enteredLoincNumber = getValue("loincNumber");
+            String enteredLoincNumber = getEnteredLoincNumber();
             labCommands.requestLaboratoryTest(visitId, new LabOrderCode(enteredLoincNumber));
             reloadPage();
         }
 
-        private void addTextField(String wicketId) {
-            TextField<String> textField = new TextField<>(wicketId, new Model<>(null));
-            add(textField);
+        private TextField createLoincNumberInputField() {
+            TextField<String> result = new TextField<>("loincNumber", new Model<>(null));
+            result.add(new LoincNumberValidator());
+            return result;
         }
 
-        private String getValue(String wicketId) {
-            Object object = get(wicketId).getDefaultModel().getObject();
+        private String getEnteredLoincNumber() {
+            Object object = get("loincNumber").getDefaultModel().getObject();
             return object != null ? object.toString() : null;
         }
 
@@ -130,7 +137,20 @@ public class LabOrderPanel extends Panel {
             if (!getPage().getClass().equals(BaseWicketTester.StartComponentInPage.class)) {
                 setResponsePage(getPage().getClass(), getPage().getPageParameters());
             } else { // This can only happen in page component tests
-                log.severe("Could not reload page");
+                log.warning("Could not reload page");
+            }
+        }
+
+        private class LoincNumberValidator implements IValidator<String> {
+
+            @Override
+            public void validate(IValidatable<String> validatable) {
+                var enteredLoincNumber = validatable.getValue();
+                if (!isValid(enteredLoincNumber)) {
+                    ValidationError error = new ValidationError(this);
+                    error.setMessage("Invalid LOINC number entered: " + enteredLoincNumber);
+                    validatable.error(error);
+                }
             }
         }
     }

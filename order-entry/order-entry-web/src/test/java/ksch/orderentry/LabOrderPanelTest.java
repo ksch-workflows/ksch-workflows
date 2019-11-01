@@ -37,8 +37,7 @@ import static ksch.laboratory.LabOrder.Status.ABORTED;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class LabOrderPanelTest extends PageComponentTest {
 
@@ -57,6 +56,7 @@ public class LabOrderPanelTest extends PageComponentTest {
         tester.startComponentInPage(labOrderPanel);
 
         assertContains(lastRenderedPage(), new CssQuery("button"));
+        assertNotContains(lastRenderedPage(), new CssQuery(".feedbackPanelERROR"));
     }
 
     @Test
@@ -70,6 +70,19 @@ public class LabOrderPanelTest extends PageComponentTest {
         ArgumentCaptor<LabOrderCode> argumentCaptor = ArgumentCaptor.forClass(LabOrderCode.class);
         verify(labCommands).requestLaboratoryTest(eq(visitId), argumentCaptor.capture());
         assertEquals("34530-6", argumentCaptor.getValue().toString());
+    }
+
+    @Test
+    public void should_validate_entered_loinc_number() {
+        givenLabOrdersPageRendered();
+
+        FormTester formTester = tester.newFormTester("labOrder:addLabOrderForm", false);
+        formTester.setValue("loincNumber", "10000-X");
+        formTester.submit();
+
+        assertContains(lastRenderedPage(), new CssQuery(".feedbackPanelERROR"));
+        assertContains(lastRenderedPage(), new ElementContainingText("Invalid LOINC number entered:"));
+        verify(labCommands, never()).requestLaboratoryTest(any(UUID.class), any(LabOrderCode.class));
     }
 
     @Test
