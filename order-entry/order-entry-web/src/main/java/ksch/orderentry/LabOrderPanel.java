@@ -84,25 +84,28 @@ public class LabOrderPanel extends Panel {
             result.setVisible(false);
         }
 
-        result.add(createListView(labQueries.getLabOrders(visitId)));
+        result.add(new LabOrderListView(labQueries.getLabOrders(visitId)));
+        //result.add(createListView());
 
         return result;
     }
 
-    private ListView<LabOrderRow> createListView(List<LabOrder> labOrders) {
-        var labOrderRows = labOrders.stream().map(LabOrderRow::new).collect(toList());
-        return new ListView<>("labOrders", labOrderRows) {
-            @Override
-            protected void populateItem(ListItem<LabOrderRow> item) {
-                LabOrderRow rowData = item.getModelObject();
-                Label statusLabel = createLabOrderStatusLabel(rowData);
+    private class LabOrderListView extends ListView<LabOrderRow> {
 
-                item.add(new Label("loincNumber", rowData.getLoincNumber()));
-                item.add(new Label("labTest", rowData.getLabTest()));
-                item.add(statusLabel);
-                item.add(createCancelLabOrderButton(rowData, statusLabel));
-            }
-        };
+        LabOrderListView(List<LabOrder> labOrders) {
+            super("labOrders", labOrders.stream().map(LabOrderRow::new).collect(toList()));
+        }
+
+        @Override
+        protected void populateItem(ListItem<LabOrderRow> item) {
+            LabOrderRow rowData = item.getModelObject();
+            Label statusLabel = createLabOrderStatusLabel(rowData);
+
+            item.add(new Label("loincNumber", rowData.getLoincNumber()));
+            item.add(new Label("labTest", rowData.getLabTest()));
+            item.add(statusLabel);
+            item.add(createCancelLabOrderButton(rowData, statusLabel));
+        }
     }
 
     private Label createLabOrderStatusLabel(LabOrderRow rowData) {
