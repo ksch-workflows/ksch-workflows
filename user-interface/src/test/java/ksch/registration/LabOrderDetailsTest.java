@@ -43,12 +43,9 @@ public class LabOrderDetailsTest extends WebPageTest {
         Patient patient = createTestPatient();
         Visit visit = visitTransactions.startVisit(patient, VisitType.OPD);
 
-        PageParameters parameters = buildPageParameters(visit.getId());
-
-        tester.startPage(LabOrderDetails.class, parameters);
+        tester.startPage(LabOrderDetails.class, buildPageParameters(visit.getId()));
 
         tester.assertRenderedPage(LabOrderDetails.class);
-
     }
 
     private PageParameters buildPageParameters(UUID visitId) {

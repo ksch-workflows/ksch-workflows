@@ -21,11 +21,12 @@ import java.util.UUID;
 public interface LabCommands {
 
     /**
-     * TODO Write javadocs
-     * @param visitId
-     * @param labOrderCode
+     * Request the lab staff to do a laboratory examination.
+     *
+     * @param visitId the identifier of the current visit of the patient
+     * @param labOrderCode the identifier for the required examination type
      */
-    void requestExamination(UUID visitId, LabOrderCode labOrderCode);
+    void requestLaboratoryTest(UUID visitId, LabOrderCode labOrderCode);
 
     /**
      * Abort the request for the given lab order with the given ID.

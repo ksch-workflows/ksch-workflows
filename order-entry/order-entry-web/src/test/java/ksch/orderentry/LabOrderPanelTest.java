@@ -68,7 +68,7 @@ public class LabOrderPanelTest extends PageComponentTest {
         formTester.submit();
 
         ArgumentCaptor<LabOrderCode> argumentCaptor = ArgumentCaptor.forClass(LabOrderCode.class);
-        verify(labCommands).requestExamination(eq(visitId), argumentCaptor.capture());
+        verify(labCommands).requestLaboratoryTest(eq(visitId), argumentCaptor.capture());
         assertEquals("34530-6", argumentCaptor.getValue().toString());
     }
 

@@ -28,7 +28,7 @@ public class LabCommandsImpl implements LabCommands {
     private final LabOrderRepository labOrderRepository;
 
     @Override
-    public void requestExamination(UUID visitId, LabOrderCode labOrderCode) {
+    public void requestLaboratoryTest(UUID visitId, LabOrderCode labOrderCode) {
         var labOrder = LabOrderEntity.builder()
                 .visitId(visitId)
                 .labTest(new LabTest(labOrderCode))

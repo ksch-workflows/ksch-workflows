@@ -35,6 +35,7 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.util.tester.BaseWicketTester;
 
 import java.io.Serializable;
 import java.util.List;
@@ -162,18 +163,12 @@ public class LabOrderPanel extends Panel {
         @Override
         protected void onSubmit() {
             String enteredLoincNumber = getValue("loincNumber");
-
-            labCommands.requestExamination(visitId, new LabOrderCode(enteredLoincNumber));
-
+            labCommands.requestLaboratoryTest(visitId, new LabOrderCode(enteredLoincNumber));
             reloadPage();
         }
 
         private void addTextField(String wicketId) {
-            addTextField(wicketId, null);
-        }
-
-        private void addTextField(String wicketId, String initialValue) {
-            TextField<String> textField = new TextField<>(wicketId, new Model<>(initialValue));
+            TextField<String> textField = new TextField<>(wicketId, new Model<>(null));
             add(textField);
         }
 
@@ -183,7 +178,7 @@ public class LabOrderPanel extends Panel {
         }
 
         private void reloadPage() {
-            if (getPage().getMarkupIdFromMarkup() != null) {
+            if (!getPage().getClass().equals(BaseWicketTester.StartComponentInPage.class)) {
                 setResponsePage(getPage().getClass(), getPage().getPageParameters());
             } else { // This can only happen in page component tests
                 log.severe("Could not reload page");

@@ -1,3 +1,3 @@
 # Medical Records module
 
-Data structures and services partially resembling [openEHR](https://specifications.openehr.org/).
+Data structures and services partially implementing the [openEHR specifications](https://specifications.openehr.org/).

@@ -46,7 +46,7 @@ public class LabCommandsTest {
         UUID visitId = UUID.randomUUID();
         LabOrderCode labOrderCode = new LabOrderCode("44907-4");
 
-        labCommands.requestExamination(visitId, labOrderCode);
+        labCommands.requestLaboratoryTest(visitId, labOrderCode);
 
         verify(labOrderRepository).save(labOrderArgumentCaptor.capture());
         LabOrderEntity savedLabOrder = labOrderArgumentCaptor.getValue();
