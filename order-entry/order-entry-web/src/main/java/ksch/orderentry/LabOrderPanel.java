@@ -43,7 +43,6 @@ import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
 
-
 @Log
 public class LabOrderPanel extends Panel {
 
@@ -83,47 +82,9 @@ public class LabOrderPanel extends Panel {
         } else {
             result.setVisible(false);
         }
-
         result.add(new LabOrderListView(labQueries.getLabOrders(visitId)));
-        //result.add(createListView());
 
         return result;
-    }
-
-    private class LabOrderListView extends ListView<LabOrderRow> {
-
-        LabOrderListView(List<LabOrder> labOrders) {
-            super("labOrders", labOrders.stream().map(LabOrderRow::new).collect(toList()));
-        }
-
-        @Override
-        protected void populateItem(ListItem<LabOrderRow> item) {
-            LabOrderRow rowData = item.getModelObject();
-            Label statusLabel = createLabOrderStatusLabel(rowData);
-
-            item.add(new Label("loincNumber", rowData.getLoincNumber()));
-            item.add(new Label("labTest", rowData.getLabTest()));
-            item.add(statusLabel);
-            item.add(createCancelLabOrderButton(rowData, statusLabel));
-        }
-    }
-
-    private Label createLabOrderStatusLabel(LabOrderRow rowData) {
-        Label statusLabel = new Label("status", rowData.getStatus());
-        statusLabel.setOutputMarkupId(true);
-        return statusLabel;
-    }
-
-    private AjaxLink<Void> createCancelLabOrderButton(LabOrderRow rowData, Label statusLabel) {
-        return new AjaxLink<>("cancelLabOrder") {
-            @Override
-            public void onClick(AjaxRequestTarget target) {
-                var newStatus = labCommands.cancel(rowData.getId());
-                statusLabel.setDefaultModelObject(newStatus.toString());
-
-                target.add(statusLabel);
-            }
-        };
     }
 
     private WebMarkupContainer createNoLabRequestsPresentMessage() {
@@ -138,25 +99,6 @@ public class LabOrderPanel extends Panel {
 
     private boolean hasLabRequestsForCurrentVisit() {
         return labQueries.getLabOrders(visitId).size() > 0;
-    }
-
-    @Getter
-    static class LabOrderRow implements Serializable {
-
-        final UUID id;
-
-        final String loincNumber;
-
-        final String labTest;
-
-        final String status;
-
-        LabOrderRow(LabOrder labOrder) {
-            id = labOrder.getId();
-            loincNumber = labOrder.getRequestedTest().toString();
-            labTest = LoincLabOrderValues.get(loincNumber).getLongCommonName();
-            status = labOrder.getStatus().toString();
-        }
     }
 
     class AddLabOrderForm extends Form<Void> {
@@ -190,6 +132,61 @@ public class LabOrderPanel extends Panel {
             } else { // This can only happen in page component tests
                 log.severe("Could not reload page");
             }
+        }
+    }
+
+    private class LabOrderListView extends ListView<LabOrderRow> {
+
+        LabOrderListView(List<LabOrder> labOrders) {
+            super("labOrders", labOrders.stream().map(LabOrderRow::new).collect(toList()));
+        }
+
+        @Override
+        protected void populateItem(ListItem<LabOrderRow> item) {
+            LabOrderRow rowData = item.getModelObject();
+            Label statusLabel = createLabOrderStatusLabel(rowData);
+
+            item.add(new Label("loincNumber", rowData.getLoincNumber()));
+            item.add(new Label("labTest", rowData.getLabTest()));
+            item.add(statusLabel);
+            item.add(createCancelLabOrderButton(rowData, statusLabel));
+        }
+
+        private Label createLabOrderStatusLabel(LabOrderRow rowData) {
+            Label statusLabel = new Label("status", rowData.getStatus());
+            statusLabel.setOutputMarkupId(true);
+            return statusLabel;
+        }
+
+        private AjaxLink<Void> createCancelLabOrderButton(LabOrderRow rowData, Label statusLabel) {
+            return new AjaxLink<>("cancelLabOrder") {
+                @Override
+                public void onClick(AjaxRequestTarget target) {
+                    var newStatus = labCommands.cancel(rowData.getId());
+                    statusLabel.setDefaultModelObject(newStatus.toString());
+
+                    target.add(statusLabel);
+                }
+            };
+        }
+    }
+
+    @Getter
+    static class LabOrderRow implements Serializable {
+
+        final UUID id;
+
+        final String loincNumber;
+
+        final String labTest;
+
+        final String status;
+
+        LabOrderRow(LabOrder labOrder) {
+            id = labOrder.getId();
+            loincNumber = labOrder.getRequestedTest().toString();
+            labTest = LoincLabOrderValues.get(loincNumber).getLongCommonName();
+            status = labOrder.getStatus().toString();
         }
     }
 }

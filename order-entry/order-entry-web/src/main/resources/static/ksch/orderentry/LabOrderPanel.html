@@ -23,10 +23,6 @@ limitations under the License.
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
-    <wicket:head>
-
-    </wicket:head>
 </head>
 
 <body>
@@ -35,7 +31,8 @@ limitations under the License.
 
     <div class="row">
         <div class="col-md-6">
-            <button wicket:id="addLabOrderButton" type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#addLabOrderDialog">
+            <button wicket:id="addLabOrderButton" type="button" class="btn btn-outline-secondary" data-toggle="modal"
+                    data-target="#addLabOrderDialog">
                 Add lab order
             </button>
         </div>
@@ -45,88 +42,88 @@ limitations under the License.
         <div class="col-md-12">
             <table class="table table-striped without-top-border">
                 <thead>
-                <tr>
-                    <th scope="col" style="width: 15%">
-                        LOINC number
-                    </th>
-                    <th scope="col" style="width: 70%">
-                        Lab test
-                    </th>
-                    <th scope="col" style="width: 30%">
-                        Status
-                    </th>
-                    <th scope="col">
-                        <!-- Action -->
-                    </th>
-                </tr>
+                    <tr>
+                        <th scope="col" style="width: 15%">
+                            LOINC number
+                        </th>
+                        <th scope="col" style="width: 70%">
+                            Lab test
+                        </th>
+                        <th scope="col" style="width: 30%">
+                            Status
+                        </th>
+                        <th scope="col">
+                            <!-- Action -->
+                        </th>
+                    </tr>
                 </thead>
+
                 <tbody>
+                    <tr wicket:id="labOrders">
+                        <td wicket:id="loincNumber">[loinc number]</td>
+                        <td wicket:id="labTest">[lab test]</td>
+                        <td wicket:id="status">[status]</td>
+                        <td class="float-right">
+                            <a wicket:id="cancelLabOrder" class="btn btn-outline-secondary" href="#">
+                                Cancel
+                            </a>
+                        </td>
+                    </tr>
 
-                <tr wicket:id="labOrders">
-                    <td wicket:id="loincNumber">[loinc number]</td>
-                    <td wicket:id="labTest">[lab test]</td>
-                    <td wicket:id="status">[status]</td>
-                    <td class="float-right">
-                        <a wicket:id="cancelLabOrder" class="btn btn-outline-secondary" href="#">
-                            Cancel
-                        </a>
-                    </td>
-                </tr>
+                    <wicket:remove>
+                        <tr>
+                            <td>
+                                34530-6
+                            </td>
+                            <td>
+                                ABO and Rh group panel - Blood
+                            </td>
+                            <td>
+                                Open
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary">Cancel</button>
+                            </td>
+                        </tr>
 
-                <wicket:remove>
-            <tr>
-                    <td>
-                        34530-6
-                    </td>
-                    <td>
-                        ABO and Rh group panel - Blood
-                    </td>
-                    <td>
-                        Open
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-outline-secondary">Cancel</button>
-                    </td>
-                </tr>
+                        <tr>
+                            <td>
+                                6765-2
+                            </td>
+                            <td>
+                                17-Hydroxypregnenolone [Mass/volume] in Serum or Plasma
+                            </td>
+                            <td>
+                                Open
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary">Cancel</button>
+                            </td>
+                        </tr>
 
-                <tr>
-                    <td>
-                        6765-2
-                    </td>
-                    <td>
-                        17-Hydroxypregnenolone [Mass/volume] in Serum or Plasma
-                    </td>
-                    <td>
-                        Open
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-outline-secondary">Cancel</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        1742-6
-                    </td>
-                    <td>
-                        Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma
-                    </td>
-                    <td>
-                        Open
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-outline-secondary">Cancel</button>
-                    </td>
-                </tr>
-                </wicket:remove>
-
+                        <tr>
+                            <td>
+                                1742-6
+                            </td>
+                            <td>
+                                Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma
+                            </td>
+                            <td>
+                                Open
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-secondary">Cancel</button>
+                            </td>
+                        </tr>
+                    </wicket:remove>
                 </tbody>
             </table>
         </div>
 
     </div>
 
-    <div id="addLabOrderDialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addLabOrderDialogLabel" aria-hidden="true">
+    <div id="addLabOrderDialog" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="addLabOrderDialogLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -140,7 +137,12 @@ limitations under the License.
                     <form wicket:id="addLabOrderForm" class="modal-body">
                         <div class="form-group">
                             <label for="formGroupExampleInput">LOINC number</label>
-                            <input wicket:id="loincNumber" type="text" class="form-control" id="formGroupExampleInput" placeholder="Please enter the LOINC number of the required test here" autocomplete="off">
+                            <input wicket:id="loincNumber"
+                                   type="text"
+                                   class="form-control"
+                                   id="formGroupExampleInput"
+                                   placeholder="Please enter the LOINC number of the required test here"
+                                   autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput2">Lab test</label>
@@ -162,7 +164,6 @@ limitations under the License.
             <p>Currently there are no laboratory requests.</p>
         </div>
     </div>
-
 
 </wicket:panel>
 
