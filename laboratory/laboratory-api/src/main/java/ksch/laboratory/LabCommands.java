@@ -26,12 +26,12 @@ public interface LabCommands {
      * @param visitId the identifier of the current visit of the patient
      * @param labOrderCode the identifier for the required examination type
      */
-    void requestLaboratoryTest(UUID visitId, LabOrderCode labOrderCode);
+    LabOrder requestLaboratoryTest(UUID visitId, LabOrderCode labOrderCode);
 
     /**
      * Abort the request for the given lab order with the given ID.
      *
      * @param id The ID of the lab order to be aborted.
      */
-    void cancel(UUID id);
+    LabOrder cancel(UUID id);
 }

@@ -28,17 +28,19 @@ public class LabCommandsImpl implements LabCommands {
     private final LabOrderRepository labOrderRepository;
 
     @Override
-    public void requestLaboratoryTest(UUID visitId, LabOrderCode labOrderCode) {
+    public LabOrder requestLaboratoryTest(UUID visitId, LabOrderCode labOrderCode) {
         var labOrder = LabOrderEntity.builder()
                 .visitId(visitId)
                 .labTest(new LabTest(labOrderCode))
                 .status(LabOrder.Status.NEW)
                 .build();
-        labOrderRepository.save(labOrder);
+        return labOrderRepository.save(labOrder);
     }
 
     @Override
-    public void cancel(UUID id) {
-
+    public LabOrder cancel(UUID labOrderId) {
+        var labOrderEntity = labOrderRepository.findById(labOrderId).orElseThrow();
+        labOrderEntity.setStatus(LabOrder.Status.ABORTED);
+        return labOrderRepository.save(labOrderEntity);
     }
 }

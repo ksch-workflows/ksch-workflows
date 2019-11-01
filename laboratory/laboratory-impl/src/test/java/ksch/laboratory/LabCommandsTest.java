@@ -16,18 +16,18 @@
 
 package ksch.laboratory;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.UUID;
+import java.util.Optional;
 
+import static java.util.UUID.randomUUID;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LabCommandsTest {
@@ -41,10 +41,15 @@ public class LabCommandsTest {
     @Captor
     private ArgumentCaptor<LabOrderEntity> labOrderArgumentCaptor;
 
+    @Before
+    public void setup() {
+        when(labOrderRepository.save(any(LabOrderEntity.class))).then(AdditionalAnswers.returnsFirstArg());
+    }
+
     @Test
     public void should_request_blood_examination() {
-        UUID visitId = UUID.randomUUID();
-        LabOrderCode labOrderCode = new LabOrderCode("44907-4");
+        var visitId = randomUUID();
+        var labOrderCode = new LabOrderCode("44907-4");
 
         labCommands.requestLaboratoryTest(visitId, labOrderCode);
 
@@ -53,5 +58,23 @@ public class LabCommandsTest {
         assertEquals(visitId, savedLabOrder.getVisitId());
         assertEquals(LabOrder.Status.NEW, savedLabOrder.getStatus());
         assertEquals(labOrderCode, savedLabOrder.getLabTest().getRequest());
+    }
+
+    @Test
+    public void should_cancel_lab_order() {
+        var labOrder = createLabOrder();
+
+        labCommands.cancel(labOrder.getId());
+
+        verify(labOrderRepository, times(2)).save(labOrderArgumentCaptor.capture());
+        assertEquals(LabOrder.Status.ABORTED, labOrderArgumentCaptor.getValue().getStatus());
+    }
+
+    private LabOrder createLabOrder() {
+        var labOrderCode = new LabOrderCode("44907-4");
+        var labOrder = (LabOrderEntity) labCommands.requestLaboratoryTest(randomUUID(), labOrderCode);
+        labOrder.setId(randomUUID());
+        when(labOrderRepository.findById(labOrder.getId())).thenReturn(Optional.of(labOrder));
+        return labOrder;
     }
 }
