@@ -22,6 +22,7 @@ import ksch.laboratory.LabOrderCode;
 import ksch.laboratory.LabQueries;
 import ksch.terminologies.LoincLabOrderValues;
 import lombok.Getter;
+import lombok.extern.java.Log;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -42,6 +43,7 @@ import java.util.UUID;
 import static java.util.stream.Collectors.toList;
 
 
+@Log
 public class LabOrderPanel extends Panel {
 
     @SpringBean
@@ -181,9 +183,10 @@ public class LabOrderPanel extends Panel {
         }
 
         private void reloadPage() {
-            boolean isInProductionContext = !getPage().getPageParameters().getNamedKeys().isEmpty(); // FIXME
-            if (isInProductionContext) { // reloading the page in unit tests would raise an error
+            if (getPage().getMarkupIdFromMarkup() != null) {
                 setResponsePage(getPage().getClass(), getPage().getPageParameters());
+            } else { // This can only happen in page component tests
+                log.severe("Could not reload page");
             }
         }
     }

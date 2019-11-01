@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ksch.util;
+package ksch.assertions;
 
 import lombok.SneakyThrows;
 import org.junit.Assert;

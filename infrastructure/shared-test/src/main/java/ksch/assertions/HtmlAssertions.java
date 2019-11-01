@@ -26,48 +26,66 @@ import static org.junit.Assert.*;
 
 public class HtmlAssertions {
 
-    public static void assertContains(String html, String cssSelector) {
-        Document doc = Jsoup.parse(html);
-        Elements searchResults = doc.select(cssSelector);
-        assertTrue("Cannot find CSS selector '" + cssSelector + "' in HTML " + html, searchResults.size() > 0);
-    }
-
     public static void assertContains(String html, CssQuery cssQuery) {
-        assertContains(html, document -> document.select(cssQuery.toString()));
+        String message = String.format("Could not find element with CSS query '%s' in HTML:\n\n%s",
+                cssQuery, html
+        );
+        assertContains(message, html, document -> document.select(cssQuery.toString()));
     }
 
     public static void assertNotContains(String html, CssQuery cssQuery) {
-        assertNotContains(html, document -> document.select(cssQuery.toString()));
+        String message = String.format("Element with CSS query '%s' should not have been found in HTML:\n\n%s",
+                cssQuery, html
+        );
+        assertNotContains(message, html, document -> document.select(cssQuery.toString()));
     }
 
     public static void assertContains(String html, WicketId wicketId) {
-        assertContains(html, document -> document.getElementsByAttributeValue("wicket:id", wicketId.toString()));
-    }
-
-    public static void assertContains(String html, ElementContainingText elementContainingText) {
-        assertContains(html, document -> document.getElementsContainingText(elementContainingText.toString()));
+        String message = String.format("Could not find element with Wicket ID '%s' in HTML:\n\n%s",
+                wicketId, html
+        );
+        assertContains(
+            message,
+            html,
+            document -> document.getElementsByAttributeValue("wicket:id", wicketId.toString())
+        );
     }
 
     public static void assertNotContains(String html, WicketId wicketId) {
-        assertNotContains(html, document -> document.getElementsByAttributeValue("wicket:id", wicketId.toString()));
+        String message = String.format("Element with Wicket ID '%s' should not have been found in HTML:\n\n%s",
+                wicketId, html
+        );
+        assertNotContains(
+            message,
+            html,
+            document -> document.getElementsByAttributeValue("wicket:id", wicketId.toString())
+        );
     }
 
-    public static void assertNotContains(String html, String cssSelector) {
-        Document doc = Jsoup.parse(html);
-        Elements searchResults = doc.select(cssSelector);
-        assertEquals("CSS selector '" + cssSelector + "' should not have been found in HTML " + html, searchResults.size(), 0);
+    public static void assertContains(String html, ElementContainingText elementContainingText) {
+        String message = String.format("Could not find any element which contains text '%s' in HTML:\n\n%s",
+                elementContainingText, html
+        );
+        assertContains(
+            message,
+            html,
+            document -> document.getElementsContainingText(elementContainingText.toString())
+        );
     }
 
-    // TODO I guess this method should be private instead as it's hard to read in the tests
-    public static void assertContains(String html, Function<Document, Elements> elementLocator) {
+    private static void assertContains(String message, String html, Function<Document, Elements> elementLocator) {
         Document doc = Jsoup.parse(html);
         Elements retrievedElements = elementLocator.apply(doc);
-        assertFalse("Cannot find matching element in HTML " + html, retrievedElements.isEmpty());
+        assertFalse(message, retrievedElements.isEmpty());
     }
 
-    private static void assertNotContains(String html, Function<Document, Elements> elementLocator) {
+    private static void assertNotContains(
+            String errorMessage,
+            String html,
+            Function<Document, Elements> elementLocator
+    ) {
         Document doc = Jsoup.parse(html);
         Elements retrievedElements = elementLocator.apply(doc);
-        assertTrue("Specified element should not have been found in HTML " + html, retrievedElements.isEmpty());
+        assertTrue(errorMessage, retrievedElements.isEmpty());
     }
 }
