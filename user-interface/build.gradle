@@ -19,12 +19,12 @@ sourceSets.main.resources {
 dependencies {
     compile project(':infrastructure:configuration')
     compile project(':infrastructure:wicket-utils')
-    compile project(':medical-records')
     compile project(':order-entry:order-entry-web')
     compile project(':patient-management')
     compile project(':patient-management:patient-management-web')
     compile project(':reporting')
-    
+    compile project(':laboratory')
+
     compile "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
 
     compile "org.apache.wicket:wicket-auth-roles:${wicketVersion}"

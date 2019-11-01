@@ -14,17 +14,12 @@
  * limitations under the License.
  */
 
-package ksch.orderentry;
+package ksch.laboratory;
 
-import ksch.wicket.PageComponentTest;
-import org.junit.Test;
+import java.util.List;
+import java.util.UUID;
 
-public class OrderManagementTest extends PageComponentTest {
+public interface LabQueries {
 
-    @Test
-    public void should_render_panel_with_order_management_table() {
-        OrderManagement orderManagement = new OrderManagement(null);
-
-        tester.startComponentInPage(orderManagement);
-    }
+    List<LabOrder> getLabOrders(UUID visitId);
 }

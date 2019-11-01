@@ -14,17 +14,23 @@
  * limitations under the License.
  */
 
-package ksch.orderentry;
+package ksch.laboratory;
 
-import ksch.wicket.PageComponentTest;
-import org.junit.Test;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 
-public class OrderManagementTest extends PageComponentTest {
+/**
+ * Identifier for a lab examination type using the LOINC number codes.
+ *
+ * @see <a href="https://loinc.org/usage/orders/">loinc.org</a>
+ */
+@RequiredArgsConstructor
+@EqualsAndHashCode
+public class LabOrderCode {
 
-    @Test
-    public void should_render_panel_with_order_management_table() {
-        OrderManagement orderManagement = new OrderManagement(null);
+    private final String loincNumber;
 
-        tester.startComponentInPage(orderManagement);
+    public String toString() {
+        return loincNumber;
     }
 }

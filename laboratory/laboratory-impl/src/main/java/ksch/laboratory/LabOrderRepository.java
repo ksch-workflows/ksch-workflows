@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package ksch.orderentry;
+package ksch.laboratory;
 
-import ksch.wicket.PageComponentTest;
-import org.junit.Test;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Component;
 
-public class OrderManagementTest extends PageComponentTest {
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.UUID;
 
-    @Test
-    public void should_render_panel_with_order_management_table() {
-        OrderManagement orderManagement = new OrderManagement(null);
+@Transactional
+@Component
+public interface LabOrderRepository extends CrudRepository<LabOrderEntity, UUID> {
 
-        tester.startComponentInPage(orderManagement);
-    }
+    List<LabOrderEntity> findByVisitId(UUID visitId);
 }

@@ -14,18 +14,26 @@
  * limitations under the License.
  */
 
-package ksch.orderentry;
+package ksch.laboratory;
 
-import org.apache.wicket.markup.html.link.ExternalLink;
-import org.apache.wicket.markup.html.panel.Panel;
+import ksch.laboratory.LabOrder.Status;
 
 import java.util.UUID;
 
-public class OrderManagement extends Panel {
+public interface LabCommands {
 
-    public OrderManagement(UUID visitId) {
-        super("orderManagement");
+    /**
+     * Request the lab staff to do a laboratory examination.
+     *
+     * @param visitId the identifier of the current visit of the patient
+     * @param labOrderCode the identifier for the required examination type
+     */
+    LabOrder requestLaboratoryTest(UUID visitId, LabOrderCode labOrderCode);
 
-        add(new ExternalLink("editLabOrdersLink", String.format("/registration/visits/%s/lab-orders", visitId)));
-    }
+    /**
+     * Abort the request for the given lab order with the given ID.
+     *
+     * @param id The ID of the lab order to be aborted.
+     */
+    Status cancel(UUID id);
 }

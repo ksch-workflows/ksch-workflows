@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package ksch.orderentry;
+package ksch.laboratory;
 
-import ksch.wicket.PageComponentTest;
 import org.junit.Test;
 
-public class OrderManagementTest extends PageComponentTest {
+import static org.junit.Assert.assertEquals;
+
+public class LabOrderEntityTest {
 
     @Test
-    public void should_render_panel_with_order_management_table() {
-        OrderManagement orderManagement = new OrderManagement(null);
+    public void should_build_new_lab_order_entity() {
+        LabOrderEntity labOrderEntity = new LabOrderEntity(new LabOrderCode("44907-4"));
 
-        tester.startComponentInPage(orderManagement);
+        assertEquals(LabOrder.Status.NEW, labOrderEntity.getStatus());
     }
 }
