@@ -84,39 +84,43 @@ public class LabOrderPanel extends Panel {
             result.setVisible(false);
         }
 
-        List<LabOrderRow> labOrders = labQueries.getLabOrders(visitId).stream()
-                .map(LabOrderRow::new)
-                .collect(toList());
+        result.add(createListView(labQueries.getLabOrders(visitId)));
 
-        ListView lv = new ListView<>("labOrders", labOrders) {
+        return result;
+    }
+
+    private ListView<LabOrderRow> createListView(List<LabOrder> labOrders) {
+        var labOrderRows = labOrders.stream().map(LabOrderRow::new).collect(toList());
+        return new ListView<>("labOrders", labOrderRows) {
             @Override
             protected void populateItem(ListItem<LabOrderRow> item) {
                 LabOrderRow rowData = item.getModelObject();
-                Label statusLabel = new Label("status", rowData.getStatus());
-                statusLabel.setOutputMarkupId(true);
+                Label statusLabel = createLabOrderStatusLabel(rowData);
 
                 item.add(new Label("loincNumber", rowData.getLoincNumber()));
                 item.add(new Label("labTest", rowData.getLabTest()));
-
                 item.add(statusLabel);
-
-                AjaxLink<Void> btn = new AjaxLink<>("cancelLabOrder") {
-                    @Override
-                    public void onClick(AjaxRequestTarget target) {
-                        var newStatus = labCommands.cancel(rowData.getId());
-                        statusLabel.setDefaultModelObject(newStatus.toString());
-
-                        target.add(statusLabel);
-                    }
-                };
-
-                item.add(btn);
+                item.add(createCancelLabOrderButton(rowData, statusLabel));
             }
         };
+    }
 
-        result.add(lv);
+    private Label createLabOrderStatusLabel(LabOrderRow rowData) {
+        Label statusLabel = new Label("status", rowData.getStatus());
+        statusLabel.setOutputMarkupId(true);
+        return statusLabel;
+    }
 
-        return result;
+    private AjaxLink<Void> createCancelLabOrderButton(LabOrderRow rowData, Label statusLabel) {
+        return new AjaxLink<>("cancelLabOrder") {
+            @Override
+            public void onClick(AjaxRequestTarget target) {
+                var newStatus = labCommands.cancel(rowData.getId());
+                statusLabel.setDefaultModelObject(newStatus.toString());
+
+                target.add(statusLabel);
+            }
+        };
     }
 
     private WebMarkupContainer createNoLabRequestsPresentMessage() {
