@@ -45,9 +45,9 @@ public class HtmlAssertions {
                 wicketId, html
         );
         assertContains(
-                message,
-                html,
-                document -> document.getElementsByAttributeValue("wicket:id", wicketId.toString())
+            message,
+            html,
+            document -> document.getElementsByAttributeValue("wicket:id", wicketId.toString())
         );
     }
 
@@ -56,9 +56,9 @@ public class HtmlAssertions {
                 wicketId, html
         );
         assertNotContains(
-                message,
-                html,
-                document -> document.getElementsByAttributeValue("wicket:id", wicketId.toString())
+            message,
+            html,
+            document -> document.getElementsByAttributeValue("wicket:id", wicketId.toString())
         );
     }
 
@@ -67,9 +67,9 @@ public class HtmlAssertions {
                 elementContainingText, html
         );
         assertContains(
-                message,
-                html,
-                document -> document.getElementsContainingText(elementContainingText.toString())
+            message,
+            html,
+            document -> document.getElementsContainingText(elementContainingText.toString())
         );
     }
 
@@ -79,7 +79,11 @@ public class HtmlAssertions {
         assertFalse(message, retrievedElements.isEmpty());
     }
 
-    private static void assertNotContains(String errorMessage, String html, Function<Document, Elements> elementLocator) {
+    private static void assertNotContains(
+            String errorMessage,
+            String html,
+            Function<Document, Elements> elementLocator
+    ) {
         Document doc = Jsoup.parse(html);
         Elements retrievedElements = elementLocator.apply(doc);
         assertTrue(errorMessage, retrievedElements.isEmpty());

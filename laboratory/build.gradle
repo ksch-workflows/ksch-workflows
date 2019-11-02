@@ -1,0 +1,4 @@
+dependencies {
+    api project(':laboratory:laboratory-api')
+    implementation project(':laboratory:laboratory-impl')
+}

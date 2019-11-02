@@ -16,15 +16,31 @@
 
 package ksch.orderentry;
 
-import ksch.wicket.PageComponentTest;
-import org.junit.Test;
+import ksch.laboratory.LabOrder;
+import ksch.laboratory.LabOrderCode;
 
-public class OrderManagementTest extends PageComponentTest {
+import java.util.UUID;
 
-    @Test
-    public void should_render_panel_with_order_management_table() {
-        OrderManagement orderManagement = new OrderManagement(null);
+public class TestLabOrder implements LabOrder {
 
-        tester.startComponentInPage(orderManagement);
+    private final String loincNumber;
+
+    public TestLabOrder(String loincNumber) {
+        this.loincNumber = loincNumber;
+    }
+
+    @Override
+    public UUID getId() {
+        return UUID.randomUUID();
+    }
+
+    @Override
+    public Status getStatus() {
+        return Status.NEW;
+    }
+
+    @Override
+    public LabOrderCode getRequestedTest() {
+        return new LabOrderCode(loincNumber);
     }
 }

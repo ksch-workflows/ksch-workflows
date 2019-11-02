@@ -14,17 +14,23 @@
  * limitations under the License.
  */
 
-package ksch.orderentry;
+package ksch.laboratory;
 
-import ksch.wicket.PageComponentTest;
-import org.junit.Test;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-public class OrderManagementTest extends PageComponentTest {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
-    @Test
-    public void should_render_panel_with_order_management_table() {
-        OrderManagement orderManagement = new OrderManagement(null);
+@Service
+@RequiredArgsConstructor
+public class LabQueriesImpl implements LabQueries {
 
-        tester.startComponentInPage(orderManagement);
+    private final LabOrderRepository labOrderRepository;
+
+    @Override
+    public List<LabOrder> getLabOrders(UUID visitId) {
+        return new ArrayList<>(labOrderRepository.findByVisitId(visitId));
     }
 }

@@ -21,12 +21,15 @@ import ksch.orderentry.OrderManagement;
 import ksch.patientmanagement.GeneralPatientInformation;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientQueries;
+import ksch.patientmanagement.visit.Visit;
+import ksch.patientmanagement.visit.VisitQueries;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static ksch.patientmanagement.PatientResource.toPatientResource;
@@ -54,10 +57,19 @@ class EditPatientDetailsActivity extends Activity {
     @SpringBean
     private PatientQueries patientQueries;
 
+    @SpringBean
+    private VisitQueries visitQueries;
+
     EditPatientDetailsActivity(UUID patientId) {
         Patient patientEntity = patientQueries.getById(patientId);
         add(new GeneralPatientInformation(toPatientResource(patientEntity)));
-        add(new OrderManagement());
+        add(new OrderManagement(activeVisitId(patientEntity)));
+    }
+
+    private UUID activeVisitId(Patient patient) {
+        Optional<Visit> activeVisit = visitQueries.getActiveVisit(patient);
+        // TODO Is there a better option for the case that there is no active visit for the current patient?
+        return activeVisit.map(Visit::getId).orElse(null);
     }
 
     @Override

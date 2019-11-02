@@ -14,24 +14,18 @@
  * limitations under the License.
  */
 
-package ksch.terminologies;
+package ksch.laboratory;
 
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class LoincLabOrderValuesTest {
+public class LabOrderEntityTest {
 
     @Test
-    public void should_provide_list_of_all_values() {
-        assertEquals(1522, LoincLabOrderValues.getAllValues().size());
-    }
+    public void should_build_new_lab_order_entity() {
+        LabOrderEntity labOrderEntity = new LabOrderEntity(new LabOrderCode("44907-4"));
 
-    @Test
-    public void should_provide_access_on_individual_value() {
-        LoincLabOrderValue result = LoincLabOrderValues.get("49054-0");
-        assertEquals("49054-0", result.getLoincNum());
-        assertEquals("25-Hydroxycalciferol [Mass/volume] in Serum or Plasma", result.getLongCommonName());
-        assertEquals("Both", result.getOrderObs());
+        assertEquals(LabOrder.Status.NEW, labOrderEntity.getStatus());
     }
 }
