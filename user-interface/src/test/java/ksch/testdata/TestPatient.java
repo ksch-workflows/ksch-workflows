@@ -24,9 +24,15 @@ import java.util.UUID;
 
 public class TestPatient implements Patient {
 
+    private final UUID id;
+
+    public TestPatient() {
+        this.id = UUID.randomUUID();
+    }
+
     @Override
     public UUID getId() {
-        return UUID.randomUUID();
+        return id;
     }
 
     @Override

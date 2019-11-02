@@ -35,6 +35,7 @@ import java.util.UUID;
 import static ksch.patientmanagement.PatientResource.toPatientResource;
 
 @MountPath("/registration/edit-patient/${id}")
+//@MountPath("/registration/visits/${visitId}")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
 public class EditPatientDetails extends RegistrationPage {
 

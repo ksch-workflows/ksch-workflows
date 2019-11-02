@@ -1,152 +1,38 @@
-/*
- * Copyright 2019 KS-plus e.V.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package ksch.registration;
 
-import ksch.WebPageTest;
-import ksch.assertions.CssQuery;
-import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.patient.PatientTransactions;
+import ksch.patientmanagement.visit.VisitQueries;
 import ksch.patientmanagement.visit.VisitTransactions;
-import ksch.patientmanagement.visit.VisitType;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.junit.After;
-import org.junit.Before;
+import ksch.testdata.TestPatient;
+import ksch.wicket.MockBean;
+import ksch.wicket.PageComponentTest;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 
-import static ksch.assertions.HtmlAssertions.assertContains;
-import static ksch.assertions.HtmlAssertions.assertNotContains;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
 
-@ContextConfiguration(classes = MockVisitTransactions.class)
-public class EditPatientDetailsActivityTest extends WebPageTest {
+public class EditPatientDetailsActivityTest extends PageComponentTest {
 
-    public static final String CSS_SELECTOR_DISCHARGE_BUTTON = "a[name='dischargeButton']";
-
-    public static final String CSS_SELECTOR_START_VISIT_BUTTON =
-            "button[name='content:generalPatientInformation:startVisitButton']";
-
-    public static final String AJAX_RESPONSE_WITH_START_VISIT_BUTTON = "ajax-response.*startVisitButton";
-
-    @Autowired
-    private PatientTransactions patientTransactions;
-
-    @Autowired
+    @MockBean
     private PatientQueries patientQueries;
 
-    @Autowired
+    @MockBean
+    private PatientTransactions patientTransactions;
+
+    @MockBean
+    private VisitQueries visitQueries;
+
+    @MockBean
     private VisitTransactions visitTransactions;
 
-    @Before
-    public void setup() {
-        login("user", "pwd");
-    }
-
-    @After
-    public void cleanup() {
-        reset(visitTransactions);
-    }
-
     @Test
-    public void should_render_patient_details_page() {
-        Patient patient = createTestPatient();
-        PageParameters parameters = buildPageParameters(patient);
+    public void should_validate_that_there_is_an_active_visit_for_the_patient() {
+        var patient = new TestPatient();
+        when(patientQueries.getById(eq(patient.getId()))).thenReturn(patient);
 
-        tester.startPage(EditPatientDetails.class, parameters);
+        var editPatientDetailsActivity = new EditPatientDetailsActivity(patient.getId());
 
-        tester.assertRenderedPage(EditPatientDetails.class);
-
-        // General tab
-        tester.assertContains(patient.getName());
-
-        // Orders tab
-        tester.assertContains("Surgery");
-    }
-
-    @Test
-    public void should_update_patient_details() {
-        Patient patient = createTestPatient();
-        openPatientDetails(patient);
-
-        tester.newFormTester("content:generalPatientInformation:updatePatientForm", false)
-                .setValue("patientFormFields:inputAddress", "St. Gilgen")
-                .submit();
-
-        Patient updatedPatient = patientQueries.getById(patient.getId());
-        assertEquals("St. Gilgen", updatedPatient.getAddress());
-    }
-
-    @Test
-    public void should_start_visit() {
-        Patient patient = createTestPatient();
-        openPatientDetails(patient);
-        assertNotContains(currentPage(), new CssQuery(CSS_SELECTOR_DISCHARGE_BUTTON));
-
-        tester.newFormTester("content:generalPatientInformation:startVisitForm")
-                .select("visitTypeSelection", 1)
-                .submit();
-
-        verify(visitTransactions).startVisit(any(Patient.class), any(VisitType.class));
-        assertContains(currentPage(), new CssQuery(CSS_SELECTOR_DISCHARGE_BUTTON));
-        assertNotContains(currentPage(), new CssQuery(CSS_SELECTOR_START_VISIT_BUTTON));
-    }
-
-    @Test
-    public void should_discharge_patient() {
-        Patient patient = createTestPatient();
-        openPatientDetails(patient);
-        startVisit();
-
-        tester.clickLink("content:generalPatientInformation:dischargeButton");
-
-        tester.assertContains(AJAX_RESPONSE_WITH_START_VISIT_BUTTON);
-        // Without re-opening of the page only the Ajax response is available for verifications
-        openPatientDetails(patient);
-
-        assertContains(currentPage(), new CssQuery(CSS_SELECTOR_START_VISIT_BUTTON));
-        assertNotContains(currentPage(), new CssQuery(CSS_SELECTOR_DISCHARGE_BUTTON));
-    }
-
-    private PageParameters buildPageParameters(Patient patient) {
-        PageParameters parameters = new PageParameters();
-        parameters.add("id", patient.getId());
-        return parameters;
-    }
-
-    private void openPatientDetails(Patient patient) {
-        PageParameters parameters = buildPageParameters(patient);
-        tester.startPage(EditPatientDetails.class, parameters);
-    }
-
-    private void startVisit() {
-        tester.newFormTester("content:generalPatientInformation:startVisitForm")
-                .select("visitTypeSelection", 1)
-                .submit();
-        tester.assertComponent("content:generalPatientInformation:dischargeButton", AjaxLink.class);
-        assertNotContains(currentPage(), new CssQuery(CSS_SELECTOR_START_VISIT_BUTTON));
-    }
-
-    private String currentPage() {
-        return tester.getLastResponseAsString();
+        tester.startComponentInPage(editPatientDetailsActivity);
     }
 }
