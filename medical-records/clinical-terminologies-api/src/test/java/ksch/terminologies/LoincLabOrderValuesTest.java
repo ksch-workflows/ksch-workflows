@@ -43,5 +43,7 @@ public class LoincLabOrderValuesTest {
     @Test
     public void should_determine_that_loinc_number_is_unavailable() {
         assertFalse(LoincLabOrderValues.isValid("XXXXXXX"));
+        assertFalse(LoincLabOrderValues.isValid(""));
+        assertFalse(LoincLabOrderValues.isValid(null));
     }
 }

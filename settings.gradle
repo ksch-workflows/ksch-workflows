@@ -8,7 +8,7 @@ include "infrastructure:wicket-utils"
 include("laboratory:laboratory-api")
 include("laboratory:laboratory-impl")
 
-include("medical-records:clinical-terminologies")
+include("medical-records:clinical-terminologies-api")
 include("medical-records:medical-records-api")
 include("medical-records:medical-records-impl")
 

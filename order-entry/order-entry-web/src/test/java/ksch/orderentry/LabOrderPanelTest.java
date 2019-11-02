@@ -86,6 +86,18 @@ public class LabOrderPanelTest extends PageComponentTest {
     }
 
     @Test
+    public void should_should_not_allow_leaving_loinc_number_empty() {
+        givenLabOrdersPageRendered();
+
+        FormTester formTester = tester.newFormTester("labOrder:addLabOrderForm", false);
+        formTester.setValue("loincNumber", "");
+        formTester.submit();
+
+        assertContains(lastRenderedPage(), new CssQuery(".feedbackPanelERROR"));
+        verify(labCommands, never()).requestLaboratoryTest(any(UUID.class), any(LabOrderCode.class));
+    }
+
+    @Test
     public void should_display_placeholder_if_there_are_no_lab_orders() {
         givenLabOrdersPageRendered();
 

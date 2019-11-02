@@ -16,19 +16,26 @@
 
 package ksch.laboratory;
 
+import ksch.terminologies.LoincLabOrderValues;
 import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
 
 /**
  * Identifier for a lab examination type using the LOINC number codes.
  *
  * @see <a href="https://loinc.org/usage/orders/">loinc.org</a>
  */
-@RequiredArgsConstructor
 @EqualsAndHashCode
 public class LabOrderCode {
 
     private final String loincNumber;
+
+    public LabOrderCode(String loincNumber) {
+        if (!LoincLabOrderValues.isValid(loincNumber)) {
+            throw new IllegalArgumentException(String.format("'%s' isn't a valid LOINC number.", loincNumber));
+        }
+
+        this.loincNumber = loincNumber;
+    }
 
     public String toString() {
         return loincNumber;

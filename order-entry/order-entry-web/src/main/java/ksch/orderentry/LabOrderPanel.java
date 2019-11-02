@@ -124,6 +124,8 @@ public class LabOrderPanel extends Panel {
 
         private TextField createLoincNumberInputField() {
             TextField<String> result = new TextField<>("loincNumber", new Model<>(null));
+            result.setRequired(true);
+            result.setLabel(new Model<>("LOINC number"));
             result.add(new LoincNumberValidator());
             return result;
         }
