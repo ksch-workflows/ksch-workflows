@@ -23,9 +23,11 @@ import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.visit.VisitQueries;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
+import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.springframework.data.util.Pair;
 import org.wicketstuff.annotation.mount.MountPath;
 
 import java.util.UUID;
@@ -52,11 +54,11 @@ public class VisitDetails extends RegistrationPage {
 
     @Override
     protected Panel getContent() {
-        return new EditPatientDetailsActivity(patientId);
+        return new VisitDetailsActivity(patientId);
     }
 }
 
-class EditPatientDetailsActivity extends Activity {
+class VisitDetailsActivity extends Activity {
 
     @SpringBean
     private PatientQueries patientQueries;
@@ -64,7 +66,7 @@ class EditPatientDetailsActivity extends Activity {
     @SpringBean
     private VisitQueries visitQueries;
 
-    EditPatientDetailsActivity(UUID patientId) {
+    VisitDetailsActivity(UUID patientId) {
         Patient patientEntity = patientQueries.getById(patientId);
         add(new GeneralPatientInformation(toPatientResource(patientEntity)));
         add(new OrderManagement(activeVisitId(patientEntity)));
@@ -80,7 +82,7 @@ class EditPatientDetailsActivity extends Activity {
     }
 
     @Override
-    public String getPreviousPagePath() {
-        return "/registration";
+    protected Pair<Class<? extends WebPage>, PageParameters> getPreviousPage() {
+        return Pair.of(RegistrationDashboard.class, new PageParameters());
     }
 }

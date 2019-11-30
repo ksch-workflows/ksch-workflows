@@ -52,16 +52,24 @@ limitations under the License.
         </ul>
 
         <div class="tab-content" id="tabContent">
-            <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="generalTab">
+            <div class="tab-pane show active" id="general" role="tabpanel" aria-labelledby="generalTab">
                 <span wicket:id="generalPatientInformation">[general patient information]</span>
             </div>
-            <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="ordersTab">
+            <div class="tab-pane" id="orders" role="tabpanel" aria-labelledby="ordersTab">
                 <span wicket:id="orderManagement">[order management]</span>
             </div>
-            <div class="tab-pane fade" id="billing" role="tabpanel" aria-labelledby="billingTab">
+            <div class="tab-pane" id="billing" role="tabpanel" aria-labelledby="billingTab">
                 Coming soon: Creation of patient visit bills.
             </div>
         </div>
+
+        <script>
+            var url = new URL(window.location.href);
+            var initialTab = new URLSearchParams(url.search).get('initialTab');
+            if (initialTab) {
+                $('.nav-tabs a[href="#' + initialTab + '"]').tab('show');
+            }
+        </script>
 
     </wicket:extend>
 

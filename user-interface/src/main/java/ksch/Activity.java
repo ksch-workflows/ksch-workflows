@@ -16,9 +16,12 @@
 
 package ksch;
 
+import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.link.ExternalLink;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.springframework.data.util.Pair;
 
 import static ksch.ApplicationFrame.MAIN_CONTENT_ID;
 
@@ -27,15 +30,25 @@ public abstract class Activity extends Panel {
     protected Activity() {
         super(MAIN_CONTENT_ID);
 
-        add(new ExternalLink("goToPreviousPage", getPreviousPagePath()));
-        add(new Label("activityTitle", getActivityTitle()));
+        add(createHeadingLabel());
+        add(createGoBackLink());
+    }
+
+    private Label createHeadingLabel() {
+        return new Label("activityTitle", getActivityTitle());
+    }
+
+    private Link<Void> createGoBackLink() {
+        return new Link<>("goToPreviousPage") {
+            @Override
+            public void onClick() {
+                var previousPage = getPreviousPage();
+                setResponsePage(previousPage.getFirst(), previousPage.getSecond());
+            }
+        };
     }
 
     protected abstract String getActivityTitle();
 
-    /**
-     * @return URL path with which the link to the previous page for the back button can be build,
-     * e.g. "/registration/dashboard"
-     */
-    protected abstract String getPreviousPagePath();
+    protected abstract Pair<Class<? extends WebPage>, PageParameters> getPreviousPage();
 }

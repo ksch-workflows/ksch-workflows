@@ -19,8 +19,10 @@ package ksch.registration;
 import ksch.Activity;
 import ksch.orderentry.LabOrderPanel;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
+import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.springframework.data.util.Pair;
 import org.wicketstuff.annotation.mount.MountPath;
 
 import java.util.UUID;
@@ -45,7 +47,11 @@ public class LabOrderDetails extends RegistrationPage {
 
 class EditLabOrdersActivity extends Activity {
 
+    private final UUID visitId;
+
     EditLabOrdersActivity(UUID visitId) {
+        this.visitId = visitId;
+
         add(new LabOrderPanel(visitId));
     }
 
@@ -55,7 +61,10 @@ class EditLabOrdersActivity extends Activity {
     }
 
     @Override
-    protected String getPreviousPagePath() {
-        return "/";
+    protected Pair<Class<? extends WebPage>, PageParameters> getPreviousPage() {
+        var parameters = new PageParameters();
+        parameters.add("initialTab", "orders");
+        parameters.add("visitId", visitId);
+        return Pair.of(VisitDetails.class, parameters);
     }
 }

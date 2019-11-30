@@ -33,6 +33,8 @@ public class LabOrderDetailsTest extends WebPageTest {
     @Autowired
     private VisitTransactions visitTransactions;
 
+    private Visit visit;
+
     @Before
     public void setup() {
         login("user", "pwd");
@@ -40,12 +42,30 @@ public class LabOrderDetailsTest extends WebPageTest {
 
     @Test
     public void should_lab_order_details_page() {
-        Patient patient = createTestPatient();
-        Visit visit = visitTransactions.startVisit(patient, VisitType.OPD);
+        givenPatientWithActiveVisit();
 
         tester.startPage(LabOrderDetails.class, buildPageParameters(visit.getId()));
 
         tester.assertRenderedPage(LabOrderDetails.class);
+    }
+
+    @Test
+    public void should_navigate_back_to_visit_details() {
+        givenPatientWithActiveVisit();
+        givenLabOrderDetailsOpened();
+
+        tester.clickLink("content:goToPreviousPage");
+
+        tester.assertRenderedPage(VisitDetails.class);
+    }
+
+    private void givenPatientWithActiveVisit() {
+        Patient patient = createTestPatient();
+        visit = visitTransactions.startVisit(patient, VisitType.OPD);
+    }
+
+    private void givenLabOrderDetailsOpened() {
+        tester.startPage(LabOrderDetails.class, buildPageParameters(visit.getId()));
     }
 
     private PageParameters buildPageParameters(UUID visitId) {
