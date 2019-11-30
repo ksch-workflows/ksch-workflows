@@ -94,4 +94,8 @@ public abstract class WebPageTest {
     protected Patient createTestPatient() {
         return patientTransactions.create(new TestPatient());
     }
+
+    protected void printLastResponse() {
+        System.out.println(tester.getLastResponseAsString());
+    }
 }

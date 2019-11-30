@@ -23,7 +23,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 @NoArgsConstructor
 public abstract class RegistrationPage extends ApplicationFrame {
 
-    public RegistrationPage(PageParameters pageParameters) {
+    RegistrationPage(PageParameters pageParameters) {
         super(pageParameters);
     }
 

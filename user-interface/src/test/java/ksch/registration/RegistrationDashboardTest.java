@@ -71,7 +71,7 @@ public class RegistrationDashboardTest extends WebPageTest {
         formTester.setValue("patientFormFields:inputAddress", "Kirpal Sagar");
         formTester.submit();
 
-        tester.assertRenderedPage(EditPatientDetails.class);
+        tester.assertRenderedPage(VisitDetails.class);
     }
 
     @Test
@@ -92,7 +92,21 @@ public class RegistrationDashboardTest extends WebPageTest {
         formTester.setValue("opdNumber", visit.getOpdNumber());
         formTester.submit();
 
-        tester.assertRenderedPage(EditPatientDetails.class);
+        tester.assertRenderedPage(VisitDetails.class);
         tester.assertContains(patient.getName());
+    }
+
+    @Test
+    public void should_open_patient_details_via_patient_overview_table() {
+        createPatientWithActiveVisit();
+        tester.startPage(RegistrationDashboard.class);
+
+        tester.clickLink("content:activeOpdPatientVisits:opdPatients:0:openPatientDetails");
+
+        tester.assertRenderedPage(VisitDetails.class);
+    }
+
+    private void createPatientWithActiveVisit() {
+        visitTransactions.startVisit(patientTransactions.create(new TestPatient()), VisitType.OPD);
     }
 }
