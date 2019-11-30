@@ -19,10 +19,12 @@ package ksch.administration;
 import ksch.Activity;
 import ksch.PatientReportQueries;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
+import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.springframework.data.util.Pair;
 import org.wicketstuff.annotation.mount.MountPath;
 
 import static java.time.LocalDateTime.now;
@@ -56,8 +58,7 @@ class PatientReportActivity extends Activity {
     }
 
     @Override
-    public String getPreviousPagePath() {
-        return "/administration";
+    protected Pair<Class<? extends WebPage>, PageParameters> getPreviousPage() {
+        return Pair.of(AdministrationDashboard.class, new PageParameters());
     }
 }
-
