@@ -16,15 +16,36 @@
 
 package ksch.orderentry;
 
+import ksch.assertions.ElementContainingText;
+import ksch.laboratory.LabQueries;
+import ksch.laboratory.OrderStatus;
+import ksch.wicket.MockBean;
 import ksch.wicket.PageComponentTest;
 import org.junit.Test;
 
+import java.util.UUID;
+
+import static ksch.assertions.HtmlAssertions.assertContains;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+
 public class OrderManagementTest extends PageComponentTest {
 
-    @Test
-    public void should_render_panel_with_order_management_table() {
-        OrderManagement orderManagement = new OrderManagement(null);
+    @MockBean
+    private LabQueries labQueries;
 
-        tester.startComponentInPage(orderManagement);
+    private UUID visitId = UUID.randomUUID();
+
+    @Test
+    public void should_display_lab_order_status() {
+        givenCanceledLabOrder();
+
+        tester.startComponentInPage(new OrderManagement(visitId));
+
+        assertContains(tester.getLastResponseAsString(), new ElementContainingText("Cancelled"));
+    }
+
+    private void givenCanceledLabOrder() {
+        given(labQueries.getLabOrderStatus(any(UUID.class))).willReturn(OrderStatus.CANCELLED);
     }
 }

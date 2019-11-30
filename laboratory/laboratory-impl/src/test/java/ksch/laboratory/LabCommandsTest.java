@@ -67,7 +67,7 @@ public class LabCommandsTest {
         labCommands.cancel(labOrder.getId());
 
         verify(labOrderRepository, times(2)).save(labOrderArgumentCaptor.capture());
-        assertEquals(LabOrder.Status.ABORTED, labOrderArgumentCaptor.getValue().getStatus());
+        assertEquals(LabOrder.Status.CANCELED, labOrderArgumentCaptor.getValue().getStatus());
     }
 
     private LabOrder createLabOrder() {

@@ -16,16 +16,32 @@
 
 package ksch.orderentry;
 
+import ksch.laboratory.LabQueries;
+import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import java.util.UUID;
 
 public class OrderManagement extends Panel {
 
+    @SpringBean
+    private LabQueries labQueries;
+
     public OrderManagement(UUID visitId) {
         super("orderManagement");
 
-        add(new ExternalLink("editLabOrdersLink", String.format("/registration/visits/%s/lab-orders", visitId)));
+        add(createLinkToLabOrders(visitId));
+        add(createLabOrderStatusLabel(visitId));
+    }
+
+    private ExternalLink createLinkToLabOrders(UUID visitId) {
+        return new ExternalLink("editLabOrdersLink", String.format(
+                "/registration/visits/%s/lab-orders", visitId));
+    }
+
+    private Label createLabOrderStatusLabel(UUID visitId) {
+        return new Label("statusLabOrders", labQueries.getLabOrderStatus(visitId).getText());
     }
 }

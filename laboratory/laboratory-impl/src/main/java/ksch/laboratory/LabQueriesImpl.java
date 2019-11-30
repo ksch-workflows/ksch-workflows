@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static ksch.laboratory.OrderStatus.*;
+
 @Service
 @RequiredArgsConstructor
 public class LabQueriesImpl implements LabQueries {
@@ -32,5 +34,21 @@ public class LabQueriesImpl implements LabQueries {
     @Override
     public List<LabOrder> getLabOrders(UUID visitId) {
         return new ArrayList<>(labOrderRepository.findByVisitId(visitId));
+    }
+
+    @Override
+    public OrderStatus getLabOrderStatus(UUID visitId) {
+        var labOrders = labOrderRepository.findByVisitId(visitId);
+
+        if (labOrders.isEmpty()) {
+            return NOT_REQUIRED;
+        }
+        if (labOrders.stream().anyMatch(o -> !o.getStatus().isTerminal())) {
+            return PENDING;
+        }
+        if (labOrders.stream().anyMatch(o -> o.getStatus().equals(LabOrder.Status.DONE))) {
+            return DONE;
+        }
+        return CANCELLED;
     }
 }

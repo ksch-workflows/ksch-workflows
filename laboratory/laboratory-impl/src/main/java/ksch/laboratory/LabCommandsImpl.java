@@ -41,7 +41,7 @@ public class LabCommandsImpl implements LabCommands {
     @Override
     public Status cancel(UUID labOrderId) {
         var labOrderEntity = labOrderRepository.findById(labOrderId).orElseThrow();
-        labOrderEntity.setStatus(Status.ABORTED);
+        labOrderEntity.setStatus(Status.CANCELED);
         labOrderRepository.save(labOrderEntity);
         return labOrderEntity.getStatus();
     }

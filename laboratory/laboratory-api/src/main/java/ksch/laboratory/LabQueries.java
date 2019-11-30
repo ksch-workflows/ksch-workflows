@@ -22,4 +22,9 @@ import java.util.UUID;
 public interface LabQueries {
 
     List<LabOrder> getLabOrders(UUID visitId);
+
+    /**
+     * @return the aggregated status from all lab orders of the given visit.
+     */
+    OrderStatus getLabOrderStatus(UUID visitId);
 }

@@ -1,3 +1,5 @@
 dependencies {
     implementation project(':medical-records:clinical-terminologies-api')
+
+    compile project(':patient-management:patient-management-api')
 }
