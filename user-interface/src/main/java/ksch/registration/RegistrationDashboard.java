@@ -24,18 +24,21 @@ import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.Visit;
 import ksch.patientmanagement.visit.VisitQueries;
+import ksch.patientmanagement.visit.VisitTransactions;
+import ksch.patientmanagement.visit.VisitType;
 import lombok.Getter;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.link.ExternalLink;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.flow.RedirectToUrlException;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
 
@@ -69,9 +72,12 @@ class RegistrationDashboardPanel extends Panel {
     @SpringBean
     private VisitQueries visitQueries;
 
+    @SpringBean
+    private VisitTransactions visitTransactions;
+
     private WebMarkupContainer patientListContainer;
 
-    public RegistrationDashboardPanel() {
+    RegistrationDashboardPanel() {
         super(MAIN_CONTENT_ID);
 
         add(createOpdPatientList());
@@ -114,10 +120,15 @@ class RegistrationDashboardPanel extends Panel {
                 item.add(new Label("location", rowData.getLocation()));
                 item.add(new Label("age", rowData.getAge()));
 
-                item.add(new ExternalLink(
-                        "openPatientDetails",
-                        "/registration/edit-patient/" + rowData.getPatientId())
-                );
+                var linkToVisitDetails = new Link<Void>("openPatientDetails") {
+                    @Override
+                    public void onClick() {
+                        var parameters = new PageParameters();
+                        parameters.add("visitId", rowData.getVisitId());
+                        setResponsePage(VisitDetails.class, parameters);
+                    }
+                };
+                item.add(linkToVisitDetails);
             }
         };
 
@@ -131,9 +142,9 @@ class RegistrationDashboardPanel extends Panel {
     }
 
     @Getter
-    class OptPatientVisitRow implements Serializable {
+    static class OptPatientVisitRow implements Serializable {
 
-        final UUID patientId;
+        final UUID visitId;
 
         final String opdNumber;
 
@@ -143,10 +154,10 @@ class RegistrationDashboardPanel extends Panel {
 
         final Integer age;
 
-        public OptPatientVisitRow(Visit visit) {
+        OptPatientVisitRow(Visit visit) {
             Patient patient = visit.getPatient();
 
-            patientId = patient.getId();
+            visitId = visit.getId();
             opdNumber = visit.getOpdNumber();
             name = patient.getName();
             location = patient.getAddress();
@@ -158,7 +169,7 @@ class RegistrationDashboardPanel extends Panel {
 
         private final PatientFormFields patientFormFields;
 
-        public AddPatientForm() {
+        AddPatientForm() {
             super("addPatientForm");
 
             this.patientFormFields = new PatientFormFields();
@@ -168,7 +179,7 @@ class RegistrationDashboardPanel extends Panel {
 
         @Override
         protected void onSubmit() {
-            PatientResource patient = PatientResource.builder()
+            var enteredPatientData = PatientResource.builder()
                     .name(patientFormFields.getAndResetValue("inputName"))
                     .nameFather(patientFormFields.getAndResetValue("inputNameFather"))
                     .address(patientFormFields.getAndResetValue("inputAddress"))
@@ -176,9 +187,10 @@ class RegistrationDashboardPanel extends Panel {
                     .dateOfBirth(parseDate(patientFormFields.getAndResetValue("dateOfBirth")))
                     .build();
 
-            UUID patientId = patientTransactions.create(patient).getId();
+            var patient = patientTransactions.create(enteredPatientData);
+            var visit = visitTransactions.startVisit(patient, VisitType.OPD);
 
-            throw new RedirectToUrlException("/registration/edit-patient/" + patientId);
+            throw new RedirectToUrlException("/registration/visits/" + visit.getId());
         }
     }
 
@@ -186,7 +198,7 @@ class RegistrationDashboardPanel extends Panel {
 
         private String opdNumber;
 
-        public OpenOpdPatientForm() {
+        OpenOpdPatientForm() {
             super("opdPatientForm");
 
             setModel(new CompoundPropertyModel<>(this));
@@ -198,8 +210,7 @@ class RegistrationDashboardPanel extends Panel {
         protected void onSubmit() {
             Optional<Visit> visit = visitQueries.findByOpdNumber(opdNumber);
             if (visit.isPresent()) {
-                UUID patientId = visit.get().getPatient().getId();
-                throw new RedirectToUrlException("/registration/edit-patient/" + patientId);
+                throw new RedirectToUrlException("/registration/visits/" + visit.get().getId());
             } else {
                 opdNumber = "";
             }

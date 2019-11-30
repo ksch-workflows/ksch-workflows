@@ -21,7 +21,6 @@ import ksch.orderentry.OrderManagement;
 import ksch.patientmanagement.GeneralPatientInformation;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientQueries;
-import ksch.patientmanagement.visit.Visit;
 import ksch.patientmanagement.visit.VisitQueries;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -29,21 +28,26 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import static ksch.patientmanagement.PatientResource.toPatientResource;
 
-@MountPath("/registration/edit-patient/${id}")
+@MountPath("/registration/visits/${visitId}")
 @AuthorizeInstantiation({"NURSE", "CLERK"})
-public class EditPatientDetails extends RegistrationPage {
+public class VisitDetails extends RegistrationPage {
+
+    @SpringBean
+    private VisitQueries visitQueries;
+
+    private final UUID visitId;
 
     private final UUID patientId;
 
-    public EditPatientDetails(PageParameters pageParameters) {
+    public VisitDetails(PageParameters pageParameters) {
         super(pageParameters);
 
-        patientId = UUID.fromString(pageParameters.get("id").toString());
+        visitId = UUID.fromString(pageParameters.get("visitId").toString());
+        patientId = visitQueries.get(visitId).getPatient().getId();
     }
 
     @Override
@@ -67,9 +71,7 @@ class EditPatientDetailsActivity extends Activity {
     }
 
     private UUID activeVisitId(Patient patient) {
-        Optional<Visit> activeVisit = visitQueries.getActiveVisit(patient);
-        // TODO Is there a better option for the case that there is no active visit for the current patient?
-        return activeVisit.map(Visit::getId).orElse(null);
+        return visitQueries.getActiveVisit(patient).orElseThrow().getId();
     }
 
     @Override
