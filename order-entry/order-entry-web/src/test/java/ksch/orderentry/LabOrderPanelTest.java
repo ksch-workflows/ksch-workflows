@@ -33,7 +33,7 @@ import java.util.UUID;
 import static com.google.common.collect.Lists.newArrayList;
 import static ksch.assertions.HtmlAssertions.assertContains;
 import static ksch.assertions.HtmlAssertions.assertNotContains;
-import static ksch.laboratory.LabOrder.Status.ABORTED;
+import static ksch.laboratory.LabOrder.Status.CANCELED;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -128,7 +128,7 @@ public class LabOrderPanelTest extends PageComponentTest {
     }
 
     private void givenLabCommandsMockConfiguration() {
-        when(labCommands.cancel(any(UUID.class))).thenReturn(ABORTED);
+        when(labCommands.cancel(any(UUID.class))).thenReturn(CANCELED);
     }
 
     private void givenLabOrders() {

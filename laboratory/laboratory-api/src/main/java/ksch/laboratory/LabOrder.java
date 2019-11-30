@@ -16,6 +16,9 @@
 
 package ksch.laboratory;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import java.util.UUID;
 
 public interface LabOrder {
@@ -26,10 +29,17 @@ public interface LabOrder {
 
     LabOrderCode getRequestedTest();
 
+    @RequiredArgsConstructor
+    @Getter
     enum Status {
-        NEW,
-        IN_PROGRESS,
-        DONE,
-        ABORTED
+        NEW(false),
+        IN_PROGRESS(false),
+        DONE(true),
+        CANCELED(true);
+
+        /**
+         * If {@code true}, no further state changes are expected for the lab order.
+         */
+        private final boolean terminal;
     }
 }

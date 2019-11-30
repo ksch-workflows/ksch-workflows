@@ -26,8 +26,9 @@ limitations under the License.
 
     <wicket:head>
         <style type="text/css">
-            td.checkbox {
-                text-align: center;
+            .edit-button {
+                padding-left:30px;
+                padding-right:30px;
             }
         </style>
     </wicket:head>
@@ -40,14 +41,11 @@ limitations under the License.
     <table class="table table-striped without-top-border">
         <thead>
         <tr>
-            <th scope="col" style="width: 10%">
+            <th scope="col" style="width: 15%">
                 Type
             </th>
-            <th scope="col" style="width: 1%">
-                Required
-            </th>
-            <th scope="col" style="width: 1%">
-                Done
+            <th scope="col" style="width: 20%">
+                Status
             </th>
             <th scope="col">
                 <!-- Action -->
@@ -60,14 +58,15 @@ limitations under the License.
             <td>
                 Lab
             </td>
-            <td class="checkbox">
-                <input type="checkbox" value="">
-            </td>
-            <td class="checkbox">
-                <input type="checkbox" value="">
+            <td>
+               <span wicket:id="statusLabOrders">
+                   Pending
+               </span>
             </td>
             <td>
-                <a wicket:id="editLabOrdersLink" href="#" class="btn btn-outline-secondary">[action]</a>
+                <a wicket:id="editLabOrdersLink" href="#" class="btn btn-outline-secondary edit-button">
+                    Edit
+                </a>
             </td>
         </tr>
 
@@ -75,14 +74,13 @@ limitations under the License.
             <td>
                 ECG
             </td>
-            <td class="checkbox">
-                <input type="checkbox" value="">
-            </td>
-            <td class="checkbox">
-                <input type="checkbox" value="">
+            <td>
+                Not required
             </td>
             <td>
-                <button type="button" class="btn btn-outline-secondary">[action]</button>
+                <button type="button" class="btn btn-outline-secondary edit-button">
+                    Edit
+                </button>
             </td>
         </tr>
 
@@ -90,14 +88,13 @@ limitations under the License.
             <td>
                 USG
             </td>
-            <td class="checkbox">
-                <input type="checkbox" value="">
-            </td>
-            <td class="checkbox">
-                <input type="checkbox" value="">
+            <td>
+                Not required
             </td>
             <td>
-                <button type="button" class="btn btn-outline-secondary">[action]</button>
+                <button type="button" class="btn btn-outline-secondary edit-button">
+                    Edit
+                </button>
             </td>
         </tr>
 
@@ -105,14 +102,13 @@ limitations under the License.
             <td>
                 X-Ray
             </td>
-            <td class="checkbox">
-                <input type="checkbox" value="">
-            </td>
-            <td class="checkbox">
-                <input type="checkbox" value="">
+            <td>
+                Not required
             </td>
             <td>
-                <button type="button" class="btn btn-outline-secondary">[action]</button>
+                <button type="button" class="btn btn-outline-secondary edit-button">
+                    Edit
+                </button>
             </td>
         </tr>
 
@@ -120,14 +116,13 @@ limitations under the License.
             <td>
                 Surgery
             </td>
-            <td class="checkbox">
-                <input type="checkbox" value="">
-            </td>
-            <td class="checkbox">
-                <input type="checkbox" value="">
+            <td>
+                Not required
             </td>
             <td>
-                <button type="button" class="btn btn-outline-secondary">[action]</button>
+                <button type="button" class="btn btn-outline-secondary edit-button">
+                    Edit
+                </button>
             </td>
         </tr>
 

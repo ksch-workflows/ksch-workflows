@@ -22,11 +22,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static ksch.laboratory.LabOrder.Status.*;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -47,6 +50,69 @@ public class LabQueriesTest {
         List<LabOrder> retrievedLabOrder = labQueries.getLabOrders(visitId);
 
         assertEquals(2, retrievedLabOrder.size());
+    }
+
+    @Test
+    public void test_getLabOrderStatus_with_no_lab_orders() {
+        givenVisitWithoutLabOrders();
+
+        var result = labQueries.getLabOrderStatus(visitId);
+
+        assertEquals("A wrong lab order status was calculated", OrderStatus.NOT_REQUIRED, result);
+    }
+
+    @Test
+    public void test_getLabOrderStatus_with_single_pending_lab_order() {
+        givenVisitWithLabOrder(IN_PROGRESS);
+
+        var result = labQueries.getLabOrderStatus(visitId);
+
+        assertEquals("A wrong lab order status was calculated", OrderStatus.PENDING, result);
+    }
+
+    @Test
+    public void test_getLabOrderStatus_with_single_canceled_lab_order() {
+        givenVisitWithLabOrder(CANCELED);
+
+        var result = labQueries.getLabOrderStatus(visitId);
+
+        assertEquals("A wrong lab order status was calculated", OrderStatus.CANCELLED, result);
+    }
+
+    @Test
+    public void test_getLabOrderStatus_with_one_order_pending_and_one_done() {
+        givenVisitWithLabOrders(IN_PROGRESS, DONE);
+
+        var result = labQueries.getLabOrderStatus(visitId);
+
+        assertEquals("A wrong lab order status was calculated", OrderStatus.PENDING, result);
+    }
+
+    @Test
+    public void test_getLabOrderStatus_with_one_order_done_and_one_aborted() {
+        givenVisitWithLabOrders(DONE, CANCELED);
+
+        var result = labQueries.getLabOrderStatus(visitId);
+
+        assertEquals("A wrong lab order status was calculated", OrderStatus.DONE, result);
+    }
+
+    private void givenVisitWithoutLabOrders() {
+        given(labOrderRepository.findByVisitId(eq(visitId))).willReturn(newArrayList());
+    }
+
+    private void givenVisitWithLabOrder(LabOrder.Status status) {
+        givenVisitWithLabOrders(status);
+    }
+
+    private void givenVisitWithLabOrders(LabOrder.Status... requestedStatuses) {
+        var labOrders = new ArrayList<LabOrderEntity>();
+        for (LabOrder.Status status : requestedStatuses) {
+            labOrders.add(LabOrderEntity.builder()
+                    .status(status)
+                    .build());
+        }
+        given(labOrderRepository.findByVisitId(eq(visitId))).willReturn(labOrders);
     }
 
     private List<LabOrderEntity> labOrders() {
