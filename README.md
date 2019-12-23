@@ -7,8 +7,8 @@ The [Kirpal Sagar Charitable Hospital](https://kirpal-sagar.org/en/kirpal-charit
 ## Software architecture
 
 ### Values
-- Simplicity
-- High test coverage
+- Robustness: The KSCH staff can trust the software to do the right thing
+- Simplicity: The KSCH staff can operate the software independently
 
 ### Technology stack
 
