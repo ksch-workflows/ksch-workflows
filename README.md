@@ -16,7 +16,6 @@ The project is built upon the following technologies:
 
 - [Java](https://github.com/ksch-workflows/ksch-workflows/wiki/Java) - the primarily used programming language
 - [Spring Boot](https://github.com/ksch-workflows/ksch-workflows/wiki/Spring-Boot) - a framework for the development of enterprise applications
-- [Apache Wicket](https://github.com/ksch-workflows/ksch-workflows/wiki/Apache-Wicket) - connects the HTML web pages with the business logic expressed in Java
 - [Bootstrap](https://github.com/ksch-workflows/ksch-workflows/wiki/Bootstrap) - provides a comprehensive set of patterns for the layout of the HTML pages
 - [Gradle](https://github.com/ksch-workflows/ksch-workflows/wiki/Gradle) - used for the compilation of the source code into an executable application  
 
@@ -65,15 +64,6 @@ The following values need to be entered for getting access:
 | User Name | sa |
 | Password | <empty string> |
 
-### Hot reload of Wicket markup
-
-When the application is [started in development mode](https://ci.apache.org/projects/wicket/guide/8.x/single.html#_switching_wicket_to_deployment_mode),
-it is possible to apply changes in Wicket markup files without restarting the application.
-
-It doesn't work with the `bootRun` task though. The application needs to be started by running the `main` method in
-the `KschWorkflowsApplication` class from within the IDE. Then after a build of the project the next page load
-should render the new data.
-
 
 ### Run Java tests
 
@@ -99,14 +89,6 @@ Afterwards HTML reports are generated for each respective sub-project and can be
 ```
 find . -name "index.html" | grep --regexp="pitest/[0-9]*/index\.html"
 ```
-
-### Run JavaScript tests
-
-The unit tests for the JavaScript files are implemented with the [QUnit](https://api.qunitjs.com/) library.
-They can be executed by opening the respective `*.test.html` file in a web browser.
-
-The build system is doing this automatically in a headless browser (see [.travis.yml](.travis.yml#L6)).
-
 
 ## Maintenance
 

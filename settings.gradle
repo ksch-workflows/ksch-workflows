@@ -3,7 +3,6 @@ project(":user-interface").name = "ksch-workflows"
 
 include "infrastructure:configuration"
 include "infrastructure:shared-test"
-include "infrastructure:wicket-utils"
 
 include("laboratory:laboratory-api")
 include("laboratory:laboratory-impl")

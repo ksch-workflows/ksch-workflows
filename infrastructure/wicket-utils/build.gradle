@@ -1,5 +1,0 @@
-
-dependencies {
-    compile "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
-    compile "org.apache.wicket:wicket-spring:${wicketVersion}"
-}
