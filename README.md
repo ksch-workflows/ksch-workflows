@@ -52,9 +52,9 @@ The application can be started for development tests with the following Gradle t
 ./gradlew bootRunDev
 ```
 
-Then it is accessible in the browser under the URL http://localhost:8080 (login: user / pwd).
+Then it is accessible in the browser under the URL http://localhost:9090 (login: user / pwd).
 
-The database can be inspected under this URL: http://localhost:8080/h2-console
+The database can be inspected under this URL: http://localhost:9090/h2-console
 
 The following values need to be entered for getting access:
 
