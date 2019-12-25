@@ -40,6 +40,7 @@ public class LabOrderRepositoryTest {
     @Test
     public void should_create_lab_order() {
         LabOrderEntity labOrder = new LabOrderEntity(new LabOrderCode("44907-4"));
+        labOrder.setVisitId(visitId);
 
         LabOrderEntity savedLabOrder = labOrderRepository.save(labOrder);
 
