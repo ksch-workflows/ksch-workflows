@@ -1,6 +1,4 @@
 
 dependencies {
     compile project(':patient-management')
-
-    compile "org.springframework.boot:spring-boot-starter-security"
 }
