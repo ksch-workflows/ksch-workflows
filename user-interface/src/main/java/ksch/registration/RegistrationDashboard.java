@@ -35,6 +35,7 @@ import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.material.Material;
+import ksch.commons.Time;
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.patient.PatientTransactions;
@@ -108,11 +109,11 @@ public class RegistrationDashboard extends VerticalLayout {
     }
 
     class AddPatientDialog extends Dialog {
-
         private final TextField nameInputField = new TextField();
-
-        Select<Gender> genderSelectBox = new Select<>();
-
+        private final TextField nameFatherInputField = new TextField();
+        private final TextField dateOfBirthInputField = new TextField();
+        private final TextField addressInputField = new TextField();
+        private final Select<Gender> genderSelectBox = new Select<>();
         private final Binder<NewPatient> binder = new Binder(NewPatient.class);
 
         AddPatientDialog() {
@@ -126,21 +127,44 @@ public class RegistrationDashboard extends VerticalLayout {
             // Name input field
             nameInputField.setLabel("Name");
             nameInputField.setRequired(true);
-            nameInputField.setId("nameInputField");
+            nameInputField.setId("name");
             binder.forField(nameInputField)
                     .withValidator(s -> s.length() > 0, "Please provide a name for the patient.")
                     .bind(NewPatient::getName, NewPatient::setName);
             formLayout.add(nameInputField);
 
+            // Father's name input field
+            nameFatherInputField.setLabel("Father's name");
+            nameFatherInputField.setId("nameFather");
+            binder.forField(nameFatherInputField)
+                    .bind(NewPatient::getNameFather, NewPatient::setNameFather);
+            formLayout.add(nameFatherInputField);
+
             // Gender select box
             genderSelectBox.setItems(Gender.MALE, Gender.FEMALE, Gender.OTHER);
             genderSelectBox.setLabel("Gender");
             genderSelectBox.setPlaceholder("Please select");
-            genderSelectBox.setId("genderSelectBox");
+            genderSelectBox.setId("gender");
             binder.forField(genderSelectBox)
                     .withValidator(Objects::nonNull, "Please select a gender.")
                     .bind(NewPatient::getGender, NewPatient::setGender);
             formLayout.add(genderSelectBox);
+
+            // Date of birth input field
+            dateOfBirthInputField.setLabel("Date of birth");
+            dateOfBirthInputField.setId("dateOfBirth");
+            binder.forField(dateOfBirthInputField)
+                    .withValidator(value -> value == null || Time.isCorrectDatePattern(value),
+                            "Please provide the date of birth in the correct format, e.g. 24-12-2020")
+                    .bind(NewPatient::getDateOfBirthAsString, NewPatient::setDateOfBirth);
+            formLayout.add(dateOfBirthInputField);
+
+            // Address input field
+            addressInputField.setLabel("Address");
+            addressInputField.setId("address");
+            binder.forField(addressInputField)
+                    .bind(NewPatient::getAddress, NewPatient::setAddress);
+            formLayout.add(addressInputField);
 
             add(formLayout);
         }

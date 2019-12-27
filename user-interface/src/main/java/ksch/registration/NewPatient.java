@@ -16,6 +16,7 @@
 
 package ksch.registration;
 
+import ksch.commons.Time;
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
 import lombok.Getter;
@@ -32,6 +33,16 @@ class NewPatient implements Patient {
     private String name;
     private String nameFather;
     private Gender gender;
-    private LocalDate dateOfBirth;
+    private String dateOfBirth;
     private String address;
+
+    // TODO Add unit test for date/string conversion
+
+    public LocalDate getDateOfBirth() {
+        return Time.parseDate(dateOfBirth);
+    }
+
+    public String getDateOfBirthAsString() {
+        return dateOfBirth;
+    }
 }

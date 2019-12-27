@@ -37,6 +37,8 @@ import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
+import java.time.LocalDate;
+
 import static com.github.mvysny.kaributesting.v10.GridKt.expectRows;
 import static com.github.mvysny.kaributesting.v10.LocatorJ._click;
 import static com.github.mvysny.kaributesting.v10.LocatorJ._find;
@@ -96,21 +98,23 @@ public class RegistrationDashboardTest extends PageComponentTest {
 
         // WHEN
         _click(_get(Button.class, spec -> spec.withText("Add patient")));
-        _setValue(_get(TextField.class, spec -> spec.withId("nameInputField")), "Ravindra Kodanda");
-        _setValue(_get(Select.class, spec -> spec.withId("genderSelectBox")), Gender.MALE);
+        _setValue(_get(TextField.class, spec -> spec.withId("name")), "Ravindra Kodanda");
+        _setValue(_get(TextField.class, spec -> spec.withId("nameFather")), "Javeed Sarath");
+        _setValue(_get(TextField.class, spec -> spec.withId("dateOfBirth")), "27-07-2000");
+        _setValue(_get(TextField.class, spec -> spec.withId("address")), "Kirpal Sagar");
+        _setValue(_get(Select.class, spec -> spec.withId("gender")), Gender.MALE);
+
         _click(_get(Button.class, spec -> spec.withText("Okay")));
 
         // THEN
         verify(patientTransactions).create(patientArgumentCaptor.capture());
         var createdPatient = patientArgumentCaptor.getValue();
         assertEquals("Ravindra Kodanda", createdPatient.getName());
+        assertEquals("Javeed Sarath", createdPatient.getNameFather());
+        assertEquals("Kirpal Sagar", createdPatient.getAddress());
+        assertEquals(LocalDate.of(2000, 7, 27), createdPatient.getDateOfBirth());
         assertEquals(Gender.MALE, createdPatient.getGender());
         verifyNavigatedToPatientDetails();
-
-//        formTester.setValue("patientFormFields:inputNameFather", "Javeed Sarath");
-//        formTester.setValue("patientFormFields:dateOfBirth", "27-07-2000");
-//        formTester.setValue("patientFormFields:inputAddress", "Kirpal Sagar");
-//        formTester.submit();
     }
 
     private void verifyNavigatedToPatientDetails() {
