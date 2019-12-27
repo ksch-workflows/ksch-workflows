@@ -34,7 +34,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
-import org.mockito.Mockito;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -87,7 +86,8 @@ public class PageComponentTest {
 
                 var userDefinedObject = field.get(this);
                 if (userDefinedObject == null) {
-                    userDefinedObject = Mockito.mock(field.getType());
+                    throw new RuntimeException("Hello");
+                    //userDefinedObject = Mockito.mock(field.getType());
                 }
 
                 result.add(SpringBeanWrapper.createSpringBean(field.getType(), userDefinedObject));
