@@ -24,34 +24,14 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.UUID;
 
+// TODO Maybe this could be a nested class
 @Getter
 @Setter
 class NewPatient implements Patient {
-
+    private final UUID id = null;
     private String name;
-
-    @Override
-    public UUID getId() {
-        return null;
-    }
-
-    @Override
-    public String getNameFather() {
-        return null;
-    }
-
-    @Override
-    public LocalDate getDateOfBirth() {
-        return null;
-    }
-
-    @Override
-    public Gender getGender() {
-        return null;
-    }
-
-    @Override
-    public String getAddress() {
-        return null;
-    }
+    private String nameFather;
+    private Gender gender;
+    private LocalDate dateOfBirth;
+    private String address;
 }

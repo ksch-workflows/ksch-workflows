@@ -28,12 +28,14 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.material.Material;
+import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.Visit;
@@ -42,6 +44,7 @@ import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Route("registration")
@@ -108,6 +111,8 @@ public class RegistrationDashboard extends VerticalLayout {
 
         private final TextField nameInputField = new TextField();
 
+        Select<Gender> genderSelectBox = new Select<>();
+
         private final Binder<NewPatient> binder = new Binder(NewPatient.class);
 
         AddPatientDialog() {
@@ -118,15 +123,25 @@ public class RegistrationDashboard extends VerticalLayout {
         private void createForm() {
             var formLayout = new FormLayout();
 
+            // Name input field
             nameInputField.setLabel("Name");
             nameInputField.setRequired(true);
             nameInputField.setId("nameInputField");
-
             binder.forField(nameInputField)
                     .withValidator(s -> s.length() > 0, "Please provide a name for the patient.")
                     .bind(NewPatient::getName, NewPatient::setName);
-
             formLayout.add(nameInputField);
+
+            // Gender select box
+            genderSelectBox.setItems(Gender.MALE, Gender.FEMALE, Gender.OTHER);
+            genderSelectBox.setLabel("Gender");
+            genderSelectBox.setPlaceholder("Please select");
+            genderSelectBox.setId("genderSelectBox");
+            binder.forField(genderSelectBox)
+                    .withValidator(Objects::nonNull, "Please select a gender.")
+                    .bind(NewPatient::getGender, NewPatient::setGender);
+            formLayout.add(genderSelectBox);
+
             add(formLayout);
         }
 

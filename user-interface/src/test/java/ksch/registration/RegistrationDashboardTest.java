@@ -20,16 +20,22 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import ksch.api.DummyPatient;
 import ksch.commons.PageComponentTest;
+import ksch.patientmanagement.patient.Gender;
+import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.VisitQueries;
 import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import static com.github.mvysny.kaributesting.v10.GridKt.expectRows;
 import static com.github.mvysny.kaributesting.v10.LocatorJ._click;
@@ -37,14 +43,15 @@ import static com.github.mvysny.kaributesting.v10.LocatorJ._find;
 import static com.github.mvysny.kaributesting.v10.LocatorJ._get;
 import static com.github.mvysny.kaributesting.v10.LocatorJ._setValue;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 
-
+@SuppressWarnings("unchecked")
 public class RegistrationDashboardTest extends PageComponentTest {
 
     @Autowired
     private PatientQueries patientQueries;
 
-    @Autowired
+    @SpyBean
     private PatientTransactions patientTransactions;
 
     @Autowired
@@ -52,6 +59,9 @@ public class RegistrationDashboardTest extends PageComponentTest {
 
     @Autowired
     private VisitTransactions visitTransactions;
+
+    @Captor
+    private ArgumentCaptor<Patient> patientArgumentCaptor;
 
     @Test
     public void should_open_registration_dashboard() {
@@ -81,19 +91,30 @@ public class RegistrationDashboardTest extends PageComponentTest {
 
     @Test
     public void should_register_new_patient() {
+        // GIVEN
         givenOnRegistrationDashboardPage();
 
+        // WHEN
         _click(_get(Button.class, spec -> spec.withText("Add patient")));
         _setValue(_get(TextField.class, spec -> spec.withId("nameInputField")), "Ravindra Kodanda");
+        _setValue(_get(Select.class, spec -> spec.withId("genderSelectBox")), Gender.MALE);
         _click(_get(Button.class, spec -> spec.withText("Okay")));
 
-        assertEquals("Patient details", _get(H2.class).getText());
+        // THEN
+        verify(patientTransactions).create(patientArgumentCaptor.capture());
+        var createdPatient = patientArgumentCaptor.getValue();
+        assertEquals("Ravindra Kodanda", createdPatient.getName());
+        assertEquals(Gender.MALE, createdPatient.getGender());
+        verifyNavigatedToPatientDetails();
 
 //        formTester.setValue("patientFormFields:inputNameFather", "Javeed Sarath");
-//        formTester.select("patientFormFields:inputGender", 0);
 //        formTester.setValue("patientFormFields:dateOfBirth", "27-07-2000");
 //        formTester.setValue("patientFormFields:inputAddress", "Kirpal Sagar");
 //        formTester.submit();
+    }
+
+    private void verifyNavigatedToPatientDetails() {
+        assertEquals("Patient details", _get(H2.class).getText());
     }
 
     private void givenOnRegistrationDashboardPage() {
