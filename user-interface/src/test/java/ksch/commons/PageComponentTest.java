@@ -63,7 +63,7 @@ public class PageComponentTest {
 
     @Before
     public final void initializeMockedVaadinEnvironment() {
-        MockVaadin.setup(MockedUI::new, new DummySpringServlet(createSpringApplicationContext()));
+        MockVaadin.setup(MockedUI::new, new DummySpringServlet(applicationContext));
     }
 
     @After
@@ -73,14 +73,6 @@ public class PageComponentTest {
 
     protected void openPage(Class<? extends Component> page) {
         UI.getCurrent().navigate(page);
-    }
-
-    @SuppressWarnings("unchecked")
-    private ApplicationContext createSpringApplicationContext() {
-        if (applicationContext == null) {
-            throw new IllegalStateException("Something is wrong here");
-        }
-        return applicationContext;
     }
 
     private static class DummySpringServlet extends SpringServlet {

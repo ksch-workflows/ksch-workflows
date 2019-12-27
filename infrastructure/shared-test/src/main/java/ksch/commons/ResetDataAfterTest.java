@@ -1,3 +1,19 @@
+/*
+ * Copyright 2019 KS-plus e.V.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package ksch.commons;
 
 import lombok.RequiredArgsConstructor;
@@ -8,8 +24,6 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,15 +63,16 @@ public class ResetDataAfterTest extends ExternalResource {
 
     @SneakyThrows
     private List<String> getAllTableNames() {
-        List<String> tableNames = new ArrayList<>();
+        var result = new ArrayList<String>();
 
-        DatabaseMetaData metaData = dataSource.getConnection().getMetaData();
-        ResultSet tables = metaData.getTables(null, null, null, new String[] { "TABLE" });
+        var metaData = dataSource.getConnection().getMetaData();
+        var tables = metaData.getTables(null, null, null, new String[] { "TABLE" });
         while (tables.next()) {
-            String tableName=tables.getString("TABLE_NAME");
-            tableNames.add(tableName);
+            String tableName = tables.getString("TABLE_NAME");
+            result.add(tableName);
         }
-        return tableNames;
+
+        return result;
     }
 
     private void truncateData(String tableName) {
