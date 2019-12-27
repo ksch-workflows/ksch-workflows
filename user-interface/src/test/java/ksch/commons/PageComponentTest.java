@@ -65,7 +65,7 @@ public class PageComponentTest {
     }
 
     @SuppressWarnings("unchecked")
-    private AnnotationConfigApplicationContext createSpringApplicationContext() {
+    private ApplicationContext createSpringApplicationContext() {
         var result = new AnnotationConfigApplicationContext();
         for (var mockBean : getTestBeans()) {
             result.registerBean(mockBean.getBeanType(), mockBean.getSupplier());

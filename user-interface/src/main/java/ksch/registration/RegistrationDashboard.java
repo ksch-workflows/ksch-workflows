@@ -17,9 +17,15 @@
 package ksch.registration;
 
 
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.material.Material;
@@ -38,12 +44,15 @@ public class RegistrationDashboard extends VerticalLayout {
 
     private Grid<Visit> activeOpdVisitsTable;
 
+    private Dialog addPatientDialog = new AddPatientDialog();
+
     @Autowired
     public RegistrationDashboard(PatientQueries patientQueries, VisitQueries visitQueries) {
         this.patientQueries = patientQueries;
         this.visitQueries = visitQueries;
 
         createHeading();
+        createActionBar();
         createActiveOptVisitsTable();
     }
 
@@ -55,6 +64,17 @@ public class RegistrationDashboard extends VerticalLayout {
         add(heading);
     }
 
+    private void createActionBar() {
+        var result = new HorizontalLayout();
+
+        var addPatientButton = new Button("Add patient", event -> {
+            addPatientDialog.open();
+        });
+        result.add(addPatientButton);
+
+        add(result);
+    }
+
     private void createActiveOptVisitsTable() {
         activeOpdVisitsTable = new Grid<>();
         var activeOpdVisits = visitQueries.getAllActiveOpdVisits();
@@ -62,6 +82,39 @@ public class RegistrationDashboard extends VerticalLayout {
         if (!activeOpdVisits.isEmpty()) {
             activeOpdVisitsTable.setItems(activeOpdVisits);
             add(activeOpdVisitsTable);
+        } else {
+            add(new Label("No active OPD patients."));
+        }
+    }
+
+    class AddPatientDialog extends Dialog {
+
+        private final TextField nameInputField = new TextField();
+
+        AddPatientDialog() {
+            createForm();
+            createButtons();
+        }
+
+        private void createForm() {
+            var formLayout = new FormLayout();
+
+            nameInputField.setLabel("Name");
+            nameInputField.setRequired(true);
+            nameInputField.setId("nameInputField");
+
+            formLayout.add(nameInputField);
+            add(formLayout);
+        }
+
+        private void createButtons() {
+            Button confirmButton = new Button("Okay", event -> {
+                close();
+            });
+            Button cancelButton = new Button("Cancel", event -> {
+                close();
+            });
+            add(confirmButton, cancelButton);
         }
     }
 }

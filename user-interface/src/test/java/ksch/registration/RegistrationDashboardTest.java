@@ -16,11 +16,14 @@
 
 package ksch.registration;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
-import ksch.commons.DummyPatient;
-import ksch.commons.DummyPatientQueries;
-import ksch.commons.DummyVisit;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.textfield.TextField;
+import ksch.api.DummyPatient;
+import ksch.api.DummyPatientQueries;
+import ksch.api.DummyVisit;
 import ksch.commons.PageComponentTest;
 import ksch.commons.SpringBean;
 import ksch.patientmanagement.visit.VisitQueries;
@@ -32,8 +35,10 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.List;
 
 import static com.github.mvysny.kaributesting.v10.GridKt.expectRows;
+import static com.github.mvysny.kaributesting.v10.LocatorJ._click;
 import static com.github.mvysny.kaributesting.v10.LocatorJ._find;
 import static com.github.mvysny.kaributesting.v10.LocatorJ._get;
+import static com.github.mvysny.kaributesting.v10.LocatorJ._setValue;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -70,8 +75,24 @@ public class RegistrationDashboardTest extends PageComponentTest {
         givenOnRegistrationDashboardPage();
 
         assertEquals(0, _find(Grid.class).size());
+        _get(Label.class, spec -> spec.withText("No active OPD patients."));
+    }
 
-        // TODO Assert that we have a message stating that there are no active ODT visits
+    @Test
+    public void should_register_new_patient() {
+        givenOnRegistrationDashboardPage();
+
+        _click(_get(Button.class, spec -> spec.withText("Add patient")));
+        _setValue(_get(TextField.class, spec -> spec.withId("nameInputField")), "Ravindra Kodanda");
+        _click(_get(Button.class, spec -> spec.withText("Okay")));
+
+        assertEquals("Patient details", _get(H2.class).getText());
+
+//        formTester.setValue("patientFormFields:inputNameFather", "Javeed Sarath");
+//        formTester.select("patientFormFields:inputGender", 0);
+//        formTester.setValue("patientFormFields:dateOfBirth", "27-07-2000");
+//        formTester.setValue("patientFormFields:inputAddress", "Kirpal Sagar");
+//        formTester.submit();
     }
 
     private void givenOnRegistrationDashboardPage() {
