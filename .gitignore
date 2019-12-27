@@ -19,7 +19,6 @@ out/
 node_modules/
 webpack.generated.js
 target/
-node/
 
 # Miscellaneous
 .notes/

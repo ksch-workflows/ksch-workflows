@@ -46,7 +46,6 @@ import java.util.function.Supplier;
  * <p>
  * A mocked Vaadin UI and a dummy Spring application context will be used.
  */
-@SuppressWarnings("rawtypes")
 public class PageComponentTest {
 
     @Before
@@ -73,6 +72,7 @@ public class PageComponentTest {
         return result;
     }
 
+    @SuppressWarnings("rawtypes")
     @SneakyThrows
     private List<SpringBeanWrapper> getTestBeans() {
         var result = new ArrayList<SpringBeanWrapper>();
@@ -154,6 +154,7 @@ public class PageComponentTest {
             return () -> mock;
         }
 
+        @SuppressWarnings("rawtypes")
         static <T> SpringBeanWrapper createSpringBean(Class<T> beanType, Object userDefinedObject) {
             return new SpringBeanWrapper<>(beanType, userDefinedObject);
         }
