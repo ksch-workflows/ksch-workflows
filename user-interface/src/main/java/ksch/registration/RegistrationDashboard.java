@@ -17,6 +17,7 @@
 package ksch.registration;
 
 
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -40,6 +41,8 @@ import ksch.patientmanagement.visit.VisitQueries;
 import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Optional;
 
 @Route("registration")
 @Theme(Material.class)
@@ -75,11 +78,7 @@ public class RegistrationDashboard extends VerticalLayout {
     }
 
     private void createHeading() {
-        var heading = new H2("Registration dashboard");
-//        heading.setMaxHeight("5px");
-//        heading.getStyle().set("margin-top", "1em");
-//        heading.getStyle().set("line-height", "0.1");
-        add(heading);
+        add(new H2("Registration dashboard"));
     }
 
     private void createActionBar() {
@@ -132,27 +131,47 @@ public class RegistrationDashboard extends VerticalLayout {
         }
 
         private void createButtons() {
-            Button confirmButton = new Button("Okay", event -> {
-
-                try {
-                    NewPatient newPatient = new NewPatient();
-                    binder.writeBean(newPatient);
-
-                    var savedPatient = patientTransactions.create(newPatient);
-                    var visit = visitTransactions.startVisit(savedPatient, VisitType.OPD);
-
-                    UI.getCurrent().navigate(PatientDetailsPage.class, visit.getId().toString());
-
-                    close();
-
-                } catch (ValidationException e) {
-                    Notification.show(e.getMessage());
-                }
-            });
-            Button cancelButton = new Button("Cancel", event -> {
-                close();
-            });
+            Button confirmButton = new Button("Okay", this::handlePatientCreationConfirmed);
+            Button cancelButton = new Button("Cancel", event -> closeDialog());
             add(confirmButton, cancelButton);
+        }
+
+        private void handlePatientCreationConfirmed(ClickEvent<Button> event) {
+            var newPatient = getNewPatient();
+            newPatient.ifPresent(p -> {
+                Visit visit = createPatientAndVisit(p);
+                navigateToPatientDetails(visit);
+                resetFormFields();
+                closeDialog();
+            });
+        }
+
+        private Optional<NewPatient> getNewPatient() {
+            try {
+                NewPatient newPatient = new NewPatient();
+                binder.writeBean(newPatient);
+                return Optional.of(newPatient);
+            } catch (ValidationException e) {
+                Notification.show(e.getMessage());
+                return Optional.empty();
+            }
+        }
+
+        private Visit createPatientAndVisit(NewPatient p) {
+            var savedPatient = patientTransactions.create(p);
+            return visitTransactions.startVisit(savedPatient, VisitType.OPD);
+        }
+
+        private void navigateToPatientDetails(Visit visit) {
+            UI.getCurrent().navigate(PatientDetailsPage.class, visit.getId().toString());
+        }
+
+        private void resetFormFields() {
+            nameInputField.setValue("");
+        }
+
+        private void closeDialog() {
+            close();
         }
     }
 }
