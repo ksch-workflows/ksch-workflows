@@ -17,7 +17,8 @@ out/
 
 # JavaScript
 node_modules/
-package-lock.json
+webpack.generated.js
+target/
 
 # Miscellaneous
 .notes/
@@ -26,8 +27,6 @@ package-lock.json
 .#*
 *~
 *~*
-codealike.json
 *.orig
 *.hprof
-
-
+.DS_Store
