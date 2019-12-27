@@ -24,11 +24,11 @@ import java.lang.annotation.Target;
 /**
  * This annotation marks fields in a test derived from {@link PageComponentTest} to be picked up as Spring beans.
  * <p>
- * If the value for the fields' value is {@code null}, a mock object will be created automatically for it.
+ * If the value for the field's value is {@code null}, a mock object will be automatically created for it.
  *
- * @see PageComponentTest
+ * @see <a href="https://www.baeldung.com/spring-bean">What is a Spring Bean? (baeldung.com)</a>>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface TestBean {
+public @interface SpringBean {
 }

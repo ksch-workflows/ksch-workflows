@@ -37,7 +37,7 @@ dependencies {
 
 bootRun.systemProperties = System.properties as Map<String, ?>
 
-task bootRunDev {
+task bootRunDev(type: Exec) {
     bootRun.configure {
         systemProperty "spring.profiles.active", 'dev'
     }

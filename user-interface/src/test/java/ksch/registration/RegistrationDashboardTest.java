@@ -18,7 +18,7 @@ package ksch.registration;
 
 import com.vaadin.flow.component.html.H1;
 import ksch.commons.PageComponentTest;
-import ksch.commons.TestBean;
+import ksch.commons.SpringBean;
 import ksch.patientmanagement.patient.PatientQueries;
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ import static com.github.mvysny.kaributesting.v10.LocatorJ._get;
 
 public class RegistrationDashboardTest extends PageComponentTest {
 
-    @TestBean
+    @SpringBean
     private PatientQueries patientQueries;
 
     @Test

@@ -15,7 +15,7 @@ The [Kirpal Sagar Charitable Hospital](https://kirpal-sagar.org/en/kirpal-charit
 The project is built upon the following technologies:
 
 - [Java](https://github.com/ksch-workflows/ksch-workflows/wiki/Java) - the primarily used programming language
-- [Vaadin](https://github.com/ksch-workflows/ksch-workflows/wiki/Vaadin) - a web component based Java web framework
+- [Vaadin](https://github.com/ksch-workflows/ksch-workflows/wiki/Vaadin) - a component based Java web framework
 - [Spring Boot](https://github.com/ksch-workflows/ksch-workflows/wiki/Spring-Boot) - a framework for the development of enterprise applications
 - [Bootstrap](https://github.com/ksch-workflows/ksch-workflows/wiki/Bootstrap) - provides a comprehensive set of patterns for the layout of the HTML pages
 - [Gradle](https://github.com/ksch-workflows/ksch-workflows/wiki/Gradle) - used for the compilation of the source code into an executable application  
@@ -32,8 +32,10 @@ When a module declares a dependency on another module it can use its API via Spr
 
 ### Dependencies
 
-- JDK 11
-- Node 10+
+In order to build the project, the following two dependencies need to be installed on your computer:
+
+- [JDK 11](https://openjdk.java.net/projects/jdk/11/)
+- [Node 10+](https://nodejs.org/en/download/)
 
 Here are some hints for the installation:
 

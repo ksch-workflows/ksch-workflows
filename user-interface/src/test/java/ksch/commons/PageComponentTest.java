@@ -46,6 +46,7 @@ import java.util.function.Supplier;
  * <p>
  * A mocked Vaadin UI and a dummy Spring application context will be used.
  */
+@SuppressWarnings("rawtypes")
 public class PageComponentTest {
 
     @Before
@@ -66,27 +67,27 @@ public class PageComponentTest {
     private AnnotationConfigApplicationContext createSpringApplicationContext() {
         var result = new AnnotationConfigApplicationContext();
         for (var mockBean : getTestBeans()) {
-            result.registerBean(mockBean.getBeanClass(), mockBean.getSupplier());
+            result.registerBean(mockBean.getBeanType(), mockBean.getSupplier());
         }
         result.refresh();
         return result;
     }
 
     @SneakyThrows
-    private List<TestBeanWrapper> getTestBeans() {
-        var result = new ArrayList<TestBeanWrapper>();
+    private List<SpringBeanWrapper> getTestBeans() {
+        var result = new ArrayList<SpringBeanWrapper>();
 
         Field[] declaredFields = this.getClass().getDeclaredFields();
-        for (Field f : declaredFields) {
-            if (f.isAnnotationPresent(TestBean.class)) {
-                f.setAccessible(true);
+        for (var field : declaredFields) {
+            if (field.isAnnotationPresent(SpringBean.class)) {
+                field.setAccessible(true);
 
-                var userDefinedObject = f.get(this);
+                var userDefinedObject = field.get(this);
                 if (userDefinedObject == null) {
-                    userDefinedObject = Mockito.mock(f.getType());
+                    userDefinedObject = Mockito.mock(field.getType());
                 }
 
-                result.add(TestBeanWrapper.createTestBean(f.getType(), userDefinedObject));
+                result.add(SpringBeanWrapper.createSpringBean(field.getType(), userDefinedObject));
             }
         }
 
@@ -138,27 +139,23 @@ public class PageComponentTest {
     }
 
     @RequiredArgsConstructor
-    private static class TestBeanWrapper<T> {
+    private static class SpringBeanWrapper<T> {
         @NonNull
-        private final Class<T> classToBeMocked;
+        private final Class<T> beanType;
 
         @Getter
         private final Object mock;
 
-        Class<T> getBeanClass() {
-            return classToBeMocked;
+        Class<T> getBeanType() {
+            return beanType;
         }
 
         Supplier<Object> getSupplier() {
             return () -> mock;
         }
 
-        static <T> TestBeanWrapper createMockBean(Class<T> beanType) {
-            return new TestBeanWrapper<>(beanType, Mockito.mock(beanType));
-        }
-
-        static <T> TestBeanWrapper createTestBean(Class<T> beanType, Object userDefinedObject) {
-            return new TestBeanWrapper<>(beanType, userDefinedObject);
+        static <T> SpringBeanWrapper createSpringBean(Class<T> beanType, Object userDefinedObject) {
+            return new SpringBeanWrapper<>(beanType, userDefinedObject);
         }
     }
 }
