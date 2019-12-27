@@ -26,7 +26,9 @@ import java.util.List;
 import java.util.UUID;
 
 import static ksch.laboratory.LabOrder.Status.DONE;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest

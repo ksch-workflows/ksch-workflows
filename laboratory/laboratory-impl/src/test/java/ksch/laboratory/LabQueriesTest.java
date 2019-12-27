@@ -27,7 +27,9 @@ import java.util.List;
 import java.util.UUID;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static ksch.laboratory.LabOrder.Status.*;
+import static ksch.laboratory.LabOrder.Status.CANCELED;
+import static ksch.laboratory.LabOrder.Status.DONE;
+import static ksch.laboratory.LabOrder.Status.IN_PROGRESS;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;

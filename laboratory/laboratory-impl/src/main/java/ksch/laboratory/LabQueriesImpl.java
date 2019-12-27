@@ -23,7 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static ksch.laboratory.OrderStatus.*;
+import static ksch.laboratory.OrderStatus.CANCELLED;
+import static ksch.laboratory.OrderStatus.DONE;
+import static ksch.laboratory.OrderStatus.NOT_REQUIRED;
+import static ksch.laboratory.OrderStatus.PENDING;
 
 @Service
 @RequiredArgsConstructor
