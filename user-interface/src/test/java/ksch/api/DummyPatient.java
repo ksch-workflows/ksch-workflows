@@ -19,20 +19,21 @@ package ksch.api;
 import ksch.patientmanagement.patient.Gender;
 import ksch.patientmanagement.patient.Patient;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Setter
 @Getter
 public class DummyPatient implements Patient {
 
-    private UUID id;
+    @Override
+    public UUID getId() {
+        return null;
+    }
 
     @Override
     public String getName() {
-        return null;
+        return "John Doe";
     }
 
     @Override
@@ -42,7 +43,7 @@ public class DummyPatient implements Patient {
 
     @Override
     public LocalDate getDateOfBirth() {
-        return null;
+        return LocalDate.now();
     }
 
     @Override
@@ -52,6 +53,6 @@ public class DummyPatient implements Patient {
 
     @Override
     public String getAddress() {
-        return null;
+        return "Kirpal Sagar";
     }
 }

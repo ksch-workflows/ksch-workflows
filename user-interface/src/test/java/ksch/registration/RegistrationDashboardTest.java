@@ -22,17 +22,14 @@ import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.textfield.TextField;
 import ksch.api.DummyPatient;
-import ksch.api.DummyPatientQueries;
-import ksch.api.DummyVisit;
 import ksch.commons.PageComponentTest;
-import ksch.commons.SpringBean;
+import ksch.patientmanagement.patient.PatientQueries;
+import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.VisitQueries;
+import ksch.patientmanagement.visit.VisitTransactions;
+import ksch.patientmanagement.visit.VisitType;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.github.mvysny.kaributesting.v10.GridKt.expectRows;
 import static com.github.mvysny.kaributesting.v10.LocatorJ._click;
@@ -40,17 +37,21 @@ import static com.github.mvysny.kaributesting.v10.LocatorJ._find;
 import static com.github.mvysny.kaributesting.v10.LocatorJ._get;
 import static com.github.mvysny.kaributesting.v10.LocatorJ._setValue;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+
 public class RegistrationDashboardTest extends PageComponentTest {
 
-    @SpringBean
-    private DummyPatientQueries patientQueries = new DummyPatientQueries();
+    @Autowired
+    private PatientQueries patientQueries;
 
-    @Mock
-    @SpringBean
+    @Autowired
+    private PatientTransactions patientTransactions;
+
+    @Autowired
     private VisitQueries visitQueries;
+
+    @Autowired
+    private VisitTransactions visitTransactions;
 
     @Test
     public void should_open_registration_dashboard() {
@@ -100,9 +101,7 @@ public class RegistrationDashboardTest extends PageComponentTest {
     }
 
     private void givenPatientWithActiveVisit() {
-        var patient = new DummyPatient();
-        var visit = new DummyVisit(patient);
-
-        when(visitQueries.getAllActiveOpdVisits()).thenReturn(List.of(visit));
+        var patient = patientTransactions.create(new DummyPatient());
+        visitTransactions.startVisit(patient, VisitType.OPD);
     }
 }

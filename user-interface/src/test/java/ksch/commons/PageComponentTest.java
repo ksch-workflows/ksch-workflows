@@ -28,19 +28,21 @@ import com.vaadin.flow.server.VaadinServletService;
 import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.spring.SpringServlet;
 import com.vaadin.flow.spring.SpringVaadinServletService;
+import ksch.KschWorkflowsApplication;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.servlet.ServletContext;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -48,7 +50,16 @@ import java.util.function.Supplier;
  * <p>
  * A mocked Vaadin UI and a dummy Spring application context will be used.
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = KschWorkflowsApplication.class)
 public class PageComponentTest {
+
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    @Autowired
+    @Rule
+    public ResetDataAfterTest resetDataAfterTest;
 
     @Before
     public final void initializeMockedVaadinEnvironment() {
@@ -66,35 +77,10 @@ public class PageComponentTest {
 
     @SuppressWarnings("unchecked")
     private ApplicationContext createSpringApplicationContext() {
-        var result = new AnnotationConfigApplicationContext();
-        for (var mockBean : getTestBeans()) {
-            result.registerBean(mockBean.getBeanType(), mockBean.getSupplier());
+        if (applicationContext == null) {
+            throw new IllegalStateException("Something is wrong here");
         }
-        result.refresh();
-        return result;
-    }
-
-    @SuppressWarnings("rawtypes")
-    @SneakyThrows
-    private List<SpringBeanWrapper> getTestBeans() {
-        var result = new ArrayList<SpringBeanWrapper>();
-
-        Field[] declaredFields = this.getClass().getDeclaredFields();
-        for (var field : declaredFields) {
-            if (field.isAnnotationPresent(SpringBean.class)) {
-                field.setAccessible(true);
-
-                var userDefinedObject = field.get(this);
-                if (userDefinedObject == null) {
-                    throw new RuntimeException("Hello");
-                    //userDefinedObject = Mockito.mock(field.getType());
-                }
-
-                result.add(SpringBeanWrapper.createSpringBean(field.getType(), userDefinedObject));
-            }
-        }
-
-        return result;
+        return applicationContext;
     }
 
     private static class DummySpringServlet extends SpringServlet {
