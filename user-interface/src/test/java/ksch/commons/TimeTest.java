@@ -21,6 +21,8 @@ import org.junit.Test;
 import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class TimeTest {
 
@@ -51,5 +53,13 @@ public class TimeTest {
         String date = "27/07/2000";
 
         Time.parseDate(date);
+    }
+
+    @Test
+    public void should_determine_whether_date_is_in_expected_format() {
+        assertTrue(Time.isCorrectDatePattern("27-07-2000"));
+        assertTrue(Time.isCorrectDatePattern("27-7-2000"));
+        assertFalse(Time.isCorrectDatePattern("27/07/2000"));
+        assertFalse(Time.isCorrectDatePattern("27-07-07"));
     }
 }

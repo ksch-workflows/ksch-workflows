@@ -21,6 +21,7 @@ import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.textfield.TextField;
 import ksch.api.DummyPatient;
 import ksch.commons.PageComponentTest;
+import ksch.commons.RouteNotFoundError;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.Visit;
@@ -29,10 +30,12 @@ import ksch.patientmanagement.visit.VisitType;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.UUID;
+
 import static com.github.mvysny.kaributesting.v10.LocatorJ._get;
 import static org.junit.Assert.assertEquals;
 
-public class PatientDetailsTest extends PageComponentTest {
+public class PatientDetailsPageTest extends PageComponentTest {
 
     @Autowired
     private PatientTransactions patientTransactions;
@@ -52,6 +55,13 @@ public class PatientDetailsTest extends PageComponentTest {
 
         assertEquals("Patient details", _get(H2.class).getText());
         assertEquals("John Doe", _get(TextField.class, spec -> spec.withId("patientName")).getValue());
+    }
+
+    @Test
+    public void should_show_error_for_invalid_visit_id() {
+        UI.getCurrent().navigate(PatientDetailsPage.class, UUID.randomUUID().toString());
+
+        _get(RouteNotFoundError.class);
     }
 
     private void givenPatientWithActiveVisit() {

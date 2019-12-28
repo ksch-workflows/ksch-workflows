@@ -37,16 +37,21 @@ import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.material.Material;
 import ksch.commons.Time;
 import ksch.patientmanagement.patient.Gender;
+import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.Visit;
 import ksch.patientmanagement.visit.VisitQueries;
 import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 @Route("registration")
 @Theme(Material.class)
@@ -213,6 +218,25 @@ public class RegistrationDashboard extends VerticalLayout {
 
         private void closeDialog() {
             close();
+        }
+    }
+
+    @Getter
+    @Setter
+    private static class NewPatient implements Patient {
+        private final UUID id = null;
+        private String name;
+        private String nameFather;
+        private Gender gender;
+        private String dateOfBirth;
+        private String address;
+
+        public LocalDate getDateOfBirth() {
+            return Time.parseDate(dateOfBirth);
+        }
+
+        public String getDateOfBirthAsString() {
+            return dateOfBirth;
         }
     }
 }

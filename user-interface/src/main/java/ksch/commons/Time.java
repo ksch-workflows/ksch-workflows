@@ -29,7 +29,8 @@ public class Time {
     public static final DateTimeFormatter INDIAN_DATE_FORMAT = DateTimeFormatter.ofPattern("d-M-y");
 
     /**
-     * @param date date in format "dd-mm-yyyy"
+     * @param date date in format "dd-mm-yyyy" (dd - one or two digits for day in month, mm - one or two digits for month in year,
+     * yyyy - four digits for year).
      */
     public static LocalDate parseDate(String date) {
         if (date == null) {
@@ -43,7 +44,11 @@ public class Time {
         return LocalDate.parse(date, INDIAN_DATE_FORMAT);
     }
 
-    // TODO Add unit test for new publicly exposed functionality
+    /**
+     * @return {@code true} if date matches the pattern "dd-mm-yyyy", otherwise {@code false}
+     * (dd - one or two digits for day in month, mm - one or two digits for month in year,
+     * yyyy - four digits for year).
+     */
     public static boolean isCorrectDatePattern(String date) {
         return date.matches("[0-3]?[0-9]-[0-1]?[0-9]-[1-2][0-9]{3}");
     }
