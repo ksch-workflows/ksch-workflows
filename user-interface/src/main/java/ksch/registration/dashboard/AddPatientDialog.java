@@ -37,16 +37,14 @@ import ksch.registration.PatientDetailsPage;
 import java.util.Objects;
 import java.util.Optional;
 
+@SuppressWarnings({"unchecked", "rawtypes"})
 class AddPatientDialog extends Dialog {
+
     private final PatientTransactions patientTransactions;
+
     private final VisitTransactions visitTransactions;
 
-    private final TextField nameInputField = new TextField();
-    private final TextField nameFatherInputField = new TextField();
-    private final TextField dateOfBirthInputField = new TextField();
-    private final TextField addressInputField = new TextField();
-    private final Select<Gender> genderSelectBox = new Select<>();
-    private final Binder<NewPatient> binder = createBinder();
+    private Binder<NewPatient> binder = new Binder(NewPatient.class);
 
     AddPatientDialog(PatientTransactions patientTransactions, VisitTransactions visitTransactions) {
         this.patientTransactions = patientTransactions;
@@ -56,59 +54,70 @@ class AddPatientDialog extends Dialog {
         createButtons();
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    private Binder<NewPatient> createBinder() {
-        return new Binder(NewPatient.class);
-    }
-
     private void createForm() {
         var formLayout = new FormLayout();
 
-        // Name input field
-        nameInputField.setLabel("Name");
-        nameInputField.setRequired(true);
-        nameInputField.setId("name");
-        binder.forField(nameInputField)
+        formLayout.add(createNameInputField());
+        formLayout.add(createNameFatherInputField());
+        formLayout.add(createGenderSelectBox());
+        formLayout.add(createDateOfBirthInputField());
+        formLayout.add(createAddressInputField());
+
+        add(formLayout);
+    }
+
+    private TextField createNameInputField() {
+        var result = new TextField();
+        result.setLabel("Name");
+        result.setRequired(true);
+        result.setId("name");
+        binder.forField(result)
                 .withValidator(s -> s.length() > 0, "Please provide a name for the patient.")
                 .bind(NewPatient::getName, NewPatient::setName);
-        formLayout.add(nameInputField);
+        return result;
+    }
 
-        // Father's name input field
-        nameFatherInputField.setLabel("Father's name");
-        nameFatherInputField.setId("nameFather");
-        binder.forField(nameFatherInputField)
-                .bind(NewPatient::getNameFather, NewPatient::setNameFather);
-        formLayout.add(nameFatherInputField);
-
-        // Gender select box
-        genderSelectBox.setItems(Gender.MALE, Gender.FEMALE, Gender.OTHER);
-        genderSelectBox.setLabel("Gender");
-        genderSelectBox.setEmptySelectionAllowed(false);
-        genderSelectBox.setPlaceholder("Please select");
-        genderSelectBox.setId("gender");
-        binder.forField(genderSelectBox)
-                .withValidator(Objects::nonNull, "Please select a gender.")
-                .bind(NewPatient::getGender, NewPatient::setGender);
-        formLayout.add(genderSelectBox);
-
-        // Date of birth input field
-        dateOfBirthInputField.setLabel("Date of birth");
-        dateOfBirthInputField.setId("dateOfBirth");
-        dateOfBirthInputField.setRequired(true);
-        binder.forField(dateOfBirthInputField)
+    private TextField createDateOfBirthInputField() {
+        var result = new TextField();
+        result.setLabel("Date of birth");
+        result.setId("dateOfBirth");
+        result.setRequired(true);
+        binder.forField(result)
                 .withValidator(value -> value == null || Time.isCorrectDatePattern(value),
                         "Please provide the date of birth in the correct format, e.g. 24-12-2020")
                 .bind(NewPatient::getDateOfBirthAsString, NewPatient::setDateOfBirth);
-        formLayout.add(dateOfBirthInputField);
+        return result;
+    }
 
-        // Address input field
+    private Select createGenderSelectBox() {
+        var result = new Select<Gender>();
+        result.setItems(Gender.MALE, Gender.FEMALE, Gender.OTHER);
+        result.setLabel("Gender");
+        result.setEmptySelectionAllowed(false);
+        result.setPlaceholder("Please select");
+        result.setId("gender");
+        binder.forField(result)
+                .withValidator(Objects::nonNull, "Please select a gender.")
+                .bind(NewPatient::getGender, NewPatient::setGender);
+        return result;
+    }
+
+    private TextField createNameFatherInputField() {
+        var result = new TextField();
+        result.setLabel("Father's name");
+        result.setId("nameFather");
+        binder.forField(result)
+                .bind(NewPatient::getNameFather, NewPatient::setNameFather);
+        return result;
+    }
+
+    private TextField createAddressInputField() {
+        var addressInputField = new TextField();
         addressInputField.setLabel("Address");
         addressInputField.setId("address");
         binder.forField(addressInputField)
                 .bind(NewPatient::getAddress, NewPatient::setAddress);
-        formLayout.add(addressInputField);
-
-        add(formLayout);
+        return addressInputField;
     }
 
     private void createButtons() {
@@ -122,7 +131,6 @@ class AddPatientDialog extends Dialog {
         newPatient.ifPresent(p -> {
             Visit visit = createPatientAndVisit(p);
             navigateToPatientDetails(visit);
-            resetFormFields();
             closeDialog();
         });
     }
@@ -145,10 +153,6 @@ class AddPatientDialog extends Dialog {
 
     private void navigateToPatientDetails(Visit visit) {
         UI.getCurrent().navigate(PatientDetailsPage.class, visit.getId().toString());
-    }
-
-    private void resetFormFields() {
-        nameInputField.setValue("");
     }
 
     private void closeDialog() {

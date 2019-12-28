@@ -25,6 +25,11 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/**
+ * Data transfer object with the responsibility to capture the data for a new patient.
+ *
+ * @see <a href="https://en.wikipedia.org/wiki/Data_transfer_object">Data transfer object (wikipedia.org)</a>
+ */
 @Getter
 @Setter
 class NewPatient implements Patient {

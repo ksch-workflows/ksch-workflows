@@ -25,7 +25,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.material.Material;
-import ksch.patientmanagement.patient.PatientQueries;
 import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.Visit;
 import ksch.patientmanagement.visit.VisitQueries;
@@ -35,8 +34,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route("registration")
 @Theme(Material.class)
 public class RegistrationDashboard extends VerticalLayout {
-
-    private final transient PatientQueries patientQueries;
 
     private final transient PatientTransactions patientTransactions;
 
@@ -48,12 +45,10 @@ public class RegistrationDashboard extends VerticalLayout {
 
     @Autowired
     public RegistrationDashboard(
-            PatientQueries patientQueries,
             PatientTransactions patientTransactions,
             VisitQueries visitQueries,
             VisitTransactions visitTransactions
     ) {
-        this.patientQueries = patientQueries;
         this.patientTransactions = patientTransactions;
         this.visitQueries = visitQueries;
         this.visitTransactions = visitTransactions;
