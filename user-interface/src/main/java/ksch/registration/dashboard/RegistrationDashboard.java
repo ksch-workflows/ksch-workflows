@@ -17,7 +17,6 @@
 package ksch.registration.dashboard;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Label;
@@ -47,8 +46,6 @@ public class RegistrationDashboard extends VerticalLayout {
 
     private Grid<Visit> activeOpdVisitsTable;
 
-    private Dialog addPatientDialog = new AddPatientDialog();
-
     @Autowired
     public RegistrationDashboard(
             PatientQueries patientQueries,
@@ -74,7 +71,7 @@ public class RegistrationDashboard extends VerticalLayout {
         var result = new HorizontalLayout();
 
         var addPatientButton = new Button("Add patient", event -> {
-            addPatientDialog.open();
+            new AddPatientDialog(patientTransactions, visitTransactions).open();
         });
         result.add(addPatientButton);
 
