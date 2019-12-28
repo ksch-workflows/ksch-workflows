@@ -52,7 +52,7 @@ import java.util.function.Supplier;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = KschWorkflowsApplication.class)
-public class PageComponentTest {
+public abstract class PageComponentTest {
 
     @Autowired
     private ApplicationContext applicationContext;

@@ -92,6 +92,7 @@ configure(subprojects.findAll { it.name.endsWith('-impl')} ) {
 
         testCompile 'org.springframework.boot:spring-boot-starter-test'
         testCompile project(path: ':infrastructure:shared-test')
+        testCompile project(path: ':infrastructure:shared-test-configuration')
     }
 }
 

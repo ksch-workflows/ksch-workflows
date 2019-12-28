@@ -68,8 +68,7 @@ public class ResetDataAfterTest extends ExternalResource {
         var metaData = dataSource.getConnection().getMetaData();
         var tables = metaData.getTables(null, null, null, new String[] { "TABLE" });
         while (tables.next()) {
-            String tableName = tables.getString("TABLE_NAME");
-            result.add(tableName);
+            result.add(tables.getString("TABLE_NAME"));
         }
 
         return result;
