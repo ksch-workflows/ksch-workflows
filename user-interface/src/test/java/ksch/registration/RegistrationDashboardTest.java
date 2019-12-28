@@ -31,6 +31,7 @@ import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.VisitQueries;
 import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
+import ksch.registration.dashboard.RegistrationDashboard;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
