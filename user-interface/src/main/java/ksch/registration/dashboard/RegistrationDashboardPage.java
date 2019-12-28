@@ -33,7 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Route("registration")
 @Theme(Material.class)
-public class RegistrationDashboard extends VerticalLayout {
+public class RegistrationDashboardPage extends VerticalLayout {
 
     private final transient PatientTransactions patientTransactions;
 
@@ -44,7 +44,7 @@ public class RegistrationDashboard extends VerticalLayout {
     private Grid<Visit> activeOpdVisitsTable;
 
     @Autowired
-    public RegistrationDashboard(
+    public RegistrationDashboardPage(
             PatientTransactions patientTransactions,
             VisitQueries visitQueries,
             VisitTransactions visitTransactions

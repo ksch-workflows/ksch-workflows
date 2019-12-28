@@ -31,7 +31,7 @@ import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.VisitQueries;
 import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
-import ksch.registration.dashboard.RegistrationDashboard;
+import ksch.registration.dashboard.RegistrationDashboardPage;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
@@ -49,7 +49,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 
 @SuppressWarnings("unchecked")
-public class RegistrationDashboardTest extends PageComponentTest {
+public class RegistrationDashboardPageTest extends PageComponentTest {
 
     @Autowired
     private PatientQueries patientQueries;
@@ -68,7 +68,7 @@ public class RegistrationDashboardTest extends PageComponentTest {
 
     @Test
     public void should_open_registration_dashboard() {
-        openPage(RegistrationDashboard.class);
+        openPage(RegistrationDashboardPage.class);
 
         _get(H2.class, spec -> spec.withText("Registration dashboard"));
 
@@ -118,16 +118,16 @@ public class RegistrationDashboardTest extends PageComponentTest {
         verifyNavigatedToPatientDetails();
     }
 
-    private void verifyNavigatedToPatientDetails() {
-        assertEquals("Patient details", _get(H2.class).getText());
-    }
-
     private void givenOnRegistrationDashboardPage() {
-        openPage(RegistrationDashboard.class);
+        openPage(RegistrationDashboardPage.class);
     }
 
     private void givenPatientWithActiveVisit() {
         var patient = patientTransactions.create(new DummyPatient());
         visitTransactions.startVisit(patient, VisitType.OPD);
+    }
+
+    private void verifyNavigatedToPatientDetails() {
+        assertEquals("Patient details", _get(H2.class).getText());
     }
 }
