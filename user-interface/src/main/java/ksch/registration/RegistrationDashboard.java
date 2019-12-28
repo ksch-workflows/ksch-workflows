@@ -113,17 +113,23 @@ public class RegistrationDashboard extends VerticalLayout {
         }
     }
 
+
     class AddPatientDialog extends Dialog {
         private final TextField nameInputField = new TextField();
         private final TextField nameFatherInputField = new TextField();
         private final TextField dateOfBirthInputField = new TextField();
         private final TextField addressInputField = new TextField();
         private final Select<Gender> genderSelectBox = new Select<>();
-        private final Binder<NewPatient> binder = new Binder(NewPatient.class);
+        private final Binder<NewPatient> binder = createBinder();
 
         AddPatientDialog() {
             createForm();
             createButtons();
+        }
+
+        @SuppressWarnings({"unchecked", "rawtypes"})
+        private Binder<NewPatient> createBinder() {
+            return new Binder(NewPatient.class);
         }
 
         private void createForm() {

@@ -29,8 +29,8 @@ public class Time {
     public static final DateTimeFormatter INDIAN_DATE_FORMAT = DateTimeFormatter.ofPattern("d-M-y");
 
     /**
-     * @param date date in format "dd-mm-yyyy" (dd - one or two digits for day in month, mm - one or two digits for month in year,
-     * yyyy - four digits for year).
+     * @param date date in format "dd-mm-yyyy" (dd - one or two digits for day in month, mm - one or two digits
+     *             for month in year, yyyy - four digits for year).
      */
     public static LocalDate parseDate(String date) {
         if (date == null) {
