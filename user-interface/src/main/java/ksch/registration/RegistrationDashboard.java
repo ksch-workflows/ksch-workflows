@@ -143,6 +143,7 @@ public class RegistrationDashboard extends VerticalLayout {
             // Gender select box
             genderSelectBox.setItems(Gender.MALE, Gender.FEMALE, Gender.OTHER);
             genderSelectBox.setLabel("Gender");
+            genderSelectBox.setEmptySelectionAllowed(false);
             genderSelectBox.setPlaceholder("Please select");
             genderSelectBox.setId("gender");
             binder.forField(genderSelectBox)
@@ -153,6 +154,7 @@ public class RegistrationDashboard extends VerticalLayout {
             // Date of birth input field
             dateOfBirthInputField.setLabel("Date of birth");
             dateOfBirthInputField.setId("dateOfBirth");
+            dateOfBirthInputField.setRequired(true);
             binder.forField(dateOfBirthInputField)
                     .withValidator(value -> value == null || Time.isCorrectDatePattern(value),
                             "Please provide the date of birth in the correct format, e.g. 24-12-2020")
