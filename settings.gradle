@@ -3,6 +3,7 @@ project(":user-interface").name = "ksch-workflows"
 
 include "infrastructure:configuration"
 include "infrastructure:shared-test"
+include "infrastructure:shared-test-configuration"
 
 include("laboratory:laboratory-api")
 include("laboratory:laboratory-impl")
