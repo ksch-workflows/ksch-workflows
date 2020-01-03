@@ -81,7 +81,9 @@ public class RegistrationDashboardPageTest extends PageComponentTest {
         givenOnRegistrationDashboardPage();
 
         assertEquals(1, _find(Grid.class).size());
-        expectRows(_get(Grid.class), 1);
+        var patientGrid = _get(Grid.class);
+        assertEquals(4, patientGrid.getColumns().size());
+        expectRows(patientGrid, 1);
     }
 
     @Test

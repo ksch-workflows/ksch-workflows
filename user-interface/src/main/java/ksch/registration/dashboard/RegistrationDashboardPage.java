@@ -26,10 +26,11 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.material.Material;
 import ksch.patientmanagement.patient.PatientTransactions;
-import ksch.patientmanagement.visit.Visit;
 import ksch.patientmanagement.visit.VisitQueries;
 import ksch.patientmanagement.visit.VisitTransactions;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import static java.util.stream.Collectors.toList;
 
 @Route("registration")
 @Theme(Material.class)
@@ -41,7 +42,7 @@ public class RegistrationDashboardPage extends VerticalLayout {
 
     private final transient VisitTransactions visitTransactions;
 
-    private Grid<Visit> activeOpdVisitsTable;
+    private Grid<OpdPatientVisitRow> activeOpdVisitsTable;
 
     @Autowired
     public RegistrationDashboardPage(
@@ -74,8 +75,13 @@ public class RegistrationDashboardPage extends VerticalLayout {
     }
 
     private void createActiveOptVisitsTable() {
-        activeOpdVisitsTable = new Grid<>();
-        var activeOpdVisits = visitQueries.getAllActiveOpdVisits();
+        activeOpdVisitsTable = new Grid<>(OpdPatientVisitRow.class);
+        activeOpdVisitsTable.setColumns("opdNumber", "name", "location", "age");
+
+        var activeOpdVisits = visitQueries.getAllActiveOpdVisits()
+                .stream()
+                .map(OpdPatientVisitRow::new)
+                .collect(toList());
 
         if (!activeOpdVisits.isEmpty()) {
             activeOpdVisitsTable.setItems(activeOpdVisits);
