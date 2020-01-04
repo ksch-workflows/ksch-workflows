@@ -33,6 +33,7 @@ import ksch.patientmanagement.visit.VisitQueries;
 import ksch.patientmanagement.visit.VisitTransactions;
 import ksch.patientmanagement.visit.VisitType;
 import ksch.registration.dashboard.RegistrationDashboardPage;
+import org.jsoup.Jsoup;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
@@ -40,7 +41,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static com.github.mvysny.kaributesting.v10.GridKt.expectRows;
 import static com.github.mvysny.kaributesting.v10.LocatorJ._click;
@@ -82,8 +85,8 @@ public class RegistrationDashboardPageTest extends PageComponentTest {
         givenPatientWithActiveVisit();
         givenOnRegistrationDashboardPage();
 
-        assertEquals(1, _find(Grid.class).size());
         var patientGrid = _get(Grid.class);
+        assertEquals("OPD No.", getHeaders(patientGrid).get(0));
         assertEquals(4, patientGrid.getColumns().size());
         expectRows(patientGrid, 1);
     }
@@ -140,5 +143,13 @@ public class RegistrationDashboardPageTest extends PageComponentTest {
 
     private void verifyNavigatedToPatientDetails() {
         assertEquals("Patient details", _get(H2.class).getText());
+    }
+
+    @SuppressWarnings("rawtypes")
+    private static List<String> getHeaders(Grid grid) {
+        List<Grid.Column> columns = grid.getColumns();
+        return columns.stream()
+                .map(c -> Jsoup.parse(c.getElement().getOuterHTML()).text())
+                .collect(Collectors.toList());
     }
 }

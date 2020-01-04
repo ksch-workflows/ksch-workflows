@@ -76,7 +76,9 @@ public class RegistrationDashboardPage extends VerticalLayout {
 
     private void createActiveOptVisitsTable() {
         activeOpdVisitsTable = new Grid<>(OpdPatientVisitRow.class);
+
         activeOpdVisitsTable.setColumns("opdNumber", "name", "location", "age");
+        activeOpdVisitsTable.getColumnByKey("opdNumber").setHeader("OPD No.");
 
         var activeOpdVisits = visitQueries.getAllActiveOpdVisits()
                 .stream()
