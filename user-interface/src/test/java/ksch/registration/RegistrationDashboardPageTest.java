@@ -16,6 +16,7 @@
 
 package ksch.registration;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
@@ -39,6 +40,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import static com.github.mvysny.kaributesting.v10.GridKt.expectRows;
 import static com.github.mvysny.kaributesting.v10.LocatorJ._click;
@@ -68,7 +70,7 @@ public class RegistrationDashboardPageTest extends PageComponentTest {
 
     @Test
     public void should_open_registration_dashboard() {
-        openPage(RegistrationDashboardPage.class);
+        goToRegistrationDashboardPage();
 
         _get(H2.class, spec -> spec.withText("Registration dashboard"));
 
@@ -121,6 +123,13 @@ public class RegistrationDashboardPageTest extends PageComponentTest {
     }
 
     private void givenOnRegistrationDashboardPage() {
+        goToRegistrationDashboardPage();
+    }
+
+    private void goToRegistrationDashboardPage() {
+        // Force page reload by provoking an error page before the actual navigation
+        UI.getCurrent().navigate(UUID.randomUUID().toString());
+
         openPage(RegistrationDashboardPage.class);
     }
 

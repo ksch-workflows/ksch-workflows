@@ -21,7 +21,7 @@ import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.textfield.TextField;
 import ksch.api.DummyPatient;
 import ksch.commons.PageComponentTest;
-import ksch.commons.RouteNotFoundError;
+import ksch.commons.RouteNotFoundErrorPage;
 import ksch.patientmanagement.patient.Patient;
 import ksch.patientmanagement.patient.PatientTransactions;
 import ksch.patientmanagement.visit.Visit;
@@ -61,7 +61,7 @@ public class PatientDetailsPageTest extends PageComponentTest {
     public void should_show_error_for_invalid_visit_id() {
         UI.getCurrent().navigate(PatientDetailsPage.class, UUID.randomUUID().toString());
 
-        _get(RouteNotFoundError.class);
+        _get(RouteNotFoundErrorPage.class);
     }
 
     private void givenPatientWithActiveVisit() {
