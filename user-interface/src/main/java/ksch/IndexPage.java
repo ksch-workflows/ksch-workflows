@@ -14,23 +14,19 @@
  * limitations under the License.
  */
 
-package ksch.commons;
+package ksch;
 
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.BeforeEnterEvent;
-import com.vaadin.flow.router.ErrorParameter;
-import com.vaadin.flow.router.HasErrorParameter;
-import com.vaadin.flow.router.NotFoundException;
+import com.vaadin.flow.router.BeforeEnterObserver;
+import com.vaadin.flow.router.Route;
+import ksch.registration.dashboard.RegistrationDashboardPage;
 
-import javax.servlet.http.HttpServletResponse;
-
-@Tag(Tag.DIV)
-public class RouteNotFoundError extends Component implements HasErrorParameter<NotFoundException> {
+@Route("")
+public class IndexPage extends Div implements BeforeEnterObserver {
 
     @Override
-    public int setErrorParameter(BeforeEnterEvent event, ErrorParameter<NotFoundException> parameter) {
-        getElement().setText("Could not navigate to '" + event.getLocation().getPath() + "'");
-        return HttpServletResponse.SC_NOT_FOUND;
+    public void beforeEnter(BeforeEnterEvent event) {
+        event.rerouteTo(RegistrationDashboardPage.class);
     }
 }
