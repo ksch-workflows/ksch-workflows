@@ -26,6 +26,7 @@ import lombok.Setter;
 import lombok.extern.java.Log;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
@@ -183,15 +184,26 @@ public class LabOrderPanel extends Panel {
         }
 
         private AjaxLink<Void> createCancelLabOrderButton(LabOrderRow rowData, Label statusLabel) {
-            return new AjaxLink<>("cancelLabOrder") {
+            AjaxLink<Void> result = new AjaxLink<>("cancelLabOrder") {
                 @Override
                 public void onClick(AjaxRequestTarget target) {
-                    LabOrder.Status newStatus = labCommands.cancel(rowData.getId());
+                    var newStatus = labCommands.cancel(rowData.getId());
                     rowData.setStatus(newStatus.toString());
-
                     target.add(statusLabel);
+
+                    setDisabled(this);
+                    target.add(this);
                 }
             };
+
+            if (rowData.getStatus().equals(LabOrder.Status.CANCELED.toString())) {
+                setDisabled(result);
+            }
+            return result;
+        }
+
+        private void setDisabled(AjaxLink<Void> link) {
+            link.add(new AttributeAppender("class", new Model<>("disabled"), " "));
         }
     }
 
