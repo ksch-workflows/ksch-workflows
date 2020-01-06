@@ -22,6 +22,7 @@ import ksch.laboratory.LabOrderCode;
 import ksch.laboratory.LabQueries;
 import ksch.terminologies.LoincLabOrderValues;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.java.Log;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -35,6 +36,7 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.tester.BaseWicketTester;
 import org.apache.wicket.validation.IValidatable;
@@ -175,7 +177,7 @@ public class LabOrderPanel extends Panel {
         }
 
         private Label createLabOrderStatusLabel(LabOrderRow rowData) {
-            Label statusLabel = new Label("status", rowData.getStatus());
+            Label statusLabel = new Label("status", new PropertyModel<>(rowData, "status"));
             statusLabel.setOutputMarkupId(true);
             return statusLabel;
         }
@@ -184,8 +186,8 @@ public class LabOrderPanel extends Panel {
             return new AjaxLink<>("cancelLabOrder") {
                 @Override
                 public void onClick(AjaxRequestTarget target) {
-                    var newStatus = labCommands.cancel(rowData.getId());
-                    statusLabel.setDefaultModelObject(newStatus.toString());
+                    LabOrder.Status newStatus = labCommands.cancel(rowData.getId());
+                    rowData.setStatus(newStatus.toString());
 
                     target.add(statusLabel);
                 }
@@ -196,13 +198,14 @@ public class LabOrderPanel extends Panel {
     @Getter
     static class LabOrderRow implements Serializable {
 
-        final UUID id;
+        private UUID id;
 
-        final String loincNumber;
+        private String loincNumber;
 
-        final String labTest;
+        private String labTest;
 
-        final String status;
+        @Setter
+        private String status;
 
         LabOrderRow(LabOrder labOrder) {
             id = labOrder.getId();
