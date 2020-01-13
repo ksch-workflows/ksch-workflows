@@ -14,10 +14,6 @@
             <property name="forceStrictCondition" value="false" />
         </module>
 
-        <module name="LineLength">
-            <property name="max" value="120" />
-        </module>
-
         <module name="EmptyBlock">
             <property name="option" value="text" />
         </module>
@@ -67,6 +63,11 @@
             <property name="format" value="(FIXME)"/>
         </module>
 
+    </module>
+
+    <!-- https://checkstyle.sourceforge.io/config_sizes.html#LineLength -->
+    <module name="LineLength">
+        <property name="max" value="120" />
     </module>
 
     <module name="NewlineAtEndOfFile" />
