@@ -4,6 +4,6 @@ dependencies {
     api 'org.mockito:mockito-core'
     api 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-    implementation 'org.jsoup:jsoup:1.11.3'
+    implementation 'org.jsoup:jsoup:1.12.1'
     implementation "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
 }
