@@ -17,27 +17,27 @@ sourceSets.main.resources {
 }
 
 dependencies {
-    compile project(':infrastructure:configuration')
-    compile project(':infrastructure:wicket-utils')
-    compile project(':order-entry:order-entry-web')
-    compile project(':patient-management')
-    compile project(':patient-management:patient-management-web')
-    compile project(':reporting')
-    compile project(':laboratory')
+    implementation project(':infrastructure:configuration')
+    implementation project(':infrastructure:wicket-utils')
+    implementation project(':order-entry:order-entry-web')
+    implementation project(':patient-management')
+    implementation project(':patient-management:patient-management-web')
+    implementation project(':reporting')
+    implementation project(':laboratory')
 
-    compile "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
+    implementation "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
 
-    compile "org.apache.wicket:wicket-auth-roles:${wicketVersion}"
-    compile "org.apache.wicket:wicket-ioc:${wicketVersion}"
-    compile "org.apache.wicket:wicket-spring:${wicketVersion}"
-    
-    compile "org.springframework.boot:spring-boot-starter-security"
-    compile "org.springframework.boot:spring-boot-starter-data-jpa"
-    
-    compile "org.wicketstuff:wicketstuff-annotation:${wicketVersion}"
+    implementation "org.apache.wicket:wicket-auth-roles:${wicketVersion}"
+    implementation "org.apache.wicket:wicket-ioc:${wicketVersion}"
+    implementation "org.apache.wicket:wicket-spring:${wicketVersion}"
 
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testCompile project(path: ':infrastructure:shared-test')
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+
+    implementation "org.wicketstuff:wicketstuff-annotation:${wicketVersion}"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation project(path: ':infrastructure:shared-test')
 }
 
 bootJar {

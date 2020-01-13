@@ -1,9 +1,9 @@
 
 dependencies {
-    compile 'junit:junit'
-    compile 'org.jsoup:jsoup:1.11.3'
-    compile 'org.mockito:mockito-core'
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-    
-    compile "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
+    api 'junit:junit'
+    api 'org.mockito:mockito-core'
+    api 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    implementation 'org.jsoup:jsoup:1.11.3'
+    implementation "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
 }

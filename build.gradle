@@ -24,7 +24,7 @@ subprojects {
 
     repositories {
         mavenCentral()
-        maven { url 'http://repo.maven.apache.org/maven2' }
+        maven { url 'https://repo.maven.apache.org/maven2' }
     }
 
     apply plugin: 'checkstyle'
@@ -50,8 +50,8 @@ subprojects {
         annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
         compileOnly "org.projectlombok:lombok:${lombokVersion}"
         testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
-        testCompile "org.projectlombok:lombok:${lombokVersion}"
-        testCompile "junit:junit:${junitVersion}"
+        testImplementation "org.projectlombok:lombok:${lombokVersion}"
+        testImplementation "junit:junit:${junitVersion}"
     }
 
     checkstyle {
@@ -72,10 +72,10 @@ configure(subprojects.findAll { !it.name.endsWith('-api')} ) {
     apply plugin: 'info.solidsoft.pitest'
 
     dependencies {
-        compile 'org.springframework.boot:spring-boot-starter'
-        compile "com.google.guava:guava:${guavaVersion}"
+        implementation 'org.springframework.boot:spring-boot-starter'
+        implementation "com.google.guava:guava:${guavaVersion}"
 
-        testCompile 'org.mockito:mockito-core'
+        testImplementation 'org.mockito:mockito-core'
     }
 
     dependencyManagement {
@@ -91,16 +91,16 @@ configure(subprojects.findAll { !it.name.endsWith('-api')} ) {
 
 configure(subprojects.findAll { it.name.endsWith('-impl')} ) {
     dependencies {
-        compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-        testCompile 'org.springframework.boot:spring-boot-starter-test'
-        testCompile project(path: ':infrastructure:shared-test')
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation project(path: ':infrastructure:shared-test')
     }
 }
 
 configure(subprojects.findAll { it.name.endsWith('-web')} ) {
     dependencies {
-        testCompile project(path: ':infrastructure:shared-test')
+        testImplementation project(path: ':infrastructure:shared-test')
     }
 
     sourceSets.main.resources {

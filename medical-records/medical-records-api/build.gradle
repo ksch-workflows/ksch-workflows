@@ -1,3 +1,3 @@
 dependencies {
-    compile project(':patient-management:patient-management-api')
+    api project(':patient-management:patient-management-api')
 }

@@ -1,8 +1,8 @@
 
 dependencies {
-    compile project(':reporting:reporting-api')
-    compile project(':patient-management')
+    api project(':reporting:reporting-api')
+    api project(':patient-management')
 
-    compile 'com.h2database:h2'
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'com.h2database:h2'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 }

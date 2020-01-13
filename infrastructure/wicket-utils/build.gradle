@@ -1,5 +1,6 @@
 
 dependencies {
-    compile "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
-    compile "org.apache.wicket:wicket-spring:${wicketVersion}"
+    api "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
+
+    implementation "org.apache.wicket:wicket-spring:${wicketVersion}"
 }

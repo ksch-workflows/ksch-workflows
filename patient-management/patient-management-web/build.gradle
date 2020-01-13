@@ -1,11 +1,11 @@
 
 dependencies {
-    compile project(':infrastructure:wicket-utils')
-    compile project(':patient-management')
+    implementation project(':infrastructure:wicket-utils')
+    implementation project(':patient-management')
 
-    compile "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
-    compile "org.apache.wicket:wicket-spring:${wicketVersion}"
+    implementation "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
+    implementation "org.apache.wicket:wicket-spring:${wicketVersion}"
 
-    testCompile project(':patient-management')
-    testCompile project(':patient-management:patient-management-impl').sourceSets.test.output
+    testImplementation project(':patient-management')
+    testImplementation project(':patient-management:patient-management-impl').sourceSets.test.output
 }

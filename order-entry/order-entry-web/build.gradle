@@ -1,9 +1,9 @@
 
 dependencies {
-    compile project(':infrastructure:wicket-utils')
-    compile project(':laboratory')
-    compile project(':medical-records:clinical-terminologies-api')
+    api project(':laboratory')
+    api project(':medical-records:clinical-terminologies-api')
 
-    compile "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
-    compile "org.apache.wicket:wicket-spring:${wicketVersion}"
+    implementation project(':infrastructure:wicket-utils')
+    implementation "com.giffing.wicket.spring.boot.starter:wicket-spring-boot-starter:${wicketSpringBootStarterVersion}"
+    implementation "org.apache.wicket:wicket-spring:${wicketVersion}"
 }
