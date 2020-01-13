@@ -9,7 +9,7 @@ buildscript {
 }
 
 plugins {
-    id "com.github.ben-manes.versions" version "0.21.0"
+    id "com.github.ben-manes.versions" version "0.27.0"
     id "idea"
     id "io.spring.dependency-management" version "1.0.7.RELEASE"
     id "org.sonarqube" version "2.7"
@@ -38,12 +38,12 @@ subprojects {
     }
 
     ext {
-        guavaVersion = '27.1-jre'
-        junitVersion = '4.12'
-        lombokVersion = '1.18.6'
+        guavaVersion = '28.2-jre'
+        junitVersion = '4.13'
+        lombokVersion = '1.18.10'
         springBootVersion = '2.1.3.RELEASE'
-        wicketVersion = '8.3.0'
-        wicketSpringBootStarterVersion = '2.1.5'
+        wicketVersion = '8.7.0'
+        wicketSpringBootStarterVersion = '2.1.8'
     }
 
     dependencies {
