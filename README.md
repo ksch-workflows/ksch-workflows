@@ -134,6 +134,12 @@ Get an overview over transitive dependencies:
 ./gradlew dependencyTree
 ```
 
+### Compile tutorials
+
+```
+asciidoctor -B $PWD  infrastructure/doc/tutorials/*.adoc
+```
+
 ## Deployment
 
 The executable JAR file can be compiled with the following Gradle task:

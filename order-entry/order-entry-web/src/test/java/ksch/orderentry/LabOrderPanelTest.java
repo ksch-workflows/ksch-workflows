@@ -39,6 +39,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
+// tag::firstTest[]
 public class LabOrderPanelTest extends PageComponentTest {
 
     @MockBean
@@ -58,6 +59,7 @@ public class LabOrderPanelTest extends PageComponentTest {
         assertContains(lastRenderedPage(), new CssQuery("button"));
         assertNotContains(lastRenderedPage(), new CssQuery(".feedbackPanelERROR"));
     }
+    // end::firstTest[]
 
     @Test
     public void should_add_lab_order_by_filling_in_dialog() {

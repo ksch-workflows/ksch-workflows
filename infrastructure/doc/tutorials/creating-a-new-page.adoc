@@ -1,0 +1,36 @@
+= Adding a new page
+:source-highlighter: coderay
+
+Wicket allows to create new pages with test-driven development.
+
+== Create a new test
+
+By extending the test from the base class `PageComponentTest` it already has the setup for the
+unit test prepared.
+
+[source,java]
+----
+include::order-entry/order-entry-web/src/test/java/ksch/orderentry/LabOrderPanelTest.java[tag=firstTest,indent=0]
+----
+
+== Create a new page
+
+A page consists of a pair of an Java and a HTML file.
+
+Here is one example for a Java file:
+
+[source,java]
+----
+include::user-interface/src/main/java/ksch/Index.java[tag=content,indent=0]
+----
+
+And here is one example for the corresponding HTML file:
+
+[source,html]
+----
+include::user-interface/out/production/resources/ksch/Index.html[]
+----
+
+== References
+
+- https://ci.apache.org/projects/wicket/guide/8.x/single.html#_test_driven_development_with_wicket

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// tag::content[]
 package ksch;
 
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
@@ -28,3 +29,4 @@ public class Index extends WebPage {
 
     }
 }
+// end::content[]

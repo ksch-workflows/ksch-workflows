@@ -29,5 +29,4 @@ package-lock.json
 codealike.json
 *.orig
 *.hprof
-
-
+infrastructure/doc/tutorials/*.html
